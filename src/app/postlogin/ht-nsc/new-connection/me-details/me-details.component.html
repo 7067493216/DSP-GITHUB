@@ -1,0 +1,189 @@
+<ng-template matStepLabel>Metering Equipment Details</ng-template>
+<mat-card class="my-card">
+    <mat-card-header>
+        <mat-card-title><span>Metering Equipment Details</span></mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider><br>
+    <!-- ================Current Transformer======================== -->
+    <h6><span>Current Transformer</span></h6>
+    <mat-divider></mat-divider><br>
+    <form [formGroup]="meFg">
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Parameter" name="ctParameter"
+                (selectionChange)=" onChangeCtParameter($event.value)" formControlName="ctParameter" required>
+                <mat-option *ngFor="let parameter of EquipmentCTParameter" [value]="parameter.ctParameterId">
+                    {{parameter.ctParameter}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ctParameter.hasError('required')">
+                Select Parameter
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select ME CT ratio" name="ctParameterValue"
+                formControlName="ctParameterValue" [(ngModel)]="meCtr" required>
+                <mat-option *ngFor="let ctValue of meCTValue" [value]="ctValue.ctParameterId">
+                    {{ctValue.ctParameterValue}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ctParameterValue.hasError('required')">
+                Select ME CT ratio
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Manufacturer" name="ctManufacturer"
+                (selectionChange)="onChangemodel($event.value)" formControlName="ctParameter"
+                formControlName="ctManufacturer" required>
+                <mat-option *ngFor="let manufacturer of ctManufacturer" [value]="manufacturer.ctManufacturerId">
+                    {{manufacturer.ctManufacturerName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ctManufacturer.hasError('required')">
+                Select Manufacturer
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Model" name="ctModel" formControlName="ctModel" required>
+                <mat-option *ngFor="let model of ctModels" [value]="model.ctModelId">
+                    {{model.ctModelName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ctModel.hasError('required')">
+                Select Model
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Serial Number" maxlength="20" name="ctSerialNo" upperCase formControlName="ctSerialNo"
+                required>
+            <mat-error *ngIf="meFg.controls.ctSerialNo.hasError('required')">
+                Serial Number is required
+            </mat-error>
+        </mat-form-field>
+
+        <!-- ============================Potential Transformer=========================== -->
+
+        <h6><span>Potential Transformer</span></h6>
+        <mat-divider></mat-divider><br>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Parameter" name="ptParameter"
+                (selectionChange)="onChangeptMeParameter($event.value)" formControlName="ptParameter" required>
+                <mat-option *ngFor="let parameter of mePtParameter" [value]="parameter.ptParameterId">
+                    {{parameter.ptParameter}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ptParameter.hasError('required')">
+                Select Parameter
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select ME PT ratio" name="ptParameterValue"
+                formControlName="ptParameterValue" [(ngModel)]="mePtr" required>
+                <mat-option *ngFor="let parameterValue of mePTParameterValue" [value]="parameterValue.ptParameterId">
+                    {{parameterValue.ptParameterValue}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ptParameterValue.hasError('required')">
+                Select ME PT ratio
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Manufacturer" name="ptManufacturer"
+                (selectionChange)="onChangeptModel($event.value)" formControlName="ptManufacturer" required>
+                <mat-option *ngFor="let manufacturer of mePtManufacturer" [value]="manufacturer.manufacturerId">
+                    {{manufacturer.ptManufacturerName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ptManufacturer.hasError('required')">
+                Select Manufacturer
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Model" name="ptModel" upperCase formControlName="ptModel" required>
+                <mat-option *ngFor="let ptModel of mePTPTModel" [value]="ptModel.ptModelId">
+                    {{ptModel.ptModelName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.ptModel.hasError('required')">
+                Select Model
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Serial Number" name="ptSerialNo" maxlength="20" upperCase formControlName="ptSerialNo"
+                required>
+            <mat-error *ngIf="meFg.controls.ptSerialNo.hasError('required')">
+                Serial Number is required
+            </mat-error>
+        </mat-form-field><br>
+                <!-- MF -->
+                <mat-form-field class="half-width">
+                    <mat-select placeholder="Dial MF" name="dialMF" formControlName="dialMF" (selectionChange)="mfCalculation($event.value)"
+                     required>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="1000">1000</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="meFg.controls.dialMF.hasError('required')">
+                        Select Dial MF
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width padding">
+                    <input matInput placeholder="MF" name="mf" [(ngModel)]="MF" formControlName="mf" readonly required>
+                </mat-form-field><br>
+        <!-- +++++++++++++ Modem +++++++++++++++++++++ -->
+        <h6><span>Modem</span></h6>
+        <mat-divider></mat-divider><br>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Manufacturer" name="modemManufacturer"
+                (selectionChange)=" onChangeModemModel($event.value)" formControlName="modemManufacturer" required>
+                <mat-option *ngFor="let manufacturer of modemManufacturer" [value]="manufacturer.manufacturerId">
+                    {{manufacturer.manufacturerName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.modemManufacturer.hasError('required')">
+                Select Manufacturer
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Model" name="modemModel" upperCase formControlName="modemModel" required>
+                <mat-option *ngFor="let model of modemModel" [value]="model.modelId">
+                    {{model.modelName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.modemModel.hasError('required')">
+                Select Model
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Serial Number" maxlength="20" name="modemSerialNo" upperCase formControlName="modemSerialNo"
+                required>
+            <mat-error *ngIf="meFg.controls.modemSerialNo.hasError('required')">
+                Serial Number is required
+            </mat-error>
+        </mat-form-field>
+        <!-- +++++++++++++ SIM +++++++++++++++++++++ -->
+        <h6><span>SIM</span></h6>
+        <mat-divider></mat-divider><br>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Service Provider" name="simId" formControlName="simId" required>
+                <mat-option *ngFor="let simService of simServiceProvider" [value]="simService.spId">
+                    {{simService.spName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meFg.controls.simId.hasError('required')">
+                Select serviceProvider
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="IMSI Code" name="imsiCode" minlength="15" maxlength="15"
+                onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="imsiCode">
+            <mat-error *ngIf="meFg.controls.imsiCode.hasError('required')">
+                IMSI Code is required
+            </mat-error>
+            <mat-error *ngIf="meFg.controls.imsiCode.hasError('minlength')">
+                Invalid IMSI
+            </mat-error>
+        </mat-form-field>
+
+        <!-- <button mat-raised-button (click)='mfCalculation()' color="accent" [disabled]="!meFg.value?.dialMF">Calculate MF</button> -->
+    </form>
+</mat-card>
+<!-- {{meFg?.value | json}} -->

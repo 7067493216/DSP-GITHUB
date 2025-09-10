@@ -1,0 +1,28 @@
+<ng-container cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+
+    <mat-toolbar color="primary" class="spaceBetween" cdkDragHandle>
+        <span>Approve/Reject</span>
+        <button class="close-btn" mat-stroked-button (click)="closeDialog()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div mat-dialog-content>
+        <span>{{data.remark}}</span><br>
+        <span>{{data.description}}</span><br>
+        <span *ngIf="data.isIndoreDiscom">{{data.jeRemark}}</span><br>
+        <span *ngIf="data.aoRemark != null">{{data.aoRemark}}</span>
+        <mat-form-field style="width:100%;">
+            <mat-label>Remark</mat-label>
+            <textarea matInput name="remark" rows="1" #remark="ngModel" [(ngModel)]="dialogData.remark"
+                required></textarea>
+            <mat-error *ngIf="remark.hasError('required')">
+                Please fill the Remark
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="center">
+        <button [disabled]="remark.errors" mat-raised-button (click)="onClickApprove()" color="primary"
+            cdkFocusInitial>Approve</button>
+        <button mat-raised-button [disabled]="remark.errors" (click)="onClickReject()" color="warn">Reject</button>
+    </div>
+</ng-container>

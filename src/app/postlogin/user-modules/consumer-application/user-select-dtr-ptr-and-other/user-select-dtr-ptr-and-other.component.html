@@ -1,0 +1,58 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <mat-toolbar class="label label-warning custom-mat-toolbar">
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div class="card">
+        <form [formGroup]="selectOmSTCFg" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="card-body">
+                <div style="display: flex; justify-content: center;">
+                    <div class="mx-5" *ngIf="consumerApplicationDetail?.dtr==3">
+                        <button style="height: 75px; width: 75px;" (click)="showDtrvalue()">DTR</button>
+                    </div>
+                    <br>
+                    <div class="mx-5" *ngIf="consumerApplicationDetail?.ptr ==4">
+                        <button style="height: 75px; width: 75px;" (click)="showPtrvalue()">PTR</button>
+                    </div>
+                    <br>
+                    <div class="mx-5" *ngIf="consumerApplicationDetail?.lt==5">
+                        <button style="height: 75px; width: 75px;" (click)="showLtvalue()">LT</button>
+                    </div>
+                    <br>
+                    <div class="mx-5" *ngIf="consumerApplicationDetail?.ht11Kv ==6">
+                        <button style="height: 75px; width: 75px;" (click)="showLtv11Kvalue()">LHT 11 KV</button>
+                    </div>
+                    <br>
+                    <div class="mx-5" *ngIf="consumerApplicationDetail?.ht33Kv ==7">
+                        <button style="height: 75px; width: 75px;" (click)="showHt33Kvalue()">HT 33 KV</button>
+                    </div>
+                    <br>
+                    <!-- <div class="mx-5" *ngIf="consumerApplicationDetail.ht132Kv==8">
+                    <button style="height: 75px; width: 75px;">HT 132 KV</button>
+                </div> -->
+
+                </div>
+
+                <br>
+
+                <div *ngIf="abcd">
+                    <label><input type="checkbox" formControlName="cb"> मेरे द्वारा यह सत्यापित किया जाता है की मेरे
+                        द्वारा
+                        उपरोक्त दिनांक को समबंधित कार्य का निरीक्षण किया गया है जिसमे कार्य पूर्ण एवं संतोषप्रद पाया
+                        गया|
+                        रिपोर्ट सलग्न कर कार्यवाही हेतु प्रेषित की जा रही है | <span class="required">*</span></label>
+                    <div align="center">
+                        <button type="submit" mat-raised-button color="primary">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+</mat-card>

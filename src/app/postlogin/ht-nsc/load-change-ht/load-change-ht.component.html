@@ -1,0 +1,403 @@
+<mat-card class="my-card">
+    <mat-card-header>
+        <mat-card-title>Load Change</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider><br>
+    <!--     <mat-form-field class="searchField">
+        <input matInput mode="search" placeholder="Account Id" [(ngModel)]="searchKey" type="number" min="5" (keyup.enter)="getConsumerDetails(searchKey)" autofocus>
+        <mat-label>Enter Account Id</mat-label>
+        <button mat-button *ngIf="searchKey" matPrefix mat-icon-button aria-label="Clear" (click)="getConsumerDetails(searchKey)">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button mat-button *ngIf="searchKey" matSuffix mat-icon-button aria-label="Clear" (click)="searchKey=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>&nbsp;
+    <button mat-flat-button color="primary" (click)="getConsumerDetails(searchKey)" [disabled]="!searchKey">Go</button>&nbsp;&nbsp; -->
+    <!-- <label><b>Connection Date: {{consumerData?.consumerName}}</b></label> -->
+
+    <!-- ........... Search field is closed ............. -->
+
+    <!-- ___________________________Consumer Details Start__________________________________ -->
+    <div class="table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr class="table-primary" align="center">
+                    <th colspan="6"><b>Consumer Details</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Consumer Name:</td>
+                    <td>{{consumerDetails?.consumerName}}</td>
+                    <td>Connection Type:</td>
+                    <td>{{consumerDetails?.connectionType}}</td>
+                    <td>Date Of Connection:</td>
+                    <td>{{consumerDetails?.connectionDate}}</td>
+                </tr>
+                <tr>
+                    <td>Meter Serial No.:</td>
+                    <td>{{consumerDetails?.meterSerialNo}}</td>
+                    <td>Supply Voltage:</td>
+                    <td>{{consumerDetails?.supplyVoltage}}</td>
+                    <td>Contract Demand:</td>
+                    <td>{{consumerDetails?.contractDemand}} (KVA)</td>
+                </tr>
+                <tr>
+                    <td>Purpose Of Installation:</td>
+                    <td>{{consumerDetails?.purposeOfInstallation}}</td>
+                    <td>Purpose Of GMC:</td>
+                    <td>{{consumerDetails?.purposeOfGMC}}</td>
+                    <td>GMC</td>
+                    <td>{{consumerDetails?.gmc}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!-- ___________________________Consumer Details End__________________________________ -->
+
+    <!-- ___________________________Current Load Details End__________________________________ -->
+    <!-- ___________________________Add New Load Details Start__________________________________ -->
+    <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+        <table class="table table-hover table-sm">
+
+            <thead>
+                <tr class="table-primary" align="center">
+                    <th colspan="4"><b>Load Change</b></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <form [formGroup]="changeLoadFg" novalidate (ngSubmit)="saveUpdatedLoad(changeLoadFg.value)">
+        <input type="hidden" formControlName="consumerId" />
+        <!-- [(ngModel)]="isGmcChange" -->
+        <div class="row">
+            <div class="col-md-12">
+                <mat-radio-group aria-label="Is GMC Change" formControlName="gmcChange"
+                    (change)=onGmcChangeEvent($event)>
+                    <label>Is GMC Change ? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <mat-radio-button value="true">Yes &nbsp;&nbsp;</mat-radio-button>
+                    <mat-radio-button value="false">No</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="changeLoadFg.controls.gmcChange.hasError('required')">
+                    Please select Yes or No for GMC Change
+                </mat-error>
+
+            </div>
+            <div style="height:10px;"></div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div style="height:10px;"></div>
+        <div style="height:10px;"></div>
+
+        <div [style.display]="isGmcChange ? 'block':'none'">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field class="half-width">
+                        <mat-select [required]="isGmcChange" panelClass="my-panel" placeholder="Select purpose of GMC"
+                            (selectionChange)="onChangepurposeOfGmc($event.value)" name="purposeOfGmcId"
+                            formControlName="purposeOfGmcId">
+                            <mat-option *ngFor="let purposeOfGmc of purposeOfGmcData" [value]="purposeOfGmc.purposeId">
+                                {{purposeOfGmc.purposeName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="changeLoadFg.controls.purposeOfGmcId.hasError('required')">
+                            Select Purpose Of GMC
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="half-width">
+                        <input matInput placeholder="Installation for GMC" name="gmc" formControlName="gmc"
+                            [required]="isGmcChange" readonly>
+                        <!-- <mat-error *ngIf="changeLoadFg.controls.gmc.hasError('required')">
+                                Select Purpose Of 
+                                </mat-error> -->
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!--------------------newLoad array code start ------------------------------------------->
+        <div formArrayName="newLoad">
+
+
+
+
+            <!-- loop throught newLoad -->
+            <ng-container *ngFor="let Load of changeLoadFg.get('newLoad')['controls']; let i=index">
+                <ng-container [formGroupName]="i">
+                    <mat-form-field class="width">
+                        <input matInput [matDatepicker]="picker" placeholder="Load Effective Date"
+                            name="loadEffectiveDate" formControlName="loadEffectiveDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="Load.controls.loadEffectiveDate.invalid">
+                            Date is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="width marginL">
+                        <mat-select placeholder="Contract Quantity Type" name="contractType"
+                            (selectionChange)="onChangeContractQuantityType(i)" formControlName="contractType">
+                            <mat-option *ngFor="let contractTypes of contractQuantity"
+                                [disabled]="contractTypes.quantityContractTypeId==firstSelectedContractType ||contractTypes.quantityContractTypeId==secondSelectedContractType 
+                            ||contractTypes.quantityContractTypeId==thirdSelectedContractType ||contractTypes.quantityContractTypeId==fourthSelectedContractType"
+                                [value]="contractTypes.quantityContractTypeId">{{contractTypes.quantityContractName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="Load.controls.contractType.invalid">
+                            Contract Quantity Type is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="width marginL">
+                        <input matInput placeholder="Value" (change)="OnChangeValue(i)" pattern="^[0-9]+$"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="value"
+                            formControlName="value">
+                        <mat-error *ngIf="Load.controls.value.hasError('required')">
+                            Value is required
+                        </mat-error>
+                        <mat-error *ngIf="Load.controls.value.hasError('pattern')">
+                            Invalid Input
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- row delete button, hidden if there is just one row -->
+                    <button type="button" mat-mini-fab color="warn" fxFlex="nogrow"
+                        *ngIf="changeLoadFg.get('newLoad')['controls'].length> 1" (click)="removeLoad(i)">
+                        <mat-icon>delete forever</mat-icon>
+                    </button>
+                </ng-container>&nbsp;
+            </ng-container>
+            <button type="button" mat-mini-fab color="primary"
+                *ngIf="changeLoadFg.get('newLoad')['controls'].length < 4" [disabled]="!changeLoadFg.valid"
+                fxFlex="nogrow" (click)="addLoad()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <!-- End newLoad array code -->
+        <div [style.display]="loadCanIncrease ?'inherit':'none'">
+            <div class="row mr-2">
+                <div class="col-md-4">
+                    <!-- ..............Registration fee Start................... -->
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Registration Fee Amount" name="regFeeAmount"
+                            [disableControl]="!loadCanIncrease" formControlName="regFeeAmount"
+                            pattern="^\d{0,9}(\.\d{1,4})?$" type="number" required>
+                        <mat-error *ngIf="changeLoadFg.controls.regFeeAmount.hasError('required')">
+                            Enter Registration Fee Amount
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Registration Reference No" name="regReferenceNo"
+                            [disableControl]="!loadCanIncrease" formControlName="regReferenceNo" required>
+                        <mat-error *ngIf="changeLoadFg.controls.regReferenceNo.hasError('required')">
+                            Enter Registration Reference No
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="full-width">
+                        <input matInput [matDatepicker]="regInvoiceDatepicker" placeholder="Registration Payment Date"
+                            tname="regPaymentDate" formControlName="regPaymentDate" [disableControl]="!loadCanIncrease"
+                            required>
+                        <mat-datepicker-toggle matSuffix [for]="regInvoiceDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #regInvoiceDatepicker></mat-datepicker>
+                        <mat-error *ngIf="changeLoadFg.controls.regPaymentDate.hasError('required')">
+                            Registration Reference Date is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mr-2">
+                <div class="col-md-4">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Security Deposit Amount" name="sdAmount" formControlName="sdAmount"
+                            [disableControl]="!loadCanIncrease" pattern="^\d{0,9}(\.\d{1,4})?$" type="number">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="SD Reference No" name="sdReferenceNo"
+                            formControlName="sdReferenceNo" [disableControl]="!loadCanIncrease">
+                        <mat-error *ngIf="changeLoadFg.controls.sdReferenceNo.hasError('required')">
+                            Name is required
+                        </mat-error>
+                        <mat-error *ngIf="changeLoadFg.controls.sdReferenceNo.hasError('pattern')">
+                            invalid Input
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="full-width">
+                        <input matInput [matDatepicker]="sdInvoiceDatepicker" placeholder="SD Reference Date"
+                            [disableControl]="!loadCanIncrease" tname="sdReferenceDate"
+                            formControlName="sdReferenceDate">
+                        <mat-datepicker-toggle matSuffix [for]="sdInvoiceDatepicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #sdInvoiceDatepicker></mat-datepicker>
+                        <mat-error *ngIf="changeLoadFg.controls.sdReferenceDate.hasError('required')">
+                            SD Invoice Date is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div style="height:10px;"></div>
+        <div style="height:10px;"></div>
+
+        <!--   refund code 18-07-2022 starts   -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-radio-group aria-label="Is Registration Fees Refund" formControlName="regFeeRefund">
+                    <label>Is Registration Fees Refund ? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <mat-radio-button value="true">Yes &nbsp;&nbsp;</mat-radio-button>
+                    <mat-radio-button value="false">No</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="changeLoadFg.controls.regFeeRefund.hasError('required')">
+                    Please select Yes or No for Registration fees refund
+                </mat-error>
+
+            </div>
+            <div style="height:10px;"></div>
+        </div>
+
+
+        <div style="height:10px;"></div>
+        <div style="height:10px;"></div>
+
+        <!--   refund code 18-07-2022 ends   -->
+
+        <div class="row" *ngIf="standByCdWarning || showWarning">
+            <div class="col-md-12">
+                <mat-checkbox unchecked="true" (change)="onChangeWarningCheckBox($event.checked)"
+                    formControlName="warningCheckBox">
+                    <label style="white-space: pre-wrap;color: rgb(246, 8, 8);" *ngIf="showWarning">You have entered
+                        load "{{loadValue}}" KVA
+                        on Voltage level "{{supplyVoltage}}KV" on which maximum load value {{maximumLoad}}" KVA is
+                        allowed.
+                        Are you sure for violation of load limit and having special permission for the load on selected
+                        voltage level.</label>
+                    <label style="white-space: pre-wrap;color: rgb(246, 8, 8);" *ngIf="standByCdWarning">You have
+                        entered total load
+                        "{{totalLoad}}" KVA on Voltage level "{{supplyVoltage}}KV" on which maximum load value
+                        {{maximumLoad}}" KVA is allowed. Are you sure for violation of load
+                        limit and having special permission for the load on selected voltage level.</label>
+                </mat-checkbox>
+            </div>
+        </div>
+
+
+
+        <!-- loadChangeApplicationNumber - loadChangeApplicationDate- loadChangeRemark --starts -->
+
+
+        <mat-divider></mat-divider>
+        <div style="height:10px;"></div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <mat-form-field class="full-width" hintLabel="Max 100 characters">
+                    <mat-label>Load Change Application Number</mat-label>
+                    <textarea matInput #loadChangeApplicationNumber placeholder="Load Change Application Number"
+                        rows="1" type="text" name="remark" formControlName="loadChangeApplicationNumber" maxlength="100"
+                        required> </textarea>
+                    <mat-hint align="end">{{loadChangeApplicationNumber.value?.length || 0}}/100</mat-hint>
+                    <mat-error *ngIf="changeLoadFg.controls.loadChangeApplicationNumber.hasError('required')">
+                        Remark is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input matInput [matDatepicker]="picker1" formControlName="loadChangeApplicationDate"
+                        [max]="maxDate" placeholder="Load Change Application Date" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error *ngIf="changeLoadFg.controls.loadChangeApplicationDate.hasError('required')">
+                        Select Load Change Application Date date
+                    </mat-error>
+                    <mat-error *ngIf="changeLoadFg.controls.loadChangeApplicationDate.invalid">
+                        Please select valid date
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+
+
+            <div class="col-md-12">
+                <mat-form-field class="full-width" hintLabel="Max 500 characters">
+                    <mat-label>Load Change Remark</mat-label>
+                    <textarea matInput #loadChangeRemark placeholder="Load Change Remark" rows="5" type="text"
+                        name="loadChangeRemark" formControlName="loadChangeRemark" maxlength="500"> </textarea>
+                    <mat-hint align="end">{{loadChangeRemark.value?.length || 0}}/500</mat-hint>
+                    <mat-error *ngIf="changeLoadFg.controls.loadChangeRemark.hasError('required')">
+                        Remark is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- loadChangeApplicationNumber - loadChangeApplicationDate- loadChangeRemark ---ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <div align="center">
+            <button *appHasRole="role.LoadChangeHtComponent_save" mat-raised-button color="primary"
+                onclick="return confirm('Please verify GMC and Tariff Subcategory before submission to ensure Correct Billing !')"
+                [disabled]="!(changeLoadFg.valid && warningCheckBoxRequired)" type="submit">Submit</button>
+        </div>
+    </form>
+    <!-- ___________________________Current Load Details Start__________________________________ -->
+    <div class="table-responsive mt-4">
+        <table class="table table-sm table1 table-hover table-wrap">
+
+            <thead>
+                <tr class="table-primary" align="center">
+                    <th colspan="3"><b>Load History</b></th>
+                </tr>
+                <tr>
+                    <th><b>Effective Date</b></th>
+                    <th><b>Value</b></th>
+                    <th><b>Description</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let load of loadRecordDetails">
+                    <td>{{load?.loadEffectiveDate}}</td>
+                    <td>{{load?.value}}</td>
+                    <td>{{load?.contractType}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-card>
+<!-- ___________________________Add New Load Details End__________________________________ -->

@@ -1,0 +1,238 @@
+.my-card {
+    width: 100%;
+    margin: 3px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.half-width {
+    width: 33%;
+}
+
+.padding {
+    padding-left: 6px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}
+
+.opticity {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+hr {
+    border: 0.01em solid grey;
+    padding: 0px !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tableHeaders {
+    background-color: gainsboro;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.tabledatas {
+    text-align: center;
+    font-size: 12px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+/* sandeep,start */
+
+.demandApproveTable {
+    border: 1px solid #0f0000;
+    border-collapse: collapse;
+    padding: 1px;
+    margin-top: 35px !important;
+}
+
+.demandApproveTable th {
+    border: 1px solid #0f0000;
+    padding: 1px;
+    background: #b3adad;
+    color: #313030;
+}
+
+.demandApproveTable td {
+    border: 1px solid #0f0000;
+    text-align: center;
+    padding: 1px;
+    background: #ffffff;
+    color: #050000;
+}
+
+.custom-srno {
+    text-align: center !important;
+    width: 5% !important;
+}
+
+.custom-particulatr {
+    text-align: center !important;
+    width: 45% !important;
+}
+
+.custom-amount {
+    text-align: center !important;
+    width: 9% !important;
+}
+
+.custom-particular-td {
+    text-align: left !important;
+    padding-left: 20px !important;
+}
+
+.custom-td {
+    padding-bottom: 0px !important;
+    text-align: center !important;
+}
+
+.custom-mat-divider {
+    margin-top: 10px !important;
+}
+
+.custom-status-div {
+    margin-top: 30px !important;
+}
+
+.custom-scroll-enable-1 {
+    height: 600px;
+    overflow: scroll;
+    display: block;
+}
+
+.custom-scroll-disable {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+/* 
+.mat-dialog-container {
+    margin-top: 25px !important;
+} */
+
+.custom-mat-divider {
+    margin-top: 10px !important;
+}
+
+.custom-col-md-12 {
+    margin-bottom: 10px !important;
+}
+
+.custom-row {
+    margin-top: 20px !important;
+}
+
+.custom-div-action {
+    margin-top: 20px !important;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+  }
+
+/* sandeep, end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.portal-select-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(7.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-bottom: 20px;
+}
+
+.label-section {
+  flex: 1 1 30%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.hindi-label {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  color: #222;
+}
+
+.select-section {
+  flex: 1 1 65%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Make readonly fields appear disabled/dark */
+.readonly-field[readonly] {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+  color: #454242;
+}
+
+
+
+.readonly-field[readonly][_ngcontent-wju-c319] {
+    background-color: #aa3737;
+    cursor: not-allowed;
+    color: #0f0101;
+    font-size: .95em;
+}
+
+.link-text {
+  color: #1976d2;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.link-text:hover {
+  text-decoration: none;
+}
+
+

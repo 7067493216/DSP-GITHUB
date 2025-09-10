@@ -1,0 +1,245 @@
+<mat-card>
+    <div style="display: flex; justify-content: space-between;">
+        <div></div>
+        <div>
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-card-header>
+        <h1>Request Generate for Rejection</h1>
+
+
+    </mat-card-header>
+
+    <br>
+    <mat-card-content style="width: 80%; margin: auto;">
+
+
+        <table class="table">
+            <tr>
+
+                <td>
+                    <b> Consumer-Application-No :</b><span
+                        class="padding">{{consumerApplicationDetails?.consumerApplicationNo}}</span>
+                </td>
+
+                <td>
+                    <b>Name :</b><span class="padding">{{consumerApplicationDetails?.consumerName}}</span>
+                </td>
+
+                <td>
+                    <b>Address :</b><span class="padding">{{consumerApplicationDetails?.address}}</span>
+                </td>
+
+
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Consumer Application Id :</b><span
+                        class="padding">{{consumerApplicationDetails?.consumerApplicationId}}</span>
+                </td>
+                <td>
+                    <b>Application Status :</b><span
+                        class="padding">{{consumerApplicationDetails?.applicationStatus?.applicationStatusName}}</span>
+                </td>
+                <td>
+                    <b>Father's Name :</b><span class="padding">{{consumerApplicationDetails?.guardianName}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Nature of Work Name :</b><span
+                        class="padding">{{consumerApplicationDetails?.natureOfWorkType.natureOfWorkName}}</span>
+                </td>
+                <td>
+                    <b>Pincode :</b><span class="padding">{{consumerApplicationDetails?.pincode}}</span>
+                </td>
+                <td>
+                    <b>SchemeType :</b><span
+                        class="padding">{{consumerApplicationDetails?.schemeType?.schemeTypeName}}</span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <b>District :</b><span class="padding">{{consumerApplicationDetails?.district?.districtName}}</span>
+                </td>
+
+                <td>
+                    <b>DC :</b><span class="padding">{{consumerApplicationDetails?.distributionCenter?.dcName}}</span>
+                </td>
+
+                <td>
+                    <b>GST Number :</b><span class="padding">{{consumerApplicationDetails?.gstNumber}}</span>
+                </td>
+
+                <td *ngIf="consumerApplicationDetails?.applicationStatus?.applicationStatusId==44">
+                    <b> Rejection Proposal File:</b><span class="padding"><button type="button" style="cursor: pointer;"
+                            class="btn btn-success" (click)="downloadFile()">Download</button></span>
+                </td>
+
+            </tr>
+        </table>
+        <br>
+
+        <b *ngIf="consumerApplicationDetails?.rejectedRemark!=null && consumerApplicationDetails?.natureOfWorkType?.natureOfWorkTypeId!=5"
+            style="color: crimson;">
+            <span>***</span> Application perposal Rejected By GM due to reason : <span
+                class="padding">{{consumerApplicationDetails?.rejectedRemark}}</span>
+        </b>
+
+        <br>
+        <br>
+
+
+        <div>
+            <input type="checkbox" (change)="checkBoxSelection($event)" style="height: 1.5em; width: 1.5em;"><span
+                class="mx-3">Request for Rejection of Application</span>
+        </div>
+        <br>
+        <!-- ///////////////////////////////////////////////////// -->
+
+        <!-- <div *ngIf="consumerApplicationDetails?.applicationStatus?.applicationStatusId==44">
+            <h2 style="color: rgb(42, 42, 141);">निरस्तीकरण प्रस्ताव</h2>
+            <b>(१) Accepted ( इस विकल्प का चुनाव करने पर आवेदन निरस्त हो जाएगा)</b><br>
+            <b>(२) Rejected (इस विकल्प का चुनाव करने पर आवेदन JE के स्तर पर चले जायेगा, और आवेदन निरस्त नहीं होगा।)</b>
+
+
+            <br>
+            <br>
+
+
+            <div>
+                <form class="example-form" [formGroup]="exFormForGm">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-radio-group aria-label="DC Accepted ? " formControlName="acceptRejectField"
+                                (change)=onGMAction($event)>
+                               
+                                <mat-radio-button value="true">Accepted</mat-radio-button><span class="mx-2"></span>
+                                <mat-radio-button value="false">Rejected &nbsp;&nbsp;</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div style="height:10px;"></div>
+                    </div>
+                    <br>
+
+                    <mat-form-field class="example-full-width" style="width: 50vw;">
+                        <mat-label>remark</mat-label>
+                        <textarea matInput placeholder="remarks" formControlName="remark"></textarea>
+                    </mat-form-field>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary" (click)="onSubmitByGm()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+
+         <div *ngIf="consumerApplicationDetails?.applicationStatus?.applicationStatusId==44 && consumerApplicationDetails?.natureOfWorkType?.natureOfWorkTypeId==5" >
+            <h2 style="color: rgb(42, 42, 141);">निरस्तीकरण प्रस्ताव</h2>
+            <b>(१) Accepted ( इस विकल्प का चुनाव करने पर आवेदन निरस्त हो जाएगा)</b><br>
+            <b>(२) Rejected (इस विकल्प का चुनाव करने पर आवेदन JE के स्तर पर चले जायेगा, और आवेदन निरस्त नहीं होगा।)</b>
+
+
+            <br>
+            <br>
+
+
+            <div>
+                <form class="example-form" [formGroup]="exFormForGm">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-radio-group aria-label="DC Accepted ? " formControlName="acceptRejectField"
+                                (change)=onGMAction($event)>
+                               
+                                <mat-radio-button value="true">Accepted</mat-radio-button><span class="mx-2"></span>
+                                <mat-radio-button value="false">Rejected &nbsp;&nbsp;</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div style="height:10px;"></div>
+                    </div>
+                    <br>
+
+                    <mat-form-field class="example-full-width" style="width: 50vw;">
+                        <mat-label>remark</mat-label>
+                        <textarea matInput placeholder="remarks" formControlName="remark"></textarea>
+                    </mat-form-field>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary" (click)="onSubmitByGm()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+        <!-- //////////////////////////////////////////////////////// -->
+        <!-- <div *ngIf="consumerApplicationDetails?.applicationStatus?.applicationStatusId!=44">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label class="form-label">आवेदन के निरस्तीकरण संबंधित दस्तावेज सलग्न करे।</label>
+                    <input class="form-control" type="file" (change)="uploadFile($event)">
+
+                </div>
+            </div>
+
+
+
+            <div>
+                <form class="example-form" [formGroup]="exForm">
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>remark</mat-label>
+                        <textarea matInput placeholder="remarks" formControlName="remark" width></textarea>
+                    </mat-form-field>
+
+
+
+                    <div>
+                        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+
+         <div *ngIf="(consumerApplicationDetails?.applicationStatus?.applicationStatusId!=44) || (consumerApplicationDetails?.applicationStatus?.applicationStatusId==44 && consumerApplicationDetails?.natureOfWorkType?.natureOfWorkTypeId!=5)">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label class="form-label">आवेदन के निरस्तीकरण संबंधित दस्तावेज सलग्न करे।</label>
+                    <input class="form-control" type="file" (change)="uploadFile($event)">
+
+                </div>
+            </div>
+
+
+
+            <div>
+                <form class="example-form" [formGroup]="exForm">
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>remark</mat-label>
+                        <textarea matInput placeholder="remarks" formControlName="remark" width></textarea>
+                    </mat-form-field>
+
+
+
+                    <div>
+                        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ////////////////////////////////////////////////////// -->
+
+
+    </mat-card-content>
+</mat-card>

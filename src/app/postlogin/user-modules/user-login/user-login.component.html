@@ -1,0 +1,81 @@
+
+<div class="dsp-loginblock" *ngIf="showForm">
+    <mat-card class="dsp-loign-item">
+        <mat-card-header>
+            <mat-card-title>Discom Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dsp-forminfo">
+            <form [formGroup]="userLoginForm" (ngSubmit)="getOtp()" autocomplete="off" class="userLoginForm"
+                *ngIf="!showOtpField">
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+                <mat-form-field appearance="outline" class="form-group">
+                    <input matInput name="userLoginId" minlength="6" maxlength="10" placeholder="User Mobile Number"
+                        formControlName="userLoginId" class="ds-textbox">
+                    <mat-label class="form-label">Enter Employee ID</mat-label>
+                    <mat-error *ngIf="userLoginForm.controls.userLoginId.hasError('required')">
+                        Enter Employee ID
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-group">
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" name="userLoginPwd"
+                        formControlName="userLoginPwd" class="ds-textbox" required>
+                    <mat-icon class="iconHover" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                        'visibility'}}</mat-icon>
+                    <mat-label class="form-label">Password</mat-label>
+                    <mat-error *ngIf="userLoginForm.controls.userLoginPwd.hasError('required')">
+                        Enter Password
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="form-group">
+                </div>
+                
+                <div class="form-group form-buttons">
+                    <button mat-stroked-button color="primary" type="submit" [disabled]="!userLoginForm.valid"
+                        class="formButton formButton-full">Get
+                        OTP
+                    </button>
+                </div>
+            </form>
+
+            <form [formGroup]="otpVerificationFg" (ngSubmit)="otpVerification()" autocomplete="off" class="loginForm"
+                *ngIf="showOtpField">
+                <div class="form-group">
+                    <!-- <input name="userLoginId" type="hidden" formControlName="userLoginId"> -->
+                    <!-- <input name="tokenId" type="hidden" formControlName="tokenId"> -->
+                    <mat-form-field appearance="outline" class="form-group">
+                        <input matInput placeholder="Enter Your OTP" type="tel" name="otp" formControlName="otp"
+                            required>
+                        <mat-label>OTP</mat-label>
+                        <mat-error *ngIf="otpVerificationFg.controls.otp.hasError('required')">
+                            Enter OTP
+                        </mat-error>
+                    </mat-form-field>
+                    <span class="resendOtp" (click)="resendOtp()">Resend OTP</span>
+                </div>
+                <div class="form-group">
+                    <button mat-stroked-button color="primary" type="submit" [disabled]="!otpVerificationFg.valid"
+                        class="formButton formButton-full">
+                        Log in
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+        <!-- <mat-divider></mat-divider> -->
+        <mat-card-footer>
+            <div class="dsp-creation">
+                <!-- <a class="underlineHover" id="signUp" [routerLink]="[ '/user/sign-up']" routerLinkActive="link-active"
+                    [routerLinkActiveOptions]="{ exact: true }">Sign up?</a> -->
+                <a class="underlineHover" id="forgot" routerLink="/user/forget-password" routerLinkActive="link-active"
+                    [routerLinkActiveOptions]="{ exact: true }">ForgotPassword?</a>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</div>
+
+<!-- href="javascript:;" class="nav-link" [routerLink]="[ '/user/login']" -->
+<!-- <div align="center">
+        <button type="submit" mat-raised-button color="primary" (click)="unlockId()">Unlock Id</button>
+    </div> -->

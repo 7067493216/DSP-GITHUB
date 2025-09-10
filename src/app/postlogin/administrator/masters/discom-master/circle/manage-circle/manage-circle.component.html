@@ -1,0 +1,55 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+          <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+    <form [formGroup]="dnCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        <input type="hidden" formControlName="circleId">
+
+        <mat-form-field class="half-width ">
+            <mat-label>Select region</mat-label>
+            <mat-select name="region" formControlName="regionId">
+                <mat-option *ngFor="let regiondata of regionData" [value]="regiondata.regionId">{{regiondata.region}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dnCreationFg.controls.regionId.hasError('required')">
+                Please Select region
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="half-width padding">
+            <mat-label>Circle Code</mat-label>
+            <input matInput placeholder="Circle Code" name="circleCode" formControlName="circleCode">
+            <mat-error *ngIf="dnCreationFg.controls.circleCode.hasError('required')">
+                Circle code name is required
+            </mat-error>
+            <mat-error *ngIf="dnCreationFg.controls.circleCode.hasError('pattern')">
+                Please enter circle code in valid format
+            </mat-error>
+            <mat-error *ngIf="dnCreationFg.controls.circleCode.hasError('uniqueValue')">
+                circle code already exists
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-label>Circle Name</mat-label>
+            <input matInput placeholder="Circle Name" name="circle" formControlName="circle">
+            <mat-error *ngIf="dnCreationFg.controls.circle.hasError('required')">
+                Circle name is required
+            </mat-error>
+            <mat-error *ngIf="dnCreationFg.controls.circle.hasError('pattern')">
+                Please enter circle in valid format
+            </mat-error>
+            <mat-error *ngIf="dnCreationFg.controls.circle.hasError('uniqueValue')">
+                Circle name already exists
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!dnCreationFg.valid">Save</button>
+        </div>
+    </form>
+</mat-card>

@@ -1,0 +1,178 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()">
+        <!-- <mat-card-content> -->
+        <mat-form-field class="half-width">
+            <mat-icon matSuffix>perm_identity</mat-icon>
+            <mat-label>Employee number</mat-label>
+            <input matInput placeholder="Employee number" type="tel" minlength="6" type="number" maxlength="10"
+                name="userId" formControlName="userId">
+            <mat-error *ngIf="registerForm.controls.userId.hasError('required')">
+                Employee number is required
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.userId.hasError('type')">
+                Invalid Pattern
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.userId.hasError('empnumberlength')">
+                Please Enter Employee number In Valid Format
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.userId.hasError('uniqueValue')">
+                Employee number already exists
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Designation</mat-label>
+            <mat-select name="designationId" formControlName="designationId">
+                <mat-option value="">Select designation</mat-option>
+                <mat-option *ngFor="let desig of designationList" [value]="desig.designationId">
+                    {{desig.designation}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerForm.controls.designationId.hasError('required')">
+                Please Select Employee Designation
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.designationId.hasError('pattern')">
+                Please Enter Employee Designation In Valid Format
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-label>Full Name</mat-label>
+            <input matInput placeholder="Full Name" name="userName" formControlName="userName">
+            <mat-error *ngIf="registerForm.controls.userName.hasError('required')">
+                Name is required
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.userName.hasError('pattern')">
+                Please Enter Name In Valid Format
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="half-width">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" name="userEmailId" type="email" formControlName="userEmailId">
+            <mat-error *ngIf="registerForm.controls.userEmailId.hasError('emailValidator')">
+                Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.userEmailId.hasError('uniqueValue')">
+                email already exists
+            </mat-error>
+        </mat-form-field>
+        <!--             <mat-form-field class="half-width padding">
+                <input matInput placeholder="Enter your password" name="userCredentials" type="password" readonly formControlName="userCredentials">
+                <mat-icon matSuffix>vpn_key</mat-icon>
+                <mat-error *ngIf="registerForm.controls.userCredentials.hasError('required')">
+                    Password field is required
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls.userCredentials.hasError('pwdPattern')">
+                   Password must contain a number an upper and lower case character and a special character
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput placeholder="Confirm Password" name="confirmPassword" type="password" readonly formControlName="confirmPassword">
+                <mat-icon matSuffix>vpn_key</mat-icon>
+                <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('required')">
+                    Confirm Password is required
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('mismatchedPasswords')">
+                    Passwords do not match.
+                </mat-error>
+            </mat-form-field><br> -->
+        <mat-form-field class="half-width padding">
+            <mat-label>Adhar Number</mat-label>
+            <input matInput placeholder="Aadhar No" type="tel" pattern="\d{1,12}" minlength="12" maxlength="12"
+                name="aadharNo" formControlName="aadharNo">
+            <mat-error *ngIf="registerForm.controls.aadharNo.hasError('required')">
+                Aadhar number is required
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.aadharNo.hasError('uniqueValue')">
+                Aadhar No already exists
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.aadharNo.hasError('minlength')">
+                Invalid Aadhar No
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.aadharNo.hasError('pattern')">
+                Invalid Aadhar No
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-label>Mobile</mat-label>
+            <input matInput placeholder="Mobile" maxlength="10" type="tel" name="mobileNo" formControlName="mobileNo">
+            <mat-error *ngIf="registerForm.controls.mobileNo.hasError('required')">
+                Mobile number is required
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.mobileNo.hasError('mobPattern')">
+                Please enter a valid mobile number
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.mobileNo.hasError('uniqueValue')">
+                mobile number already exists
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-label>Select Role</mat-label>
+            <mat-select name="userRoles" formControlName="userRoles" multiple required>
+                <mat-option *ngFor="let roles of roleList" [value]="roles.roleId">{{roles.role}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf=" registerForm.controls.userRoles.hasError('required')">
+                Please Select Roles
+            </mat-error>
+        </mat-form-field>
+        <!-- ~~~~~~~~~Location Selection ~~~~~~~~~~~~ -->
+        <mat-form-field class="half-width padding">
+            <mat-label>Access level</mat-label>
+            <mat-select name="accessLevel" (selectionChange)=" managelocaton($event.value)"
+                formControlName="accessLevel">
+                <mat-option value="">Select Access level</mat-option>
+                <mat-option value="1">Discom Level</mat-option>
+                <mat-option value="2">Region Level</mat-option>
+                <mat-option value="3">Circle Level</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerForm.controls.accessLevel.hasError('required')">
+                Please Select Access level
+            </mat-error>
+        </mat-form-field>
+        <ng-container
+            *ngIf="registerForm.get('accessLevel').value == '2' || registerForm.get('accessLevel').value == '3'">
+            <mat-form-field class="half-width padding">
+                <mat-label>Select Region</mat-label>
+                <mat-select name="regionId" formControlName="regionId" (selectionChange)="onChangeCicle($event.value)">
+                    <mat-option>Select region</mat-option>
+                    <mat-option *ngFor="let region of rigionList" [value]="region.regionId">{{region.region}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="registerForm.controls.regionId.hasError('required')">
+                    Please Select Region
+                </mat-error>
+            </mat-form-field>
+        </ng-container><br>
+        <ng-container *ngIf="registerForm.get('accessLevel').value === '3'">
+            <mat-form-field class="half-width">
+                <mat-label>Select Circle</mat-label>
+                <mat-select name="circleId" formControlName="circleId">
+                    <mat-option>Select Circle</mat-option>
+                    <mat-option *ngFor="let circle of circleList" [value]="circle.circleId">{{circle.circle}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf=" registerForm.controls.circleId.hasError('required')">
+                    Please Select Circle
+                </mat-error>
+            </mat-form-field>
+        </ng-container>
+        <!-- ~~~~~~~~~Location Selection ~~~~~~~~~~~~ -->
+        <!-- </mat-card-content> -->
+
+        <!--REGISTER BUTTON HERE-->
+        <mat-divider></mat-divider><br>
+        <div align="center">
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!registerForm.valid">{{data.btnTitle}}</button>
+        </div>
+    </form>
+</mat-card>

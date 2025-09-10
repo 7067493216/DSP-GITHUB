@@ -1,0 +1,74 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+    </mat-toolbar>
+    <form [formGroup]="cityCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+
+        <!--  <mat-form-field class="half-width">
+            <mat-label>Select Country</mat-label>
+            <mat-select name="country" formControlName="country">
+                <mat-option value="">Select country name</mat-option>
+                <mat-option value="option1">India</mat-option>
+            </mat-select>
+            <mat-error *ngIf="cityCreationFg.controls.country.hasError('required')">
+                Please Select country
+            </mat-error>
+        </mat-form-field> -->
+        <mat-form-field class="half-width ">
+            <mat-label>Select State</mat-label>
+            <mat-select name="stateId" formControlName="stateId" placeholder="Select State">
+                <!-- <mat-option value="">Select state</mat-option> -->
+                <mat-option value="1">Madhya Pradesh</mat-option>
+                <!-- <mat-option *ngFor="let tehsil of tehsilData" [value]="tehsil.districtId">{{tehsil.district}}
+                    </mat-option> -->
+            </mat-select>
+            <mat-error *ngIf="cityCreationFg.controls.stateId.hasError('required')">
+                Please select state
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select name="districtId" formControlName="districtId" placeholder="Select District" (selectionChange)="onChangeDistrict($event.value)">
+                <mat-option *ngFor="let district of districtData" [value]="district.districtId">{{district.district}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="cityCreationFg.controls.districtId.hasError('required')">
+                Please select district
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-label>Select tehsil</mat-label>
+            <mat-select name="tehsilId" formControlName="tehsilId" placeholder="Select Tehsil">
+                <!-- <mat-option value="">Select tehsil</mat-option> -->
+                <mat-option *ngFor="let tehsil of tehsilData" [value]="tehsil.tehsilId">{{tehsil.tehsil}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="cityCreationFg.controls.tehsilId.hasError('required')">
+                Please Select tehsil
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>City Name</mat-label>
+            <input matInput placeholder="City Name" name="city" placeholder="Select City" formControlName="city">
+            <mat-error *ngIf="cityCreationFg.controls.city.hasError('required')">
+                City name is required
+            </mat-error>
+            <mat-error *ngIf="cityCreationFg.controls.city.hasError('pattern')">
+                Please Enter City In Valid Format
+            </mat-error>
+        </mat-form-field>
+        <!--  <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+            <mat-error *ngIf="cityCreationFg.controls.description.hasError('required')">
+                Description is required
+            </mat-error>
+        </mat-form-field> -->
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!cityCreationFg.valid">Save</button>
+        </div>
+    </form>
+</mat-card>

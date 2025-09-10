@@ -1,0 +1,182 @@
+<!-- ___________________________load change HT Close__________________________________ -->
+
+<mat-card class="my-card">
+    <form [formGroup]="tariffChangeFg">
+        <mat-card-header>
+            <mat-card-title>Change Tariff Details</mat-card-title>
+            <mat-checkbox [(ngModel)]="IsEditable" formControlName="tariffEditable"
+                onclick="return confirm('Are you sure?')" class="checkBoxPadding">Update Tariff Details
+            </mat-checkbox>
+        </mat-card-header>
+        <div [ngClass]="{readonlyDiv:!IsEditable}">
+            <mat-divider></mat-divider><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    <mat-form-field class="half-width">
+                        <input matInput [matDatepicker]="picker" placeholder="Tariff Change Effective Date"
+                            name="tariffChangeEffDate " formControlName="tariffChangeEffDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="tariffChangeFg.controls.tariffChangeEffDate.hasError('required')">
+                            Tariff Change Effective Date is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="half-width">
+                            <mat-select placeholder="Select Supply Voltage" name="supplyVoltage"
+                                (selectionChange)="onChangeSupplyVoltage($event.value)" formControlName="supplyVoltage"
+                                required>
+                                <mat-option *ngFor="let supply of supplyVoltages | keyvalue" [value]="supply.key">
+                                    {{supply.value}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="tariffChangeFg.controls.supplyVoltage.hasError('required')">
+                                Select Supply Voltage
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-5">
+                        <mat-form-field class="half-width">
+                            <mat-select panelClass="my-panel" placeholder="Select Purpose of Installation" name="purpose"
+                                formControlName="purpose" required (selectionChange)="onChangePurpose($event.value)">
+                                <mat-option *ngFor="let purpose of allPurposeData" [value]="purpose.purposeInstId">
+                                    {{purpose.purposeDesc +' ' +'('+ purpose.purposeOfInstTariffSubCategory.tariffSubCategoryCode +')'}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="half-width">
+                            <input formControlName="customerClassId" name="customerClassId" matInput
+                                placeholder="Tariff Schedule" readonly>
+                            <mat-error *ngIf="tariffChangeFg.controls.customerClassId.hasError('required')">
+                                Select Customer Class
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="half-width">
+                            <input formControlName="tariffCategory" name="tariffCategory" matInput
+                                placeholder="Tariff Category" readonly>
+                            <mat-error *ngIf="tariffChangeFg.controls.tariffCategory.hasError('required')">
+                                Select Tariff Category
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-5">
+                        <mat-form-field class="half-width">
+                            <input formControlName="tariffSubCategory" name="tariffSubCategory" matInput
+                                placeholder="Tariff SubCategory" readonly>
+                            <mat-error *ngIf="tariffChangeFg.controls.tariffSubCategory.hasError('required')">
+                                Select Sub Category
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="half-width">
+                            <mat-select panelClass="my-panel" placeholder="Select purpose of GMC"
+                                (selectionChange)="onChangepurposeOfGmc($event.value)" name="purposeOfGmcId"
+                                formControlName="purposeOfGmcId">
+                                <mat-option  *ngFor="let purposeOfGmc of purposeOfGmcData"
+                                    [value]="purposeOfGmc.purposeId">
+                                    {{purposeOfGmc.purposeName}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="tariffChangeFg.controls.purposeOfGmcId.hasError('required')">
+                                Select Select purpose of GMC
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="half-width">
+                            <input matInput placeholder="Installation for GMC" name="gmc" formControlName="gmc" required
+                                readonly>
+                            <mat-error *ngIf="tariffChangeFg.controls.gmc.hasError('required')">
+                                Enter Installation for GMC
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-5">
+                        <mat-form-field class="half-width">
+                            <mat-select placeholder="Select Revenue Category" name="revenueCategoryId"
+                                formControlName="revenueCategoryId">
+                                <mat-option *ngFor="let revenueCategory of revenueCategoryData"
+                                    [value]="revenueCategory.revenueCategoryId">
+                                    {{revenueCategory.revenueCategoryName +"("+revenueCategory.revenueCategoryCode +")"}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="tariffChangeFg.controls.revenueCategoryId.hasError('required')">
+                                Select Sub Category
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                   
+                </div>
+                <div class="row" *ngIf="tariffScheduleCode === 'HV-4'">
+                    <div class="col-md-4">
+                        <mat-form-field class="half-width">
+                            <input formControlName="seasonalStartDate" matInput (dateInput)="firstDateInput($event)"
+                                [matDatepicker]="seasonalStartDate" placeholder="Seasonal Start Date"
+                                [disableControl]="tariffScheduleCode !== 'HV-4'">
+                            <mat-datepicker-toggle matSuffix [for]="seasonalStartDate"></mat-datepicker-toggle>
+                            <mat-datepicker #seasonalStartDate></mat-datepicker>
+                            <mat-error *ngIf="tariffChangeFg.controls.seasonalStartDate.hasError('required')">
+                                Seasonal StartDate is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="half-width">
+                            <input matInput [matDatepicker]="seasonalEndDate" [min]="minEndDate" [max]="maxEndDate"
+                                placeholder="Seasonal End Date" tname="seasonalEndDate"
+                                formControlName="seasonalEndDate" [disableControl]="tariffScheduleCode !== 'HV-4'">
+                            <mat-datepicker-toggle matSuffix [for]="seasonalEndDate"></mat-datepicker-toggle>
+                            <mat-datepicker #seasonalEndDate></mat-datepicker>
+                            <mat-error *ngIf="tariffChangeFg.controls.seasonalEndDate.hasError('required')">
+                                Seasonal EndDate is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                   
+                </div>
+<!--                 <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="half-width">
+                            <input matInput [matDatepicker]="picker4" placeholder="Meter Rent Effective Date"
+                                name="meterRentEffectiveDate " formControlName="meterRentEffectiveDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                            <mat-error *ngIf="tariffChangeFg.controls.meterRentEffectiveDate.hasError('required')">
+                                Meter Rent Effective Date is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="half-width">
+                            <mat-select placeholder="Meter Rent" name="meterRent" formControlName="meterRent">
+                                <mat-option *ngFor="let meterRent of meterRentType" [value]="meterRent.meterRentTypeId">
+                                    {{meterRent.meterCapacity}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="tariffChangeFg.controls.meterRent.hasError('required')">
+                                Select Meter Rent
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div> -->
+            </div>
+            <div align="center">
+                <button *appHasRole="role.TariffChangeHtComponent_Cu" mat-raised-button color="accent" (click)="SaveTariff()" [disabled]="!IsEditable">Submit</button>
+            </div>
+        </div>
+    </form>
+    <!-- {{tariffChangeFg?.value | json}} -->
+</mat-card>

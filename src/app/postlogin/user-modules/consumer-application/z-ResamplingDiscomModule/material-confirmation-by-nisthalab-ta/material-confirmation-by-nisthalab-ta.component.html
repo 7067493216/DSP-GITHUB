@@ -1,0 +1,47 @@
+<div align="right">
+  <button class="close-btn" (click)="onClose()" tabIndex="-2">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<mat-card class="form-card">
+
+  <!-- Header -->
+  <div class="header">
+    <mat-icon>description</mat-icon>
+    <span>Material Verification</span>
+  </div>
+
+  <div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- Material Acceptance -->
+        <mat-form-field appearance="outline" class="col-md-6 full-width">
+          <mat-label>Material Acceptance</mat-label>
+          <mat-select formControlName="dtrAcceptOrNot" required (selectionChange)="onPassOrFail($event)" >
+            <mat-option *ngFor="let c of confirmations" [value]="c.value">
+              {{ c.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Remark -->
+        <mat-form-field appearance="outline" class="col-md-6 full-width">
+          <mat-label>Select Remark</mat-label>
+          <mat-select formControlName="remark" required>
+            <mat-option *ngFor="let d of remarks" [value]="d.value">
+              {{ d.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" class="submit-btn" type="submit">
+        <mat-icon>send</mat-icon>
+        Submit
+      </button>
+    </form>
+  </div>
+
+</mat-card>

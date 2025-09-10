@@ -1,0 +1,851 @@
+<!-- <mat-card style="height: 500px; overflow: scroll;" class="my-card"> -->
+    <mat-card class="my-card custom-scroll-enable-1">
+        <mat-toolbar class="label label-warning">
+            <!-- <span>{{data.modalTitle}}</span> -->
+            <span>Application Demand Details</span>
+            <span class="fill-remaining-space"></span>
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </mat-toolbar>
+    
+        <!-- 62.925 , 0.00
+        9983 , {.cgst}
+        9983, {sgst}
+        46.947,  0.00
+        ---- , 0.00
+        -----,0.00
+        55.160, 0.00
+        47.320, bycondition {.totaldepositAmount} or {.totalamountOfSupervision} 
+        ---- ,0.00
+        bycondition {.totaldepositAmount} or {.totalamountOfSupervision}  -->
+    
+    
+        <div class="card">
+    
+            <div class="card-body" >
+                <div #componentViewNew id="elementIdToCaptureNew">
+    
+    
+                    <div *ngIf="data.schemeTypeId==1">
+                        <header class="dsp-headerblock">
+                            <div id="alterna-header" class="">
+                                <div class="container">
+                                    <div class="logobox">
+                                        <img class="img-fluid" style="height: 10em;"
+                                            alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                            src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                                    </div>
+                                    <div class="header-custom-container"></div>
+                                </div>
+                            </div>
+    
+                            <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU  src="assets/images/banner_mpmkvvcl_logo.jpg"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU" -->
+    
+                        </header>
+    
+                        <br>
+                        <hr>
+                        <h2 style="color: crimson;font-weight: 900;"> कृपया ध्यान दे : </h2>
+                        <h3 style="color: crimson;font-weight: 900;">
+                            * अगर आपने पोर्टल पर भुगतान किया है और किसी तकनीकी समस्या के कारण पोर्टल पर समायोजित नही हुआ है
+                            तो
+                            पुनः भुगतान
+                            से पहले आवेदन क्रमांक dsp.mpcz000@gmail.com पर ईमेल करे।</h3>
+    
+                        <h3 style="color: crimson; font-weight: 900;">
+                            * भुगतान करने के लिए दिए गए भुगतान विकल्प का उपयोग करे,किसी भी अन्य माध्यम / ऑफलाइन के माध्यम से
+                            किया गया भुगतान स्वीकार नहीं किया जायेगा।
+                        </h3>
+    
+                        <h3 style="color: crimson; font-weight: 900;">
+                           * शासकीय विभाग यह सुनिश्चित करें कि भुगतान की राशि मांग पत्र में उल्लिखित राशि के बराबर हो।
+                        </h3>
+    
+                        <br>
+                        <div style="display: flex; justify-content: center; align-items: center;">
+    
+    
+                            <h1 style="color: rgb(32, 32, 89);">Consumer Application Demand Note <span>
+                                    ({{consumerApplicationDetail?.consumerApplicationNo}})</span> </h1>
+                        </div>
+    
+                        <table class="table table-bordered" *ngIf="data.schemeTypeId == 1 ">
+                            <thead>
+                                <tr>
+                                    <th class="custom-srno">Sr. No.</th>
+                                    <th class="custom-particulatr">Particular</th>
+                                    <th class="custom-amount">Account code <span class="required"></span></th>
+                                    <th class="custom-amount">Amount (in ₹)<span class="required"></span></th>
+    
+                                </tr>
+                            </thead>
+                            <tbody>
+    
+                                <!-- <tr>
+                            <td>00</td>
+                            <td>00</td>
+                            <td>00</td>
+                            <td>00</td>
+                        </tr> -->
+                                <tr>
+                                    <td>1.</td>
+                                    <td class="custom-particular-td">&nbsp;
+                                        <span *ngIf="natureOfWorkTypeId!=5">Supervision Charges on Cost of Material
+                                            (Excluding
+                                            Service Tax Amount)</span> 
+                                            <span *ngIf="natureOfWorkTypeId==5">पर्यवेक्षण शुल्क (Supervision Charges)</span>
+                                        </td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        62.925
+                                    </td>
+                                    <td>
+    
+                                        <div *ngIf="paymentDetails?.superVisionAmount!=null">
+                                            {{paymentDetails?.superVisionAmount}}
+                                        </div>
+    
+                                        <div *ngIf="paymentDetails?.superVisionAmount==null">
+                                            0.00
+                                        </div>
+    
+                                        <!-- <div *ngIf="natureOfWorkTypeId==4">
+                                            <div
+                                                *ngIf="consumerApplicationDetail?.individualOrGroup?.individualOrGroupId==1 && consumerApplicationDetail?.jeLoad<400">
+                                                &nbsp;0.00</div>
+                                            <div
+                                                *ngIf="consumerApplicationDetail?.individualOrGroup?.individualOrGroupId==1 && consumerApplicationDetail?.jeLoad>=400">
+                                                &nbsp;{{paymentDetails?.superVisionAmount}}</div>
+                                            <div
+                                                *ngIf="consumerApplicationDetail?.individualOrGroup?.individualOrGroupId==2">
+                                                {{paymentDetails?.superVisionAmount}}
+                                            </div>
+                                        </div>
+    
+                                        <div *ngIf="natureOfWorkTypeId!=4">
+                                            <div>
+                                                {{paymentDetails?.superVisionAmount}}
+                                            </div>
+                                        </div> -->
+    
+                                    </td>
+    
+                                </tr>
+                                <tr >
+                                    <td>&nbsp;2.</td>
+                                    <td class="custom-particular-td">&nbsp;
+                                        <span *ngIf="natureOfWorkTypeId==5">CGST on पर्यवेक्षण शुल्क @9%</span> 
+                                        <span *ngIf="natureOfWorkTypeId!=5"> CGST-9%</span>
+                                    </td>
+                                    <td class="custom-td">&nbsp;46.948
+                                    </td>
+                                    <td>&nbsp;{{paymentDetails?.cgst}}</td>
+    
+                                </tr>
+                                <tr >
+                                    <td>&nbsp;3.</td>
+                                    <td class="custom-particular-td">&nbsp;
+                                        <span *ngIf="natureOfWorkTypeId==5">SGST on पर्यवेक्षण शुल्क @9%</span> 
+                                        <span *ngIf="natureOfWorkTypeId!=5"> SGST-9%</span>
+                                    </td>
+                                    <td class="custom-td">&nbsp;46.949
+                                    </td>
+                                    <td>&nbsp;{{paymentDetails?.sgst}}</td>
+    
+    
+                                </tr>
+                               
+                                <tr *ngIf="natureOfWorkTypeId!=5">
+                                    
+                                    <td >&nbsp;4.</td>
+                                    <td class="custom-particular-td">&nbsp;System Development Charges
+    
+                                    </td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        55.160
+                                    </td>
+    
+                                    <td>0.00</td>
+                                </tr>
+                                <tr *ngIf="natureOfWorkTypeId!=5">
+                                    
+                                    <td >&nbsp;5.</td>
+                                    <td class="custom-particular-td">&nbsp;Cost of Estimate for 100% Deposit Work</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        47.320
+                                    </td>
+                                    <td>0.00</td>
+    
+                                </tr>
+                               
+                               
+                                <tr *ngIf="natureOfWorkTypeId!=5">
+                                   
+                                    <td >&nbsp;6.</td>
+                                    <td class="custom-particular-td">&nbsp;Deposit for Electrification of illegal
+                                        Colony/Slum
+                                    </td>
+                                    <td class="custom-td">&nbsp; 47.337
+    
+    
+                                        <!-- colonyOrSlum -->
+                                    </td>
+                                    <td>
+                                        <div *ngIf="paymentDetails?.colonyOrSlum != null">
+    
+                                            {{paymentDetails?.colonyOrSlum}}
+                                        </div>
+                                        <div *ngIf="paymentDetails?.colonyOrSlum == null">0.00</div>
+                                    </td>
+                                </tr>
+    
+                                <tr >
+                                    
+                                    <td >&nbsp;7.</td>
+                                    <td class="custom-particular-td">&nbsp;Supply Affording Charges <span *ngIf="natureOfWorkTypeId!=5 && (natureOfWorkTypeId==1 || natureOfWorkTypeId==2 ||
+                                        natureOfWorkTypeId==3 ||
+                                        natureOfWorkTypeId==4 ||
+                                        natureOfWorkTypeId==6 ||
+                                        natureOfWorkTypeId==7 ||
+                                        natureOfWorkTypeId==8
+                                       
+                                        )">@850 per KVA</span> 
+                                        <span *ngIf="natureOfWorkTypeId!=5 && natureOfWorkTypeId==10">@1260 per KVA</span> 
+                                    </td>
+    
+    
+                                    <td class="custom-td">&nbsp;
+    
+                                        55.150
+                                    </td>
+                                    <td>
+                                        <div *ngIf="paymentDetails?.kvaLoadAmount != null">
+                                            <!-- {{paymentDetails.kvaLoadAmount}} -->
+                                            {{paymentDetails?.kvaLoadAmount}}
+                                            <!-- {{paymentDetails |json}} -->
+                                        </div>
+                                        <div *ngIf="paymentDetails?.kvaLoadAmount == null">0.00</div>
+                                    </td>
+    
+    
+                                </tr>
+    
+                                <!-- ************************************************************************************************** -->
+                                <tr *ngIf="natureOfWorkTypeId==5 ">
+                                    <td  *ngIf="natureOfWorkTypeId==5">&nbsp;4</td>
+                                    
+                                    <td  class="custom-particular-td">&nbsp;आवेदन शुल्क</td>
+                                    <td class="custom-td">&nbsp;62.936
+                                    </td>
+                                    <td>
+                                        <!-- {{mkmyAmountData?.avedanShulk}} -->
+                                        5
+                                    </td>
+                                </tr>
+    
+                                <!-- <tr *ngIf="natureOfWorkTypeId==5 ">
+                                   
+                                    <td class="custom-td">&nbsp;47.310
+                                    </td>
+                                    <td>
+                                       
+                                        2495
+                                    </td>
+                                </tr> -->
+    
+    
+                                <tr *ngIf="natureOfWorkTypeId==5">
+                                    <td *ngIf="natureOfWorkTypeId==5">&nbsp;5.</td>
+                                   
+                                    <td class="custom-particular-td">&nbsp; सुरक्षा निधि राशि प्रति HP <span *ngIf="consumerApplicationDetail?.jeLoad<=10">@200</span><span *ngIf="consumerApplicationDetail?.jeLoad>10">@400</span> ( कुल भार )
+                                    </td>
+                                    <!-- सारे उपभोक्ता द्वारा भरा -->
+                                    <td class="custom-td">&nbsp;48.150
+                                    </td>
+                                    <td>
+                                        <span>{{paymentDetails?.securityDeposit}}</span><span *ngIf="paymentDetails?.securityDeposit==null">0.00</span>
+                                        <!-- {{paymentDetails?.securityDeposit}} -->
+                                    </td>
+                                </tr>
+
+                                 <!-- <tr *ngIf="consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==5">
+                                    <td>&nbsp;6.</td>
+                                    <td class="custom-particular-td">
+                                        <a href="javascript:void(0)" (click)="onMeterialItemDetails()"
+                                            class="link-text">
+                                            &nbsp;Meterial Item Cost
+                                        </a>
+                                    </td>
+                                    <td class="custom-td">&nbsp;</td>
+                                    <td>
+                                        {{ paymentDetails?.oytMaterialtotalcostwithCgstAndSgst }}
+                                    </td>
+                                </tr> -->
+                                <!-- ************************************************************************************************** -->
+    
+    
+                                <tr *ngIf="natureOfWorkTypeId==7 ||natureOfWorkTypeId==1 || natureOfWorkTypeId==2 || natureOfWorkTypeId==6 || natureOfWorkTypeId==3 || natureOfWorkTypeId==4">
+                                    <td>&nbsp;8.</td>
+                                    <td class="custom-particular-td">&nbsp;Return Material amount in estimate
+                                    </td>
+    
+    
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.115
+                                    </td>
+                                    <td>
+                                        <div *ngIf="paymentDetails?.jeReturnAmount != null">
+    
+                                            {{paymentDetails?.jeReturnAmount}}
+                                        </div>
+                                        <div *ngIf="paymentDetails?.jeReturnAmount == null">0.00</div>
+                                    </td>
+    
+    
+                                </tr>
+    
+                                <tr>
+                                    <td colspan="2" class="text-center">&nbsp; <strong>Total Amount (in ₹.) </strong></td>
+                                    <td colspan="2" class="text-center">&nbsp;{{paymentDetails?.totalamountOfSupervision }}
+                                    </td>
+    
+                                </tr>
+                            </tbody>
+                        </table>
+                  
+                        <br>
+    
+                        <ul>
+                            <li style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Total payment is <span style="font-weight: 900; color: green;">{{paymentView?.Demand_fees}}</span></li>
+                            <li  style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Transaction Id is <span style="font-weight: 900; color: green;">{{paymentView?.Demand_fees_Transaction_Id }}</span> </li>
+                            <li  style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Transaction Date is <span style="font-weight: 900; color: green;"> {{paymentView?.Demand_fees_Transaction_Date | date: 'dd-MM-yyyy' }}</span></li>
+                        </ul>
+    
+                    </div>
+    
+                   
+    
+    
+                </div>
+                <div class="text-right" *ngIf="data.schemeTypeId==1">
+                    <!-- <button class="btn btn-primary" (click)="downloadHtmlViewNew()">download</button> -->
+                    <button class="btn btn-primary" (click)="downloadPdfNew()">Download as PDF</button>
+                </div>
+    
+                <!-- <div *ngIf="data.schemeTypeId==1">
+                    <button class="btn btn-primary" (click)="downloadPdfNew()">Download as PDF</button>
+                </div> -->
+    
+    
+                <div #componentView id="elementIdToCapture" >
+                    <div *ngIf="data.schemeTypeId==2">
+                        <header class="dsp-headerblock">
+                            <div id="alterna-header" class="">
+                                <div class="container">
+                                    <div class="logobox">
+                                        <img class="img-fluid" style="height: 10em;"
+                                            alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                            src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                                    </div>
+                                    <div class="header-custom-container"></div>
+                                </div>
+                            </div>
+    
+                            <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU  src="assets/images/banner_mpmkvvcl_logo.jpg"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU" -->
+    
+                        </header>
+    
+                        <br>
+                        <hr>
+    
+                        <h2 style="color: crimson;font-weight: 900;"> कृपया ध्यान दे : </h2>
+                        <h3 style="color: crimson;font-weight: 900;">
+                            * अगर आपने पोर्टल पर भुगतान किया है और किसी तकनीकी समस्या के कारण पोर्टल पर समायोजित नही हुआ है
+                            तो
+                            पुनः भुगतान
+                            से पहले आवेदन क्रमांक dsp.mpcz000@gmail.com पर ईमेल करे।</h3>
+    
+                        <h3 style="color: crimson; font-weight: 900;">
+                            * भुगतान करने के लिए दिए गए भुगतान विकल्प का उपयोग करे,किसी भी अन्य माध्यम / ऑफलाइन के माध्यम से
+                            किया गया भुगतान स्वीकार नहीं किया जायेगा।
+                        </h3>
+    
+                        <h3 style="color: crimson; font-weight: 900;">
+                           * शासकीय विभाग यह सुनिश्चित करें कि भुगतान की राशि मांग पत्र में उल्लिखित राशि के बराबर हो।
+                        </h3>
+    
+                        <br>
+    
+                        <div style="display: flex; justify-content: center; align-items: center;">
+    
+                            <h1 style="color: rgb(32, 32, 89);">Consumer Application Demand Note<span>
+                                ({{consumerApplicationDetail?.consumerApplicationNo}})</span></h1>
+                        </div>
+    
+    
+    
+                        <!-- <table class="table table-bordered" *ngIf=" data.schemeTypeId == 2 ">
+                            <thead>
+                                <tr>
+                                    <th class="custom-srno">Sr. No.</th>
+                                    <th class="custom-particulatr">Particular</th>
+                                    <th class="custom-amount">Account code <span class="required"></span></th>
+                                    <th class="custom-amount">Amount (in ₹.)<span class="required"></span></th>
+    
+    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td class="custom-particular-td">&nbsp;Supervision Charges on Cost of Material
+                                        (Excluding
+                                        Service Tax Amount)</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        62.925
+                                    </td>
+                                    <td>
+    
+                                        <div *ngIf="paymentDetails?.superVisionAmount!=null">
+                                            {{paymentDetails?.superVisionAmount}}</div>
+                                        <div *ngIf="paymentDetails?.superVisionAmount==null">0.00</div>
+    
+                                      
+                                    </td>
+    
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;2.</td>
+                                    <td class="custom-particular-td">&nbsp;CGST-9%</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.948
+                                    </td>
+                                    <td>{{paymentDetails?.cgst}}</td>
+    
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;3.</td>
+                                    <td class="custom-particular-td">&nbsp;SGST-9%</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.949
+                                    </td>
+                                    <td>{{paymentDetails?.sgst}}</td>
+    
+                                </tr>
+                              
+                                <tr>
+                                    <td>&nbsp;4.</td>
+                                    <td class="custom-particular-td">&nbsp;System Development Charges
+                                    </td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        55.160
+                                    </td>
+                                    <td>0.00</td>
+    
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;5.</td>
+                                    <td class="custom-particular-td">&nbsp;Cost of Estimate for 100% Deposit Work</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        47.320
+                                    </td>
+    
+                                    <td>
+                                        <div *ngIf="paymentDetails?.totalamountOfSupervision == null">
+                                            {{paymentDetails?.depositAmount | currency:"INR":"symbol"}}
+    
+                                        </div>
+                                        <div *ngIf="paymentDetails?.totaldepositAmount == null">
+                                            {{paymentDetails?.superVisionAmount | currency:"INR":"symbol"}}
+                                        </div>
+                                    </td>
+    
+                                </tr>
+                              
+    
+                                <tr *ngIf="natureOfWorkTypeId==1 || natureOfWorkTypeId==2 || natureOfWorkTypeId==3 || natureOfWorkTypeId==4 || natureOfWorkTypeId==6 || natureOfWorkTypeId==7">
+                                    <td>&nbsp;6.</td>
+                                    <td class="custom-particular-td">&nbsp;Return Material amount in estimate
+                                    </td>
+    
+    
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.115
+                                    </td>
+                                    <td>
+                                        <div *ngIf="paymentDetails?.jeReturnAmount != null">
+    
+                                            {{paymentDetails?.jeReturnAmount}}
+                                        </div>
+                                        <div *ngIf="paymentDetails?.jeReturnAmount == null">0.00</div>
+                                    </td>
+    
+    
+                                </tr>
+    
+                                <tr>
+                                    <td colspan="2" class="text-center">&nbsp; <strong>Total Amount (in ₹) </strong></td>
+    
+                                    <td colspan="2" class="text-center">
+    
+                                        <div *ngIf="paymentDetails?.totalamountOfSupervision == null">
+                                            {{paymentDetails?.totaldepositAmount | currency:"INR":"symbol"}}
+    
+                                        </div>
+                                        <div *ngIf="paymentDetails?.totaldepositAmount == null">
+                                            {{paymentDetails?.totalamountOfSupervision | currency:"INR":"symbol"}}
+                                        </div>
+                                    </td>
+    
+                                </tr>
+                            </tbody>
+                        </table> -->
+
+                        <table class="table table-bordered" *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId == 2 ">
+                            <thead>
+                                <tr rowspan="2">
+                                    <th colspan="4" style="font-size: 1.5em; font-weight: 900;color: rgb(21, 21, 103);">
+                                        Application Demand Details
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="custom-srno">Sr. No.</th>
+                                    <th class="custom-particulatr">Particular</th>
+                                    <th class="custom-amount">Account code <span class="required"></span></th>
+                                    <th class="custom-amount">Amount (in ₹.)<span class="required"></span></th>
+    
+    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr>
+                                    <td>1.</td>
+                                    <td class="custom-particular-td">&nbsp;Supervision Charges on Cost of Material
+                                        (Excluding
+                                        Service Tax Amount)</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        62.925
+                                    </td>
+                                    <td>
+    
+                                        <div *ngIf="paymentDetails?.superVisionAmount!=null">
+                                            {{paymentDetails?.superVisionAmount}}</div>
+                                        <div *ngIf="paymentDetails?.superVisionAmount==null">0.00</div>
+    
+                                      
+                                    </td>
+    
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;2.</td>
+                                    <td class="custom-particular-td">&nbsp;CGST-9%</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.948
+                                    </td>
+                                    <td>{{paymentDetails?.cgst}}</td>
+    
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;3.</td>
+                                    <td class="custom-particular-td">&nbsp;SGST-9%</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.949
+                                    </td>
+                                    <td>{{paymentDetails?.sgst}}</td>
+    
+                                </tr>
+                              
+                                <tr>
+                                    <td>&nbsp;4.</td>
+                                    <td class="custom-particular-td">&nbsp;System Development Charges
+                                    </td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        55.160
+                                    </td>
+                                    <td>0.00</td>
+    
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;5.</td>
+                                    <td class="custom-particular-td">&nbsp;Cost of Estimate for 100% Deposit Work</td>
+                                    <td class="custom-td">&nbsp;
+    
+                                        47.320
+                                    </td>
+    
+                                    <td>
+                                        <div *ngIf="paymentDetails?.totalamountOfSupervision == null">
+                                            {{paymentDetails?.depositAmount | currency:"INR":"symbol"}}
+    
+                                        </div>
+                                        <div *ngIf="paymentDetails?.totaldepositAmount == null">
+                                            {{paymentDetails?.superVisionAmount | currency:"INR":"symbol"}}
+                                        </div>
+                                    </td>
+    
+                                </tr>
+                               
+    
+                                <tr *ngIf="consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==1 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==2 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==3 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==4 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==6 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==7">
+                                    <td>&nbsp;6.</td>
+                                    <td class="custom-particular-td">&nbsp;Return Material amount in estimate
+                                    </td>
+    
+    
+                                    <td class="custom-td">&nbsp;
+    
+                                        46.115
+                                    </td>
+                                    <td>
+                                        <div *ngIf="paymentDetails?.jeReturnAmount != null">
+    
+                                            {{paymentDetails?.jeReturnAmount}}
+                                        </div>
+                                        <div *ngIf="paymentDetails?.jeReturnAmount == null">0.00</div>
+                                    </td>
+    
+    
+                                </tr>  -->
+
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<tr>
+    <td>1.</td>
+    <td class="custom-particular-td">&nbsp;Supervision Charges on Cost of Material
+        (Excluding
+        Service Tax Amount)</td>
+    <td class="custom-td">&nbsp;
+        <!-- {{consumerDemandData?.supervisionChargesOnCostOfMaterial | number: '1.2-2' |
+currency:"INR":"symbol"}} -->
+        62.925
+    </td>
+    <td>
+        <div *ngIf="paymentDetails?.superVisionAmount!=null">
+            {{paymentDetails?.superVisionAmount}}</div>
+        <div *ngIf="paymentDetails?.superVisionAmount==null">0.00</div>
+
+    </td>
+    <!-- <td>0.00</td>
+<td>0.00</td> -->
+</tr>
+<tr>
+    <td>&nbsp;2.</td>
+    <td class="custom-particular-td">&nbsp;CGST-9%</td>
+    <td class="custom-td">&nbsp;
+        <!-- {{consumerDemandData?.cgst | number: '1.2-2' | currency:"INR":"symbol"}} -->
+        46.948
+    </td>
+    <td>
+        <span *ngIf="paymentDetails?.cgst!=null">
+            {{paymentDetails?.cgst}}
+        </span>
+        <span *ngIf="paymentDetails?.cgst==null">0.00</span>
+
+    </td>
+    <!-- <td>0.00</td>
+<td>0.00</td> -->
+</tr>
+<tr>
+    <td>&nbsp;3.</td>
+    <td class="custom-particular-td">&nbsp;SGST-9%</td>
+    <td class="custom-td">&nbsp;
+        <!-- {{consumerDemandData?.sgst | number: '1.2-2' | currency:"INR":"symbol"}} -->
+        46.949
+    </td>
+    <td>
+        <span
+            *ngIf="paymentDetails?.sgst!=null">{{paymentDetails?.sgst}}
+        </span>
+        <span *ngIf="paymentDetails?.sgst==null">0.00</span>
+
+    </td>
+    <!-- <td>0.00</td>
+<td>0.00</td> -->
+</tr>
+
+<tr>
+    <td>&nbsp;4.</td>
+    <td class="custom-particular-td">&nbsp;System Development Charges
+    </td>
+    <td class="custom-td">&nbsp;
+        <!-- {{consumerDemandData?.systemDevelopmentCharges | number: '1.2-2' | currency:"INR":"symbol"}} -->
+        55.160
+    </td>
+    <td>0.00</td>
+    <!-- <td>0.00</td>
+<td>0.00</td> -->
+</tr>
+<tr>
+    <td>&nbsp;5.</td>
+    <td class="custom-particular-td">&nbsp;Deposit Charges(Excluding Supervision Charges
+        and
+        CGST,SGST
+        on Supervision Charges)</td>
+    <td class="custom-td">&nbsp;
+        <!-- {{consumerDemandData?.costOfEstimate | number: '1.2-2' | currency:"INR":"symbol"}} -->
+        47.320
+    </td>
+    <!-- <td>{{erpEstimateCalculations.depositAmount | number: '1.2-2' | currency:"INR":"symbol"}}</td> -->
+    <td>
+        <div *ngIf="paymentDetails?.superVisionAmount == null">
+            {{paymentDetails?.depositAmount | currency:"INR":"symbol"}}
+
+        </div>
+        <div *ngIf="paymentDetails?.depositAmount == null">
+            {{paymentDetails?.superVisionAmount | currency:"INR":"symbol"}}
+        </div>
+
+        <div
+            *ngIf="paymentDetails?.depositAmount != null && paymentDetails?.superVisionAmount != null">
+            {{paymentDetails?.depositAmount | currency:"INR":"symbol"}}
+        </div>
+
+        <div
+            *ngIf="paymentDetails?.depositAmount == null && paymentDetails?.superVisionAmount == null">
+            0.00
+        </div>
+
+
+    </td>
+    <!-- <td>1000.00</td>
+<td>{{erpEstimateCalculations?.balanceRemaining}}</td> -->
+</tr>
+<tr>
+    <td>&nbsp;6.</td>
+    <td class="custom-particular-td">&nbsp;Other Infrastructure related cost</td>
+    <td class="custom-td">&nbsp;
+        <!-- {{consumerDemandData?.otherInfraStrucRelatedCost | number: '1.2-2' |
+currency:"INR":"symbol"}} -->
+    </td>
+    <td>0.00</td>
+    <!-- <td>0.00</td>
+<td>0.00</td> -->
+</tr>
+
+<tr>
+    <td>&nbsp;7.</td>
+    <td class="custom-particular-td">&nbsp;Deposit for Electrification of illegal
+        Colony/Slum
+    </td>
+    <td class="custom-td">&nbsp; 47.337
+    </td>
+    <td>
+        <div *ngIf="paymentDetails?.colonyOrSlum != null">
+
+            {{paymentDetails?.colonyOrSlum}}
+        </div>
+        <div *ngIf="paymentDetails?.colonyOrSlum == null">0.00</div>
+    </td>
+</tr>
+
+
+
+
+<tr
+    *ngIf="consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==2 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==3 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==4 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==1 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==7 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==6">
+    <td>&nbsp;8.</td>
+    <td class="custom-particular-td">&nbsp;
+        <!-- <div *ngIf="consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==7">
+Return Material amount in estimate
+</div> -->
+
+        <span
+            *ngIf="consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==2 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==7 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==1 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==6 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==3 || consumerApplicationDetail?.natureOfWorkType?.natureOfWorkTypeId==4">
+            Return Material amount in estimate
+        </span>
+
+    </td>
+    <td class="custom-td">&nbsp; 46.115
+    </td>
+    <td>
+        <div *ngIf="paymentDetails?.jeReturnAmount != null">
+
+            {{paymentDetails?.jeReturnAmount}}
+        </div>
+        <div *ngIf="paymentDetails?.jeReturnAmount == null">0.00</div>
+    </td>
+</tr>
+
+<tr>
+    <td>&nbsp;9.</td>
+    <td class="custom-particular-td">&nbsp;Supply Affording Charges <span *ngIf="natureOfWorkTypeId!=5 && (natureOfWorkTypeId==1 || natureOfWorkTypeId==2 ||
+                                        natureOfWorkTypeId==3 ||
+                                        natureOfWorkTypeId==4 ||
+                                        natureOfWorkTypeId==6 ||
+                                        natureOfWorkTypeId==7 ||
+                                        natureOfWorkTypeId==8
+                                       
+                                        )">@850 per KVA</span> 
+                                        <span *ngIf="natureOfWorkTypeId!=5 && natureOfWorkTypeId==10">@1260 per KVA</span> 
+    </td>
+    <td class="custom-td">&nbsp;
+        55.150
+    </td>
+    <td>
+        <div *ngIf="paymentDetails?.kvaLoadAmount != null">
+            {{paymentDetails?.kvaLoadAmount}}</div>
+        <div *ngIf="paymentDetails?.kvaLoadAmount == null">0.00</div>
+    </td>
+</tr>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+                                <tr>
+                                    <td colspan="2" class="text-center">&nbsp; <strong>Total Amount (in ₹) </strong></td>
+    
+                                    <td colspan="2" class="text-center">
+    
+                                        <div *ngIf="paymentDetails?.totalamountOfSupervision == null">
+                                            {{paymentDetails?.totaldepositAmount | currency:"INR":"symbol"}}
+    
+                                        </div>
+                                        <div *ngIf="paymentDetails?.totaldepositAmount == null">
+                                            {{paymentDetails?.totalamountOfSupervision | currency:"INR":"symbol"}}
+                                        </div>
+                                    </td>
+    
+                                </tr>
+                            </tbody>
+                        </table>
+    
+                        <br>
+    
+                        <ul>
+                            <li style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Total payment is <span style="font-weight: 900; color: green;">{{paymentView?.Demand_fees}}</span></li>
+                            <li  style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Transaction Id is <span style="font-weight: 900; color: green;">{{paymentView?.Demand_fees_Transaction_Id }}</span> </li>
+                            <li  style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Transaction Date is <span style="font-weight: 900; color: green;"> {{paymentView?.Demand_fees_Transaction_Date | date: 'dd-MM-yyyy' }}</span></li>
+                        </ul>
+    
+                    </div>
+                   
+    
+                </div>
+    
+                <div class="text-right" *ngIf="data.schemeTypeId==2">
+                    <!-- <button class="btn btn-primary" (click)="downloadHtmlView()">download</button> -->
+                    <button class="btn btn-primary" (click)="downloadPdf()">Download as PDF</button>
+                </div>
+    
+                <!-- <div *ngIf="data.schemeTypeId==2">
+                    <button (click)="downloadPdf()">Download as PDF</button>
+                </div> -->
+    
+    
+            </div>
+        </div>
+    </mat-card>

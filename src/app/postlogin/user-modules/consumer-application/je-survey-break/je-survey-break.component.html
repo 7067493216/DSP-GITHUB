@@ -1,0 +1,162 @@
+<mat-card class="custom-scroll-enable">
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style=" font-size: 2em; font-weight: 900; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Survey Details Filled By OIC</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+
+    <br>
+    <br>
+    <hr>
+<div align="center" style="font-weight: 900; font-size: 2em;">Consumer Application Number : <span style="color: green;">{{consumerApplicationDetail.consumerApplicationNo}}</span></div>
+    <br>
+    
+    <div align="center" style="font-size: 1.5em;font-weight: 800;">**** डीसी इंचार्ज सर्वे करने और एस्टीमेट जनरेट करने के लिए निम्न प्रक्रिया का पालन करें। ****</div>
+    <br>
+    1. DC Incharge को जबलपुर डिस्कॉम द्वारा बनाए गए GIS Desktop Application (  http://mpezgis.in/mpdiscom/login.php  )पर अपने कर्मचारी क्रमांक से लॉगिन करके सर्वेयर का चयन करना होगा और उसका मोबाइल नंबर पंजियन करना होगा |<br>
+    2. DC Incharge को समबन्धित कार्य का नाम दर्ज़ करके वृत्त ,संभाग और वितरण केंद्र का चयन करना होगा ,कार्य का सन्दर्भ दर्ज करने के उपरांत सर्वेयर को समबन्धित कार्य से जोड़ना होगा जिससे की सर्वेयर द्वारा समबन्धित कार्य का GIS Mobile Applicatio द्वारा Pole by Pole सर्वे पूर्ण किया जा सके |<br>
+    3. सर्वे पूर्ण करने के पश्चात सर्वेयर सर्वे को App के माध्यम से Complete घोषित करेगा। जिसके फलस्वरूप वितरण केन्द्र प्रभारी को सर्वे Accept/Reject करने का विकल्प उपलब्ध होगा ।<br>
+    4. इसके पश्चात GIS system में एस्टीमेट जनरेशन किया जावेगा और Unique SB Project ID प्राप्त होगी | एस्टीमेट सर्वे के अनुरूप पाने पर DC Incharge को GIS Estimate को "Push to ERP " करना होगा |<br>
+    5.ERP में एस्टीमेट जनरेशन GIS सिस्टम की Unique SB Project ID से linked होगा और Approval ERP के DOP approval के अनुरूप होगा |<br>
+    6. नीचे दिए गए स्थान पर ERP नम्बर डाले |
+    <br>
+
+
+<form [formGroup]="jeSurveyBreakForm">
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="form-group col-md-3 mx-5">
+            <label for="erpNumber" class="form-label">Enter ERP Estimate Number</label>
+            <input type="number" class="form-control" formControlName="erpNo">
+            <mat-error
+            *ngIf="(jeSurveyBreakFormControls['erpNo'].touched || submitted) && jeSurveyBreakFormControls['erpNo'].errors">
+            <div *ngIf="jeSurveyBreakFormControls['erpNo'].errors['required']">
+                ERP NUMBER IS REQUIRED </div>
+        </mat-error>
+        
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary mt-4" (click)="onSearch()">Search</button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</form>
+
+
+<br>
+<br>
+
+<div *ngIf="natureOfWorkTypeId!=8">
+<table class="demandApproveTable table table-bordered">
+    <thead>
+        <tr>
+
+            <th>ERP No.</th>
+            <th>Estimate sanction No.</th>
+            <th>Estimate name</th>
+            <th>Location</th>
+            <th>scheme</th>
+            <th>Supervision Amount</th>
+            <th>Estimate Amount</th>
+            <th>CGST@9%</th>
+            <th>SGST@9%</th>
+            <th>Estimate Status</th>
+            <th>approved By</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of newArray">
+            <td>{{item?.PROJECT_NUMBER}}</td>
+            <td>{{item?.ESTIMATE_NO}}</td>
+            <td>{{item?.LONG_NAME}}</td>
+            <td>{{item?.ORG}}</td>
+            <td>{{item?.SCHEMECODE}}</td>
+            <td>{{item?.SUPERVISION_COST}}</td>
+            <!-- <td>{{item?.ESTIMATED_COST}}</td> -->
+            <td>{{(item?.ESTIMATED_COST+item?.MINUS_COST)}}</td>
+            <td>{{(item?.SUPERVISION_COST /100)*9}}</td>
+            <td>{{(item?.SUPERVISION_COST /100)*9}}</td>
+            <td>{{item?.STATUS}}</td>
+            <td >{{item?.APPROVED_BY_NAME}}<span *ngIf="item?.APPROVED_BY_NAME==null">---Pending---</span></td>
+        </tr>
+
+
+    </tbody>
+
+
+
+</table>
+</div>
+
+<div *ngIf="natureOfWorkTypeId==8">
+    <table class="demandApproveTable table table-bordered">
+
+        <thead>
+
+            <tr>
+
+
+                <th>आवेदन क्रमांक</th>
+                <th>कुल प्राकलन राशि</th>
+                <th>म.प्र द्वारा दी गई अनुदान राशि(40%)</th>
+                <th>म.प्र विद्युत कंपनी द्वारा दी गई अनुदान राशि(10%)</th>
+                <th>सिक्योरिटी डिपाजिट </th>
+                <th>आवेदन शुल्क </th>
+                <th>उपभोक्ता द्वारा वहन की गई राशि (50%)</th>
+                <th>इ. आर. पी. नंबर </th>
+                <th>स्कीम कोड </th>
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of newArray">
+
+
+                <td>{{consumerApplicationDetail.consumerApplicationNo}}</td>
+                <td>{{item?.totalAmount}}</td>
+                <td>{{(item?.ESTIMATED_COST/100)*40}}</td>
+                <td>{{(item?.ESTIMATED_COST/100)*10}}</td>
+                <td>{{item?.securityDeposit}}</td>
+                <td>2500</td>
+                <td>{{(item?.ESTIMATED_COST/100)*50}}</td>
+                <td>{{item?.PROJECT_NUMBER}}</td>
+                <td>{{item?.SCHEMECODE}}</td>
+
+            </tr>
+        </tbody>
+
+
+
+    </table>
+</div>
+
+<br>
+
+<div>
+    <input type="checkbox" (change)="onCheckBoxChange($event)" class="mx-2"><span>मैं सत्यापित करता हूं कि मेरे निर्देशन में कार्यस्थल के सर्वेक्षण के दौरान किए गए सभी माप, गणना और विश्लेषण सही और सटीक रूप से किए गए है।मेरे ज्ञान और विशेषज्ञता के आधार पर प्राकलन सर्वे के अनुरूप और सटीक है एवं दर्ज ERP प्राकलन इसी आवेदन से संबंधित है। *</span>
+</div>
+
+<br>
+<div align="right">
+<button type="button" [disabled]="checkedBoolean==true?false:true" class="btn btn-success" (click)="onSubmit()">Submit</button>
+</div>
+
+
+
+
+
+    </mat-card>

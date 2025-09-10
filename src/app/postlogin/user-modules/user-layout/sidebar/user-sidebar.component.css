@@ -1,0 +1,56 @@
+.sidenav-container {
+    height: 100%;
+}
+
+.sidenav {
+    width: 250px;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+}
+
+.hidden {
+    display: none;
+}
+
+.timer {
+    font-size: small;
+    font-family: Orbitron;
+    font-weight: 400;
+    vertical-align: text-bottom;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    padding-right: 70px;
+}
+
+mat-toolbar a {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.tbar {
+    position: relative;
+    z-index: 2;
+    height: 50px;
+    text-decoration: none;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .switch-account-icon {
+    font-size: 48px;
+    color: #3f51b5;
+    margin-right: 8px;
+  }
+  

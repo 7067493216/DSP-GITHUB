@@ -1,0 +1,119 @@
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 1em 0 0em 0px;
+  color: #160202;
+  font-size: 24px;
+}
+
+.vendor-form-wrapper {
+  position: relative;
+  padding: 16px;
+}
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.vendor-form-card {
+  margin: auto;
+  border-radius: 12px;
+  padding: 16px;
+}
+.vendor-array-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+.vendor-row-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.vendor-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  position: relative;
+  display: block;
+}
+
+.vendor-form-grid  gap {
+  gap :16px 65px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.vendor-row-title {
+  font-size: 16px;
+}
+.add-row-btn-container {
+  margin: 24px 0 8px;
+  display: flex;
+  justify-content: flex-start;
+}
+.submit-btn-container {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+.submit-btn {
+  min-width: 160px;
+  font-weight: 600;
+}
+
+.vendor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3f51b5;
+  color: white;
+  padding: 2%;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 8px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #000;
+  border-color: #000;
+}
+
+/* search input styling used in both selects */
+.vendor-search-option {
+  opacity: 1 !important; /* ensure visible even when disabled */
+  pointer-events: none; /* the mat-option wrapper is disabled; we re-enable input below */
+}
+.vendor-search-option input.vendor-search {
+  pointer-events: auto; /* re-enable interaction on the input */
+}
+
+.vendor-search {
+  width: 100%;
+  padding: 4px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+}
+
+.vendor-select-panel,
+.material-select-panel {
+  max-height: 300px !important;
+}
+
+
+
+::ng-deep .month-year-picker .mat-calendar-period-button {
+  display: none; /* Hide unnecessary year navigation */
+}
+

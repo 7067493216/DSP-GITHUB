@@ -1,0 +1,87 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.box {
+  position: sticky;
+  opacity: 1;
+  float: center;
+  margin: 0px 0px 0px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  max-width: 400px;
+}
+
+.login-wrapper .loginForm {
+  min-width: 100%;
+  max-width: 250px;
+  width: 100%;
+}
+
+.login-wrapper .width,
+.login-wrapper .btn-block {
+  width: 100%;
+}
+
+.login-wrapper mat-card-header {
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-weight: 400;
+}
+
+.captcha {
+  display: block;
+  max-width: 500px;
+  max-height: 35px;
+  width: auto;
+  height: auto;
+}
+
+.spacer {
+  flex: 1 1;
+}
+
+.autoRenewButton {
+  margin-right: 10px;
+  margin-top: -0.4rem;
+}
+
+.login-wrapper mat-card-header mat-card-footer mat-card-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.login-wrapper .mat-card {
+  padding: 30px 40px 40px;
+}
+
+.login-wrapper .mat-stroked-button {
+  border: 1px solid currentColor;
+  line-height: 54px;
+  background: #fff7fa;
+}
+
+.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.8375em 0;
+}
+
+.iconHover {
+  cursor: pointer;
+}
+
+.resendOtp {
+  cursor: pointer;
+  color: royalblue;
+}
+
+#signUp{
+  margin: 7%;
+}

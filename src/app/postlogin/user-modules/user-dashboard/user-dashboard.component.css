@@ -1,0 +1,156 @@
+
+.dspuser_dashborad_main {
+  position: relative;
+  background: #fff;
+}
+
+.dspuser_dashborad_main .title_block {
+  position: relative;
+  padding: 20px 0;
+}
+
+.dspuser_dashborad_main .title_block h4 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  font-family: monospace;
+  margin: 0;
+  color: #3f51b5;
+  text-transform: uppercase;
+  text-shadow: 2px 1px 2px rgb(0 0 0 / 33%);
+}
+
+.dspuser_dashborad_main .dsh_cuns_block {
+  padding: 30px 0;
+}
+
+.dspuser_dashborad_main .dsh_cuns_block h4 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  margin: 0;
+}
+
+.dspuser_dashborad_main .dsh_cuns_block h4 a {
+  display: inline-block;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dash_qubebox_list {
+  position: relative;
+}
+
+.dash_qubebox_list .dash_qubebox_item {
+  position: relative;
+  padding: 0;
+  margin: 20px 0 20px;
+  padding: 0px;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox {
+  position: relative;
+  padding-left: 120px;
+  padding-right: 10px;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .contabt_box {
+  background: #fff;
+  box-shadow: 0px 2px 4px 1px hsl(0deg 0% 0% / 30%);
+  padding: 15px;
+  border-radius: 5px;
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  z-index: 9;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .iconbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background: #4482DE;
+  border-radius: 100%;
+  padding: 20px;
+  position: absolute;
+  left: 74px;
+  top: 20%;
+  z-index: 99;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .contabt_box h4 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  border-radius: 4px;
+  line-height: 19px;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .contabt_box p {
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+  background: #4482DE;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .iconbox svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .iconbox svg path {
+  stroke: #fff;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .iconbox svg circle {
+  stroke: #fff;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox .iconbox:before {
+  content: "";
+  border: 1.5px solid #4482DE;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  transition: .5s;
+  transform: scale(1.25);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.dash_qubebox_list .dash_qubebox_item .dass_innerbox:after {
+  content: "";
+  border: 1.5px solid #4482DE;
+  width: 240px;
+  height: 126px;
+  transition: .5s;
+  transform: scale(1.25);
+  position: absolute;
+  left: 127px;
+  top: 0px;
+  border-radius: 6px;
+}

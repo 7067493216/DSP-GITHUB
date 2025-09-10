@@ -1,0 +1,21 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <!-- *ngFor="let basics of basicdetails"  app-consumer-application-view-page -->
+
+    <!-- <ng-container *ngIf="consumerApplicationDetail">
+        <consumer-application-view [consumerApplicationId]="consumerApplicationDetail.consumerApplicationId">
+        </consumer-application-view>
+    </ng-container> -->
+
+    <ng-container >
+        <app-consumer-application-view-page >
+        </app-consumer-application-view-page>
+    </ng-container>
+
+</mat-card>

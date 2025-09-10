@@ -1,0 +1,358 @@
+<ng-template matStepLabel>Account Information</ng-template>
+<mat-card class="my-card">
+    <mat-card-header>
+        <mat-card-title>Account Information</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider><br>
+    <form [formGroup]="accountInfoFg">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Connection Type" name="connectionType"
+                        (selectionChange)=" manageconnEndDate($event)" formControlName="connectionType" required>
+                        <mat-option *ngFor="let connection of connectionTypeList" [value]="connection.connectionTypeId">
+                            {{connection.connectionType}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.connectionType.hasError('required')">
+                        Select Connection Type
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4" [style.display]="accountInfoFg.get('connectionType').value === 2?'inherit':'none'">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Connection period in days" type="number"
+                        name="tempConnectionPeriodDays" formControlName="tempConnectionPeriodDays">
+                    <mat-error *ngIf="accountInfoFg.controls.tempConnectionPeriodDays.hasError('required')">
+                        Connection period in days is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select Supply Voltage" name="supplyVoltage"
+                        (selectionChange)="onChangeSupplyVoltage($event.value)" formControlName="supplyVoltage"
+                        required>
+                        <mat-option *ngFor="let supply of supplyVoltages | keyvalue" [value]="supply.key">
+                            {{supply.value}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.supplyVoltage.hasError('required')">
+                        Select Supply Voltage
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width" style="float: right;">
+                    <mat-select panelClass="my-panel" placeholder="Select Purpose of Installation" name="purpose"
+                        formControlName="purpose" required (selectionChange)="onChangePurpose($event.value)">
+                        <mat-option *ngFor="let purpose of allPurposeData" [value]="purpose.purposeInstId">
+                            {{purpose.purposeDesc +' ' +'('+ purpose.purposeOfInstTariffSubCategory.tariffSubCategoryCode +')'}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input formControlName="customerClassId" name="customerClassId" matInput
+                        placeholder="Tariff Schedule" readonly>
+                    <mat-error *ngIf="accountInfoFg.controls.customerClassId.hasError('required')">
+                        Select Customer Class
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input formControlName="tariffCategory" name="tariffCategory" matInput placeholder="Tariff Category"
+                        readonly>
+                    <mat-error *ngIf="accountInfoFg.controls.tariffCategory.hasError('required')">
+                        Select Tariff Category
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input formControlName="tariffSubCategory" name="tariffSubCategory" matInput
+                        placeholder="Tariff SubCategory" readonly>
+                    <mat-error *ngIf="accountInfoFg.controls.tariffSubCategory.hasError('required')">
+                        Select Sub Category
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select purpose of GMC"
+                        (selectionChange)="onChangepurposeOfGmc($event.value)" name="revenueCategoryId"
+                        formControlName="purposeOfGmcId">
+                        <mat-option *ngFor="let purposeOfGmc of purposeOfGmcData" [value]="purposeOfGmc.purposeId">
+                            {{purposeOfGmc.purposeName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.purposeOfGmcId.hasError('required')">
+                        Select Select purpose of GMC
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Installation for GMC" name="gmc" formControlName="gmc" required
+                        readonly>
+                    <mat-error *ngIf="accountInfoFg.controls.gmc.hasError('required')">
+                        Enter Installation for GMC
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select Revenue Category" name="revenueCategoryId"
+                        formControlName="revenueCategoryId">
+                        <mat-option *ngFor="let revenueCategory of revenueCategoryData"
+                            [value]="revenueCategory.revenueCategoryId">
+                            {{revenueCategory.revenueCategoryName +"("+revenueCategory.revenueCategoryCode +")"}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.revenueCategoryId.hasError('required')">
+                        Select Sub Category
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4" [style.display]="tariffScheduleCode === 'HV-4'?'inherit':'none'">
+
+                <mat-form-field class="full-width">
+                    <input formControlName="seasonalStartDate" matInput (dateInput)="firstDateInput($event)"
+                        [matDatepicker]="seasonalStartDate" placeholder="Seasonal Start Date"
+                        [disableControl]="tariffScheduleCode !== 'HV-4'">
+                    <mat-datepicker-toggle matSuffix [for]="seasonalStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker #seasonalStartDate></mat-datepicker>
+                    <mat-error *ngIf="accountInfoFg.controls.seasonalStartDate.hasError('')">
+                        Seasonal StartDate is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4" [style.display]="tariffScheduleCode === 'HV-4'?'inherit':'none'">
+                <mat-form-field class="full-width">
+                    <input matInput [matDatepicker]="seasonalEndDate" [min]="minEndDate" [max]="maxEndDate"
+                        placeholder="Seasonal End Date" tname="seasonalEndDate" formControlName="seasonalEndDate"
+                        [disableControl]="tariffScheduleCode !== 'HV-4'">
+                    <mat-datepicker-toggle matSuffix [for]="seasonalEndDate"></mat-datepicker-toggle>
+                    <mat-datepicker #seasonalEndDate></mat-datepicker>
+                    <mat-error *ngIf="accountInfoFg.controls.seasonalEndDate.hasError('')">
+                        Seasonal EndDate is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- ..............Registration Fee Refund Required Start................... -->
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Registration Fee Amount" name="registrationAmount"
+                        formControlName="registrationAmount" pattern="^\d{0,9}(\.\d{1,4})?$" type="tel" maxlength="14"
+                        required>
+                    <mat-error *ngIf="accountInfoFg.controls.registrationAmount.hasError('required')">
+                        Enter Registration Fee Amount
+                    </mat-error>
+                    <mat-error *ngIf="accountInfoFg.controls.registrationAmount.hasError('pattern')">
+                        Invalid Input
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Registration Reference No" name="regReferenceNo" maxlength="15"
+                        formControlName="regReferenceNo" required>
+                    <mat-error *ngIf="accountInfoFg.controls.regReferenceNo.hasError('required')">
+                        Enter Registration Reference No
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input matInput [matDatepicker]="regInvoiceDatepicker" placeholder="Registration Payment Date"
+                        tname="regPaymentDate" formControlName="regPaymentDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="regInvoiceDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #regInvoiceDatepicker></mat-datepicker>
+                    <mat-error *ngIf="accountInfoFg.controls.regPaymentDate.hasError('required')">
+                        Registration Reference Date is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder=" Registration Fee Refund Required"
+                        (selectionChange)="onChangeRefundRequired($event.value)" name="regFeeRefundRequired"
+                        formControlName="regFeeRefundRequired" required>
+                        <mat-option value="1">Yes</mat-option>
+                        <mat-option value="2">No</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.regFeeRefundRequired.hasError('required')">
+                        Select Registration Fee Refund Required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Registration refund amount" pattern="^\d{0,9}(\.\d{1,4})?$"
+                        name="regRefundAmount" formControlName="regRefundAmount" required readonly>
+                    <mat-error *ngIf="accountInfoFg.controls.regRefundAmount.hasError('required')">
+                        Enter Registration Refund Amount
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <!-- ..............Registration Fee Refund Required End ................... -->
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="NSC transferred From LT to HT" name="nscTransferred"
+                        formControlName="nscTransferred" required>
+                        <mat-option value="1">Yes</mat-option>
+                        <mat-option value="2">No</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.nscTransferred.hasError('required')">
+                        Select NSC transferred From LT to HT
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- securityDeposit Field -->
+        <div class="row">
+            <div formArrayName="securityDeposit" class="col-md-12">
+                <!-- loop throught securityDeposit-->
+                <ng-container *ngFor="let sd of accountInfoFg.get('securityDeposit')['controls']; let i=index">
+                    <ng-container [formGroupName]="i">
+                        <mat-form-field class="half-width">
+                            <input matInput placeholder="Security Deposit Amount" name="sdAmount"
+                                formControlName="sdAmount" pattern="^\d{0,9}(\.\d{1,4})?$" type="tel" maxlength="15"
+                                required>
+                            <mat-error *ngIf="sd.controls.sdAmount.hasError('required')">
+                                Security Deposit Amount is required
+                            </mat-error>
+                            <mat-error *ngIf="sd.controls.sdAmount.hasError('pattern')">
+                                Invalid Input
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="half-width  padding">
+                            <input matInput placeholder="SD Reference No" name="sdReferenceNo" maxlength="15"
+                                formControlName="sdReferenceNo">
+                            <mat-error *ngIf="sd.controls.sdReferenceNo.hasError('required')">
+                                Name is required
+                            </mat-error>
+                            <mat-error *ngIf="sd.controls.sdReferenceNo.hasError('pattern')">
+                                invalid Input
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="width padding">
+                            <input matInput [matDatepicker]="sdInvoiceDatepicker" placeholder="SD Reference Date"
+                                tname="sdReferenceDate" formControlName="sdReferenceDate" required>
+                            <mat-datepicker-toggle matSuffix [for]="sdInvoiceDatepicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #sdInvoiceDatepicker></mat-datepicker>
+                            <mat-error *ngIf="sd.controls.sdReferenceDate.hasError('required')">
+                                SD Invoice Date is required
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- row delete button, hidden if there is just one row -->
+                        <button mat-icon-button color="warn"
+                            *ngIf="accountInfoFg.get('securityDeposit').value.length > 1" (click)="removeSd(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </ng-container>
+                </ng-container>&nbsp;&nbsp;
+                <!-- row add button, hidden if there is just four row  addNewLoadFormGroup.get(newLoad).controls-->
+                <button type="button" mat-icon-button color="primary" fxFlex="nogrow"
+                    *ngIf="accountInfoFg.get('securityDeposit').value.length < 4" (click)="addnewSd()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- End form securityDeposit array -->
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select Eduty Applicability" name="edutyApplicability"
+                        formControlName="edutyApplicability" required>
+                        <mat-option value="1">Yes</mat-option>
+                        <mat-option value="2">No</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.edutyApplicability.hasError('required')">
+                        Please Select Eduty Applicability
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <!-- Is Dedicated Feeder  -->
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Is Dedicated Feeder"
+                        (selectionChange)="onChangeDedicatedFeeder($event.value)" name="dedicatedFeeder"
+                        formControlName="dedicatedFeeder" required>
+                        <mat-option value="1">Yes</mat-option>
+                        <mat-option value="2">No</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.dedicatedFeeder.hasError('required')">
+                        Please select option
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <!-- Is Dedicated Feeder closed -->
+                <mat-form-field class="full-width"
+                    [style.display]="accountInfoFg.get('dedicatedFeeder').value === '1'?'inherit':'none'">
+                    <input matInput placeholder="Feeder maintenance charge" pattern="^\d{0,9}(\.\d{1,4})?$"
+                        name="feederMaintenanceCharge" formControlName="feederMaintenanceCharge" type="tel"
+                        maxlength="15" required>
+                    <mat-error *ngIf="accountInfoFg.controls.feederMaintenanceCharge.hasError('required')">
+                        Enter Feeder maintenance charge
+                    </mat-error>
+                    <mat-error *ngIf="accountInfoFg.controls.feederMaintenanceCharge.hasError('pattern')">
+                        invalid Input
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Is PDC Consumer" (selectionChange)="onChangePdcConsumer($event.value)"
+                        name="pdcConsumer" formControlName="pdcConsumer" required>
+                        <mat-option value="1">Yes</mat-option>
+                        <mat-option value="2">No</mat-option>
+                        <mat-option value="3">Detail Not Available</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountInfoFg.controls.pdcConsumer.hasError('required')">
+                        Select the input
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4" [style.display]="accountInfoFg.get('pdcConsumer').value === '1'?'inherit':'none'">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Old Account Id" upperCase name="oldAccountId" maxlength="11"
+                        formControlName="oldAccountId" required>
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-error *ngIf="accountInfoFg.controls.oldAccountId.hasError('required')">
+                        Enter Old Account Id
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="full-width"
+                    [style.display]="accountInfoFg.get('pdcConsumer').value === '1'?'inherit':'none'">
+                    <input matInput [matDatepicker]="disconnectionDatepicker" [max]="connectionDate"
+                        placeholder="PDC Date" tname="disconnectionDate" formControlName="disconnectionDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="disconnectionDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #disconnectionDatepicker></mat-datepicker>
+                    <mat-error *ngIf="accountInfoFg.controls.disconnectionDate.hasError('required')">
+                        PDC Date is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+    <!-- {{accountInfoFg?.value | json}} -->
+</mat-card>

@@ -1,0 +1,644 @@
+<mat-card class="my-card custom-scroll-enable-1 dsp-cunsumergenerate">
+    <mat-toolbar class="label label-warning custom-mat-toolbar">
+        <span>कार्य अनुमति आदेश</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+
+    <div class="card" #componentView id="elementIdToCapture" style="padding: 2em;">
+        <div class="header text-center mb-2" *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==8">
+            <div style="display: flex; text-align: center; justify-content: space-between;width: 100%;">
+                <img src="assets/images/kisanyojanaimages/logo_Kisan1.jpg" alt="" height="92em" width="92em"
+                    style="margin-right: 5em;">
+
+                <div>
+                    <h3 style="font-weight: 900;" class="text-center">मुख्यमंत्री कृषक मित्र योजना</h3>
+                    <h4>मध्य प्रदेश मध्य क्षेत्र विद्यत वितरण कंपनी लिमिटेड
+                        <br>
+                        ट्रांसफार्मर सहित नवीन कृषि पंप/ट्यूबवेल कनेक्शन हेतु आवेदन पत्र
+
+                    </h4>
+                </div>
+
+                <img src="assets/images/kisanyojanaimages/logo_Kisan2.jpg" alt="" height="92em" width="92em"
+                    style="margin-left: 5em;">
+            </div>
+
+            <div align="center" style="font-size: 2em; font-weight: 900;">
+                कार्य अनुमति आदेश (<span> {{consumerApplicationDetail?.consumerApplicationNo}}</span>)
+            </div>
+            <br>
+            <!-- src="assets/images/kisanyojanaimages/logo_Kisan1.jpg" -->
+            <!-- src="assets/images/kisanyojanaimages/logo_Kisan2.jpg" -->
+        </div>
+
+        <div *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=8">
+            <header class="dsp-headerblock">
+                <div id="alterna-header" class="">
+                    <div class="container">
+                        <div class="logobox">
+                            <img class="img-fluid" style="height: 10em;" alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                        </div>
+                        <div class="header-custom-container"></div>
+                    </div>
+                </div>
+                <div align="center" style="font-size: 2em; font-weight: 900;">
+                  <span *ngIf="consumerApplicationDetail?.revisedErpNumber==null">कार्य अनुमति आदेश</span> <span *ngIf="consumerApplicationDetail?.revisedErpNumber!=null">(Revise) पुनः कार्य अनुमति आदेश</span>  (<span> {{consumerApplicationDetail?.consumerApplicationNo}}</span>)
+                </div>
+                <br>
+
+            </header>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="workOrderFg" autocomplete="off">
+                <div class="form-group">
+                   
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <b> आवेदन क्रमांक : </b><span
+                                class="padding">{{consumerApplicationDetail?.consumerApplicationNo}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> वृत का नाम : </b><span class="padding">
+                                {{consumerApplicationDetail?.NAME_OF_CIRCLE
+                                }}</span>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <b> संभाग का नाम : </b><span class="padding"> {{
+                                consumerApplicationDetail?.NAME_OF_DIVISION}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> वितरण केंद्र का नाम : </b><span class="padding">{{
+                                consumerApplicationDetail?.dcName}}</span>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <b> प्राकलन क्रमांक : </b><span class="padding">
+                                <span
+                                    *ngIf="consumerApplicationDetail?.revisedErpNumber==null && consumerApplicationDetail?.erpVersion!='V3'">
+                                    {{consumerApplicationDetail?.erpWorkFlowNumber}}
+                                </span>
+                                <span
+                                    *ngIf="consumerApplicationDetail?.revisedErpNumber!=null && consumerApplicationDetail?.erpVersion!='V3'">
+                                    {{consumerApplicationDetail?.revisedErpNumber}}
+                                </span>
+                                <span *ngIf="consumerApplicationDetail?.erpVersion=='V3'">
+                                    {{consumerApplicationDetail?.revisedErpNumber}}
+                                </span>
+
+
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <b> Estimate Amount : </b><span class="padding">
+                               
+                                    {{consumerApplicationDetail?.estimate_amount}}
+                               
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <b> Supervision Amount : </b><span class="padding">
+                               
+                                    {{consumerApplicationDetail?.supervision_amount}}
+                               
+                            </span>
+                        </div>
+
+                       
+
+
+                        <div class="col-md-6">
+                            <b>कार्य प्रकार : </b><span class="padding">{{
+                                consumerApplicationDetail?.natureOfWorkName}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> ठेकेदार का नाम : </b><span class="padding">
+                                {{contractorDetails?.CONTRACTOR_NAME}}</span>
+                            <span> , {{consumerApplicationDetail?.contractorRegistrationNo}}</span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <b> GST Number : </b><span class="padding">
+                                {{consumerApplicationDetail.gstNumber}}</span>
+                        </div>
+
+                        <!-- consumerApplicationDetail.gstNumber -->
+
+
+                        <div class="col-md-6">
+                            <b> Registration Payment Fee : </b><span
+                                class="padding">{{paymentView?.Registration_Fees}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> Registration Payment Date : </b><span
+                                class="padding">{{paymentView?.Registration_Fees_Transaction_Date }}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> Registration Payment Transaction-Id : </b><span
+                                class="padding">{{paymentView?.Registration_Fees_Transaction_Id }}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> Demand Payment Fee : </b><span class="padding">{{paymentView?.Demand_fees}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b>Demand Payment Date : </b><span
+                                class="padding">{{paymentView?.Demand_fees_Transaction_Date }}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b>Demand Payment Transaction-Id : </b><span
+                                class="padding">{{paymentView?.Demand_fees_Transaction_Id }}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> Revise Payment Fee : </b><span
+                                class="padding">{{paymentView?.Revised_Demand_fees}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b>Revise Payment Date : </b><span
+                                class="padding">{{paymentView?.Revised_Demand_fees_Transaction_Date}}</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <b> Revise Payment Transaction-Id : </b><span
+                                class="padding">{{paymentView?.Revised_Demand_fees_Transaction_Id }}</span>
+                        </div>
+
+                        <div class="col-md-6" *ngIf="consumerApplicationDetail?.erpVersion=='V3'">
+                            <b> Second Revised Demand fees : </b><span
+                                class="padding">{{paymentView?.Second_Revised_Demand_fees}}</span>
+                        </div>
+
+
+                        <div class="col-md-6" *ngIf="consumerApplicationDetail?.erpVersion=='V3'">
+                            <b>Second Revised Demand fees Transaction Date : </b><span
+                                class="padding">{{paymentView?.Second_Revised_Demand_fees_Transaction_Date}}</span>
+                        </div>
+
+
+                        <div class="col-md-6" *ngIf="consumerApplicationDetail?.erpVersion=='V3'">
+                            <b> Second Revised Demand fees Transaction Id : </b><span
+                                class="padding">{{paymentView?.Second_Revised_Demand_fees_Transaction_Id }}</span>
+                        </div>
+                        <br>
+
+
+                    </div>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="d-block text-left">
+                                <b>
+                                    क्र. मप्र/संचा/सधा /{{perviousYear}}-{{date?.getFullYear()}}/</b>{{workOrderNumber}}
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="d-block text-right">
+                                <b> दिनांक : &nbsp;&nbsp;{{backEndWorkOrderDate | date:"dd/MM/yy"}}</b>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forminfo-block">
+                    <ul class="list-info">
+                        <li class="nav-item">
+                            <label class="d-block">
+
+                                <div *ngIf="consumerApplicationDetail?.schemeTypeId==1">
+                                    प्रति, &nbsp;
+                                    <b>
+                                        {{consumerApplicationDetail?.consumerName}}
+                                    </b> , {{consumerApplicationDetail?.address}}
+                                </div>
+                                <div *ngIf="consumerApplicationDetail?.schemeTypeId==2">
+                                    प्रति, &nbsp;
+                                    <b>
+                                        {{dgmStcName}} ("DGM_(STC)")
+                                    </b> , {{stcCircleName}}
+                                </div>
+                                <!-- प्रति, &nbsp;
+                                <b>
+                                    {{consumerApplicationDetail?.consumers?.consumerName}}
+                                </b> , {{consumerApplicationDetail?.address}} -->
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विषय :- &nbsp;
+                                <b>
+                                    {{
+                                    consumerApplicationDetail?.consumerApplicationNo}},
+                                    {{consumerApplicationDetail?.dcName
+                                    }},
+                                    {{
+                                    consumerApplicationDetail?.NAME_OF_DIVISION}},
+                                    {{consumerApplicationDetail?.NAME_OF_CIRCLE
+                                    }}
+                                </b>
+                                अंतर्गत
+                                <b>
+                                    {{ consumerApplicationDetail?.shortDescriptionOfWork}}
+                                </b>
+                                कार्य अनुमति आदेश ।
+                            </label>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <label class="d-block">
+                                महोदय,
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                आपके उपरोक्त स्वीकृत संदर्भित प्राक्कलन और <b> DSP आवेदन क्रमांक
+                                    {{consumerApplicationDetail?.consumerApplicationNo}} </b> अनुसार <b> डिमांड नोट</b>
+                                जमा करने पर कार्य क्यू.सी. पोर्टल पर पंजीकृत एक्टिव कॉन्ट्रेक्ट श्रेणी के
+                                <b>{{workOrderData?.contractorCategory}}</b> परिपत्र क्रमांक 95 दिनांक 20/06/22 श्रेणी
+                                विद्युत ठेकेदार <b>
+                                    {{workOrderData?.contractorName}}</b> द्वारा संपादित कराने की अनुमति आपको निम्नलिखित
+                                नियम / शर्तों पर प्रदान की जाती है ।
+                            </label>
+                        </li>
+                    </ul>
+
+                    <ul class="list-info1">
+                        <li class="nav-item">
+                            <label class="d-block">
+                                म.प्र. शासन, ऊर्जा विभाग का पत्र क्रमांक-5425 / 2012 / तेरह / भोपाल दिनांक 17.10.2012
+                                में दिये गये दिशा-निर्देश अनुसार
+                                केन्द्रीय विद्युत प्राधिकरण एवं ऊर्जा संरक्षण अधिनियम 2001 के अनुसार विद्युत उपकरण मानक
+                                स्तर के एवं ट्रांसफार्मर (BIS level-III
+                                (Old) / BIS level-II (New) हल्का भूरा रंग (Light Brown) का स्थापित करना सुनिश्चित करे
+                                जिसका निर्माण केन्द्रीय विद्युत
+                                प्राधिकरण द्वारा निर्धारित स्पेसीफिकेशन के अनुसार ही हो ।
+                            </label>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युतीकरण का कार्य कार्यादेश के साथ संलग्न कम्पनी द्वारा स्वीकृत प्राक्कलन एवं विद्युत
+                                निरीक्षक म.प्र.
+                                शासन द्वारा अनुमोदित 33/11 केव्ही उपकेन्द्र का मानचित्र एवं केन्द्रीय विद्युत प्राधिकरण
+                                द्वारा निर्धारित मापदण्ड के अनुसार सुरक्षित दूरी
+                                का ध्यान रखते हुए कराना होगा।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युतीकरण कार्य में उपयोग की जाने वाली समस्त (अनुमोदित जी.टी.पी के अनुसार) सामग्री
+                                कम्पनी द्वारा
+                                अनुमोदित निर्माताओं / सप्लायर से कथ कर ही उपयोग की जाए एवं उपयोग में लाने से पूर्व इस
+                                कार्यालय के अधिकृत प्रतिनिधि <span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5">उप महाप्रबंधक
+                                    (एस.टी.सी.)</span><span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">प्रबंधक
+                                    (संचा./संधा.)</span> से निरीक्षण करवाकर इसकी प्रति पोर्टल पर दर्ज करें।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                आपके द्वारा किये जा रहे कार्य के निरीक्षण हेतु कम्पनी के निदेशानुसार <span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5">उप महाप्रबंधक
+                                    (एस.टी.सी.)</span><span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">प्रबंधक
+                                    (संचा./संधा.)</span> {{
+                                consumerApplicationDetail?.NAME_OF_DIVISION}},
+                                {{consumerApplicationDetail?.NAME_OF_CIRCLE
+                                }} को अधिकृत किया जाता है। अतः निर्माण कार्य की अवधि में कम्पनी के <span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5">उप महाप्रबंधक
+                                    (एस.टी.सी.)</span><span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">प्रबंधक
+                                    (संचा./संधा.)</span>{{
+                                consumerApplicationDetail?.NAME_OF_DIVISION}},
+                                {{consumerApplicationDetail?.NAME_OF_CIRCLE
+                                }} से सतत्
+                                सम्पर्क बनाये रखे ताकि समय-समय पर कार्य की गुणवत्ता / उपयोग की जाने वाली सामग्री का
+                                निरीक्षण किया जा सके।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युतीकरण के कार्य में कम्पनी द्वारा स्वीकृत प्राक्कलन में उपयोग की गई सामग्री एवं
+                                प्राक्कलन राशि में 5 प्रतिशत
+                                से अधिक परिवर्तन होने पर / मानचित्र में किसी भी प्रकार का परिवर्तन होने पर, सक्षम
+                                कार्यालय से अनुमति / स्वीकृति प्राप्त कर पोर्टल पर
+                                दर्ज कराना आवश्यक होगा। अन्यथा की स्थिति में न तो कार्य स्वीकार किया जावेगा एव न ही लाइन
+                                चालू की जाकर कनेक्शन दिया जावेगा।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युतीकरण हेतु स्थापित ट्रासफार्मर के चारों ओर फेसिंग एवं सुरक्षा व्यवस्था कम्पनी के
+                                मापदण्डानुसार करानी होगी।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युत लाईन शिफ्टिंग / विद्युतीकरण का कार्य पूर्ण होने के उपरांत कम्पनी के अधिकृत
+                                अधिकारी, आपके अधिकृत प्रतिनिधि
+                                एवं ठेकेदार द्वारा संयुक्त रूप से निरीक्षण कर यह निश्चित किया जाये। कि. कार्य कम्पनी
+                                द्वारा स्वीकृत प्राक्कलन, अनुमोदित ले-आउट के अनुसार संपादित
+                                किया गया है। एवं उपयोग की गई सामग्री की गुणवत्ता निर्धारित मापदण्ड अनुसार हैं।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युत लाईन शिफ्टिंग / विद्युतीकरण का कार्य पूर्ण होने के पश्चात कम्पनी द्वारा
+                                निर्धारित प्रश्नावधि प्रारूप में लाईन / ट्रांसफार्मर कम्पनी द्वारा ग्रहण करने की
+                                कार्यवाही हेतु आवश्यक दस्तावेज जैसे कि:-
+                            </label>
+                            <ul class="list-info2">
+                                <li class="nav-item">
+                                    <label class="d-block">
+                                        <b> अ-</b>निर्धारित संयुक्त निरीक्षण रिपोर्ट ।
+                                    </label>
+                                </li>
+                                <li class="nav-item">
+                                    <label class="d-block">
+                                        <b>आ-</b> पोल शेडयूल जी.आई.एस आधारित क्यू.सी. एप पर ।
+                                    </label>
+                                </li>
+                                <li class="nav-item">
+                                    <label class="d-block">
+                                        <b>इ-</b> क्वालिटी मेनुअल परिपत्र कमांक 94 दिनांक 20.06.2022 के अनुसार सामग्री
+                                        एवं ट्रांसफार्मर के टेस्ट एवं गारन्टी प्रमाण पत्र ।
+                                    </label>
+                                </li>
+                                <li class="nav-item">
+                                    <label class="d-block">
+                                        <b>ई- </b> निर्माण कार्य में उपयोग की गई सामग्री जैसे कि तार / पोल / इन्सुलेटर /
+                                        ए.बी स्विच / केवल एवं (BIS level - III ( Old ) / BIS level-11 (New), वितरण
+                                        ट्रांसफार्मर इत्यादि के क्रय व्हाउचर की मूलप्रति से सत्यापित छायाप्रतियां
+                                        प्रस्तुत करें।
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                विद्युतीकरण कार्य पूर्ण होने एवं लाईन चार्जिंग के उपरान्त स्वीकृत प्राक्कलन में दर्शाये
+                                गये भार से अधिक भार के विद्युत संयोजनों हेतु अतिरिक्त सिस्टम चार्ज/स्ट्रेथनिंग चार्ज का
+                                भुगतान अतिरिक्त करना होगा।
+                            </label>
+                            <ul class="list-info2">
+                                <li class="nav-item">
+                                    <label class="d-block">
+                                        <b> अ- </b> कार्य विद्युत कम्पनी को हस्तांतरित होने के क्वालिटी मेनुअल परिपत्र
+                                        कमांक 94 दिनांक 20.06.2022 के अनुसार सामग्री एवं ट्रांसफार्मर के टेस्ट एवं
+                                        गारन्टी प्रमाण पत्र ।
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                पश्चात् 02 वर्ष तक लाईन उपकरणों में किसी भी प्रकार की टूट-फूट नुकसान ट्रांसफार्मर खराब
+                                होने पर उसे बदलना या सुधरवाने की जिम्मेदारी आपकी होगी। इस बाबत निर्धारित स्टाम्प पर
+                                घोषणा पत्र प्रस्तुत करना होगा।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                एनर्जी ऑडिट हेतु मॉडम सहित सी.टी मीटर लगाना अनिवार्य होगा।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                33/11 के. व्ही. उपकेन्द्र, कैंपसीटर बैंक वितरण ट्रासफार्मर की अर्थिग शेड्यूल ऑफ रेटस के
+                                शेड्यूल "जी" के अनुसार की जायें।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                प्राक्कलन के अनुसार निकली हुई पुरानी लाईन का तार / स्टील एवं अन्य सामग्री <span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5">उप महाप्रबंधक
+                                    (एस.टी.सी.)</span><span
+                                    *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">प्रबंधक
+                                    (संचा./संधा.)</span> के माध्यम से क्षेत्रीय भण्डार में वापिस किया जाना सुनिश्चित
+                                करे। रहेगी।
+                            </label>
+                        </li>
+<br>
+                        <!-- <li class="nav-item">
+                            <label class="d-block">
+                                
+                            </label>
+                        </li> -->
+
+                        <li class="nav-item">
+                            <label class="d-block">
+                                उक्त विद्युतीकरण के कार्य का निधारित समयावधि कार्य के अनुरूप स्वीकृत प्राक्कलन की 24 माह
+                                की निर्धारित करेंसी अवधि में कार्य पूर्ण
+                                नहीं किये जाने की स्थिति में कार्यादेश स्वतः ही निरस्त माना जायेगा एवं पुनः आवेदन करने
+                                पर प्राक्कलन सक्षम अधिकारी। की स्वीकृति पश्चात् समस्त औपचारिकताएं पूर्ण करने पर
+                                नियमानुसार संरचना के ऊर्जीकृत करने की अनुमति प्रदान की जा सकेगी।
+                            </label>
+                        </li>
+
+                        <li class="nav-item">
+                            <label class="d-block">
+                                बिना प्रापर शट डाउन किये कार्य किया हुआ पाया जाता है या लाईन जुडी हुई पाई जाती है तो
+                                विद्युत अधिनियम 2003 की धारा 138 के तहत आपके विरुद्ध कार्यवाही की जावेगी।
+                            </label>
+                        </li>
+                        <li class="nav-item">
+                            <label class="d-block">
+                                निर्माण कार्य / नवीन विद्युत लाईन / शिफ्टिंग कार्य एवं अन्य कार्य में आने वाली बाधाओं का
+                                निराकरण आपके स्वयं के स्तर पर कराया जायेगा।
+                                अतः आपसे अनुरोध है कि. समस्त कार्य ऊपर दर्शाये गये बिन्दुओं के अनुसार पूर्ण करें। कार्य
+                                में बिना अनुमति के किये गये परिवर्तन मान्य नहीं होगे एवं इससे उत्पन्न समस्त विवादों की
+                                जबाबदारी आपकी की होगी।
+                            </label>
+                        </li>
+                        <li class="nav-item nav-iteminfo">
+                            <label class="d-block text-center">
+                                <b> "धन्यवाद" </b>
+                            </label>
+                        </li>
+                    </ul>
+
+                    <div class="signaturer-text">
+                        <div class="text-right">
+                            <label class="text-center">
+                                <div *ngIf="userRole== 'DGM_(HTM)'">
+                                    उप महाप्रबंधक (उच्च दाब रखरखाव
+                                    ) <br>
+                                    {{consumerApplicationDetail?.NAME_OF_CIRCLE}}
+                                    <br>
+                                    म.प्र.म.क्षे.वि.वि.क. लि.
+                                </div>
+                                <div *ngIf="userRole!='DGM_(HTM)'">
+                                    उप महाप्रबंधक (संचा. / संधा.) <br>
+                                    म.प्र.म.क्षे.वि.वि.क. लि. <br>
+                                    {{consumerApplicationDetail?.NAME_OF_DIVISION}}
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="copyright-block">
+                        <label class="d-block">
+                            प्रतिलिपि
+                        </label>
+                        <ul class="list-copyright">
+                            <li class="nav-item">
+                                <label class="d-block">
+                                    महाप्रबंधक (संचा. / संधा.) म.प्र.म.क्षे.वि.वि.क.लि. <b>
+                                        {{consumerApplicationDetail?.NAME_OF_CIRCLE
+                                        }} </b> की ओर सूचनार्थ ।
+                                </label>
+                            </li>
+                            <li class="nav-item">
+                                <label class="d-block">
+
+                                    <span *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5">उप महाप्रबंधक
+                                        (एस.टी.सी.)</span><span
+                                        *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">प्रबंधक
+                                        (संचा./संधा.)</span> म.प्र.म.क्षे.वि.वि.क.लि. ,
+                                    <b><span *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5 ">
+                                            {{consumerApplicationDetail?.NAME_OF_CIRCLE}}</span>
+                                        <span
+                                            *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">{{consumerApplicationDetail?.subdivName}}
+                                            , {{consumerApplicationDetail?.NAME_OF_DIVISION}} ,
+                                            {{consumerApplicationDetail?.NAME_OF_CIRCLE}} </span></b> <span
+                                        *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">
+                                        {{consumerApplicationDetail?.consumerName}} ,
+                                        <b>{{consumerApplicationDetail?.address}} </b></span> की ओर सूचनार्थ एवं
+                                    माननीय
+                                    अध्यक्ष एवं प्रबंध संचालक महोदय म.प्र.म.क्षे.वि.वि.कं. लि. भोपाल के पत्र के 485
+                                    दिनांक 24/09/2024 के परिपालन में उपरोक्त कार्य का नियमानुसार निरीक्षण / सुपरविजन
+                                    करते
+                                    हुए लाईन / ट्रासफार्मर को चार्ज करने हेतु आवश्यक रिपोर्ट प्रेषित करें।
+                                </label>
+                            </li>
+                            <li class="nav-item">
+                                <label class="d-block">
+                                    प्रबंधक<span *ngIf="userRole=='DGM_(HTM)'">(उच्च दाब रखरखाव)</span><span
+                                        *ngIf="userRole!='DGM_(HTM)'">(संचा. / संधा.)</span> / सहायक प्रबंधक<span
+                                        *ngIf="userRole=='DGM_(HTM)'">(उच्च दाब रखरखाव)</span><span
+                                        *ngIf="userRole!='DGM_(HTM)'">(संचा. / संधा.)</span> म.प्र.म.क्षे.वि.वि. क.लि.
+                                    <b>
+                                        <span
+                                            *ngIf="userRole=='DGM_(HTM)'">{{consumerApplicationDetail?.NAME_OF_CIRCLE}}</span><span
+                                            *ngIf="userRole!='DGM_(HTM)'">{{consumerApplicationDetail?.dcName}}</span>
+                                    </b> की ओर सूचनार्थ एवं ठेकेदार द्वारा उपयोग की गयी सामाग्री की क्वालिटी सुनिश्चित
+                                    करने
+                                    आवश्यक कार्यवाही हेतु प्रेषित ।
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="signaturer-text">
+                        <div class="text-right">
+                            <label class="text-center">
+                                <div *ngIf="userRole=='DGM_(HTM)'">
+                                    उप महाप्रबंधक (उच्च दाब रखरखाव
+                                    ) <br>
+                                    {{consumerApplicationDetail?.NAME_OF_CIRCLE}}
+                                    <br>
+                                    म.प्र.म.क्षे.वि.वि.क. लि.
+                                </div>
+                                <div *ngIf="userRole!='DGM_(HTM)'">
+                                    उप महाप्रबंधक (संचा. / संधा.) <br>
+                                    म.प्र.म.क्षे.वि.वि.क. लि. <br>
+                                    {{consumerApplicationDetail?.NAME_OF_DIVISION}}
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="((paymentDetails!=null && paymentDetails?.Demand_fees!=null ) || (paymentDetails!=undefined && paymentDetails?.Demand_fees!=null )) ">
+                        <div *ngIf="downloadHideBoolean==false">
+                            <div class="form-group mt-2">
+                                <label class="custome_checkbox">
+                                    <span class="d-block">
+                                        मैं सत्यापित करता है कि मेरे द्वारा जारी प्राकलन का विश्लेषण भली भाति कर लिया
+                                        गया है
+                                        और
+                                        कार्याआदेश जारी करने के लिए अनुमति प्रदान करता है |
+                                    </span>
+                                    <!-- <input type="checkbox" formControlName="cb" (change)="checkboxSelectionValidation($event)"> -->
+                                    <input type="checkbox" [(ngModel)]="isChecked"
+                                        (change)="checkboxSelectionValidation(isChecked==true? true:false)"
+                                        formControlName="cb" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                <p style="color: red; font-size: 12px; float: left;font-weight: 800;"
+                                    *ngIf="checkBoxValuecheck==false">
+                                    ! PLEASE SELECT CHECKBOX
+                                </p>
+                            </div>
+
+
+                            <div class="form-group mt-2">
+                                <div class="text-center">
+                                    <!-- disablebtn -->
+                                    <button type="button" class="btn btn-primary"
+                                        [disabled]="disablebtn==true?true:false" (click)="onSubmit()">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- <div style="color: red; font-weight: 900; font-size: 1.5em; justify-content: center; text-align: center; align-items: center;" *ngIf="(paymentDetails==undefined) || (paymentDetails==null) || (paymentDetails!=null && paymentDetails?.Demand_fees==null) || (paymentDetails!=undefined && paymentDetails?.Demand_fees==null) ">
+                       ***Note:  Demand Payment Not Done By Consumer !
+                    </div> -->
+
+                    <br>
+
+                    <div style="display: flex; font-weight: 900;color: red;"
+                        *ngIf="(paymentDetails==undefined) || (paymentDetails==null) || (paymentDetails!=null && paymentDetails?.Demand_fees==null) || (paymentDetails!=undefined && paymentDetails?.Demand_fees==null) ">
+                        <div class="mx-2">***Note : इस आवेदन से संबंधित डिमांड का भुगतान नहीं किया गया है।आवेदक से
+                            डिमांड का भुगतान करवाने के लिए यहाँ क्लिक करे |</div>
+                        <div style="padding-left: 2em;">
+                            <button type="button" class="btn btn-primary"
+                                (click)="revertToDemandPayment()">Submit</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</mat-card>

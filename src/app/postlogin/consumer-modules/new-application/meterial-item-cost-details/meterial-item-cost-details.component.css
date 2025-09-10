@@ -1,0 +1,98 @@
+/* Close button */
+.close-btn {
+  background: #f5f5f5;
+  border: none;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #e0e0e0;
+  cursor: pointer;
+}
+
+/* Card styling */
+mat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-top: 10px;
+}
+
+/* Heading */
+h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.mat-toolbar.mat-primary {
+    background: #1976d2;
+    /* color: #fff; */
+}
+
+/* Table wrapper */
+.mat-elevation-z4 {
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Table Borders (Grid look) */
+.modern-table th,
+.modern-table td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+/* Header Styling */
+.modern-table thead {
+  background-color: #f4f6f8;
+}
+
+.modern-table th {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Sticky Header */
+.header.sticky th {
+  position: sticky;
+  top: 0;
+  background-color: #f4f6f8;
+  z-index: 1;
+}
+
+/* Hover Effect on Rows */
+.modern-table tbody tr:hover {
+  background-color: #f9fafb;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Overall Total Row */
+.overall-total-row {
+  background-color: #f1f1f1;
+}
+
+.total-label {
+  text-align: right;
+}
+
+.total-value {
+  color: #2c3e50;
+  font-weight: bold;
+}

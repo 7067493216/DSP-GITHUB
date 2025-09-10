@@ -1,0 +1,65 @@
+<mat-card>
+
+    <div class="row " style="background-color: #007bff;">
+
+        <div class="col-md-12 w-60">      
+        <app-payment-reciept-header></app-payment-reciept-header>
+            
+        </div>
+        <!-- <div class="col-md-4"></div> -->
+
+    </div>
+<br>
+<br>
+    <div align="center" style="font-size: 2em; font-weight: 900;">Payment Reciept</div>
+
+    <hr>
+    <br>
+
+    <form [formGroup]="PaymentForm">
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+                <label class="form-label">Consumer Application Number</label>
+                <input type="text" class="form-control" formControlName="applicationNumber">
+            </div>
+            <div class="col-md-3 mt-4">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+
+            </div>
+        </div>
+
+    </form>
+
+    <br>
+    <hr>
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-4" *ngIf="registrationBooleanShow==true ">
+
+            <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;" (click)="onDownload(1)">
+                Registration Reciept </button>
+
+        </div>
+
+        <div class="col-md-4" *ngIf=" demandBooleanShow==true ">
+
+            <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;" (click)="onDownload(2)">
+                Demand Reciept </button>
+
+        </div>
+
+        <div class="col-md-4" *ngIf="reviseDemandBooleanShow==true">
+
+            <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;" (click)="onDownload(3)">
+                Revise Demand Reciept </button>
+
+        </div>
+
+    </div>
+
+
+</mat-card>

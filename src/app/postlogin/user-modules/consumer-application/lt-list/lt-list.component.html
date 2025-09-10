@@ -1,0 +1,493 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <mat-toolbar class="label label-warning custom-mat-toolbar">
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="card">
+
+        <div class="card-body">
+            <form [formGroup]="itListForm">
+
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">01- Length of line actually laid ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox1'].errors || formControl['checkBox1'].invalid && (formControl['checkBox1'].dirty || formControl['checkBox1'].touched) }"
+                            formControlName="checkBox1">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox1.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox1}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">02- Whether all poles are in plumb ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox2'].errors || formControl['checkBox2'].invalid && (formControl['checkBox2'].dirty || formControl['checkBox2'].touched) }"
+                            formControlName="checkBox2">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox2.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox2}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">03- Whether alignment of poles is errected ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox3'].errors || formControl['checkBox3'].invalid && (formControl['checkBox3'].dirty || formControl['checkBox3'].touched) }"
+                            formControlName="checkBox3">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox3.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox3}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">04- Whether all the fixtures have been secured in place properly </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox4'].errors || formControl['checkBox4'].invalid && (formControl['checkBox4'].dirty || formControl['checkBox4'].touched) }"
+                            formControlName="checkBox4">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox4.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox4}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">05- Whether pin/shackle insulators have been secured in place properly At
+                            all the
+                            locations ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox5'].errors || formControl['checkBox5'].invalid && (formControl['checkBox5'].dirty || formControl['checkBox5'].touched) }"
+                            formControlName="checkBox5">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox5.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox5}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">06- Whether the span at all location is reasonable </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox6'].errors || formControl['checkBox6'].invalid && (formControl['checkBox6'].dirty || formControl['checkBox6'].touched) }"
+                            formControlName="checkBox6">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox6.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox6}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">07- Whether all metallic fixtures pointed </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox7'].errors || formControl['checkBox7'].invalid && (formControl['checkBox7'].dirty || formControl['checkBox7'].touched) }"
+                            formControlName="checkBox7">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox7.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox7}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">08- Whether Sag of Conductor in all the span is proper ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox8'].errors || formControl['checkBox8'].invalid && (formControl['checkBox8'].dirty || formControl['checkBox8'].touched) }"
+                            formControlName="checkBox8">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox8.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox8}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">09- Whether neutral wire run on Aluminium bobbins </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox9'].errors || formControl['checkBox9'].invalid && (formControl['checkBox9'].dirty || formControl['checkBox9'].touched) }"
+                            formControlName="checkBox9">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox9.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox9}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">10- Whether neutral wire efectively earthed at every locations ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox10'].errors || formControl['checkBox10'].invalid && (formControl['checkBox10'].dirty || formControl['checkBox10'].touched) }"
+                            formControlName="checkBox10">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox10.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox10}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">11- Whether all metallic structure connected to earth </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox11'].errors || formControl['checkBox11'].invalid && (formControl['checkBox11'].dirty || formControl['checkBox11'].touched) }"
+                            formControlName="checkBox11">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox11.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox11}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">12- Whether Stay Insulator provided (in case of PCC Poles only) </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox12'].errors || formControl['checkBox12'].invalid && (formControl['checkBox12'].dirty || formControl['checkBox12'].touched) }"
+                            formControlName="checkBox12">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox12.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox12}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">13- Whether Stay provided at suitable location </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox13'].errors || formControl['checkBox13'].invalid && (formControl['checkBox13'].dirty || formControl['checkBox13'].touched) }"
+                            formControlName="checkBox13">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox13.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox13}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">14- Whether diamond guarding provided on both sided of each supports
+                        </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox14'].errors || formControl['checkBox14'].invalid && (formControl['checkBox14'].dirty || formControl['checkBox14'].touched) }"
+                            formControlName="checkBox14">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox14.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox14}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">15- Whether ground clearance of wires is as per IE rules ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox15'].errors || formControl['checkBox15'].invalid && (formControl['checkBox15'].dirty || formControl['checkBox15'].touched) }"
+                            formControlName="checkBox15">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox15.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox15}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">16- Whether the horizontal clearance from the side buildings is as per IE
+                            rules ?
+                        </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox16'].errors || formControl['checkBox16'].invalid && (formControl['checkBox16'].dirty || formControl['checkBox16'].touched) }"
+                            formControlName="checkBox16">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox16.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox16}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">17- Whether adequate guarding arrangement provided at road crossing /
+                            railway Crossing /
+                            telephone lines etc. </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox17'].errors || formControl['checkBox17'].invalid && (formControl['checkBox17'].dirty || formControl['checkBox17'].touched) }"
+                            formControlName="checkBox17">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox17.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox17}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">18- Whether clearance between phase to phase and phase to neutral are
+                            adequate </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox18'].errors || formControl['checkBox18'].invalid && (formControl['checkBox18'].dirty || formControl['checkBox18'].touched) }"
+                            formControlName="checkBox18">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox18.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox18}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">19- Whether horning of poles done </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox19'].errors || formControl['checkBox19'].invalid && (formControl['checkBox19'].dirty || formControl['checkBox19'].touched) }"
+                            formControlName="checkBox19">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox19.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox19}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">20- Whether adcquate tree cutting on both sides of the line has been done ?
+                        </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox20'].errors || formControl['checkBox20'].invalid && (formControl['checkBox20'].dirty || formControl['checkBox20'].touched) }"
+                            formControlName="checkBox20">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox20.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox20}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">21- Whether pole schedule enclosed with this proforma ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox21'].errors || formControl['checkBox21'].invalid && (formControl['checkBox21'].dirty || formControl['checkBox21'].touched) }"
+                            formControlName="checkBox21">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox21.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox21}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">22- Whether route map enclosed with this proforma ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox22'].errors || formControl['checkBox22'].invalid && (formControl['checkBox22'].dirty || formControl['checkBox22'].touched) }"
+                            formControlName="checkBox22">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox22.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox22}}</div>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <div>
+                        <label class="mr-5">23- Any other remarks ? </label>
+                    </div>
+                    <div *ngIf="itListArray == null">
+                        <mat-radio-group aria-label="Select an option"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['checkBox23'].errors || formControl['checkBox23'].invalid && (formControl['checkBox23'].dirty || formControl['checkBox23'].touched) }"
+                            formControlName="checkBox23">
+                            <mat-radio-button value="YES" class="mr-2">yes </mat-radio-button>
+                            <mat-radio-button value="NO">no </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="submitted && itListForm.controls.checkBox23.hasError('required') && !itListForm.valid"
+                            style="color: crimson;">
+                            ! Please Select Yes/No.
+                        </div>
+
+                    </div>
+                    <div *ngIf="itListArray != null">{{itListArray.checkBox23}}</div>
+                </div>
+                <br>
+
+                <div *ngIf="itListArray == null">
+                    <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</mat-card>

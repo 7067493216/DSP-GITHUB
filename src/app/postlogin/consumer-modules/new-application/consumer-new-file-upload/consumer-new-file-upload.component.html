@@ -1,0 +1,37 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: white; font-size: 2em; font-weight: 900; background-color: rgb(92, 92, 227); text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Wrong File</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <div>
+
+        <div class="row" *ngFor="let item of docDropdownArray">
+         
+                <div class="col-md-9 form-group">
+                    <label class="form-label">{{item.name}}<span class="text-danger">*</span></label>
+                    <input type="file" class="form-control" [disabled]="item.value.documentStatus!=3?true:false"
+                        (change)="fileUploadChange($event,item.value)">
+                </div>
+          
+        </div>
+
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-primary" [disabled]="chalGayaBoolean==true?true:false" (click)="onSubmit()">Submit</button>
+    </div>
+
+</mat-card>

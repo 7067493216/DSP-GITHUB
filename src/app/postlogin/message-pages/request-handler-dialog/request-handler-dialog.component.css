@@ -1,0 +1,10 @@
+.spaceBetween {
+    justify-content: space-between;
+  }
+  mat-toolbar {
+    height: 40px;
+    margin: -24px -24px  -0px -24px !important;
+    cursor: move;
+    width: auto;
+
+}

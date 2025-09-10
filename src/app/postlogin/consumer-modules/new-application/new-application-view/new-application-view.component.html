@@ -1,0 +1,1314 @@
+<mat-card class="custom-scroll-enable">
+    
+    <mat-toolbar>
+        <span>Application Details : {{consumerApplicationDetail?.consumerApplicationNo}}</span>
+        <span class="fill-remaining-space"></span>
+    </mat-toolbar>
+
+    <!-- <table class="table table-striped" style="font-size: 15px;">
+        <tbody>
+
+            <tr class="col-md-12">
+                <td class="col-md-6"><b>Applicant Name (आवेदक का नाम) : </b><span
+                        class="padding">{{consumerApplicationDetail?.consumerName}} </span></td>
+                <td class="col-md-6"><b>Father/Husband Name (पिता/पति का नाम) : </b><span class="padding">
+                        {{consumerApplicationDetail?.guardianName}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Applicant Name (आवेदक का नाम) : </b><span
+                        class="padding">{{consumerApplicationDetail?.consumerName}} </span></td>
+                <td><b>Father/Husband Name (पिता/पति का नाम) : </b><span class="padding">
+                        {{consumerApplicationDetail?.guardianName}}</span>
+                </td>
+            </tr>
+
+            <tr class="col-md-12">
+                <td class="col-md-6"><b>Address (पता) : </b><span class="padding">
+                        {{consumerApplicationDetail?.address}}</span>
+                </td>
+              
+            </tr>
+
+            <tr class="col-md-12">
+                <div *ngIf="consumerApplicationDetail?.ivrsNo !== null; then thenBlockivrs">
+                    This content is not shown
+                </div>
+    
+                <ng-template #thenBlockivrs>
+    
+                    <td class="col-md-12" colspan="2"><b>IVRSNO (उपभोक्ता संख्या) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.ivrsNo}} </b>
+                           
+                        </span>
+                    </td>
+                </ng-template>
+            </tr>
+            
+            
+
+            <tr class="col-md-12">
+                <td class="col-md-6"><b>Nature Of Work (कार्य प्रकार)(Application type) : </b><span class="padding">
+                        {{consumerApplicationDetail?.natureOfWorkName}}
+                    </span>
+                </td>
+                <td class="col-md-6"><b>Scheme Type (योजना का प्रकार) : </b><span class="padding">
+                        {{consumerApplicationDetail?.schemeTypeName}}
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Nature of Work (कार्य प्रकार)(Application type) : </b><span >
+                        {{consumerApplicationDetail?.natureOfWorkName}}
+                    </span>
+                </td>
+                <td><b>Scheme Type (योजना का प्रकार) : </b><span >
+                        {{consumerApplicationDetail?.schemeTypeName}}
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+               
+            </tr>
+
+            <tr class="col-md-12">
+                <div *ngIf="supplyVoltageString !== ''; then thenBlockSupplyVoltage">
+                    This content is not shown
+                </div>
+    
+                <ng-template #thenBlockSupplyVoltage>
+    
+                    <td class="col-md-12" colspan="2"><b>Supply Voltage (सप्लाई वोल्टेज) : </b><span
+                            class="padding"><b>{{supplyVoltageString}} </b>
+                          
+                        </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+          <tr class="col-md-12">
+            <div *ngIf="consumerApplicationDetail?.loadRequested !== null; then thenBlockLoadReuest">
+                This content is not shown
+            </div>
+
+            <ng-template #thenBlockLoadReuest>
+
+                <td class="col-md-6" colspan="1"><b>load Request (लोड(भार) अनुमति) : </b><span
+                        class="padding"><b>{{consumerApplicationDetail?.loadRequested}} </b>
+                       
+                    </span>
+                </td>
+               
+                <td class="col-md-6" colspan="1"><b>load unit (लोड यूनिट ) : </b><span
+                    class="padding"><b>{{consumerApplicationDetail?.loadRequestedId?.loadRequestedName}} </b>
+                </span>
+            </td>
+
+            </ng-template>
+        </tr>
+      
+
+            <tr class="col-md-12">
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1; then thenBlockSchemeTypeIs1">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs1>
+
+                    <td class="col-md-12" colspan="2"><b>Contractor Name (कॉन्ट्रैक्टर का नाम) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.contractorId?.contractorCompanyName}}, </b>
+                            [{{consumerApplicationDetail?.contractorId?.contractorAuthenticationId}}] </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr class="col-md-12">
+                <div
+                    *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1  ; then thenBlockSchemeTypeWithStatus">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeWithStatus>
+
+                    <div
+                        *ngIf="consumerApplicationDetail?.applicationStatus?.applicationStatusId > 3  ; then thenBlockContractorStatus else elseBlockContractorStatus">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockContractorStatus>
+
+                        <td class="col-md-6"><b>Contractor Class Type: </b><span
+                                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+                        </td>
+
+                        <td class="col-md-6">
+                            <b>Contractor's Status: </b><span class="padding text-success"><strong>
+                             
+                                    
+                                </strong>
+                            </span>
+                        </td>
+                    </ng-template>
+
+                    <ng-template #elseBlockContractorStatus>
+
+                        <td class="col-md-6"><b>Contractor Class Type: </b><span
+                                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+                        </td>
+
+                        <td class="col-md-6">
+                            <b>Contractor's Status: </b><span class="padding text-danger"><strong>The
+                                   
+                                    </strong>
+                            </span>
+                        </td>
+                    </ng-template>
+
+                </ng-template>
+            </tr>
+
+            <tr class="col-md-12">
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 2; then thenBlockSchemeTypeIs2">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs2>
+
+                    <td class="col-md-12" colspan="2"><b>Vendor Name (कॉन्ट्रैक्टर का नाम): </b><span class="padding">Madhya Pradesh Madhya
+                            Kshetra Vidyut
+                            Vitaran Company Limited <strong>(MPMKVVCL)</strong></span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr class="col-md-12">
+
+             
+                <td class="col-md-3"><b>Circle (वृत) : </b><span class="padding">
+                    {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.divisionCircle?.circle}}
+                </span>
+               </td>
+
+                <td class="col-md-3"><b>Division (संभाग ) : </b><span class="padding">
+                    {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.division}}
+                </span>
+                </td>
+
+            </tr>
+
+
+            <tr class="col-md-12">
+                <td class="col-md-6" colspan="2"><b>Distribution Center (वितरण केन्द्र) : </b><span class="padding">
+                    {{consumerApplicationDetail?.distributionCenter?.dcName}}
+                </span>
+            </td>
+            </tr>
+
+             <tr class="col-md-12">  
+                <div *ngIf="consumerApplicationDetail?.workAllocationAddress != null; then thenBlockWorkAllocationDifference">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockWorkAllocationDifference>
+                    <td class="col-md-6"><b>Work Location Address (कार्य स्थल पता): </b><span class="padding">
+                            {{consumerApplicationDetail?.workAllocationAddress}}</span></td>
+                </ng-template>
+             </tr>
+
+          
+             <tr class="col-md-12" >
+                <div *ngIf="consumerApplicationDetail?.area != null; then thenBlockArea">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockArea>
+                    <td class="col-md-6"><b>Area (क्षेत्र): </b><span class="padding">
+                            {{consumerApplicationDetail?.area}}</span></td>
+                    <td class="col-md-6"><b>land area unit (भूमि क्षेत्र  इकाई): </b><span class="padding">
+                                {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span></td>       
+                </ng-template>
+             </tr>
+
+
+         
+             <tr class="col-md-12" >
+                <div *ngIf="consumerApplicationDetail?.noOfPlot != null; then thenBlockNoOfPlot">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockNoOfPlot>
+                    <td class="col-md-6"  colspan="2"><b>No. of Plots (घर की संख्या): </b><span class="padding">
+                            {{consumerApplicationDetail?.noOfPlot}}</span></td>    
+                </ng-template>
+             </tr>
+             
+           
+              
+                <tr class="col-md-12" >
+                    <div *ngIf="consumerApplicationDetail?.gstNumber != null; then thenBlockGstNumber">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockGstNumber>
+                        <td class="col-md-6" colspan="2"><b>GST Number(जी.एस.टी नंबर): </b><span class="padding">
+                                {{consumerApplicationDetail?.gstNumber}}</span></td>    
+                    </ng-template>
+                </tr>
+
+           
+             <tr class="col-md-12" >
+                <div *ngIf="consumerApplicationDetail?.individualOrGroup != null; then thenBlockIndividualOrGroup">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockIndividualOrGroup>
+                    <td class="col-md-6" colspan="2"><b>Apply Individual Or Group (आबेदन का तरीका): </b><span class="padding">
+                            {{consumerApplicationDetail?.individualOrGroup?.name}}</span></td>    
+                </ng-template>
+             </tr>
+             
+            
+
+            <tr class="col-md-12">
+                <td colspan="2"><b>Work Short Description (कार्य का संक्षिप्त विवरण) : </b><span
+                        class="padding">{{consumerApplicationDetail?.shortDescriptionOfWork}}
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <div *ngIf="applicationDocumentData?.docAdministrative!=null">
+                        <b>Doc-Administrative File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocAdministrativeFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docNoc!=null">
+                        <b>Doc-Noc File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocNocFile()">Download</button>
+                        </span>
+                    </div>
+                    <div *ngIf="applicationDocumentData?.docRegistry!=null">
+                        <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocRegistryFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docReraPermission!=null">
+                        <b>Doc ReraPermission File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocReraPermissionFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docT$cpPermission!=null">
+                        <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocTcpPermissionFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docKhasraKhatoni!=null">
+                        <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocKhasraKhatoniFile()">Download</button>
+                        </span>
+                    </div>
+
+                   
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table> -->
+
+
+    <table class="table table-striped" style="line-height:26px;font-size: 15px;">
+        <tbody>
+
+            <tr>
+                <td><b>Applicant Name (आवेदक का नाम) : </b><span
+                        class="padding">{{consumerApplicationDetail?.consumerName}} </span></td>
+                <td><b>Father/Husband Name (पिता/पति का नाम) : </b><span class="padding">
+                        {{consumerApplicationDetail?.guardianName}}</span>
+                </td>
+            </tr>
+
+            <!-- <tr>
+                <td><b>Aadhar Number: </b><span class="padding">
+                        {{maskAadhaarNo}}
+                        <a *ngIf="consumerApplicationDetail?.consumers.docAadhar?.uploadId != null "
+                            href="javascript:void(0)"
+                            (click)="getFile(consumerApplicationDetail?.consumers.docAadhar?.uploadId)"> Download
+                            Document</a>
+                    </span>
+                </td>
+                <td><b>Pan Number: </b><span class="padding">
+                        {{consumerApplicationDetail?.consumers.panNo}} <a
+                            *ngIf="consumerApplicationDetail?.consumers.docPan?.uploadId != null "
+                            href="javascript:void(0)"
+                            (click)="getFile(consumerApplicationDetail?.consumers.docPan?.uploadId)"> Download
+                            Document</a></span>
+                </td>
+            </tr> -->
+
+            <tr>
+                <td><b>Address (पता) : </b><span class="padding">
+                        {{consumerApplicationDetail?.address}}</span>
+                </td>
+                <!-- <td><b>IVRS No (उपभोक्ता संख्या): </b><span class="padding">
+                        {{consumerApplicationDetail?.consumers?.ivrsNo}}</span>
+                </td> -->
+            </tr>
+
+            <tr>
+                <td colspan="2"><b>Contact : </b><span class="padding">
+                        {{consumerApplicationDetail?.consumerphonNumber}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.ivrsNo !== null; then thenBlockivrs">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockivrs>
+
+                    <td colspan="2"><b>IVRSNO (उपभोक्ता संख्या) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.ivrsNo}} </b>
+                            <!-- [{{consumerApplicationDetail?.loadRequested}}]  -->
+                        </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+
+
+            <tr>
+                <td><b>Nature of Work (कार्य प्रकार)(Application type) : </b><span class="padding">
+                        {{consumerApplicationDetail?.natureOfWorkName}}
+                    </span>
+                </td>
+                <td><b>Scheme Type (योजना का प्रकार) : </b><span class="padding">
+                        {{consumerApplicationDetail?.schemeType?.schemeTypeName}}
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <!-- <td><b>Tariff Category : </b><span class="padding">
+                        {{consumerApplicationDetail?.tariffCategory.tariffCategoryCode}}
+                    </span>
+                </td> -->
+                <!-- <td><b>Supply Voltage: </b><span class="padding">
+                        {{consumerApplicationDetail?.supplyVoltage?.supplyVoltageName}}
+                    </span>
+                </td> -->
+
+                <!-- <td><b>Supply Voltage (सप्लाई वोल्टेज) : </b><span class="padding">
+                    {{supplyVoltageString}}
+                </span>
+            </td> -->
+            </tr>
+
+            <!-- supply voltage -->
+            <tr>
+                <div *ngIf="supplyVoltageString !== ''; then thenBlockSupplyVoltage">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSupplyVoltage>
+
+                    <td colspan="2"><b>Supply Voltage (सप्लाई वोल्टेज) : </b><span
+                            class="padding"><b>{{supplyVoltageString}} </b>
+
+                        </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.loadRequested !== null; then thenBlockLoadReuest">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockLoadReuest>
+
+                    <td colspan="1"><b>load Request (लोड(भार) अनुमति) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.loadRequested}} </b>
+                            <!-- [{{consumerApplicationDetail?.loadRequested}}]  -->
+                        </span>
+                    </td>
+                    <!-- load  Unit -->
+
+                    <td colspan="1"><b>load unit (लोड यूनिट ) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.loadRequestedId?.loadRequestedName}} </b>
+                        </span>
+                    </td>
+
+                </ng-template>
+            </tr>
+
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1; then thenBlockSchemeTypeIs1">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs1>
+
+                    <td colspan="2"><b>Contractor Name (कॉन्ट्रैक्टर का नाम) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.contractorId?.contractorCompanyName}}, </b>
+                            [{{consumerApplicationDetail?.contractorId?.contractorAuthenticationId}}] </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr>
+                <div
+                    *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1  ; then thenBlockSchemeTypeWithStatus">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeWithStatus>
+
+                    <div
+                        *ngIf="consumerApplicationDetail?.applicationStatus?.applicationStatusId > 3  ; then thenBlockContractorStatus else elseBlockContractorStatus">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockContractorStatus>
+
+                        <td><b>Contractor Class Type: </b><span
+                                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+                        </td>
+
+                        <td>
+                            <b>Contractor's Status: </b><span class="padding text-success"><strong>
+                                    <!--  The contractor has accepted this application.-->
+
+                                </strong>
+                            </span>
+                        </td>
+                    </ng-template>
+
+                    <ng-template #elseBlockContractorStatus>
+
+                        <td><b>Contractor Class Type: </b><span
+                                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+                        </td>
+
+                        <td>
+                            <b>Contractor's Status: </b><span class="padding text-danger"><strong>The
+                                    <!-- contractor has rejected this application.-->
+                                </strong>
+                            </span>
+                        </td>
+                    </ng-template>
+
+                </ng-template>
+            </tr>
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 2; then thenBlockSchemeTypeIs2">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs2>
+
+                    <td colspan="2"><b>Vendor Name (कॉन्ट्रैक्टर का नाम): </b><span class="padding">Madhya Pradesh
+                            Madhya
+                            Kshetra Vidyut
+                            Vitaran Company Limited <strong>(MPMKVVCL)</strong></span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr>
+
+              
+                <td><b>Circle (वृत) : </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.divisionCircle?.circle}}
+                    </span>
+                </td>
+
+                <td><b>Division (संभाग ) : </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.division}}
+                    </span>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td colspan="2"><b>Distribution Center (वितरण केन्द्र) : </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcName}}
+                    </span>
+                </td>
+            </tr>
+            <!-- charitra comment start -->
+            <!-- <tr>
+                <td><b>Area (एरिया) (sq.ft*): </b><span class="padding">
+                        {{consumerApplicationDetail?.area}}</span></td>
+
+                <div *ngIf="consumerApplicationDetail?.poleNo != null; then thenBlockPoleNo else elseBlockPoleNo">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockPoleNo>
+                    <td><b>Pole No (पोल नंबर): </b><span class="padding">
+                            {{consumerApplicationDetail?.poleNo}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockPoleNo>
+                    <td><b>Pole No (पोल नंबर): </b><span class="padding">
+                            NA</span></td>
+                </ng-template>
+            </tr> -->
+            <!-- charitra comment end -->
+
+            <!-- <tr>
+                <div *ngIf="consumerApplicationDetail?.dtrCode != null; then thenBlockDTRCode else elseBlockDTRCode">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockDTRCode>
+                    <td><b>DTR Code (Numeric*): </b><span class="padding">
+                            {{consumerApplicationDetail?.dtrCode}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockDTRCode>
+                    <td><b>DTR Code (Numeric*): </b><span class="padding">
+                            NA</span></td>
+                </ng-template>
+
+                <td><b>Distribution Center: </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcName}}</span></td>
+            </tr> -->
+
+            <!-- <tr>
+                <td><b>Sub-Station: </b><span class="padding">
+                        {{consumerApplicationDetail?.substation?.subStationName}}
+                    </span>
+                </td> -->
+            <!-- <td><b>Feeder: </b><span class="padding"> {{consumerApplicationDetail?.feeder?.feederName}}</span></td> -->
+            <!-- </tr> -->
+
+
+            <!-- if work laction is difference -->
+            <tr>
+                <div
+                    *ngIf="consumerApplicationDetail?.workAllocationAddress != null; then thenBlockWorkAllocationDifference">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockWorkAllocationDifference>
+                    <td><b>Work Location Address (कार्य स्थल पता): </b><span class="padding">
+                            {{consumerApplicationDetail?.workAllocationAddress}}</span></td>
+                </ng-template>
+            </tr>
+
+            <!-- land area -->
+            <!-- alnd are Unit  -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.area != null; then thenBlockArea">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockArea>
+                    <td><b>Area (भूमि क्षेत्रफल) & land area unit (भूमि क्षेत्रफल इकाई): </b><span class="padding">
+                            {{consumerApplicationDetail?.area}} {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}} </span></td>
+                    <!-- <td><b>land area unit (): </b><span class="padding">
+                            {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span></td> -->
+                </ng-template>
+            </tr>
+
+
+            <!-- no Of Plot -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.noOfPlot != null; then thenBlockNoOfPlot">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockNoOfPlot>
+                    <td><b>No. of Plots/flats: </b><span class="padding">
+                            {{consumerApplicationDetail?.noOfPlot}}</span></td>
+                </ng-template>
+            </tr>
+
+
+            <!--gst number  -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.gstNumber != null; then thenBlockGstNumber">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockGstNumber>
+                    <td colspan="2"><b>GST Number(): </b><span class="padding">
+                            {{consumerApplicationDetail?.gstNumber}}</span></td>
+                </ng-template>
+            </tr>
+
+            <!--Individual Or Group -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.individualOrGroup != null; then thenBlockIndividualOrGroup">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockIndividualOrGroup>
+                    <td colspan="2"><b>Individual(Consumer)/Group(Colonizer): </b><span class="padding">
+                            {{consumerApplicationDetail?.individualOrGroup?.name}}</span></td>
+                </ng-template>
+            </tr>
+
+
+
+            <tr *ngIf="consumerApplicationDetail?.natureOfWorkTypeId ==8 && consumerApplicationDetail?.applicationStatus?.applicationStatusId==33">
+                <th colspan="2" scope="row">Consumer Number (for Ngb Punching)</th>
+                <td colspan="2">{{ngbPunchingDetails?.ngbConsumerNo}}</td>
+
+            </tr>
+
+            <tr *ngIf="consumerApplicationDetail?.natureOfWorkTypeId ==8 && consumerApplicationDetail?.applicationStatus?.applicationStatusId==33">
+                <th colspan="2" scope="row">DTR Name (for Ngb Punching)</th>
+                <td colspan="2">{{ngbPunchingDetails?.dtrName}}</td>
+
+            </tr>
+
+            <tr *ngIf="consumerApplicationDetail?.natureOfWorkTypeId ==8 && consumerApplicationDetail?.applicationStatus?.applicationStatusId==33">
+                <th colspan="2" scope="row">FEEDER Name (for Ngb Punching)</th>
+                <td colspan="2">{{ngbPunchingDetails?.feederName}}</td>
+
+            </tr>
+
+
+            <!-- *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null" -->
+            <!-- <tr>
+              
+                    <td colspan="2" *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null"><b>DGM STC APPROVAL DATE: </b><span class="padding">
+                            {{consumerApplicationDetail?.dateOfDgmOandM}}</span></td>
+               
+
+               
+                    <td colspan="2" *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null"><b>DGM (O&M) APPROVAL DATE: </b><span class="padding">
+                            {{consumerApplicationDetail?.dateOfDgmOandM}}</span></td>
+               
+            </tr> -->
+
+            <tr>
+                <td *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null"><b>DGM STC APPROVAL DATE: </b><span class="padding">
+                    {{consumerApplicationDetail?.dateOfDgmOandM}}
+                    </span>
+                </td>
+
+                <td *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null"><b>DGM (O&M) APPROVAL DATE: </b><span class="padding">
+                    {{consumerApplicationDetail?.dateOfDgmOandM}}
+                    </span>
+                </td>
+
+            </tr>
+
+
+            <!-- land area unit -->
+            <!-- <tr>
+                <div *ngIf="consumerApplicationDetail?.landAreaUnit != null; then thenBlockLandAreUnit">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockLandAreUnit>
+                    <td><b>land area unit (): </b><span class="padding">
+                            {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span></td>
+                </ng-template>
+             </tr> -->
+
+            <tr>
+                <td colspan="2"><b>Work Short Description (कार्य का संक्षिप्त विवरण) : </b><span
+                        class="padding">{{consumerApplicationDetail?.shortDescriptionOfWork}}
+                    </span>
+                </td>
+            </tr>
+
+
+            <!-- <tr>
+                <td colspan="2">
+                   
+
+                    <div *ngIf="applicationDocumentData?.docEstimate!=null">
+                        <b>Doc-Estimate File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocEstimateFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docAdministrative!=null">
+                        <b>Doc-Administrative File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocAdministrativeFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docNoc!=null">
+                        <b>Doc-Noc File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocNocFile()">Download</button>
+                        </span>
+                    </div>
+                    <div *ngIf="applicationDocumentData?.docRegistry!=null">
+                        <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocRegistryFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docReraPermission!=null">
+                        <b>Doc ReraPermission File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocReraPermissionFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docT$cpPermission!=null">
+                        <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocT$cpPermissionFile()">Download</button>
+                        </span>
+                    </div>
+
+                    <div *ngIf="applicationDocumentData?.docKhasraKhatoni!=null">
+                        <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                                class="btn btn-actionifo" (click)="getDownloaddocKhasraKhatoniFile()">Download</button>
+                        </span>
+                    </div>
+
+                   
+                </td>
+
+            </tr> -->
+        </tbody>
+    </table>
+    <div *ngIf="applicationDocumentData">
+    <div *ngIf="applicationDocumentData?.consumerApplicationDetail?.natureOfWorkTypeId!=2">  
+        <hr />
+
+        <div style="border-bottom: dashed 1px solid black;"></div>
+
+        <table class="table table-striped" style="font-size: 12px;">
+            <thead>
+                <th colspan="2" style="text-align: left;">Application Document (आवेदन दस्तावेज) : </th>
+            </thead>
+            <tbody>
+
+                <ng-container *ngIf="consumerApplicationDetail?.applicationType?.applicationTypeId != null
+                        && (consumerApplicationDetail?.applicationType?.applicationTypeId === 1 
+                        || consumerApplicationDetail?.applicationType?.applicationTypeId === 2)">
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>ROW: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docRow?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docRow?.uploadId)"> Download Document</a>
+                            </span>
+                        </td>
+
+                        <td class="col-md-6"><b>Registry: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docRegistry?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docRegistry?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Nagar Nigam Permission: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docNagarNigamPermission?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNagarNigamPermission?.uploadId)">
+                                    Download
+                                    Document</a></span></td>
+
+                        <td class="col-md-6"><b>DIC/Gumasta: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docDicOrGumasta?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docDicOrGumasta?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Shapath Patra: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docShapathPatra?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docShapathPatra?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                        <td class="col-md-6"><b>Test Report: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docTestReport?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docTestReport?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+                </ng-container>
+
+                <ng-container *ngIf="consumerApplicationDetail?.applicationType?.applicationTypeId != null
+                        && consumerApplicationDetail?.applicationType?.applicationTypeId === 3">
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>ROW: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docRow?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docRow?.uploadId)"> Download Document</a>
+                            </span>
+                        </td>
+
+                        <td class="col-md-6"><b>Registry: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docRegistry?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docRegistry?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Nagar Nigam Permission: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docNagarNigamPermission?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNagarNigamPermission?.uploadId)">
+                                    Download
+                                    Document</a></span></td>
+
+                        <td class="col-md-6"><b>Shapath Patra: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docShapathPatra?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docShapathPatra?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>T&CP Permission: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docT$cpPermission?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docT$cpPermission?.uploadId)"> Download
+                                    Document</a></span></td>
+
+                        <td class="col-md-6"><b>Rera Permission: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docReraPermission?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docReraPermission?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Drawing Notarized: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docDrawingNotarized?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docDrawingNotarized?.uploadId)"> Download
+                                    Document</a></span></td>
+
+                        <td class="col-md-6"><b>Colony Prakoshth: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docColonyPrakoshth?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docColonyPrakoshth?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Colony Licence: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docColonyLicence?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docColonyLicence?.uploadId)"> Download
+                                    Document</a></span></td>
+
+                        <td class="col-md-6"><b>Load Sheet: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docLoadSheet?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docLoadSheet?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>NOC: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docNoc?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNoc?.uploadId)"> Download
+                                    Document</a></span></td>
+
+                        <td class="col-md-6"><b>All Paper Notarized (03 Set): </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docAllPaperNotarizedSet?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docAllPaperNotarizedSet?.uploadId)">
+                                    Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                </ng-container>
+
+                <ng-container *ngIf="consumerApplicationDetail?.applicationType?.applicationTypeId != null
+                        && consumerApplicationDetail?.applicationType?.applicationTypeId === 4">
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>ROW: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docRow?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docRow?.uploadId)"> Download Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>Shapath Patra: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docShapathPatra?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docShapathPatra?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Load Sheet: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docLoadSheet?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docLoadSheet?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>NOC: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docNoc?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNoc?.uploadId)"> Download Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Committee: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docCommittee?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docCommittee?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>Diversion: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docDiversion?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docDiversion?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Nazul: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docNazul?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNazul?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>MAP: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docMap?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docMap?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Khasra Khatoni: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docKhasraKhatoni?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docKhasraKhatoni?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>Map Civil Engineer: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docMapCivilEngineer?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docMapCivilEngineer?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Application Consent: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docApplicationConsent?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docApplicationConsent?.uploadId)">
+                                    Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>Performa 5A: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docPerforma5a?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docPerforma5a?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="col-md-12">
+
+                        <td class="col-md-6"><b>Performa 5B: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docPerforma5b?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docPerforma5b?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+
+                        <td class="col-md-6"><b>PlotArea Details Owner: </b><span class="padding">
+                                <a *ngIf="applicationDocumentData?.docPlotAreaDetailsOwner?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docPlotAreaDetailsOwner?.uploadId)">
+                                    Download
+                                    Document</a>
+                            </span>
+                        </td>
+
+                    </tr>
+                </ng-container>
+
+                <ng-container *ngIf="consumerApplicationDetail?.applicationType?.applicationTypeId != null
+                        && (consumerApplicationDetail?.applicationType?.applicationTypeId === 5 
+                        || consumerApplicationDetail?.applicationType?.applicationTypeId === 6)">
+                    <tr class="col-md-12">
+                        <td class="col-md-6"><b>Registry: </b><span class="custom-document-span">
+                                <a *ngIf=" applicationDocumentData?.docRegistry?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile( applicationDocumentData?.docRegistry?.uploadId)"> Download
+                                    Document</a>
+                            </span>
+                        </td>
+                        <td class="col-md-6"><b>Nagar Nigam Permission: </b><span class="padding"><a
+                                    *ngIf="applicationDocumentData?.docNagarNigamPermission?.uploadId != null "
+                                    href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNagarNigamPermission?.uploadId)">
+                                    Download
+                                    Document</a></span></td>
+                    </tr>
+                    <tr class="col-md-12">
+                        <td class="col-md-6"><b>NOC: </b><span class="custom-document-span">
+                                <a *ngIf="applicationDocumentData?.docNoc?.uploadId != null " href="javascript:void(0)"
+                                    (click)="getFile(applicationDocumentData?.docNoc?.uploadId)"> Download Document</a>
+                            </span>
+                        </td>
+                        <td class="col-md-6"></td>
+                    </tr>
+                </ng-container>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+    <div *ngIf="geoLocationData">
+        <hr />
+        <div style="border-bottom: dashed 1px solid black;"></div>
+
+        <table class="table table-striped" style="font-size: 15px;">
+            <thead>
+                <th colspan="2" style="text-align: left;">Geo Location Data : </th>
+            </thead>
+            <tbody>
+                <tr class="col-md-12">
+                    <td class="col-md-6">
+                        <b>Start Latitude (प्रारंभिक अक्षांश):  </b><span class="padding">{{geoLocationData?.startingLatitude}}</span> , 
+                    <td class="col-md-6">
+                        <b>End Latitude (अंतिम अक्षांश) </b><span class="padding">{{geoLocationData?.startingLatitude}}</span> ,       
+                </tr>
+                <tr class="col-md-12">
+                    <td class="col-md-6"> 
+                        <b>Start Longitude (प्रारंभिक देशांतर): </b><span class="padding"> {{geoLocationData?.startingLongitude}}</span></td>
+                    <td class="col-md-6">
+                        <b>End Longitude (प्रारंभिक देशांतर): : </b><span class="padding"> {{geoLocationData?.endingLongitude}}</span></td>
+                </tr>
+
+                <tr class="col-md-12">
+                    <td class="col-md-6"><b>Start Geolocation Image: </b><span class="padding"> <a
+                                *ngIf="geoLocationData?.startDoc?.uploadId != null " href="javascript:void(0)"
+                                (click)="getFile(geoLocationData?.startDoc?.uploadId)"> Download
+                                Image</a></span>
+                    </td>
+                    <td class="col-md-6"><b>End GeoLocation Image: </b><span class="padding"> <a
+                                *ngIf="geoLocationData?.endDoc?.uploadId != null " href="javascript:void(0)"
+                                (click)="getFile(geoLocationData?.endDoc?.uploadId)"> Download
+                                Image</a></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- <tr>
+                <td><b>Energy Bill File: </b><span class="padding"> <a
+                            *ngIf="consumerApplicationDetail?.docEnergyBill?.uploadId != null "
+                            href="javascript:void(0)"
+                            (click)="getFile(consumerApplicationDetail?.docEnergyBill?.uploadId)"> Download
+                            File</a></span>
+                </td>
+                <td><b>Registry Or Lease File: </b><span class="padding"> <a
+                            *ngIf="consumerApplicationDetail?.docRegistoryOrLease?.uploadId != null "
+                            href="javascript:void(0)"
+                            (click)="getFile(consumerApplicationDetail?.docRegistoryOrLease?.uploadId)"> Download
+                            File</a></span></td>
+            </tr> -->
+
+    <!-- <tr>
+                <td><b>Residential Proof File: </b><span class="padding"> <a
+                            *ngIf="consumerApplicationDetail?.docResidentialProof?.uploadId != null "
+                            href="javascript:void(0)"
+                            (click)="getFile(consumerApplicationDetail?.docResidentialProof?.uploadId)"> Download
+                            File</a></span>
+                </td>
+                <td><b>Building Permission Or TNC Approval File: </b><span class="padding"> <a
+                            *ngIf="consumerApplicationDetail?.docBullidingPermissonOrTncpApproval?.uploadId != null "
+                            href="javascript:void(0)"
+                            (click)="getFile(consumerApplicationDetail?.docBullidingPermissonOrTncpApproval?.uploadId)"> Download
+                            File</a></span></td>
+
+            </tr> -->
+
+    <!-- && consumerSurveyData?.surveyStatus!= 'PENDING' -->
+    <div *ngIf="consumerSurveyData">
+        <hr />
+        <div style="border-bottom: dashed 1px solid black;"></div>
+
+        <table class="table table-striped" style="font-size: 15px;">   
+            <thead>
+                <th colspan="2" style="text-align: left;"> SURVEY DATA : </th>
+            </thead>
+            <tbody>
+                <tr class="col-md-12">
+                    <td td class="col-md-6"> <b>Surveyor Name: </b><span class="padding">
+                            {{consumerSurveyData?.surveyorName}}</span> ,
+                        <b>Surveyor Mobile: </b><span class="padding"> {{consumerSurveyData?.surveyorMobile}}</span>
+                    </td>
+
+                    <td td class="col-md-6"><b>Schedule Survey Date: </b><span class="padding">
+                            {{consumerSurveyData?.scheduleSurveyDate | date: 'dd/MM/yyyy'}}</span>
+                        ,
+                        <b>Schedule Survey Time: </b><span class="padding">
+                            {{consumerSurveyData?.scheduleSurveyTime}}</span>
+                    </td>
+                </tr>
+
+                <tr class="col-md-12">
+
+                    <div
+                        *ngIf="consumerSurveyData?.docSurvey?.uploadId != null; then thenBlockDocSurvey else elseBlockDocSurvey">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockDocSurvey>
+                        <td class="col-md-6"><b>Survey File: </b><span class="padding"> <a href="javascript:void(0)"
+                                    (click)="getFile(consumerSurveyData?.docSurvey?.uploadId)"> Download
+                                    File</a></span>
+                        </td>
+                    </ng-template>
+
+                    <ng-template #elseBlockDocSurvey>
+                        <td class="col-md-6"><b>Remark: </b><span class="padding text-danger font-weight-bold"> Survey
+                                not done.</span>
+                        </td>
+                    </ng-template>
+
+                    <!-- <td class="col-md-6"><b>Survey File: </b><span class="padding"> <a
+                                *ngIf="consumerSurveyData?.docSurvey?.uploadId != null " href="javascript:void(0)"
+                                (click)="getFile(consumerSurveyData?.docSurvey?.uploadId)"> Download
+                                File</a></span>
+                    </td> -->
+
+                    <td td class="col-md-6">
+                        <div *ngIf="consumerSurveyData?.surveyStatus == 'REJECTED'">
+                            <b>REJECTED REASON: </b> {{consumerSurveyData?.rejectedReason}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div *ngIf="consumerDemandData">
+        <hr />
+        <div style="border-bottom: dashed 1px solid black;"></div>
+
+        <table class="table table-striped" style="font-size: 15px;">
+            <thead>
+                <th colspan="2" style="text-align: left;"> DEMAND DATA : </th>
+            </thead>
+            <tbody>
+                <tr class="col-md-12">
+                    <td class="col-md-6"><b>Demand File: </b><span class="padding"> <a
+                                *ngIf="consumerDemandData?.docDemand?.uploadId != null " href="javascript:void(0)"
+                                (click)="getFile(consumerDemandData?.docDemand?.uploadId)"> Download
+                                File</a></span>
+                    </td>
+                    <td class="col-md-6">
+                        <div *ngIf="consumerDemandData">
+                            <!--  <span> &#8377;</span>  -->
+                            <b>Demand Amount: </b> {{consumerDemandData?.demandRs | currency:"INR":"symbol"}} ,
+                            <b>Demand Date: </b> {{consumerDemandData?.demandGenerationDate | date: 'dd/MM/yyyy'}}
+                        </div>
+                        <div *ngIf="consumerDemandData?.demandStatus == 'REJECTED'">
+                            <b>REJECTED REASON: </b> {{consumerDemandData?.rejectedReason}}
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-card>

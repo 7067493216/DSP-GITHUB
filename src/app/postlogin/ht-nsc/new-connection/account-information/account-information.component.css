@@ -1,0 +1,27 @@
+.my-card {
+    width: 70%;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+}
+.padding {
+    padding-left: 23px
+}
+.half-width {
+    width: 33%;
+}
+.full-width {
+    width: 100%;
+}
+.width {
+    width: 22%;
+}
+.my-panel {
+    /* background: orange; */
+    /* height: 300px; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+    /* width: auto; */
+    min-width: 450px !important;
+    }

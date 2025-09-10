@@ -1,0 +1,64 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+            <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+          <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+    <form [formGroup]="dnCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field class="half-width">
+            <mat-label>Select region</mat-label>
+            <mat-select name="region" formControlName="regionId" (selectionChange)="onChangeCicle($event.value)">
+                <mat-option value="">Select region</mat-option>
+                <mat-option *ngFor="let regiondata of regionData" [value]="regiondata.regionId">{{regiondata.region}}
+                    </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dnCreationFg.controls.regionId.hasError('required')">
+                Please Select region
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Select circle</mat-label>
+            <mat-select name="circle" formControlName="circleId" >
+                    <mat-option *ngFor="let circledata of circleData" [value]="circledata.circleId">{{circledata.circle}}
+                        </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dnCreationFg.controls.circleId.hasError('required')">
+                Please Select circle
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width ">
+            <mat-label>Division Code</mat-label>
+            <input matInput placeholder="division Code" name="divisionCode" formControlName="divisionCode">
+            <mat-error *ngIf="dnCreationFg.controls.divisionCode.hasError('required')">
+                Division code name is required
+            </mat-error>
+            <mat-error *ngIf="dnCreationFg.controls.divisionCode.hasError('pattern')">
+                Please enter division code in valid format
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Division Name</mat-label>
+            <input matInput placeholder="division Name" name="division" formControlName="division">
+            <mat-error *ngIf="dnCreationFg.controls.division.hasError('required')">
+                division name is required
+            </mat-error>
+            <mat-error *ngIf="dnCreationFg.controls.division.hasError('pattern')">
+                Please enter division in valid format
+            </mat-error>
+        </mat-form-field><br>
+        <section class="example-section">
+                <mat-label >Group Selection:</mat-label>
+                <mat-checkbox class="padding" [(ngModel)]="ngGroupA"  formControlName="groupA">Group A</mat-checkbox>
+                <mat-checkbox class="padding" [(ngModel)]="ngGroupB"  formControlName="groupB">Group B</mat-checkbox>
+                <mat-checkbox class="padding" [(ngModel)]="ngGroupC"  formControlName="groupC">Group C</mat-checkbox>
+                <mat-checkbox class="padding" [(ngModel)]="ngGroupD"  formControlName="groupD">Group D</mat-checkbox>
+                <mat-checkbox class="padding" [(ngModel)]="ngGroupE"  formControlName="groupE">Group E</mat-checkbox>
+              </section><br>
+          
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!(ngGroupA || ngGroupB  || ngGroupC  || ngGroupD || ngGroupE) && !(dnCreationFg.valid)">Save</button>
+        </div>
+    </form>
+</mat-card>

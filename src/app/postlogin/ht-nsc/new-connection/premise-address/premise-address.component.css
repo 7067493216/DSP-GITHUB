@@ -1,0 +1,19 @@
+.my-card {
+    width: 70%;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+}
+.padding {
+    padding-left: 23px
+}
+.half-width {
+    width: 33%;
+}
+.width {
+    width: 22%;
+}
+
+.hidden {
+    display: none;
+}

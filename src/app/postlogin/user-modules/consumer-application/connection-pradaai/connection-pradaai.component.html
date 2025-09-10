@@ -1,0 +1,139 @@
+<mat-card class="custom-scroll-enable">
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: black; background-color:  rgb(215, 214, 214); font-size: 2em; font-weight: 900; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">कनेक्शन प्रदाय</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <!-- <mat-accordion> -->
+
+    <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"> -->
+    <!-- <mat-expansion-panel-header>
+                <mat-panel-title>
+                    IVRS DATA
+                </mat-panel-title>
+                <mat-panel-description>
+                    IVRS Related Data
+                </mat-panel-description>
+            </mat-expansion-panel-header> -->
+
+    <br>
+    <br>
+
+
+    <div class="row">
+
+        <div class="col-sm-4">
+
+        </div>
+
+        <div class="col-sm-4">
+            <form [formGroup]="ivrsForm">
+                <div style="display: flex; justify-content: space-evenly;">
+                    <div>
+                        <label class="form-label" style="font-weight: 900;">Enter IVRS NUMBER</label>
+                        <input class="form-control" type="text" formControlName="ivrs" minLength="11" maxLength="11">
+
+                        <mat-error
+                            *ngIf="(ivrsForm.controls['ivrs'].touched || isFormSubmit) && ivrsForm.controls['ivrs'].errors">
+                            <div *ngIf="ivrsForm.controls['ivrs'].errors['required']">
+                                ivrs is required</div>
+                            <div *ngIf="ivrsForm.controls['ivrs'].errors['pattern']">
+                                first letter should be N or H and 10 numbers allowed</div>
+
+                        </mat-error>
+
+                    </div>
+
+                    <div>
+                        <button type="button" [disabled]="showTable==true?true:false" class="btn btn-success mt-4 mx-6"
+                            (click)="onSubmit()">Get</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <hr>
+
+    <div *ngIf="showTable">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h1 style="color: rgb(32, 32, 89);">कनेक्शन प्रदाय</h1>
+        </div>
+
+        <table class="table table-bordered" *ngIf="showTable" >
+            <tr aria-rowspan="3">
+
+                <th><strong>IVRS</strong></th>
+                <th><strong>CONSUMER NAME</strong></th>
+                <th><strong>ADDRESS</strong></th>
+                <th><strong>CONNECTION DATE</strong></th>
+                <th><strong>SANCTIONED LOAD</strong></th>
+                <th><strong>CONTRACT LOAD</strong></th>
+                <th><strong>CONNECTION TYPE</strong></th>
+                <th><strong>FEEDER NAME</strong></th>
+                <th><strong>DTR NAME</strong></th>
+                <th><strong>PURPOSE OF INSTALLATION</strong></th>
+                <th><strong>METERED/UNMETERED</strong></th>
+
+            </tr>
+
+            <tr>
+
+                <td>{{IvrsData.ivrs }}</td>
+                <td>{{IvrsData.consumer_name }}</td>
+                <td>{{IvrsData.address }}</td>
+                <td>{{IvrsData.connection_date }}</td>
+                <td>{{IvrsData.sanctioned_load }} {{IvrsData.sanctioned_load_unit}}</td>
+                <td>{{IvrsData.contract_demand }} {{IvrsData.contract_demand_unit}}</td>
+                <td>{{IvrsData.connection_type }}</td>
+                <td>{{IvrsData.feeder_name }}</td>
+                <td>{{IvrsData.dtr_name }}</td>
+                <td>{{IvrsData.purpose_of_installation }}</td>
+                <td>{{IvrsData.metering_status }}</td>
+
+            </tr>
+
+
+        </table>
+
+        <br>
+
+        <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex;">
+                <div>
+                    <input type="checkbox" (change)="onCheckboxCheck($event)">
+                </div>
+                <div class="mx-2"> मैं सत्यापित करता हूँ कि ऊपर दर्ज किया गया IVRS नंबर, इसी आवेदन से सम्बंधित है।</div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" (click)="onDataSubmit()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- </mat-expansion-panel>
+    </mat-accordion> -->
+
+
+
+</mat-card>

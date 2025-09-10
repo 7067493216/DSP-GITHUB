@@ -1,0 +1,98 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td {
+    width: 7%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  th {
+    width: 7%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+
+  /* .name-column {
+    max-width: 50px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+  
+   */
+
+
+
+
+
+   .userlist_tables, .userlist_tables td, .userlist_tables th {
+    border: 1px solid hsl(0deg 0% 0% / 50%);
+    text-align: center; 
+}
+
+.userlist_tables th {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+.userlist_tables th .mat-sort-header-container {
+    text-align: center;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2em;
+    color: #000;
+}
+
+.table thead th {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: rgb(48, 48, 184);
+}
+
+.table thead th * {
+  width: auto;
+  justify-content: center;
+  color: black;
+  font-size: 1.5em;
+  font-weight: 900;
+  line-height: 24px;
+  color: rgb(48, 48, 184);
+}
+
+
+
+.mat-cell, .mat-footer-cell {
+  color: #020202;
+}
+
+.mat-cell, .mat-footer-cell {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+

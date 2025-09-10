@@ -1,0 +1,131 @@
+<mat-card class="custom-scroll-enable">
+
+
+  <div>
+    <div style="font-size: 2.5em; font-weight: 900; text-align: center;">Applicant Feedback</div>
+    <div style="text-align: right;">
+      <button class="close-btn" style="text-align: right;" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <hr>
+  <br>
+
+
+
+
+  <!-- <ngb-rating [max]=5 [(rate)]="starRating"></ngb-rating> -->
+
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 form-group">
+        <label class="form-label" style="color: rgb(51, 51, 101); font-weight: 900;">Application Number</label>
+        <input class="form-control" type="text" [readonly]="true" formControlName="consumerApplicationNo">
+        <mat-error
+          *ngIf="(FeedbackControls['consumerApplicationNo'].touched || submitted) && FeedbackControls['consumerApplicationNo'].errors">
+          <div *ngIf="FeedbackControls['consumerApplicationNo'].errors['required']">
+            Please Enter consumer Application No
+          </div>
+
+        </mat-error>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 form-group" >
+        <label class="form-label" style="color: rgb(51, 51, 101); font-weight: 900;">Feedback Options</label>
+        <select class="form-select form-control"  formControlName="feedbackOption" (change)="onfeedbackOptionSelect($event)">
+          <option [ngValue]="null" disabled style="color: blue; font-weight: 500;">Select Feedback Option</option>
+          <option *ngFor="let obj of feedbackOptionArray" [value]="obj?.value">{{obj?.name}}</option>
+        </select>
+        <mat-error
+          *ngIf="(FeedbackControls['feedbackOption'].touched || submitted) && FeedbackControls['feedbackOption'].errors">
+          <div *ngIf="FeedbackControls['feedbackOption'].errors['required']">
+            Please Choose any option
+          </div>
+
+        </mat-error>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 form-group">
+        <label class="form-label" style="color: rgb(51, 51, 101); font-weight: 900;">feedback</label>
+        <textarea class="form-control" type="text" formControlName="feedback">
+                </textarea>
+        <mat-error *ngIf="(FeedbackControls['feedback'].touched || submitted) && FeedbackControls['feedback'].errors">
+          <div *ngIf="FeedbackControls['feedback'].errors['required']">
+            Please Enter feedback
+          </div>
+
+        </mat-error>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+
+<br>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div align="center"><span style="font-size: 2.5em; font-weight: 700; color: blue;">Rating :</span>
+          <span *ngFor="let star of stars" class="star" style="font-size: 3em;" (click)="rate(star)"
+            [ngClass]="{ 'text-warning': star <= currentRating, 'text-muted': star > currentRating }">
+            <i class="fas fa-star"  ></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+<br>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+  </form>
+
+  <!-- src/app/rating/rating.component.html -->
+
+
+
+
+  <!-- <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Rating (0 to 10)</mat-label>
+      <input matInput type="number" formControlName="ratings" min="0" max="10">
+      <mat-error *ngIf="(FeedbackControls['ratings'].touched || submitted) && FeedbackControls['ratings'].errors">
+        <div *ngIf="FeedbackControls['ratings'].errors['required']">
+          Please Enter ratings
+        </div>
+        <div *ngIf="FeedbackControls['ratings'].errors['min']">
+          Ratings must be at least 0.
+        </div>
+        <div *ngIf="FeedbackControls['ratings'].errors['max']">
+          Rating cannot exceed 10.
+        </div>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="feedbackForm.invalid">Submit</button>
+  </form> -->
+
+
+
+</mat-card>

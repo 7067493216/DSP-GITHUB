@@ -1,0 +1,82 @@
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}
+::ng-deep.mat-dialog-container {
+    resize: both; 
+    overflow: auto;
+    background: #fff;
+  }
+  [mat-dialog-title] {
+    margin: -24px -24px 0px -24px !important;
+    padding: 10px 24px;
+    background: #369;
+    color: #fff;
+    cursor: move;
+    text-align: center;
+  }
+  .close-button{
+    float: right;
+    top:-10px;
+    right:-10px;
+  }
+  
+  .close-icon {
+    transition: 1s ease-in-out;
+  }
+  
+  .close-icon:hover {
+    transform: rotate(180deg);
+  }
+  .formSize{
+    width: 100%;
+  }
+  .full-width{
+    width: 80%;
+    /* margin-left: -2px; */
+  }
+  .width{
+    width: 20%; 
+  } 
+  .mat-row:hover {
+    background-color: rgba(104, 117, 109, 0.329);
+    cursor: pointer;
+  }
+  .table-container{
+    height: 330px;
+    overflow: auto;
+    width: 100%;
+  }
+/*   .mat-table{
+    overflow-y: scroll;
+  } */
+  .mat-cell {
+    padding: 15px 15px 8px 0;
+    font-size:11px;
+    flex: 1 1 auto;
+    }
+  .mat-header-cell {
+    padding: 15px 15px 8px 0;
+    font-size:13px;
+    color: black;
+    font-weight:bold;
+    flex: 1 1 auto;
+  }
+  .mat-column-address {
+    width: 300px;
+    margin-left: 8px;
+  }
+  .mat-column-consumerName {
+    width: 200px;
+    margin-left: 8px;
+  }

@@ -1,0 +1,102 @@
+<mat-sidenav-container class="sidenav-container" *ngIf="consumerLoginService.currentConsumerName != null" autosize>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport mode="push" opened="false">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/consumer/dashboard" (click)="cleanSearchKey(drawer)" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>dashboard</mat-icon>
+        &nbsp;&nbsp;<span>Consumer Dashboard</span>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <!-- <a mat-list-item *appHasRole="role.viewTodoModuleNavLink" routerLink="/user-modules/todo-module" -->
+      <a mat-list-item routerLink="/consumer/new-application" (click)="cleanSearchKey(drawer)"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>fiber_new</mat-icon>
+        &nbsp;&nbsp;&nbsp;<span>New Application</span>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <!-- <a mat-list-item *appHasRole="role.viewTodoModuleNavLink" routerLink="/user-modules/todo-module" -->
+      <a mat-list-item routerLink="/consumer/mkky" (click)="cleanSearchKey(drawer)" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>fiber_new</mat-icon>
+        &nbsp;&nbsp;&nbsp;<span>मुख्यमंत्री कृषक मित्र योजना</span>
+      </a>
+    </mat-nav-list>
+
+    <!-- <mat-nav-list>
+      <a mat-list-item routerLink="/consumer/multiple-payment-refund-request" (click)="cleanSearchKey(drawer)" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>fiber_new</mat-icon>
+        &nbsp;&nbsp;&nbsp;<span>Multiple Payment refund</span>
+      </a>
+    </mat-nav-list> -->
+
+
+    <!-- <mat-nav-list>
+      <div class="dropdown">
+        <div class=" dropdown-toggle" style="font-size: 1.2em; align-items: center;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <mat-icon>fiber_new</mat-icon>
+          &nbsp;&nbsp;&nbsp;<span>Refund Application</span>
+        </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" style="font-size: 1rem;" (click)="cleanSearchKey(drawer);onNavigationClick(1)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Return Amount Application</a>
+            <br>
+            <a class="dropdown-item" style="font-size: 1rem;"  (click)="cleanSearchKey(drawer);onNavigationClick(2)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Cancellation Application</a>
+        </div>
+      </div>
+    </mat-nav-list> -->
+
+   
+
+  </mat-sidenav>
+
+
+  <!-- SideNav is closed -->
+  <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z20 tbar" color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a routerLink="/consumer/dashboard"><span>Deposit Supervision Portal</span></a>&nbsp;&nbsp;
+      <span class="timer">{{ time | date: "hh:mm:ss a" }}</span>
+      <span class="spacer"></span>
+      <span>Welcome {{ consumerLoginService?.currentConsumerName }} </span>&nbsp;&nbsp;
+
+      <!-- notifications Panel -->
+      <!--             <button mat-icon-button [matMenuTriggerFor]="notifications">
+                <mat-icon style="font-size: 34px" matBadge="{{notificationsCount}}" matBadgePosition="after"
+                    matBadgeColor="accent">notifications_none</mat-icon>
+            </button>&nbsp;&nbsp;
+            <mat-menu #notifications="matMenu" xPosition="before">
+                <mat-list>
+                    <mat-list-item>Item 1</mat-list-item>
+                    <mat-list-item>Item 2</mat-list-item>
+                    <mat-list-item>Item 3</mat-list-item>
+                </mat-list>
+            </mat-menu> -->
+      <!-- notifications Panel Close -->
+      <button mat-icon-button [matMenuTriggerFor]="dropmenu">
+        <mat-icon style="font-size: 34px">account_circle</mat-icon>
+      </button>
+      <mat-menu #dropmenu>
+        <a mat-menu-item routerLink="/consumer/change-password" (click)="cleanSearchKey(drawer)"
+          routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>lock</mat-icon>
+          <span>change-password</span>
+        </a>
+        <a mat-menu-item (click)="logout()" (click)="cleanSearchKey(drawer)" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>logout</span>
+        </a>
+
+
+      </mat-menu>&nbsp;&nbsp;
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

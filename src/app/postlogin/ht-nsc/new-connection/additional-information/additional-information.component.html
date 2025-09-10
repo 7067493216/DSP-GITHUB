@@ -1,0 +1,88 @@
+<!-- ...........................Additional Information.............Start..........................-->
+
+<mat-card class="my-card">
+    <mat-card-header>
+        <mat-card-title>Additional Information</mat-card-title>
+    </mat-card-header>
+    <!-- ..........................Load Details.............................  -->
+    <mat-divider></mat-divider><br>
+    <form [formGroup]="additionalFormGroup">
+        <mat-form-field class="half-width">
+            <input matInput placeholder="Sanction Load in KVA" name="sanctionLoad" type="tel" maxlength="15" (change)="onChangeSanction($event.target.value)" formControlName="sanctionLoad"
+                onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+            <mat-error *ngIf="additionalFormGroup.controls.sanctionLoad.hasError('required')">
+                Sanction Load required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Contract demand in KVA" [maxNumber]="sanctionLoadValue" type="tel" maxlength="15" name="ContractDemand" formControlName="contractDemand"
+                onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+            <mat-error *ngIf="additionalFormGroup.controls.contractDemand.hasError('required')">
+                Contract Demand required
+            </mat-error>
+            <mat-error *ngIf="additionalFormGroup.controls.contractDemand.hasError('maxNumber')">
+                Contract Demand should be lower than Sanction Load
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Temporary contract demand in KVA" type="tel" maxlength="15" [maxNumber]="sanctionLoadValue" name="tempContractDemand"
+                formControlName="tempContractDemand" onkeypress='return event.charCode>= 48 && event.charCode <= 57'>
+            <mat-error *ngIf="additionalFormGroup.controls.tempContractDemand.hasError('required')">
+                Temporary Load required
+            </mat-error>
+            <mat-error *ngIf="additionalFormGroup.controls.tempContractDemand.hasError('maxNumber')">
+                Temporary contract demand should be lower than Sanction Load
+            </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider><br><br>
+        <!-- ..........................Load Details Closed.............................  -->
+
+
+        <!-- ..........................Add Additional Load Start.............................  -->
+
+
+        <mat-checkbox formControlName="requiredAdditionalLoad" color="primary"
+            (change)="addAdditionalLoadOptions($event.checked)">Add Additional Load
+        </mat-checkbox><br>
+        <div [style.display]="additionalFormGroup.controls.requiredAdditionalLoad.value === true?'inherit':'none'">
+            <mat-form-field class="half-width">
+                <input matInput placeholder="Contract Demand in KVA" name="contractDemand1" type="tel" maxlength="15"
+                    formControlName="contractDemand1"
+                    [disableControl]="!additionalFormGroup.controls.requiredAdditionalLoad.value === true" required>
+                <mat-error *ngIf="additionalFormGroup.controls.contractDemand1.hasError('required')">
+                    Contract Demand 1 is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <input matInput [matDatepicker]="effectiveDatepicker" placeholder="Effective Date 1"
+                    tname="effectiveDate1" formControlName="effectiveDate1" [min]="connectionDate"
+                    [disableControl]="!additionalFormGroup.controls.requiredAdditionalLoad.value === true" required>
+                <mat-datepicker-toggle matSuffix [for]="effectiveDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #effectiveDatepicker></mat-datepicker>
+                <mat-error *ngIf="additionalFormGroup.controls.effectiveDate1.hasError('required')">
+                    Effective Date 1 is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <mat-select placeholder="Purpose of Installation for GMC1" name="purposeGMC1"
+                    formControlName="purposeGMC1"
+                    [disableControl]="!additionalFormGroup.controls.requiredAdditionalLoad.value === true"
+                    (selectionChange)="onChangePurposeOfGmc($event.value)" required>
+                    <mat-option *ngFor="let gmc of purposeOfGmc" [value]="gmc.purposeId">
+                        {{gmc.purposeName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="additionalFormGroup.controls.purposeGMC1.hasError('required')">
+                    Purpose of Installation for GMC1 is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width">
+                <input matInput placeholder="GMC" name="calculatedGmc" formControlName="calculatedGmc"
+                    [disableControl]="!additionalFormGroup.controls.requiredAdditionalLoad.value === true" readonly>
+            </mat-form-field>
+            <br>
+        </div>
+    </form>
+</mat-card>
+<!-- {{additionalFormGroup?.value | json}} -->

@@ -1,0 +1,49 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+            <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <form [formGroup]="tehsilCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field class="half-width ">
+                    <mat-label>Select State</mat-label>
+                    <mat-select name="stateId" formControlName="stateId">
+                        <mat-option value="1">Madhya Pradesh</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="tehsilCreationFg.controls.stateId.hasError('required')">
+                        Please Select State
+                    </mat-error>
+                </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Select district</mat-label>
+            <mat-select name="districtId" formControlName="districtId" placeholder="Select District">
+                <mat-option *ngFor="let district of districtData" [value]="district.districtId">{{district.district}}
+                    </mat-option>
+            </mat-select>
+            <mat-error *ngIf="tehsilCreationFg.controls.districtId.hasError('required')">
+                Please Select district
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width ">
+            <mat-label>Tehsil Name</mat-label>
+            <input matInput placeholder="tehsil Name" name="tehsil" aria-placeholder="Select Tehsil" formControlName="tehsil">
+            <mat-error *ngIf="tehsilCreationFg.controls.tehsil.hasError('required')">
+                tehsil name is required
+            </mat-error>
+            <mat-error *ngIf="tehsilCreationFg.controls.tehsil.hasError('pattern')">
+                Please enter tehsil in valid format
+            </mat-error>
+        </mat-form-field>
+      <!--   <mat-form-field class="">
+            <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+            <mat-error *ngIf="tehsilCreationFg.controls.description.hasError('required')">
+                Description is required
+            </mat-error>
+        </mat-form-field> -->
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!tehsilCreationFg.valid">{{data.btnTitle}}</button>
+        </div>
+    </form>
+</mat-card>

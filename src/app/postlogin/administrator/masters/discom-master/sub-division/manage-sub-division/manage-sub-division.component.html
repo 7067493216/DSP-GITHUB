@@ -1,0 +1,73 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+              <mat-icon>clear</mat-icon>
+          </button>
+    </mat-toolbar>
+    <form [formGroup]="subDnCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+
+        <mat-form-field class="half-width">
+            <mat-label>Select region</mat-label>
+            <mat-select name="region" formControlName="regionId" (selectionChange)="onChangeCicle($event.value)">
+                <mat-option value="">Select region</mat-option>
+                <mat-option *ngFor="let regiondata of regionData" [value]="regiondata.regionId">{{regiondata.region}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="subDnCreationFg.controls.regionId.hasError('required')">
+                Please Select region
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Select circle</mat-label>
+            <mat-select name="circle" formControlName="circleId" (selectionChange)="onChangeDivision($event.value)">
+                <mat-option *ngFor="let circledata of circleData" [value]="circledata.circleId">{{circledata.circle}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="subDnCreationFg.controls.circleId.hasError('required')">
+                Please Select circle
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-label>Select Division</mat-label>
+            <mat-select name="divisionId" formControlName="divisionId">
+                <mat-option value="">Select Division</mat-option>
+                <mat-option *ngFor="let divisiondata of divisionData" [value]="divisiondata.divisionId">{{divisiondata.division}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="subDnCreationFg.controls.divisionId.hasError('required')">
+                Please Select Division
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="half-width padding">
+            <mat-label>Sub Division Name</mat-label>
+            <input matInput placeholder="Sub Division Name" name="subDivision" formControlName="subDivision">
+            <mat-error *ngIf="subDnCreationFg.controls.subDivision.hasError('required')">
+                Sub Division name is required
+            </mat-error>
+            <mat-error *ngIf="subDnCreationFg.controls.subDivision.hasError('uniqueValue')">
+                Sub Division name already exists
+            </mat-error>
+
+        </mat-form-field>
+        <mat-form-field class="half-width ">
+            <mat-label>Sub Division Code</mat-label>
+            <input matInput placeholder="Sub Division Code" name="subDivisionCode" formControlName="subDivisionCode">
+            <mat-error *ngIf="subDnCreationFg.controls.subDivisionCode.hasError('required')">
+                Sub Division name is required
+            </mat-error>
+            <mat-error *ngIf="subDnCreationFg.controls.subDivisionCode.hasError('pattern')">
+                Please enter Sub Division code in valid format
+            </mat-error>
+            <mat-error *ngIf="subDnCreationFg.controls.subDivisionCode.hasError('uniqueValue')">
+                Sub Division code already exists
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!subDnCreationFg.valid">Save</button>
+        </div>
+    </form>
+</mat-card>

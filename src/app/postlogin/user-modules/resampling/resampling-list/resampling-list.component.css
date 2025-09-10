@@ -1,0 +1,136 @@
+.my-card {
+  margin: 1rem;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-tab-group ::ng-deep .mat-tab-label {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.tab-content {
+  padding: 1.5rem;
+  font-size: 1rem;
+}
+
+
+/* Main table settings */
+.mat-table {
+width: 100%;
+font-size: 13px;
+border-collapse: collapse;
+}
+
+/* Header cells */
+.mat-header-cell {
+font-weight: 900;
+background-color: #f5f5f5;
+font-size: 1.2em;
+font-family: monospace;
+color: #000;
+text-align: center;
+vertical-align: middle;
+padding: 8px;
+border: 2px solid #dee2e6;
+}
+
+/* Data cells */
+.mat-cell {
+text-align: center;
+vertical-align: middle;
+word-break: break-word;
+padding: 5px 7px;
+ min-width: 65px!important;
+ max-width: 200px!important;
+border: 2px solid #dee2e6;
+}
+
+/* Header row font-size */
+th.mat-header-cell {
+font-size: 1.5em;
+padding: 6px;
+}
+
+/* Card spacing */
+.mat-card {
+margin: 16px;
+border-radius: 8px;
+padding: 16px;
+}
+
+/* Title styling */
+mat-card-title {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 1.3rem;
+font-weight: 600;
+}
+
+/* Responsive scroll wrapper */
+.table-container {
+overflow-x: auto;
+width: 100%;
+}
+
+/* Word-break fix for small screens */
+.mat-cell,
+.mat-header-cell {
+white-space: normal;
+}
+
+
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.text-white {
+  color: white;
+}
+.text-lg {
+  font-size: 1.125rem;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+
+::ng-deep .text-blue {
+  color: blue !important;
+  font-weight: 600;
+}
+
+::ng-deep .text-green {
+  color: green !important;
+  font-weight: 600;
+}
+
+::ng-deep .text-red {
+  color: red !important;
+  font-weight: 600;
+}
+
+
+/* .mat-cell[_ngcontent-soa-c354] {
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-word;
+    padding: 5px 7px;
+    min-width: 65px!important;
+    border: 2px solid #dee2e6;
+} */
+
+

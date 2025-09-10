@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+
+    <form [formGroup]="desigCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        <mat-form-field class="half-width">
+            <mat-label>Designation Name</mat-label>
+            <input matInput placeholder="Designation Name" name="designation" formControlName="designation">
+            <mat-error *ngIf="desigCreationFg.controls.designation.hasError('required')">
+                Designation Name is required
+            </mat-error>
+            <mat-error *ngIf="desigCreationFg.controls.designation.hasError('pattern')">
+                Please Enter Designation Name In Valid Format
+            </mat-error>
+            <mat-error *ngIf="desigCreationFg.controls.designation.hasError('uniqueValue')">
+                Designation name already exists
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field class="half-width">
+            <mat-label>Designation short form</mat-label>
+            <input matInput placeholder="Designation short form" name="designationShortForm" formControlName="designationShortForm">
+            <mat-error *ngIf="desigCreationFg.controls.designationShortForm.hasError('required')">
+                Designation short form is required
+            </mat-error>
+            <mat-error *ngIf="desigCreationFg.controls.designationShortForm.hasError('pattern')">
+                Please Enter Designation short form In Valid Format
+            </mat-error>
+        </mat-form-field><br>
+
+        <!--REGISTER BUTTON HERE-->
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!desigCreationFg.valid && this.crudType == 1">{{data.btnTitle}}</button>
+        </div>
+    </form>
+</mat-card>

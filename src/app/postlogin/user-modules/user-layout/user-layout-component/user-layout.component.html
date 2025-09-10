@@ -1,0 +1,14 @@
+<div *ngIf="userLoginService.currentUserName === null">
+    <app-user-header></app-user-header>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+    <app-user-footer></app-user-footer>
+</div>
+
+<app-user-sidebar *ngIf="userLoginService.currentUserName != null">
+    <!-- <app-navbar></app-navbar> -->
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+</app-user-sidebar>
+
+<ng-template #template>
+    <router-outlet> </router-outlet>
+</ng-template>

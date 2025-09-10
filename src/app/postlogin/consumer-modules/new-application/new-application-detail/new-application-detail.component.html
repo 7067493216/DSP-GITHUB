@@ -1,0 +1,25 @@
+<mat-card class="my-card">
+    <!-- <mat-toolbar> -->
+        <!-- <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span> -->
+        
+
+        <div style="display: flex; justify-content: space-between;">
+            <div></div>
+            <div><button class="close-btn" mat-stroked-button (click)="onClose()" >
+                <mat-icon>clear</mat-icon>
+            </button></div>
+        </div>
+        <div style="align-items: center; justify-content: center; text-align: center;">
+            <h1 >{{data.modalTitle}}</h1>
+        </div>
+       
+    <!-- </mat-toolbar> -->
+    <!-- *ngFor="let basics of basicdetails" -->
+
+    <ng-container *ngIf="consumerApplicationDetail">
+        <new-application-view [consumerApplicationId]="consumerApplicationDetail.consumerApplicationId">
+        </new-application-view>
+    </ng-container>
+
+</mat-card>

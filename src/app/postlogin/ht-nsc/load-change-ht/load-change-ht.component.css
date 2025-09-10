@@ -1,0 +1,36 @@
+.my-card {
+    width: 75%;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.width {
+    width: 29%;
+}
+.full-width {
+    width: 100%;
+}
+.marginL {
+    margin-left: 15px;
+}
+
+/* .table-responsive {
+    max-height:100px;
+} */
+tbody {
+    height: 150px;
+    display: block;
+    overflow-y: auto;
+  }
+  
+  tr {
+    display: block;
+  }
+  
+  th {
+    width: 350px;
+  }
+  td {
+    width: 350px;
+  }

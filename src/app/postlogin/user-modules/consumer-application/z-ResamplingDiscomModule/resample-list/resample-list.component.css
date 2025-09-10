@@ -1,0 +1,84 @@
+/* Card Styling */
+.list-card {
+  margin: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Header Title */
+.header-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #1976d2;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* Table Container */
+.table-container {
+  overflow-x: auto;
+}
+
+/* Custom Table Styling */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fafafa;
+}
+
+/* Header Cells */
+.custom-table th {
+  background: linear-gradient(45deg, #1976d2, #42a5f5);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+
+/* Body Cells */
+.custom-table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Row Hover Effect */
+.custom-table tr:hover {
+  background-color: #e3f2fd;
+  transition: 0.3s;
+}
+
+/* Zebra Striping */
+.custom-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Paginator Styling */
+mat-paginator {
+  margin-top: 15px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
+
+::ng-deep .text-blue {
+  color: blue !important;
+  font-weight: 600;
+}
+
+::ng-deep .text-green {
+  color: green !important;
+  font-weight: 600;
+}
+
+::ng-deep .text-red {
+  color: red !important;
+  font-weight: 600;
+}
+

@@ -1,0 +1,26 @@
+.header {
+    width: auto;
+}
+
+mat-toolbar {
+    position: relative;
+    z-index: 2;
+    height: 50px;
+    text-decoration: none;
+}
+.space-between{
+    justify-content:space-between
+}
+
+.menulisttoolbar .meniulist_block .nav-item .nav-link.text-black {
+    color: black;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: unset;
+}
+.dropdown-toggle{
+    display: flex;
+    align-items: center;
+}

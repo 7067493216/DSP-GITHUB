@@ -1,0 +1,517 @@
+
+.dsp_landing_block {
+    position: relative;
+    background: #e6e6ff;
+}
+
+.dsp_landing_block .dsp_cards_contant {
+    position: relative;
+    padding: 30px;
+    color: #323233;
+    background: #e6e6ff;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block {
+    position: relative;
+    border: 1px solid #dddd;
+    margin: 0 0 20px;
+    box-shadow: 4px 1px 7px 0px rgb(0 0 0 / 45%), -2px -3px 6px 0px rgb(0 0 0 / 10%);
+    background: #fff;
+    border-radius: 10px;
+    min-height: 230px;
+    transition: .5s;
+    border-bottom: 4px solid #000;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .crad-header {
+    position: relative;
+}
+
+.card-header {}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-header {
+    position: relative;
+    padding: 16px;
+    background: transparent !important;
+    border: 0 !important;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-header h2 {
+    position: relative;
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 6px;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-header h2:before {
+    content: "";
+    background: blue;
+    width: 40px;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-body {
+    padding: 12px;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-body .listitem_block {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-body .listitem_block .nav-item {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    position: relative;
+    padding-left: 16px;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-body .listitem_block .nav-item:before {
+    content: "";
+    background: #1f1a1a;
+    width: 6px;
+    height: 1.6px;
+    position: absolute;
+    left: 0;
+    top: 9px;
+}
+
+.dsp_landing_block .dsp_cards_contant .dsp_card_block .card-body .listitem_block .nav-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #323233;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+
+
+
+
+
+
+
+.dsp_landing_header {
+    position: relative;
+}
+
+.dsp_landing_header .dsp_landing_headertop {
+    position: relative;
+    position: relative;
+    background: #fff;
+    box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 16%);
+    margin: 0 0 0px;
+}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner .logo {
+    position: relative;
+    margin-right: 10px;
+}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner .logo img {
+    max-width: 60px;
+}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner {}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner  .navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner .navbar .nav-item {
+    position: relative;
+}
+
+.dsp_landing_header .dsp_landing_headertop .dsp_landing_header_inner .navbar .nav-item .nav-link {
+    font-size: 14px;
+    color: #323233;
+    text-transform: capitalize;
+    padding: 30px  13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 16px;
+}
+
+.dsp_landing_headerbottom {
+    background: #007bff;
+    padding: 14px 10px;
+    border-top: 4px solid #dc3545;
+}
+
+.dsp_landing_headerbottom .marquee-slide {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 33px;
+    display: flex;
+    align-items: center;
+}
+
+.dsp_landing_headerbottom .marquee-slide .breakingNews-title {
+    background: #fff;
+    padding: 10px;
+    white-space: nowrap;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 500;
+    border-radius: 4px;
+    position: absolute;
+    text-align: center;
+    background: #FF9800;
+    background: #2f3131;
+    height: 35px;
+    color: #fff;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px 2px 2px 2px;
+    padding: 0 10px;
+    font-weight: 400;
+    box-shadow: inset 0 0 8px 0px #00000042;
+    letter-spacing: .03em;
+    font-size: 13px;
+}
+
+.dsp_landing_headerbottom .marquee-slide .breakingNews-title:before {
+    content: "";
+    position: absolute;
+    border-left: 18px solid #b5710c;
+    border-top: 17.5px solid #0000;
+    border-bottom: 17.5px solid #0000;
+    left: 100%;
+    border-left-color: #2f3131;
+}
+
+.dsp_landing_headerbottom .marquee-slide marquee {
+    margin: 0;
+    padding: 0;
+    display: block;
+    padding-left: 140px;
+    overflow: hidden;
+}
+
+.dsp_landing_headerbottom .marquee-slide marquee .marquee-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dsp_landing_headerbottom .marquee-slide marquee .marquee-list li {
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    padding-left: 25px;
+    color: #d5b30a;
+    display: inline-flex;
+    color: #fff;
+}
+
+.dsp_landing_headerbottom .marquee-slide marquee .marquee-list li:not(:last-child) {
+    margin-right: 15px;
+}
+
+.dsp_landing_headerbottom .marquee-slide marquee .marquee-list li p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+
+
+
+
+.dsp_landingslider_block {
+    position: relative; 
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+}
+
+.dsp_landingslider_block .item {
+    width: 100%;
+}
+
+.dsp_landingslider_block .item img {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dst_contantbox_block {
+    position: relative;
+    padding: 30px 00;
+    background: #fff;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm {
+    position: relative;
+    padding: 30px;
+    margin: 0 0 20px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox {
+    position: relative;
+    padding: 14px;
+    border: 3px solid #000;
+    border-radius: 12px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .iconbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .iconbox * {
+    width: 60px;
+    height: 60px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .contants {
+    position: relative;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .contants h4 {
+    font-size: 18px;
+    line-height: 28px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    margin: 0 0 7px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm:before {
+    content: "";
+    background: #4482DE;
+    width: 100%;
+    height: 190px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: 4px 4px 24px 24px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm:after {
+    content: "";
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .contants p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #fff;
+    height: 90px;
+    margin: 0;
+    overflow: hidden;
+    font-weight: 500;
+    position: relative;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .contants p:after {
+    content: "...";
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+    font-size: 20px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox .contants p:before {
+    content: "";
+    background: #4482DE;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 22px;
+    height: 22px;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm .dst_innerbox:before {
+    content: "";
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid #4482DE;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    position: absolute;
+    right: 49%;
+    top: 95px;
+}
+
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_orange:before {
+    background: #9ED442 !important;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_orange .dst_innerbox:before {
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid #9ED442;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent; 
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_orange .dst_innerbox p:before {
+    background: #9ED442 !important;
+}
+
+
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_lightblue:before {
+    background: #43D1A1;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_lightblue .dst_innerbox:before {
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid #43D1A1;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent; 
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_lightblue .dst_innerbox p:before {
+    background: #43D1A1;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_lightgreen:before {
+    background: #3ED0DD;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_lightgreen .dst_innerbox:before {
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid #3ED0DD;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_lightgreen .dst_innerbox p:before {
+    background: #3ED0DD;
+}
+
+
+
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_gray:before {
+    background: #4C5B72;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_gray .dst_innerbox:before {
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid #4C5B72;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_gray .dst_innerbox p:before {
+    background: #4C5B72;
+}
+
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_yellow:before {
+    background: #FF9800;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_yellow .dst_innerbox:before {
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid #FF9800;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+}
+
+.dst_contantbox_block .dst_contantbox_itenm.dst_yellow .dst_innerbox p:before {
+    background: #FF9800;
+}
+
+hr:not([size]) {
+    height: 1px;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

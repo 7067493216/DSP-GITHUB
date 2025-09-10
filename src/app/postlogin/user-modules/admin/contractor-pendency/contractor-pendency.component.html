@@ -1,0 +1,94 @@
+<!-- <div class="glass-wrapper">
+    <div class="glass-form">
+        <div class="header">
+            <mat-icon class="icon">engineering</mat-icon>
+            <h2>Contractor Pendency</h2>
+            <p>Enter Contractor ID to view pending tasks</p>
+        </div>
+
+        <form (ngSubmit)="fetchPendency()">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Contractor ID</mat-label>
+                <mat-icon matPrefix>badge</mat-icon>
+                <input matInput [(ngModel)]="contractorId" name="contractorId" required />
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="submit-btn" type="submit" [disabled]="!contractorId">
+                <mat-icon>search</mat-icon> Fetch Pendency
+            </button>
+        </form>
+
+        <div *ngIf="isLoading" class="loading">Loading...</div>
+        <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+        <div class="pendency-list-container" *ngIf="pendencyList.length > 0">
+            <h3 class="list-title">Pendency List</h3>
+            <mat-list class="scrollable-list">
+                <mat-list-item *ngFor="let item of pendencyList" class="pendency-item">
+                    <mat-icon matListIcon color="primary">pending_actions</mat-icon>
+                    <div class="text-content">
+                        <div><strong>App No.:</strong> {{ item?.CONSUMER_APPLICATION_NUMBER }}</div>
+                        <div><strong>ID:</strong> {{ item?.CONTRACTOR_AUTHANTICATION_ID }}</div>
+                        <div><strong>Consumer:</strong> {{ item?.CONSUMER_NAME }}</div>
+                        <div><strong>Contractor:</strong> {{ item?.CONTRACTOR_NAME }}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+    </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+<div class="glass-wrapper">
+  <div class="glass-form">
+    <div class="header">
+      <mat-icon class="icon">engineering</mat-icon>
+      <h2>Contractor Pendency</h2>
+      <p>Enter Contractor ID to view pending tasks</p>
+    </div>
+
+    <form (ngSubmit)="fetchPendency()">
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Contractor ID</mat-label>
+        <mat-icon matPrefix>badge</mat-icon>
+        <input matInput [(ngModel)]="contractorId" name="contractorId" required />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="submit-btn" type="submit" [disabled]="!contractorId">
+        <mat-icon>search</mat-icon> Fetch Pendency
+      </button>
+    </form>
+
+    <div *ngIf="isLoading" class="loading">Loading...</div>
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+    <div class="pendency-list-container" *ngIf="pendencyList.length > 0">
+      <h3 class="list-title">Pendency List</h3>
+      <mat-list class="scrollable-list">
+        <mat-list-item *ngFor="let item of pendencyList" class="pendency-item" style="align-items: center;height: fit-content;
+    align-items: center;
+    justify-content: space-between">
+          <mat-icon matListIcon color="primary" class="mx-10">pending_actions</mat-icon>
+          <div class="text-content" >
+            <div><strong>App No.:</strong> {{ item?.CONSUMER_APPLICATION_NUMBER }}</div>
+            <div><strong>ID:</strong> {{ item?.CONTRACTOR_AUTHANTICATION_ID }}</div>
+            <div><strong>Consumer:</strong> {{ item?.CONSUMER_NAME }}</div>
+            <div><strong>Contractor:</strong> {{ item?.CONTRACTOR_NAME }}</div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>
+
+
+
+

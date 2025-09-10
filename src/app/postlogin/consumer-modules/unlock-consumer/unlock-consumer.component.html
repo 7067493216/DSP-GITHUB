@@ -1,0 +1,52 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <mat-toolbar class="label label-warning custom-mat-toolbar">
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <!-- user id -->
+    <div class="container">
+        <form [formGroup]="userUnlockForm">
+            <div align="center" style="margin-top: 15%;">
+                <div style="display: flex;width: 100%;justify-content: center;" *ngIf="!useridFieldShouldbeHidden">
+                <div>
+                    <mat-form-field class="full-width padding">
+                        <mat-label>User Id</mat-label>
+                        <input matInput placeholder="Fill User Id" formControlName="userId" [readonly]="false"
+                            minlength="10" maxlength="10">
+                        <!-- <mat-error
+            *ngIf="(newApplicationFormControls['userId'].touched || isFormSubmit) && newApplicationFormControls['pinCode'].errors">
+            <div *ngIf="newApplicationFormControls['userId'].errors['required']">
+                UserId is required 10 digit </div>
+             
+                <div *ngIf="newApplicationFormControls['userId'].errors['minLength']">
+                    10 digit required </div>
+                  
+        </mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary" (click)="getOtp()">Get OTP</button>
+                </div>
+            </div>
+
+            <div *ngIf="useridFieldShouldbeHidden">
+                <div style="width: 70%;" >
+                    <mat-form-field class="half-width padding">
+                        <mat-label> ENTER otp</mat-label>
+                        <input type="otp" matInput class="form-control" formControlName="otp">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            </div>
+
+        </form>
+    </div>
+
+</mat-card>

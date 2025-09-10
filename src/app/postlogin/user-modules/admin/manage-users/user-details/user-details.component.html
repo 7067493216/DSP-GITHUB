@@ -1,0 +1,193 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <table class="table table-striped" style="line-height:5px;font-size: 15px;">
+        <tbody *ngFor="let basics of basicdetails">
+            <tr>
+                <td colspan="2"><strong><span>Employee No: {{basics.userId}}</span></strong></td>
+            </tr>
+            <tr>
+                <!-- <td><b>Employee No:</b><span class="padding">{{basics.userId}}</span></td> -->
+                <td><b>Name:</b><span class="padding">{{basics.userName}}</span></td>
+                <!-- {{basics.aadharNo}}  -->
+                <td><b>Aadhar Number:</b><span class="padding">{{maskAadhaarNo}}</span></td>
+            </tr>
+            <tr>
+                <td><b>Mobile Number:</b><span class="padding">{{basics.mobileNo}}</span></td>
+                <td><b>Email:</b><span class="padding">{{basics.userEmailId}}</span></td>
+            </tr>
+            <tr>
+                <td><b>Designation Name:</b><span class="padding">{{basics.designationName}}</span></td>
+                <td><b>Access Level:</b><span class="padding">{{basics.accessLevel}}</span></td>
+            </tr>
+            <tr>
+                <!--                 <td><b>Last Logged:</b><span class="padding">{{basics.lastLoggedInDate}}</span></td>
+                <td><b>Access Level:</b><span class="padding">{{basics.accessLevel}}</span></td>
+            </tr> -->
+            <tr>
+                <td><b>Discom Name:</b><span class="padding">{{basics.discomName}}</span></td>
+                <td><b>Region Name:</b><span class="padding">{{basics.regionName}}</span></td>
+            </tr>
+            <tr>
+                <td><b>Circle Name:</b><span class="padding">{{basics.circleName}}</span></td>
+
+                <div *ngIf="basics?.divisionName != null ; then thenBlockDivisonName  else elseBlockDivisonName">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockDivisonName>
+                    <td><b>Division Name:</b><span class="padding">{{basics.divisionName}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockDivisonName>
+                    <td><b>Division Name:</b><span class="padding"> - </span></td>
+                </ng-template>
+
+            </tr>
+            <tr>
+                <div
+                    *ngIf="basics?.subDivisionName != null ; then thenBlockSubDivisonName  else elseBlockSubDivisonName">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSubDivisonName>
+                    <td><b>SubDivison Name:</b><span class="padding">{{basics.subDivisionName}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockSubDivisonName>
+                    <td><b>SubDivison Name:</b><span class="padding"> - </span></td>
+                </ng-template>
+
+
+                <div *ngIf="basics?.dcName != null ; then thenBlockDcName  else elseBlockDcName">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockDcName>
+                    <td><b>DC Name:</b><span class="padding">{{basics.dcName}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockDcName>
+                    <td><b>DC Name:</b><span class="padding"> - </span></td>
+                </ng-template>
+
+            </tr>
+
+
+            <tr>
+                <div
+                    *ngIf="basics?.substationName != null ; then thenBlockSubStationName  else elseBlockSubSatationName">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSubStationName>
+                    <td><b>SubStation Name:</b><span class="padding">{{basics.substationName}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockSubSatationName>
+                    <td><b>SubStationName Name:</b><span class="padding"> - </span></td>
+                </ng-template>
+
+      <!-- yaha se kam karna hai -->
+                <div *ngIf="basics?.feederName!= null ; then thenBlockfeederName  else elseBlockfeederName">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockfeederName>
+                    <td><b>DC Name:</b><span class="padding">{{basics.feederName}}</span></td>
+                </ng-template>
+
+                <ng-template #elseBlockfeederName>
+                    <td><b>DC Name:</b><span class="padding"> - </span></td>
+                </ng-template>
+
+            </tr>
+
+            <!--             <tr>
+                <td><b>Division Name:</b><span class="padding">{{basics.divisionName}}</span></td>
+                <td><b>roles Name:</b><span class="padding">{{roles.role}}</span></td>
+            </tr> -->
+        </tbody>
+    </table>
+    <div class="table-responsive-md">
+        <table class="table table-sm table-hover">
+            <thead style="background-color: darkgrey;">
+                <tr align="center">
+                    <th>Roles</th>
+                    <th>Role Codes</th>
+                    <th>Add Action</th>
+                    <th>View Action</th>
+                    <th>Update Action</th>
+                    <!-- <th>Remove Action</th> -->
+                </tr>
+            </thead>
+            <!-- sandeep, start -->
+            <tbody>
+                <tr *ngFor="let roles of userRoles" align="center">
+                    <td>{{roles.role}}</td>
+                    <td>{{roles.roleCode}}</td>
+
+                    <!-- <td>{{roles.addAction}}</td>
+                    <td>{{roles.viewAction}}</td>
+                    <td>{{roles.updateAction}}</td>
+                    <td>{{roles.removeAction}}</td> -->
+
+                    <div *ngIf="roles?.addAction ; then thenBlockAddAction  else elseBlockAddAction">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockAddAction>
+                        <td class="custom-action-true"><mat-icon>check_circle</mat-icon></td>
+                    </ng-template>
+
+                    <ng-template #elseBlockAddAction>
+                        <td class="custom-action-false"><mat-icon>cancel</mat-icon></td>
+                    </ng-template>
+
+                    <div *ngIf="roles?.viewAction ; then thenBlockViewAction  else elseBlockViewAction">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockViewAction>
+                        <td class="custom-action-true"><mat-icon>check_circle</mat-icon></td>
+                    </ng-template>
+
+                    <ng-template #elseBlockViewAction>
+                        <td class="custom-action-false"><mat-icon>cancel</mat-icon></td>
+                    </ng-template>
+
+                    <div *ngIf="roles?.updateAction ; then thenBlockUpdateAction  else elseBlockUpdateAction">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockUpdateAction>
+                        <td class="custom-action-true"><mat-icon>check_circle</mat-icon></td>
+                    </ng-template>
+
+                    <ng-template #elseBlockUpdateAction>
+                        <td class="custom-action-false"><mat-icon>cancel</mat-icon></td>
+                    </ng-template>
+
+
+                    <!-- <div *ngIf="roles?.removeAction ; then thenBlockRemoveAction  else elseBlockRemoveAction">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockRemoveAction>
+                        <td class="custom-action-true"><mat-icon>check_circle</mat-icon></td>
+                    </ng-template>
+
+                    <ng-template #elseBlockRemoveAction>
+                        <td class="custom-action-false"><mat-icon>cancel</mat-icon></td>
+                    </ng-template> -->
+                </tr>
+            </tbody>
+            <!-- sandeep, end -->
+        </table>
+    </div>
+</mat-card>

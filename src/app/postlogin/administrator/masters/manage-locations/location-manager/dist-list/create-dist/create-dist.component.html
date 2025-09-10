@@ -1,0 +1,52 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+            <span>{{data.modalTitle}}</span>
+        <!-- <span>{{distCreationFg.controls['$key'].value?"Modify District":"Create New District"}}</span> -->
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <form [formGroup]="distCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        
+       <!--  <mat-form-field class="half-width ">
+            <mat-label>Select Country</mat-label>
+            <mat-select name="country" formControlName="country">
+                <mat-option value="">Select country</mat-option>
+                <mat-option value="option1">India</mat-option>
+            </mat-select>
+            <mat-error *ngIf="distCreationFg.controls.country.hasError('required')">
+                Please Select country
+            </mat-error>
+        </mat-form-field> -->
+        <mat-form-field class="half-width ">
+            <mat-label>Select State</mat-label>
+            <mat-select name="stateId" formControlName="stateId">
+                <mat-option value="1">Madhya Pradesh</mat-option>
+            </mat-select>
+            <mat-error *ngIf="distCreationFg.controls.stateId.hasError('required')">
+                Please Select State
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>District Name</mat-label>
+            <input matInput placeholder="district Name" name="district" formControlName="district">
+            <mat-error *ngIf="distCreationFg.controls.district.hasError('required')">
+                District Name is required
+            </mat-error>
+            <mat-error *ngIf="distCreationFg.controls.district.hasError('pattern')">
+                Please Enter district In Valid Format
+            </mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+            <mat-error *ngIf="distCreationFg.controls.description.hasError('required')">
+                Description is required
+            </mat-error>
+        </mat-form-field> -->
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!distCreationFg.valid">{{data.btnTitle}}</button>
+        </div>
+    </form>
+</mat-card>

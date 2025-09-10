@@ -1,0 +1,58 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<div>
+    <mat-card class="p-4">
+
+        <div class="vendor-toolbar">
+            <mat-icon>description</mat-icon>
+            <span>ReSampling Documents</span>
+        </div>
+
+
+       
+
+            <div class="card shadow-lg border-0 rounded-3 p-4">
+
+                <h5 class="text-center mb-4" style="font-weight:600; color:#4CAF50;">
+                    📂 Download ReSampled Files
+                </h5>
+
+                <div class="row g-3 align-items-center">
+
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center" *ngIf="applicationDocumentData?.getPassfile!=null">
+                        <button type="button" class="btn btn-success px-4 py-2 rounded-pill cute-btn mt-3"
+                            (click)="onGatePassDownload()">📂Gate Pass File</button>
+                    </div>
+
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center" *ngIf="applicationDocumentData?.trffile!=null">
+                        <button type="button" class="btn btn-success px-4 py-2 rounded-pill cute-btn mt-3"
+                            (click)="onTrfDownload()">
+                           📂TRF File
+                        </button>
+                    </div>
+
+                     <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center" *ngIf="applicationDocumentData?.testReportFile!=null">
+                        <button type="button" class="btn btn-success px-4 py-2 rounded-pill cute-btn mt-3"
+                            (click)="onReportFileDownload()">
+                           📂Testing Report File
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+   
+
+
+
+
+
+    </mat-card>
+</div>

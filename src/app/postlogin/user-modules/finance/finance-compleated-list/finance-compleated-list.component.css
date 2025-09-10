@@ -1,0 +1,82 @@
+/* Table container styling */
+.mat-elevation-z8 {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+/* Header styling */
+table.mat-table thead th {
+  background-color: #003366;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px;
+}
+
+/* Row cell styling */
+table.mat-table td.mat-cell {
+  padding: 14px 12px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Hover effect on rows */
+table.mat-table tr.mat-row:hover {
+  background-color: #f5faff;
+}
+
+/* Button styling */
+.btn-success {
+  background-color: #28a745 !important;
+  color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #ffc107 !important;
+  color: black;
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: none;
+}
+
+/* Status buttons */
+.btnaction_custome {
+  padding: 5px 10px;
+  font-size: 13px;
+  border-radius: 20px;
+}
+
+/* Paginator styling */
+mat-paginator {
+  margin-top: 16px;
+  background-color: #fafafa;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table.mat-table {
+    font-size: 13px;
+  }
+
+  .mat-elevation-z8 {
+    padding: 1rem;
+  }
+
+  .btn-success,
+  .btn-warning,
+  .btnaction_custome {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}

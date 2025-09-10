@@ -1,0 +1,60 @@
+.my-card {
+    width: 100%;
+    margin: 3px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-scroll-enable {
+    height: 500px;
+    overflow: scroll;
+    display: block;
+    overflow-x: hidden !important;
+}
+
+.half-width {
+    width: 33%;
+}
+
+.padding {
+    padding-left: 6px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}
+
+.opticity {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+hr {
+    border: 0.01em solid grey;
+    padding: 0px !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}

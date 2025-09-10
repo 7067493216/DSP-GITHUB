@@ -1,0 +1,35 @@
+<mat-card class="custom-scroll-enable">
+
+
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: black; background-color:  rgb(215, 214, 214); font-size: 2em; font-weight: 900; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">सहायक प्रबंधक/प्रबंधक द्वारा की जाने वाली घोषणा</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+
+        <mat-checkbox class="example-margin mx-2" (change)="onCheckboxSelection($event)"> </mat-checkbox>
+        <span style="font-size: 1.2em; font-weight: 700;">मैं सत्यापित करता हूँ कि उक्त कार्य पूर्ण हो चुका है और
+            विद्युत कनेक्शन चालू है। अतः मैं नवीन कनेक्शन जारी करने के लिए अपनी सहमति देता हूँ।</span>
+    </div>
+    <br>
+    <div align="center">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">
+            Submit
+        </button>
+    </div>
+
+
+</mat-card>

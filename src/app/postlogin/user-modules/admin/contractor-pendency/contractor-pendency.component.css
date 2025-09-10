@@ -1,0 +1,412 @@
+/* .glass-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.glass-form {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  color: #333;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  .icon {
+    font-size: 40px;
+    color: #1976d2;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+  }
+}
+
+.input-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(to right, #64b5f6, #4fc3f7);
+  font-weight: 600;
+  color: #fff;
+
+  mat-icon {
+    margin-right: 6px;
+  }
+}
+
+.loading {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #777;
+}
+
+.error {
+  margin-top: 1rem;
+  color: #d32f2f;
+}
+
+mat-list-item {
+  background: rgba(255, 255, 255, 0.4);
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+.glass-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af); 
+  padding: 20px;
+}
+
+.glass-form {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  color: #ffffff;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .icon {
+    font-size: 40px;
+    color: #00e5ff;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  p {
+    font-size: 13px;
+    color: #e0e0e0;
+    margin: 5px 0 0;
+  }
+}
+
+.input-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  input {
+    color: #fff;
+  }
+
+  .mat-form-field-label,
+  .mat-icon {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .mat-form-field-underline {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .mat-error {
+    font-size: 12px;
+    color: #ff8a80;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to right, #2196f3, #21cbf3);
+  box-shadow: 0 4px 14px rgba(33, 203, 243, 0.5);
+  padding: 12px 0;
+
+  mat-icon {
+    margin-right: 6px;
+  }
+
+  &:hover {
+    background: linear-gradient(to right, #21cbf3, #2196f3);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pendency-list-container {
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  max-height: 400px;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  color: #fff;
+
+  .list-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffffee;
+  }
+
+  .scrollable-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 6px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
+
+  .pendency-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    color: #000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  }
+}
+ */
+
+
+
+
+
+
+
+ .glass-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #3b8d99, #6b6b83, #aa4b6b);
+  min-height: 100vh;
+}
+
+.glass-form {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .icon {
+    font-size: 40px;
+    color: #ffffff;
+  }
+
+  h2 {
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+
+  p {
+    color: #e0e0e0;
+  }
+}
+
+.input-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  input {
+    color: #fff;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  font-weight: bold;
+}
+
+.loading,
+.error {
+  text-align: center;
+  margin-top: 1rem;
+  color: #ffcccc;
+}
+
+.pendency-list-container {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1rem;
+  color: #000;
+
+  .list-title {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .scrollable-list {
+    max-height: 350px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(170, 11, 11, 0.3);
+      border-radius: 10px;
+    }
+  }
+.pendency-item {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(5px);
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left; /* 👈 ensures text is left aligned */
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 14px;
+    width: 100%;
+    height: 200%;
+    text-align: initial;
+    text-align: left; /* 👈 makes sure all content starts from left */
+  }
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

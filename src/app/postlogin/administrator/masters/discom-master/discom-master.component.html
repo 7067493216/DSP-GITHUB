@@ -1,0 +1,23 @@
+<mat-tab-group mat-stretch-tabs selectedIndex="0" (selectedTabChange)="changeTab($event)" class="stretched-tabs mat-elevation-z4">
+    <mat-tab label="Region">
+        <app-region></app-region>
+    </mat-tab>
+    <mat-tab label="Circle">
+        <app-circle *ngIf="tabIndex === 1"></app-circle>
+    </mat-tab>
+    <mat-tab label="Division">
+        <app-division *ngIf="tabIndex === 2"></app-division>
+    </mat-tab>
+    <mat-tab label="Sub Division">
+        <app-sub-division *ngIf="tabIndex === 3"></app-sub-division>
+    </mat-tab>
+    <mat-tab label="DC">
+        <app-dc *ngIf="tabIndex === 4"></app-dc>
+    </mat-tab>
+    <mat-tab label="Sub Station">
+        <app-sub-station *ngIf="tabIndex === 5"></app-sub-station>
+    </mat-tab>
+    <mat-tab label="Feeder">
+            <app-feeder *ngIf="tabIndex === 6"></app-feeder>
+   </mat-tab>
+</mat-tab-group>

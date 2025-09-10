@@ -1,0 +1,461 @@
+<mat-card class="my-card">
+    <div align="right">
+        <button (click)="printToCart('printSectionId')" mat-raised-button color="primary">Print</button>
+    </div>
+    <div id="printSectionId" class="table-responsive">
+        <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" width="100%" align="center"
+            *ngFor="let nscData of nscViewData">
+            <thead>
+                <tr>
+                    <th colspan="6" align="center"><img src="assets/images/latter.png" width="90%" height="90"></th>
+                </tr>
+            </thead>
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        Personal Information:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr colspan="6">
+                    <th>Customer ID</th>
+                    <td>{{nscData.consumerId}}</td>
+                    <th>Person/Organization</th>
+                    <td>{{nscData.userType}}</td>
+                    <th>Nsc Application No</th>
+                    <td>{{nscData.nscApplicationNo}}</td>
+                </tr>
+                <tr colspan="6">
+                    <th>Nsc Application Date</th>
+                    <td>{{nscData.nscApplicationDate}}</td>
+                    <th>Goverment Type</th>
+                    <td>{{nscData.govtType}}</td>
+                    <th> Departmant Name</th>
+                    <td>{{nscData.departmentName}}</td>
+                </tr>
+                <tr>
+                    <th colspan="3">Name Type</th>
+                    <th colspan="3">Name</th>
+                </tr>
+                <tr *ngFor="let nTypes of nscData.nameTypes">
+
+                    <td colspan="3">{{nTypes.nameType}}</td>
+                    <td colspan="3">{{nTypes.name}}</td>
+                </tr>
+                <tr>
+                    <th colspan="3">Document Type</th>
+                    <th colspan="3">Document Name</th>
+                </tr>
+                <tr *ngFor="let docTypes of nscData.documents">
+                    <td colspan="3">{{docTypes.docType}}</td>
+                    <td colspan="3">{{docTypes.documentNumber}}</td>
+                </tr>
+                <tr colspan="6">
+                    <!-- <th width="14%" colspan="2">Id Proof Number</th> -->
+                    <!-- <td colspan="2">{{nscData.idNumber}}</td> -->
+                    <th>Mobile</th>
+                    <td>{{nscData.mobile}}</td>
+                    <th>Secondary Mobile</th>
+                    <td>{{nscData.secondryMobile}}</td>
+                    <th>Email</th>
+                    <td>{{nscData.email}}</td>
+                </tr>
+                <tr>
+                    <th>Secondary Email</th>
+                    <td>{{nscData.secondryEmail}}</td>
+                    <th>Relation</th>
+                    <td>{{nscData.relation}}</td>
+                    <th>Relation Name</th>
+                    <td>{{nscData.relationName}}</td>
+                </tr>
+                <tr>
+                    <th>Connection Date </th>
+                    <td>{{nscData.connectionDate}}</td>
+                    <th>Agreement Date</th>
+                    <td>{{nscData.agreementDate}}</td>
+                </tr>
+
+            </tbody>
+            <!---- -------------- Account Information------------------------ -->
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        Account Information:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Connection Type</th>
+                    <td>{{nscData.connectionType}}</td>
+                    <th>Temp.Connection period in days</th>
+                    <td>{{nscData.tempConnectionPeriodDays}}</td>
+                    <th>Tariff Schedule</th>
+                    <td>{{nscData.customerClassId}}</td>
+                </tr>
+                <tr>
+                    <th>Seasonal Start Date</th>
+                    <td>{{nscData.seasonalStartDate}}</td>
+                    <th>Seasonal End Date</th>
+                    <td>{{nscData.seasonalEndDate}}</td>
+                    <th>Tariff Category</th>
+                    <td>{{nscData.tariffCategory}}</td>
+                </tr>
+                <tr>
+                    <th>Tariff Sub Category</th>
+                    <td>{{nscData.tariffSubCategory}}</td>
+                    <th>Purpose of Installation</th>
+                    <td>{{nscData.purposeOfInst}}</td>
+                    <th>Revenue Category</th>
+                    <td>{{nscData.revenueCategory}}</td>
+                </tr>
+                <tr>
+                    <th>Purpose of GMC</th>
+                    <td>{{nscData.purposeforGMC}}</td>
+                    <th>GMC Value</th>
+                    <td>{{nscData.gmc}}</td>
+                    <th>Eduty Applicability</th>
+                    <td>{{nscData.edutyFlag}}</td>
+                </tr>
+                <!-- /*********************
+                *  Sandeep Namdeo, Date: - 19 - 07 - 2022 - Start *****
+                * *********************/ -->
+                <tr style="background-color: gainsboro">
+                    <th colspan="6" align="left">
+                        Security Deposit (SD) Information:
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2">SD Amount</th>
+                    <th colspan="2">SD Reference No</th>
+                    <th colspan="2">SD Reference Date</th>
+                </tr>
+                <tr *ngFor="let sd of nscData.securityDeposit">
+                    <td colspan="2" style="text-align:center;">{{sd.sdAmount}}</td>
+                    <td colspan="2" style="text-align:center;">{{sd.sdReferenceNo}}</td>
+                    <td colspan="2" style="text-align:center;">{{sd.sdRefDate}}</td>
+                </tr>
+                <!-- /*********************
+                * Sandeep Namdeo, Date: - 19 - 07 - 2022 - End ******
+                * ********************/ -->
+                <tr>
+                    <th>Old Consumer</th>
+                    <td>{{nscData.oldConsumer}}</td>
+                    <th>Old Account ID</th>
+                    <td>{{nscData.oldAccountId}}</td>
+                    <th>Old Account Disconnection Date</th>
+                    <td>{{nscData.disConnectionDate}}</td>
+
+                </tr>
+                <tr>
+                    <th>Is Dedicated Feeder</th>
+                    <td>{{nscData.dedicatedFeeder}}</td>
+                    <th>Feeder maintenance charge</th>
+                    <td>{{nscData.feederAmount}}</td>
+                    <th>Registration Fee Refund Required</th>
+                    <td>{{nscData.regFeeRefundRequired}}</td>
+                </tr>
+                <tr>
+                    <th>Registration Amount</th>
+                    <td>{{nscData.registrationAmount}}</td>
+                    <th>RegDeposit Invoice No</th>
+                    <td>{{nscData.regDepositInvoiceNo}}</td>
+                    <th>Registration Payment</th>
+                    <td>{{nscData.regDepositInvoiceDate}}</td>
+                </tr>
+                <tr>
+                    <th colspan="6">NSC transferred From LT to HT:{{nscData.nscTransferred}}</th>
+                </tr>
+            </tbody>
+            <!---- -------------- Premise Address Information------------------------ -->
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        Premise Address Information:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Agreement Purpose</th>
+                    <td>{{nscData.premiseType}}</td>
+                    <th>Area Type</th>
+                    <td>{{nscData.areaType}}</td>
+                    <th>Area Town</th>
+                    <td>{{nscData.areaTowns}}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{nscData.region}}</td>
+                    <th>Circle</th>
+                    <td>{{nscData.circle}}</td>
+                    <th>Division</th>
+                    <td>{{nscData.division}}</td>
+                </tr>
+                <tr>
+                    <th>Sub Division</th>
+                    <td>{{nscData.subDivision}}</td>
+                    <th>DC</th>
+                    <td>{{nscData.dc}}</td>
+                    <th>SubStation</th>
+                    <td>{{nscData.subStation}}</td>
+                </tr>
+                <tr>
+                    <th>Feeder</th>
+                    <td>{{nscData.feeder}}</td>
+                    <th>House/Street No.</th>
+                    <td>{{nscData.houseNo}}</td>
+                    <th> Area Colony</th>
+                    <td>{{nscData.areaColony}}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{{nscData.state}}</td>
+                    <th>District</th>
+                    <td>{{nscData.district}}</td>
+                    <th> Tehsil </th>
+                    <td>{{nscData.tehsil}}</td>
+                </tr>
+                <tr>
+                    <th>City/Village</th>
+                    <td>{{nscData.city}}</td>
+                    <th>PIN Code</th>
+                    <td>{{nscData.pinCode}}</td>
+                </tr>
+            </tbody>
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        Mailling address is same as premise address:<span
+                            align="center">{{nscData.mailingAddress}}</span>
+                    </th>
+                    <!-- <td>{{nscData.pinCode}}</td> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>House/Street No.</th>
+                    <td>{{nscData.houseStreetNo1}}</td>
+                    <th>Area Colony</th>
+                    <td>{{nscData.areaColony1}}</td>
+                    <th>State</th>
+                    <td>{{nscData.state}}</td>
+                </tr>
+                <tr>
+                    <th>District</th>
+                    <td>{{nscData.district1}}</td>
+                    <th> Tehsil </th>
+                    <td>{{nscData.tehsil1}}</td>
+                    <th>City/Village</th>
+                    <td>{{nscData.city1}}</td>
+                </tr>
+                <tr>
+                    <th>PIN Code</th>
+                    <td>{{nscData.pincode1}}</td>
+                </tr>
+            </tbody>
+            <!---- -------------- Additional Information------------------------ -->
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        Additional Information:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Supply Voltage</th>
+                    <td>{{nscData.supplyVoltage}}</td>
+                    <th>Sanction Load in KVA</th>
+                    <td>{{nscData.sanctionLoad}}</td>
+                    <th>Contract Demand in KVA</th>
+                    <td>{{nscData.contractDemand}}</td>
+                </tr>
+                <tr colspan="4">
+                    <th>Temporary Demand in KVA</th>
+                    <td>{{nscData.tempDemand}}</td>
+                </tr>
+            </tbody>
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        Additional Load:{{nscData.isrequiredAdditionalLoad}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Contract Demand</th>
+                    <td>{{nscData.contractDemand1}}</td>
+                    <th>Effective Date</th>
+                    <td>{{nscData.effectiveDate1}}</td>
+                    <th>Purpose of GMC</th>
+                    <td>{{nscData.purposeGMC1}}</td>
+                </tr>
+                <tr>
+                    <th>GMC Value</th>
+                    <td>{{nscData.calculatedGmc}}</td>
+                </tr>
+            </tbody>
+            <!---- -------------- New Meter Details------------------------ -->
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        New Meter Details:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Meter Type</th>
+                    <td>{{nscData.meterType}}</td>
+                    <th>Plant Capacity </th>
+                    <td>{{nscData.PlantCapacity}}</td>
+                    <th>Configuration </th>
+                    <td>{{nscData.configuration}}</td>
+                </tr>
+                <tr>
+                    <th>Meter Rent Type </th>
+                    <td>{{nscData.meterRentType}}</td>
+                    <th>Manufacturer</th>
+                    <td>{{nscData.manufacture}}</td>
+                    <th>Meter Capacity</th>
+                    <td>{{nscData.meterCapacity}}</td>
+                </tr>
+                <tr>
+                    <th>Model</th>
+                    <td>{{nscData.meterModel}}</td>
+                    <th>Meter Serial </th>
+                    <td>{{nscData.meterSerial}}</td>
+                    <th>Meter Owner </th>
+                    <td>{{nscData.meterOwner}}</td>
+                </tr>
+                <tr>
+
+                    <th>Meter Accuracy </th>
+                    <td>{{nscData.meterAccuracy}}</td>
+                    <th>Meter CT Ratio </th>
+                    <td>{{nscData.meterCTRatio}}</td>
+                    <th>Meter PT Ratio</th>
+                    <td>{{nscData.meterPTRatio}}</td>
+                </tr>
+                <tr>
+                    <th>Bill Cycle </th>
+                    <td>{{nscData.billCycle}}</td>
+                    <th>Security Deposit</th>
+                    <td>{{nscData.meterSecurityDeposit}}</td>
+                    <th>Security Deposit Amount </th>
+                    <td>{{nscData.meterSecurityDepositeAmount}}</td>
+                </tr>
+                <tr>
+
+                    <th>Initial KWH import Read </th>
+                    <td>{{nscData.initialKWHRead}}</td>
+                    <th>Initial KVAH import Read</th>
+                    <td>{{nscData.initialKVAHRead}}</td>
+                    <th>Initial OffPeak import Read(TOD1)</th>
+                    <td>{{nscData.initialoffPeakRead}}</td>
+                </tr>
+                <tr>
+
+
+                    <th>Initial normal import Read (TOD2) </th>
+                    <td>{{nscData.initialNormalRead}}</td>
+                    <th>Initial onpeak import Read(TOD3)</th>
+                    <td>{{nscData.initialOnPeakRead}}</td>
+                    <th>Initial KWH Export Read</th>
+                    <td>{{nscData.kwhExportRead}}</td>
+                </tr>
+                <tr>
+
+                    <th>Initial KVAH Export Read</th>
+                    <td>{{nscData.kvahExportRead}}</td>
+                    <th>Initial OffPeak Export Read(TOD1)</th>
+                    <td>{{nscData.initialTOD1ExportRead}}</td>
+                    <th>Initial normal Export Read(TOD2)</th>
+                    <td>{{nscData.initialTOD2ExportRead}}</td>
+                </tr>
+                <tr>
+                    <th>Initial onpeak Export Read(TOD3)</th>
+                    <td>{{nscData.initialTOD3ExportRead}}</td>
+                </tr>
+                <tr>
+
+
+                </tr>
+            </tbody>
+            <!---- -------------- New Equipement Details------------------------ -->
+            <thead style="background-color: gainsboro">
+                <tr>
+                    <th colspan="6" align="left">
+                        New Equipement Details:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="6" align="left">ME Type:Current Transformer</th>
+                </tr>
+                <tr>
+                    <th>Parameter</th>
+                    <td>{{nscData.ctParameter}}</td>
+                    <th>Parameter Value List</th>
+                    <td>{{nscData.ctParameterValue}}</td>
+                    <th>Manufacturer</th>
+                    <td>{{nscData.ctManufacturer}}</td>
+                </tr>
+                <tr>
+                    <th>Model</th>
+                    <td>{{nscData.ctModel}}</td>
+                    <th>Serial Number</th>
+                    <td>{{nscData.ctSerialNo}}</td>
+
+                </tr>
+                <tr>
+                    <th colspan="6" align="left">ME Type:Potential Transformer</th>
+                </tr>
+                <tr>
+                    <th>Parameter</th>
+                    <td>{{nscData.ptParameter}}</td>
+                    <th>Parameter Value List</th>
+                    <td>{{nscData.ptParameterValue}}</td>
+                    <th>Manufacturer</th>
+                    <td>{{nscData.ptManufacturer}}</td>
+                </tr>
+                <tr>
+                    <th>Model</th>
+                    <td>{{nscData.ptModel}}</td>
+                    <th>Serial Number</th>
+                    <td>{{nscData.ptSerialNo}}</td>
+                </tr>
+                <tr>
+                    <th colspan="6" align="left">ME Type:Modem</th>
+                </tr>
+                <tr>
+                    <th>Manufacturer</th>
+                    <td>{{nscData.modemManufacturer}}</td>
+                    <th>Model</th>
+                    <td>{{nscData.modemModel}}</td>
+                    <th>Serial Number</th>
+                    <td>{{nscData.modemSerialNo}}</td>
+                </tr>
+                <tr>
+                    <th colspan="6" align="left">ME Type:SIM</th>
+                </tr>
+                <tr>
+                    <th>Service Provider</th>
+                    <td>{{nscData.simId}}</td>
+                    <th>IMSI Code</th>
+                    <td>{{nscData.imsiCode}}</td>
+                    <th>Dial MF</th>
+                    <td>{{nscData.dialMF}}</td>
+                </tr>
+                <tr>
+                    <th>MF</th>
+                    <td>{{nscData.mf}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-card>

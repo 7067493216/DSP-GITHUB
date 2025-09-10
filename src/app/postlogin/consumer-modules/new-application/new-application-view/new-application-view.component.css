@@ -1,0 +1,89 @@
+.my-card {
+    width: 100%;
+    margin: 3px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-scroll-enable {
+    height: 500px;
+    overflow: scroll;
+    display: block;
+}
+
+.half-width {
+    width: 33%;
+}
+
+.padding {
+    padding-left: 6px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}
+
+.opticity {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+hr {
+    border: 0.01em solid grey;
+    padding: 0px !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.custom-document-span {
+    padding-right: 158px !important;
+}
+
+.custom-scroll-disable {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.custom-progress-bar {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.geoLacationpadding{
+    padding-left: 60px
+}
+.kisan-header-text1
+{
+    font-size: 14px;
+    font-weight: 900;
+}
+.kisan-header-text2
+{
+    font-size: 10px;
+    font-weight: 900;
+}

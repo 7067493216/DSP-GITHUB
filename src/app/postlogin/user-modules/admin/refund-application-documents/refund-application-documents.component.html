@@ -1,0 +1,166 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+
+
+
+
+<mat-card class="dsp_matcard_block dsp_matcard_block mypayments-card">
+
+    <mat-toolbar color="primary" class="justify-center py-3 shadow-md rounded-md">
+        <div class="flex items-center justify-center gap-2 text-white text-xl font-semibold" align="center"><mat-icon
+                class="align-middle" color="primary">description</mat-icon>
+            <span class="align-middle ml-1">Refund Application Details</span>
+        </div>
+    </mat-toolbar>
+
+
+    <div class="dsp_card_body">
+
+        <br>
+        <table class="table table-bordered table-striped shadow-lg bg-white text-center" width="100%">
+            <!-- Table Header -->
+            <tr class="table-primary">
+                <th scope="col" colspan="4">
+                    <h2 class="fw-bold my-2">आवेदक द्वारा भरा गया बैंक विवरण</h2>
+                </th>
+            </tr>
+
+            <!-- Account Details Row -->
+            <tr class="align-middle">
+                <th class="px-3">खाता धारक का नाम (Account Holder Name) :</th>
+                <td class="fw-semibold align-middle">{{ bankDetails?.accountHolderName }}</td>
+                <th class="px-3">खाता संख्या (Account Number) :</th>
+                <td class="fw-semibold align-middle">{{ bankDetails?.accountNo }}</td>
+            </tr>
+
+            <!-- Bank Details Row -->
+            <tr class="align-middle">
+                <th class="px-3">बैंक का नाम (Bank Name) :</th>
+                <td class="fw-semibold align-middle">{{ bankDetails?.bankName }}</td>
+                <th class="px-3">आईएफएससी कोड (IFSC Code) :</th>
+                <td class="fw-semibold align-middle">{{ bankDetails?.ifscCode }}</td>
+            </tr>
+
+            <!-- PAN & Application Number -->
+            <tr class="align-middle">
+                <th class="px-3">पैन संख्या (PAN Number) :</th>
+                <td class="fw-semibold align-middle">{{ bankDetails?.panNo }}</td>
+                <th class="px-3">आवेदन क्रमांक (Application Number) :</th>
+                <td class="fw-semibold align-middle">{{ bankDetails?.consumerApplicationNo }}</td>
+            </tr>
+
+            <!-- Download Bank Passbook/Checkbook -->
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docCheckOrPassBookFile">
+                <!--  -->
+                <th class="px-3">Bank Passbook/Checkbook :</th>
+                <td colspan="3" class="align-middle">
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocCheckOrPassBookFileFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download Applicant Passbook/Checkbook PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docPanNoFile">
+                <th class=" px-3">PAN Card File :</th>
+                <td colspan="3" class="align-middle">
+                    <!--  -->
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocPanNoFileFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download Applicant PAN Number PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docNotry">
+                <!--  -->
+                <th class=" px-3">Notry File :</th>
+                <td colspan="3" class="align-middle">
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocNotryFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download Applicant Notry PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docAddressProofFile">
+                <!--  -->
+                <th class=" px-3">Address Proof File :</th>
+                <td colspan="3" class="align-middle">
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocAddressProofFileFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download Applicant Address Proof file PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docRequestLetter">
+                <!--  -->
+                <th class=" px-3">Request Letter File :</th>
+                <td colspan="3" class="align-middle">
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocRequestLetterFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download Applicant Request Letter PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docGovAuthorizedLetterFile">
+                <!--  -->
+                <th class=" px-3">Govt. Authorized Letter File :</th>
+                <td colspan="3" class="align-middle">
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocGovAuthorizedLetterFileFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download Applicant Govt. Authorized Letter
+                            PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="align-middle" *ngIf="applicationDocumentData?.docMraFile">
+                <!--  -->
+                <th class=" px-3">MRA File :</th>
+                <td colspan="3" class="align-middle">
+                    <div>
+                        <button type="button"
+                            class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                            (click)="getDownloaddocMraFileFile()">
+                            <mat-icon class="me-2">download</mat-icon> Download MRA File
+                            PDF
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+
+
+        </table>
+
+
+    </div>
+
+</mat-card>

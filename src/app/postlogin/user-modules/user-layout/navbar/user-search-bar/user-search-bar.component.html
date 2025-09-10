@@ -1,0 +1,43 @@
+<ng-container cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <h3 mat-dialog-title cdkDragHandle>
+        Advance Search Menu
+        <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+            <mat-icon class="close-icon">close</mat-icon>
+        </button>
+    </h3>
+    <div mat-dialog-content>
+        <form [formGroup]="advanceSearchFg" class="mt-2">
+            <mat-form-field appearance="outline" class="width">
+                <mat-label>Search Type</mat-label>
+                <mat-select formControlName="searchType" (selectionChange)="changeSelection($event.value)" required>
+                    <mat-option value="aadhar">Aadhar number</mat-option>
+                    <mat-option value="name">Consumer name</mat-option>
+                    <mat-option value="email">Email number</mat-option>
+                    <mat-option value="meterNo">Meter number</mat-option>
+                    <mat-option value="mobile">Mobile number</mat-option>
+                    <mat-option value="pancard">Pan card</mat-option>
+                </mat-select>
+                <mat-error *ngIf="advanceSearchFg.controls.searchType.hasError('required')">
+                    Select Disconnection Reason
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Advance Search</mat-label>
+                <input placeholder="Pick one" [maxlength]="maxLength" [minlength]="minLength" [pattern]="inputPattern"
+                    matInput formControlName="searchValue" (keyup.enter)="advanceSearch()" autofocus>
+                <button matSuffix mat-icon-button (click)="advanceSearch()">
+                    <mat-icon>search</mat-icon>
+                </button>
+                <mat-error *ngIf="advanceSearchFg.controls.searchValue.hasError('required')">
+                    Enter the parameters
+                </mat-error>
+                <mat-error *ngIf="advanceSearchFg.controls.searchValue.hasError('pattern')">
+                    Invalid Pattern
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+    </div>
+    <div mat-dialog-actions>
+    </div>
+</ng-container>

@@ -1,0 +1,177 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>User management dashboard</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field class="search-form-field" floatLabel="never" class="custom-placeholder">
+            <input matInput [(ngModel)]="searchKey" placeholder="Search by Employee No or Employee Name or Mobile No"
+                autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button mat-raised-button
+            (click)="exporter.exportTable('xlsx', {fileName:'User_list', sheet: 'sheet_name', Props: {Author: 'SHYAMRAJ'}})"
+            class="custom-btn-export">Export
+            Table</button>
+        <button matTooltip="Refresh Table" mat-icon-button color="primary" (click)="refreshUserList()">
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <button *appHasRole="role.UserListComponent_add" class="left-position" mat-raised-button (click)="onCreate()">
+            <mat-icon>add</mat-icon>Create new User
+        </button>
+    </mat-toolbar>
+    <div class="mat-elevation-z8 table-container">
+        <table mat-table matTableExporter [dataSource]="listData" #exporter="matTableExporter"
+            [hiddenColumns]="[8,9,10]" matSort>
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+                    {{paginator.pageSize * paginator.pageIndex + i + 1}}</td>
+            </ng-container>
+
+            <!-- Location Name Column -->
+            <ng-container matColumnDef="locationName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Location Name</th>
+                <td mat-cell *matCellDef="let element">
+
+                    <div *ngIf="element?.userCircle?.circleId != null ; then thenBlockCircle"></div>
+
+                    <ng-template #thenBlockCircle>
+                        <strong>Circle: </strong>
+                        {{element?.userCircle?.circle != null ? element?.userCircle?.circle : 'NA'}}
+                        <strong>({{element?.userCircle?.circleCode != null ? element?.userCircle?.circleCode : 'NA'}})
+                        </strong><br>
+                    </ng-template>
+
+                    <div *ngIf="element?.userDivision?.divisionId != null ; then thenBlockDivision"></div>
+
+                    <ng-template #thenBlockDivision>
+                        <strong>Division: </strong>{{element?.userDivision?.division !=null ?
+                        element?.userDivision?.division : 'NA'}}
+                        <strong>({{element?.userDivision?.divisionCode != null ? element?.userDivision?.divisionCode :
+                            'NA'}})</strong><br>
+                    </ng-template>
+
+                    <div *ngIf="element?.userSubDivision?.subDivisionId != null ; then thenBlockSubDivision"></div>
+
+                    <ng-template #thenBlockSubDivision>
+                        <strong>SubDivision: </strong>{{element?.userSubDivision?.subDivision != null ?
+                        element?.userSubDivision?.subDivision : 'NA'}}
+                        <strong>({{element?.userSubDivision?.subDivisionCode != null ?
+                            element?.userSubDivision?.subDivisionCode : 'NA'}})</strong><br>
+                    </ng-template>
+
+                    <div *ngIf="element?.userDc?.dcId != null ; then thenBlockDc"></div>
+
+                    <ng-template #thenBlockDc>
+                        <strong>DC: </strong>{{element?.userDc?.dcName != null ? element?.userDc?.dcName : 'NA'}}
+                        <strong>({{element?.userDc?.dcCode != null ? element?.userDc?.dcCode : 'NA'}})</strong>
+                    </ng-template>
+
+                </td>
+            </ng-container>
+
+            <!-- Employee number Column -->
+            <ng-container matColumnDef="userId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+            </ng-container>
+
+            <!-- Employee Name Column -->
+            <ng-container matColumnDef="userName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+            </ng-container>
+            <!-- Employee Designation Column -->
+            <!-- <ng-container matColumnDef="userDesignation.designationShortForm">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
+                <td mat-cell *matCellDef="let element"> {{element.userDesignation.designationShortForm}} </td>
+            </ng-container> -->
+            <!-- Email ID Column -->
+            <ng-container matColumnDef="userEmailId">
+                <th mat-header-cell *matHeaderCellDef [hidden]="true" mat-sort-header>Email ID</th>
+                <td mat-cell *matCellDef="let element" [hidden]="true"> {{element.userEmailId}} </td>
+            </ng-container>
+            <!-- Mobile No Column -->
+            <ng-container matColumnDef="mobileNo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</th>
+                <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+            </ng-container>
+            <!-- Location Column -->
+            <ng-container matColumnDef="accessLevel">
+                <th mat-header-cell *matHeaderCellDef [hidden]="true" mat-sort-header>Access Level</th>
+                <td mat-cell *matCellDef="let element" [hidden]="true"> {{element.accessLevel}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+
+                <th mat-header-cell *matHeaderCellDef [hidden]="!role.roleMatch(role.UserListComponent_edit_view)">
+
+                    <div *ngIf="userRoles =='AE_IT' ; then thenBlockUserRoles else elseBlockUserRoles">
+                    </div>
+
+                    <ng-template #thenBlockUserRoles>
+                        View
+                    </ng-template>
+
+                    <ng-template #elseBlockUserRoles>
+                        Edit/View
+                    </ng-template>
+
+                </th>
+
+                <td mat-cell *matCellDef="let row">
+                    <button *appHasRole="role.UserListComponent_edit" matTooltip="Edit User" mat-icon-button
+                        color="primary" (click)="onEdit(row.adUserId)">
+                        <mat-icon>launch</mat-icon>
+                    </button>
+                    <button *appHasRole="role.UserListComponent_view" matTooltip="View User" mat-icon-button
+                        color="primary" (click)="onView(row.adUserId)">
+                        <mat-icon> all_out</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="accExpired">
+                <th mat-header-cell *matHeaderCellDef [hidden]="!role.roleMatch(role.UserListComponent_toggle)">Expired
+                    Account</th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-slide-toggle
+                        [matTooltip]="row.accountNonExpired ? 'Turn off the switch to activate the account': 'Account Activated'"
+                        color="accent" *appHasRole="role.UserListComponent_toggle"
+                        (change)="onChange('1',row, $event.checked)" [disabled]="!row.accountNonExpired"
+                        [checked]="row.accountNonExpired">Expired</mat-slide-toggle>
+                </td>
+            </ng-container> 
+            <ng-container matColumnDef="accLocked">
+                <th mat-header-cell *matHeaderCellDef [hidden]="!role.roleMatch(role.UserListComponent_toggle)">Locked
+                    Account</th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-slide-toggle
+                        [matTooltip]="row.accountNonLocked ? 'Turn off the switch to activate the account': 'Account Activated'"
+                        color="warn" *appHasRole="role.UserListComponent_toggle"
+                        (change)="onChange('2',row, $event.checked)" [disabled]="!row.accountNonLocked"
+                        [checked]="row.accountNonLocked">Locked</mat-slide-toggle>
+                </td>
+            </ng-container>-->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef [hidden]="!role.roleMatch(role.UserListComponent_toggle)">
+                    Active/Inactive</th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-slide-toggle matTooltip="Set User Status" color="primary"
+                        *appHasRole="role.UserListComponent_toggle" (change)="onChange('3',row, $event.checked)"
+                        onclick="return confirm('Are you sure?')" [checked]="row.active">Active</mat-slide-toggle>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    Loading data...
+                </mat-footer-cell>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="listData?.filteredData.length==0">Record Not Found.</div>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</mat-card>

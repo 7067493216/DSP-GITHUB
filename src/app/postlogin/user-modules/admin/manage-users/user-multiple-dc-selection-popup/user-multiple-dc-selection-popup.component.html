@@ -1,0 +1,66 @@
+
+
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+  
+  <mat-card class="custom-scroll-enable">
+
+    <form [formGroup]="multipleDcSelectionForm">
+        <label>
+            <!-- <input type="checkbox" formControlName="gstCreditCheckBox" style=""
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5  && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7"
+                (change)="checkBoxCredit($event)"> -->
+            <!-- <input type="checkbox" formControlName="gstCreditCheckBox" 
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5  && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7"
+                (change)="checkBoxCredit($event)"> -->
+            <mat-label class="text-danger" style="font-size: 1.5em; font-weight: 800;">
+                {{data?.message}}
+            </mat-label>
+    
+            <mat-radio-group aria-label="Select an option" formControlName="dcSelectionCheck" class="mx-5"
+                (change)="checkBoxCredit($event)" >
+                <mat-radio-button value="YES" class="mx-2" style="font-weight: 900;">Yes</mat-radio-button>
+                <mat-radio-button value="NO" style="font-weight: bold;">No</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field class="half-width padding" *ngIf="data?.accessLevel == 5 || data?.accessLevel ==6 "
+            [hidden]="((data?.accessLevel == 5 && multipleDcSelectionForm.get('dcSelectionCheck').value!='YES') || (data?.accessLevel == 6 && multipleDcSelectionForm.get('dcSelectionCheck').value!='YES'))">
+                <mat-label> Select DC</mat-label>
+                <mat-select   multiple required (selectionChange)="onDcsSelect($event.value)">
+                    <mat-option *ngFor="let dc of dcList" [value]="dc">{{dc.dcName}}</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="multipleDcSelectionForm.controls.userdcs.hasError('required')">
+                    Please Select Dc
+                </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="half-width padding" *ngIf="data?.accessLevel == 3 || data?.accessLevel ==4 "
+            [hidden]="((data?.accessLevel == 3 && multipleDcSelectionForm.get('dcSelectionCheck').value!='YES') || (data?.accessLevel == 4 && multipleDcSelectionForm.get('dcSelectionCheck').value!='YES'))">
+                <mat-label> Select Division</mat-label>
+                <mat-select   multiple required (selectionChange)="onDivisionsSelect($event.value)">
+                    <mat-option *ngFor="let division of divisionList" [value]="division">{{division.division}}</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="multipleDcSelectionForm.controls.userdcs.hasError('required')">
+                    Please Select Dc
+                </mat-error> -->
+            </mat-form-field>
+    
+    
+        </label>
+
+
+    </form>
+
+  
+  
+    <br><br>
+  
+    <div align="right">
+      <button type="button" class="btn btn-success mx-3" (click)="onSubmit()">OK</button>
+      <button type="button" class="btn btn-danger" (click)="onClose()">Cancel</button>
+    </div>
+  </mat-card>
+  

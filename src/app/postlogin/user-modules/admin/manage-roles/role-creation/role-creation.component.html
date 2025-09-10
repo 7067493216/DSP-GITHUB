@@ -1,0 +1,46 @@
+<mat-card>
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <form [formGroup]="roleCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        <input type="hidden" formControlName="roleId">
+        <mat-form-field class="full-width">
+            <mat-label>Role Name</mat-label>
+            <input matInput placeholder="Role Name" name="role" formControlName="role">
+            <mat-error *ngIf="roleCreationFg.controls.role.hasError('required')">
+                Role Name is required
+            </mat-error>
+            <mat-error *ngIf="roleCreationFg.controls.role.hasError('pattern')">
+                Please Enter Role Name In Valid Format
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field class="full-width">
+            <mat-label>Role Code</mat-label>
+            <input matInput placeholder="Role Name" name="roleCode" formControlName="roleCode" maxlength="15">
+            <mat-error *ngIf="roleCreationFg.controls.roleCode.hasError('required')">
+                Role Code Name is required
+            </mat-error>
+            <mat-error *ngIf="roleCreationFg.controls.roleCode.hasError('pattern')">
+                Please Enter Role Code Name In Valid Format
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+            <mat-error *ngIf="roleCreationFg.controls.role.hasError('required')">
+                Description is required
+            </mat-error>
+        </mat-form-field><br>
+        <span>Select Actions </span>
+        <mat-checkbox class="ckeck-margin" [(ngModel)]="checkedA" formControlName="addAction">Create</mat-checkbox>
+        <mat-checkbox class="ckeck-margin" [(ngModel)]="checkedU" formControlName="updateAction">update</mat-checkbox>
+        <mat-checkbox class="ckeck-margin" [(ngModel)]="checkedV" formControlName="viewAction">view</mat-checkbox>
+        <mat-checkbox class="ckeck-margin" [(ngModel)]="checkedR" formControlName="removeAction">Delete</mat-checkbox>
+        <!--REGISTER BUTTON HERE-->
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!(checkedA || checkedU  || checkedV  || checkedR)">{{data.btnTitle}}</button>
+        </div>
+    </form>
+</mat-card>

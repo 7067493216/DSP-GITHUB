@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": "https://rooftop-uat.mpcz.in:8888",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
+  

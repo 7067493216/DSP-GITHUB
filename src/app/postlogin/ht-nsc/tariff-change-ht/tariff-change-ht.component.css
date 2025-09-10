@@ -1,0 +1,36 @@
+.my-card {
+  width: 60%;
+  margin: 20px auto;
+  align-items: center;
+  justify-content: center;
+}
+.padding {
+  padding-left: 23px;
+}
+
+.mat-card-title {
+  justify-content: centre;
+  text-align: center;
+  /* for center*/
+  /* justify-content: flex-end; 
+  justify-content: flex-start; */
+}
+.btn:disabled {
+  pointer-events: none;
+}
+.readonlyDiv {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.checkBoxPadding {
+  position: absolute;
+  right: 0;
+  padding-right: 18px;
+  color: #ff4081;
+}
+.half-width{
+  width: 100%;
+}
+.my-panel {
+  min-width: 600px !important;
+  }

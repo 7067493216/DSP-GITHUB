@@ -1,0 +1,393 @@
+<mat-card class="custom-scroll-enable">
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: black; background-color:  rgb(215, 214, 214); font-size: 2em; font-weight: 900; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">कनेक्शन प्रदाय (NGB)</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+
+
+    <form [formGroup]="connectionPradaaiForm">
+        <div class="row">
+
+
+            <div class="col-md-6 ">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Select Group No.</mat-label>
+                    <mat-select disableRipple formControlName="grpNo" (selectionChange)="onGroupSelect($event)">
+                        <!-- <mat-option selected>Choose a ApplicationStatus</mat-option> -->
+                        <mat-option *ngFor="let e of GroupList" value="{{e.groupNo}}">
+                            {{e.groupNo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['grpNo'].touched || submitted) && connectionPradaaiFormControls['grpNo'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['grpNo'].errors['required']">
+                        Please select Group No. </div>
+                </mat-error>
+            </div>
+
+
+
+
+            <div class="col-md-6 ">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>RD No.</mat-label>
+                    <!-- <input matInput id="" formControlName="rdNo"> -->
+                    <mat-select disableRipple formControlName="rdNo">
+                        <!-- <mat-option selected>Choose a ApplicationStatus</mat-option> -->
+                        <mat-option *ngFor="let e of rdNoList" value="{{e.readingDiaryNo}}">
+                            {{e.readingDiaryNo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['rdNo'].touched || submitted) && connectionPradaaiFormControls['rdNo'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['rdNo'].errors['required']">
+                        Please Enter RD No. </div>
+                </mat-error>
+            </div>
+
+
+            <br>
+            <br>
+            <br>
+
+
+            <div class="col-md-6 ">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Choose Feeder</mat-label>
+                    <mat-select disableRipple formControlName="feeder" (selectionChange)="onFeederSelect($event)">
+                        <!-- <mat-option selected>Choose a ApplicationStatus</mat-option> -->
+                        <mat-option *ngFor="let e of feederList" [value]='e'>
+                            {{e.feeder_name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['feeder'].touched || submitted) && connectionPradaaiFormControls['feeder'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['feeder'].errors['required']">
+                        Please Select Feeder </div>
+                </mat-error>
+            </div>
+
+
+            <div class="col-md-6 ">
+                <span *ngIf="dtrListGetNullBoolean==false">
+                    <label><span class="text-danger">*</span><span class="text-danger">डीटीआर की प्रविष्टि सर्वप्रथम
+                            डीएफआइएस पोर्टल पर सुनिश्चित करने के पश्चात् ही डीटीआर ड्रॉपडाउन में दिखेगा।</span></label>
+                    <mat-form-field appearance="outline" class="w-100">
+
+                        <mat-label>DTR</mat-label>
+                        <!-- <input matInput id="" formControlName="dtr"> -->
+                        <mat-select disableRipple formControlName="dtr" (selectionChange)="onDtrSelect($event)">
+                            <!-- <mat-option selected>Choose a ApplicationStatus</mat-option> -->
+                            <mat-option *ngFor="let e of dtrList" [value]="e">
+                                {{e.location_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="(connectionPradaaiFormControls['dtr'].touched || submitted) && connectionPradaaiFormControls['dtr'].errors">
+                        <div *ngIf="connectionPradaaiFormControls['dtr'].errors['required']">
+                            Please Enter dtr </div>
+                    </mat-error>
+                </span>
+
+                <span *ngIf="dtrListGetNullBoolean==true" class="form-group">
+                    <label class="form-label" style="font-weight: 900;">Enter DTR</label>
+                    <input class="form-control" type="text" formControlName="customDtr">
+                    <mat-error
+                        *ngIf="(connectionPradaaiFormControls['customDtr'].touched || submitted) && connectionPradaaiFormControls['customDtr'].errors">
+                        <div *ngIf="connectionPradaaiFormControls['customDtr'].errors['required']">
+                            Please Enter DTR </div>
+                    </mat-error>
+                </span>
+
+
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <div class="col-md-12" style="display: flex;">
+                <div class="mx-2">
+                    <input type="checkbox" (change)="onCheckboxSelection($event)">
+                </div>
+                <div style="color: rgb(30, 30, 177); font-size: 1em;font-weight: 700;">क्या आप उपभोक्ता के पता में सुधार
+                    करना चाहते है </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+
+
+            <div class="col-md-6 form-group ">
+                <!-- <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Address1</mat-label>
+                    <input matInput id="" [disabled]="true" formControlName="address1">
+                </mat-form-field> -->
+                <label class="mx-2"><span class="text-danger">*</span><span class="text-danger">Address1 must be less
+                        than or equal to 100 length</span></label>
+                <label class="form-label" style="font-weight: 900;">Enter Address1</label>
+                <!-- maxlength="100" -->
+                <input class="form-control" type="text" formControlName="address1" maxlength="100"
+                    (input)="onInputCount($event)">
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['address1'].touched || submitted) && connectionPradaaiFormControls['address1'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['address1'].errors['required']">
+                        Please Enter Address1 </div>
+
+                </mat-error>
+                <div *ngIf="address1ErrorShowBoolean==true;" class="text-danger">
+                    Address1 Must have length less than 100
+                </div>
+            </div>
+
+            <div class="col-md-6 ">
+                <!-- <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Address2</mat-label>
+                    <input matInput id=""  formControlName="address2">
+                </mat-form-field> -->
+
+                <label class="form-label" style="font-weight: 900;">Enter Address2</label>
+                <input class="form-control" type="text" formControlName="address2">
+
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['address2'].touched || submitted) && connectionPradaaiFormControls['address2'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['address2'].errors['required']">
+                        Please Enter Address2 </div>
+                </mat-error>
+            </div>
+
+            <div class="col-md-6 ">
+                <!-- <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Address3</mat-label>
+                    <input matInput id=""  formControlName="address3">
+                </mat-form-field> -->
+
+                <label class="form-label" style="font-weight: 900;">Enter Address3</label>
+                <input class="form-control" type="text" formControlName="address3">
+
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['address3'].touched || submitted) && connectionPradaaiFormControls['address3'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['address3'].errors['required']">
+                        Please Enter Address3 </div>
+                </mat-error>
+            </div>
+
+            <div class="col-md-6 ">
+
+                <label class="form-label" style="font-weight: 900;">Pole No</label>
+                <input class="form-control" type="number" formControlName="poleNo">
+
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['poleNo'].touched || submitted) && connectionPradaaiFormControls['poleNo'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['poleNo'].errors['required']">
+                        Please Enter Pole No </div>
+                </mat-error>
+            </div>
+
+
+            <div class="col-md-6 ">
+
+                <label class="form-label" style="font-weight: 900;">Pole Distance</label>
+                <input class="form-control" type="number" formControlName="poleDistance">
+
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['poleDistance'].touched || submitted) && connectionPradaaiFormControls['poleDistance'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['poleDistance'].errors['required']">
+                        Please Enter Pole Distance </div>
+                </mat-error>
+            </div>
+
+
+            <!-- <div class="col-md-6 ">
+
+                <label class="form-label" style="font-weight: 900;">Connection Date</label>
+                <input class="form-control" type="date" formControlName="connectionDate" min="minDate" max="todayDate">
+
+                <mat-error
+                    *ngIf="(connectionPradaaiFormControls['connectionDate'].touched || submitted) && connectionPradaaiFormControls['connectionDate'].errors">
+                    <div *ngIf="connectionPradaaiFormControls['connectionDate'].errors['required']">
+                        Please Enter Date </div>
+                </mat-error>
+            </div> -->
+
+            <div class="col-md-6 ">
+                <mat-form-field class="w-100">
+                    <label class="form-label" style="font-weight: 900;">Connection Date</label>
+                    <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate"
+                        formControlName="connectionDate" (dateInput)="onDateInput($event)" [readonly]="(connectionPradaaiFormControls['connectionDate'].value!=null || connectionPradaaiFormControls['connectionDate'].value!=undefined)?true:false" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="month"
+                        (monthSelected)="chosenMonthHandler($event)"></mat-datepicker>
+                    <mat-error
+                        *ngIf="(connectionPradaaiFormControls['connectionDate'].touched || submitted) && connectionPradaaiFormControls['connectionDate'].errors">
+                        <div *ngIf="connectionPradaaiFormControls['connectionDate'].errors['required']">
+                            Please Enter Date </div>
+                            <div class="text-danger" *ngIf="connectionPradaaiFormControls['connectionDate'].status=='INVALID' && (connectionPradaaiFormControls['connectionDate'].value!=null || connectionPradaaiFormControls['connectionDate'].value!=undefined) ">
+                            minimum Date should be {{minDate}} and Maximum date should be {{maxDate}}
+                            </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-md-6 form-group" *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==5">
+
+                <mat-label>उपभोक्ता श्रेणी चुने<span class="required">*</span></mat-label>
+                <select formControlName="castCategory" class="form-control form-select">
+                    <option value="" disabled>उपभोक्ता श्रेणी चुने</option>
+                    <option *ngFor="let cast of casttList" [value]="cast.name">
+                        {{cast.name}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(connectionPradayFormControls['castCategory'].touched || submitted) && connectionPradayFormControls['castCategory'].errors">
+                    <div *ngIf="connectionPradayFormControls['castCategory'].errors['required']">
+                        Select Cast-catogery</div>
+                </mat-error>
+
+            </div>
+
+
+        </div>
+
+        <br>
+        <br>
+
+        <div align="center">
+            <button type="button" class="btn btn-danger" (click)="onSubmit()" *ngIf="successboolean==false">Push to SSP
+                Portal
+            </button> <span *ngIf="submitted">
+                <button type="button" class="btn btn-success" disabled="true" *ngIf="successboolean==true">Push to SSP
+                    Portal
+                </button></span>
+        </div>
+
+    </form>
+
+
+    <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateInput)="onDateInput($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="month" (monthSelected)="chosenMonthHandler($event)"></mat-datepicker>
+    </mat-form-field> -->
+
+    <!-- ********************************************************************************************************************************** -->
+
+    <!-- <div class="row">
+
+        <div class="col-sm-4">
+
+        </div>
+
+        <div class="col-sm-4">
+            <form [formGroup]="ivrsForm">
+                <div style="display: flex; justify-content: space-evenly;">
+                    <div>
+                        <label class="form-label" style="font-weight: 900;">Enter IVRS NUMBER</label>
+                        <input class="form-control" type="text" formControlName="ivrs" minLength="11" maxLength="11">
+
+                        <mat-error
+                            *ngIf="(ivrsForm.controls['ivrs'].touched || isFormSubmit) && ivrsForm.controls['ivrs'].errors">
+                            <div *ngIf="ivrsForm.controls['ivrs'].errors['required']">
+                                ivrs is required</div>
+                            <div *ngIf="ivrsForm.controls['ivrs'].errors['pattern']">
+                                first letter should be N or H and 10 numbers allowed</div>
+
+                        </mat-error>
+
+                    </div>
+
+                    <div>
+                        <button type="button" [disabled]="showTable==true?true:false" class="btn btn-success mt-4 mx-6"
+                            (click)="onSubmit()">Get</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <hr>
+
+    <div *ngIf="showTable">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h1 style="color: rgb(32, 32, 89);">कनेक्शन प्रदाय</h1>
+        </div>
+
+        <table class="table table-bordered" *ngIf="showTable" >
+            <tr aria-rowspan="3">
+
+                <th><strong>IVRS</strong></th>
+                <th><strong>CONSUMER NAME</strong></th>
+                <th><strong>ADDRESS</strong></th>
+                <th><strong>CONNECTION DATE</strong></th>
+                <th><strong>SANCTIONED LOAD</strong></th>
+                <th><strong>CONTRACT LOAD</strong></th>
+                <th><strong>CONNECTION TYPE</strong></th>
+                <th><strong>FEEDER NAME</strong></th>
+                <th><strong>DTR NAME</strong></th>
+                <th><strong>PURPOSE OF INSTALLATION</strong></th>
+                <th><strong>METERED/UNMETERED</strong></th>
+
+            </tr>
+
+            <tr>
+
+                <td>{{IvrsData.ivrs }}</td>
+                <td>{{IvrsData.consumer_name }}</td>
+                <td>{{IvrsData.address }}</td>
+                <td>{{IvrsData.connection_date }}</td>
+                <td>{{IvrsData.sanctioned_load }} {{IvrsData.sanctioned_load_unit}}</td>
+                <td>{{IvrsData.contract_demand }} {{IvrsData.contract_demand_unit}}</td>
+                <td>{{IvrsData.connection_type }}</td>
+                <td>{{IvrsData.feeder_name }}</td>
+                <td>{{IvrsData.dtr_name }}</td>
+                <td>{{IvrsData.purpose_of_installation }}</td>
+                <td>{{IvrsData.metering_status }}</td>
+
+            </tr>
+
+
+        </table>
+
+        <br>
+
+        <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex;">
+                <div>
+                    <input type="checkbox" (change)="onCheckboxCheck($event)">
+                </div>
+                <div class="mx-2"> मैं सत्यापित करता हूँ कि ऊपर दर्ज किया गया IVRS नंबर, इसी आवेदन से सम्बंधित है।</div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" (click)="onDataSubmit()">Submit</button>
+            </div>
+        </div>
+
+    </div> -->
+
+    <!-- ********************************************************************************************************************************** -->
+
+
+</mat-card>

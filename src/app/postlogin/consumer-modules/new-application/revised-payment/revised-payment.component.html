@@ -1,0 +1,584 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div>
+        <!--this is  other option div -->
+        <div class="row custom-row">
+
+            <div class="col-md-12 custom-col-md-12">
+
+                <table id="tableID" border="1" width="100%" cellspacing="1" #scrollBottom>
+
+                    <tbody id="tablebody">
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Application Number</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumerApplicationNo}}</td>
+                        </tr>
+                        <!-- <tr class="col-md-12">
+                                <td class="tableHeaders col-md-4">Name</td>
+                                <td class="tabledatas col-md-8">{{consumerPaymentData.firstName}}
+                                    {{consumerPaymentData.lastName}}
+                                </td>
+                            </tr> -->
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Name</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumerName
+                                }}
+                            </td>
+                        </tr>
+                        <!-- <tr class="col-md-12">
+                                <td class="tableHeaders col-md-4">Email</td>
+                                <td class="tabledatas col-md-8">{{consumerPaymentData.email}}</td>
+                            </tr> -->
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Email</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumers?.consumerEmailId}}
+                            </td>
+                        </tr>
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Mobile No.</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumers?.consumerMobileNo}}
+                            </td>
+                        </tr>
+
+
+                        <!-- <tr class="col-md-12">
+                                <td class="tableHeaders col-md-4">Payment particular</td>
+                                <td class="tabledatas col-md-8">{{consumerPaymentData.prductInfo}}</td>
+                            </tr> -->
+
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Payment particular</td>
+                            <td class="tabledatas col-md-8">
+                                Revise Payment
+                            </td>
+                        </tr>
+                        <!-- <tr class="col-md-12">
+                                <td class="tableHeaders col-md-4">Transaction ID</td>
+                                <td class="tabledatas col-md-8">{{consumerPaymentData.txnId}}</td>
+                            </tr> -->
+
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Transaction ID</td>
+                            <td class="tabledatas col-md-8">
+                                <!-- <div *ngIf=" natureOfWorkTypeId==8">{{oidAndAuthTokenData?.orderId}}</div>
+                                <div *ngIf=" natureOfWorkTypeId!=8">{{consumerPaymentDetailsss?.orderId}}</div> -->
+                            </td>
+                        </tr>
+                        <!-- <tr class="col-md-12">
+                                <td class="tableHeaders col-md-4">Registration Fees (in ₹)</td>
+                                <td class="tabledatas col-md-8">{{amount | currency:"INR":"symbol"}}</td>
+                            </tr> -->
+                        <tr *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==5"
+                            class="col-md-12">
+                            <th class="tableHeaders col-md-4"> Fees (in ₹)</th>
+                            <td class="tabledatas col-md-8">1000</td>
+                        </tr>
+                        <tr *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==5"
+                            class="col-md-12">
+                            <th class="tableHeaders col-md-4">CGST-9%</th>
+                            <td class="tabledatas col-md-8">90</td>
+                        </tr>
+                        <tr *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==5"
+                            class="col-md-12">
+                            <th class="tableHeaders col-md-4">SGST-9%</th>
+                            <td class="tabledatas col-md-8">90</td>
+                        </tr>
+
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4"
+                                *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==5"> Total
+                                Amount (in ₹)
+                            </td>
+                            <td class="tableHeaders col-md-4"
+                                *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==12">Fees (in ₹)
+                            </td>
+
+                            <td class="tabledatas col-md-8">
+
+                                <!-- <div *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==5">
+                                    {{consumerPaymentDetailsss.txnAmount}}
+                                </div> -->
+
+                                <!-- <div
+                                    *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==12 && natureOfWorkTypeId!=8">
+                                    <div *ngIf="erpEstimateCalculations?.totalamountOfSupervision == null">
+                                        {{erpEstimateCalculations?.totaldepositAmount | currency:"INR":"symbol"}}
+
+                                    </div>
+                                    <div *ngIf="erpEstimateCalculations?.totaldepositAmount == null">
+                                        {{erpEstimateCalculations?.totalamountOfSupervision | currency:"INR":"symbol"}}
+                                    </div>
+                                </div>
+                                <div *ngIf=" natureOfWorkTypeId==8 && applicationStatusId==12">
+                                    {{mkmyAmountData?.payableAmount}}
+                                </div> -->
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+
+        <mat-divider class="custom-mat-divider">
+
+        </mat-divider>
+
+
+        <br>
+
+        <div>
+            <form [formGroup]="erpForm">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="form-group">
+                        <label class="form-label">Enter Erp Number</label>
+                        <input type="number" class="form-control" formControlName="erpNumber">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success mt-2" (click)="getPaymentDetails()">Get</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="openTableBoolean">
+            <!-- consumerApplicationDetail?.schemeType?.schemeTypeId == 1 " -->
+
+            <table class="table table-bordered"
+                *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId == 1 && natureOfWorkTypeId!=8">
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th scope="col">S.NO.</th>
+                    <th scope="col"> Particular</th>
+                    <th scope="col">Amount Head</th>
+                    <th scope="col">Old Demand Payment Details</th>
+                    <th scope="col">New Demand Payment Details</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td scope="row">&nbsp; Supervision Charges on Cost of Material (Excluding
+                        Service Tax Amount)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td scope="row">&nbsp;CGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td scope="row">&nbsp;SGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td scope="row">&nbsp;System Development Charges</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td scope="row">&nbsp;Deposit Charges(Excluding Supervision Charges and CGST,SGST on Supervision
+                        Charges)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td scope="row">&nbsp;Other Infrastructure related cost</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td scope="row">&nbsp;Supply Affording Charges @850 per KVA</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td scope="row">&nbsp;Deposit for Electrification of illegal Colony/Slum</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td scope="row"> Return Material amount in estimate</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+
+                    <td colspan="3" scope="row">&nbsp; <strong>Total Amount (in ₹.) </strong></td>
+                    <td colspan="2">&nbsp; <strong> 200000000000 </strong></td>
+                </tr>
+
+            </table>
+
+
+            <table class="table table-bordered"
+                *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId == 2 && natureOfWorkTypeId!=8">
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th>S.NO.</th>
+                    <th> Particular</th>
+                    <th>Amount Head</th>
+                    <th>Old Demand Payment Details</th>
+                    <th>New Demand Payment Details</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>&nbsp;Supervision Charges on Cost of Material (Excluding
+                        Service Tax Amount)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>&nbsp;CGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>&nbsp;SGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>&nbsp;System Development Charges</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>&nbsp;Deposit Charges(Excluding Supervision Charges and CGST,SGST on Supervision Charges)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>&nbsp;Other Infrastructure related cost</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td>&nbsp;Deposit for Electrification of illegal Colony/Slum</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>&nbsp;Supply Affording Charges @850 per KVA</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td> Return Material amount in estimate</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">&nbsp; <strong>Total Amount (in ₹) </strong></td>
+                    <td colspan="2">&nbsp; <strong>100000000000000 </strong></td>
+
+                </tr>
+
+
+
+
+            </table>
+
+            <table class="table table-bordered"
+                *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId == 1 && natureOfWorkTypeId==8">
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th scope="col">S.NO.</th>
+                    <th scope="col"> Particular</th>
+                    <th scope="col">Amount Head</th>
+                    <th scope="col">Old Demand Payment Details</th>
+                    <th scope="col">New Demand Payment Details</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td scope="row">&nbsp; Supervision Charges on Cost of Material (Excluding
+                        Service Tax Amount)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td scope="row">&nbsp;CGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td scope="row">&nbsp;SGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td scope="row">&nbsp;System Development Charges</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td scope="row">&nbsp;Deposit Charges(Excluding Supervision Charges and CGST,SGST on Supervision
+                        Charges)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td scope="row">&nbsp;Other Infrastructure related cost</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td scope="row">&nbsp;Supply Affording Charges @850 per KVA</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td scope="row">&nbsp;Deposit for Electrification of illegal Colony/Slum</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td> Return Material amount in estimate</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+
+                    <td colspan="3" scope="row">&nbsp; <strong>Total Amount (in ₹.) </strong></td>
+                    <td colspan="2">&nbsp; <strong> 200000000000 </strong></td>
+                </tr>
+
+            </table>
+
+
+            <table class="table table-bordered"
+                *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId == 2 && natureOfWorkTypeId==8">
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th>S.NO.</th>
+                    <th> Particular</th>
+                    <th>Amount Head</th>
+                    <th>Old Demand Payment Details</th>
+                    <th>New Demand Payment Details</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>&nbsp;Supervision Charges on Cost of Material (Excluding
+                        Service Tax Amount)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>&nbsp;CGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>&nbsp;SGST-9%</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>&nbsp;System Development Charges</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>&nbsp;Deposit Charges(Excluding Supervision Charges and CGST,SGST on Supervision Charges)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>&nbsp;Other Infrastructure related cost</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td>&nbsp;Deposit for Electrification of illegal Colony/Slum</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>&nbsp;Supply Affording Charges @850 per KVA</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td> Return Material amount in estimate</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">&nbsp; <strong>Total Amount (in ₹) </strong></td>
+                    <td colspan="2">&nbsp; <strong>100000000000000 </strong></td>
+
+                </tr>
+
+
+
+
+            </table>
+
+        </div>
+
+        <div style="display: flex; justify-content: space-between;" *ngIf="openTableBoolean">
+            <div></div>
+            <div>
+                <button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+</mat-card>

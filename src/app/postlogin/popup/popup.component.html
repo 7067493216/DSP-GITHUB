@@ -1,0 +1,19 @@
+
+
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+  
+  <mat-card class="custom-scroll-enable">
+    <span style="font-size: 1.2em; font-weight: 700; line-height: 1.2;">{{data?.message}}</span>
+  
+    <br><br>
+  
+    <div align="right">
+      <button type="button" class="btn btn-success mx-3" (click)="onSubmit()">OK</button>
+      <button type="button" class="btn btn-danger" (click)="onClose()">Cancel</button>
+    </div>
+  </mat-card>
+  

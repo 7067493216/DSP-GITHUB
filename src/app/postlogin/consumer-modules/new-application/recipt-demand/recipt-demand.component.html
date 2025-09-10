@@ -1,0 +1,327 @@
+<mat-card class="my-card custom-scroll-enable-1">
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: gray; font-size: 2em; font-weight: 900; background-color: rgb(235, 233, 233); text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Demand Reciept</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="custom-mat-divider">
+
+    </mat-divider>
+    <br>
+
+    <!-- <div>
+        <form [formGroup]="billForm">
+            <div class="row ">
+                <div class="col-md-6"></div>
+
+                <div class="col-md-4 form-group mt-3">
+                    <label class="form-group">Enter Bill Refrence Number</label>
+                    <input class="form-control" type="number" formControlName="billRefNo">
+                </div>
+
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-primary mt-5" (click)="onSearch()"> search</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <br>
+    <mat-divider class="custom-mat-divider">
+
+    </mat-divider>
+    <br> -->
+    <div *ngIf="demandDataFirstBoolean==true">
+        <div align="center" id="elementIdToCaptureNew">
+            <br>
+            <header class="dsp-headerblock">
+                <div id="alterna-header" class="">
+                    <div class="container">
+                        <div class="logobox">
+                            <img class="img-fluid" style="height: 10em;" alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                        </div>
+                        <div class="header-custom-container"></div>
+                    </div>
+                </div>
+
+                <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU  src="assets/images/banner_mpmkvvcl_logo.jpg"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU" -->
+
+            </header>
+            <br>
+            <table class="table" style="width: 80%;">
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <div align="center" style="font-size: 1.5em;">
+                               DSP Payment Reciept
+                            </div>
+
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Application Number</td>
+                        <td style="font-weight: 500;">{{demandData?.conAppNo}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Application Name</td>
+                        <td style="font-weight: 500;">{{demandData?.consumerName}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Transaction Number</td>
+                        <td style="font-weight: 500;">{{demandData?.billRefNo}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Amount </td>
+                        <td style="font-weight: 500;">{{demandData?.amount}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Date</td>
+                        <td style="font-weight: 500;">{{demandData?.paymentDate}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Payment recieved towards against your Application</td>
+                        <td style="color: green;font-weight: 500;">Success</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <br>
+
+        <div class="text-right">
+            <!-- <button class="btn btn-primary" (click)="downloadHtmlViewNew()">download</button> -->
+            <button class="btn btn-primary" (click)="downloadPdfNew()">Download as PDF</button>
+        </div>
+
+    </div>
+
+
+
+    <br>
+  
+
+    <div *ngIf="demandDataSecondBoolean==true">
+        <mat-divider class="custom-mat-divider">
+
+        </mat-divider>
+        <br>
+        <div align="center" id="elementIdToCaptureNewSecond">
+            <br>
+            <header class="dsp-headerblock">
+                <div id="alterna-header" class="">
+                    <div class="container">
+                        <div class="logobox">
+                            <img class="img-fluid" style="height: 10em;" alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                        </div>
+                        <div class="header-custom-container"></div>
+                    </div>
+                </div>
+
+                <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU  src="assets/images/banner_mpmkvvcl_logo.jpg"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU" -->
+
+            </header>
+            <br>
+            <table class="table" style="width: 80%;">
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <div align="center" style="font-size: 1.5em;">
+                               DSP Payment Reciept
+                            </div>
+
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Application Number</td>
+                        <td style="font-weight: 500;">{{demandDataSecond?.conAppNo}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Application Name</td>
+                        <td style="font-weight: 500;">{{demandDataSecond?.consumerName}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Transaction Number</td>
+                        <td style="font-weight: 500;">{{demandDataSecond?.billRefNo}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Amount </td>
+                        <td style="font-weight: 500;">{{demandDataSecond?.amount}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight: 700;">Date</td>
+                        <td style="font-weight: 500;">{{demandDataSecond?.paymentDate}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="font-weight: 700;">Payment recieved towards against your Application</td>
+                        <td style="color: green;font-weight: 500;">Success</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br>
+
+        <div class="text-right">
+            <!-- <button class="btn btn-primary" (click)="downloadHtmlViewNew()">download</button> -->
+            <button class="btn btn-primary" (click)="downloadPdfNewSecond()">Download as PDF</button>
+        </div>
+    </div>
+
+
+    <br>
+   
+    <div *ngIf="demandDataThirdBoolean==true">
+        <mat-divider class="custom-mat-divider">
+
+        </mat-divider>
+        <br>
+    
+    <div align="center" id="elementIdToCaptureNewThird">
+        <br>
+        <header class="dsp-headerblock">
+            <div id="alterna-header" class="">
+                <div class="container">
+                    <div class="logobox">
+                        <img class="img-fluid" style="height: 10em;" alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                            src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                    </div>
+                    <div class="header-custom-container"></div>
+                </div>
+            </div>
+
+            <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU  src="assets/images/banner_mpmkvvcl_logo.jpg"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU" -->
+
+        </header>
+        <br>
+        <table class="table" style="width: 80%;">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <div align="center" style="font-size: 1.5em;">
+                            Payment Reciept
+                        </div>
+
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td style="font-weight: 700;">Application Number</td>
+                    <td style="font-weight: 500;">{{demandDataThird?.conAppNo}}</td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="font-weight: 700;">Application Name</td>
+                    <td style="font-weight: 500;">{{demandDataThird?.consumerName}}</td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="font-weight: 700;">Transaction Number</td>
+                    <td style="font-weight: 500;">{{demandDataThird?.billRefNo}}</td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="font-weight: 700;">Amount </td>
+                    <td style="font-weight: 500;">{{demandDataThird?.amount}}</td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="font-weight: 700;">Date</td>
+                    <td style="font-weight: 500;">{{demandDataThird?.paymentDate}}</td>
+
+                </tr>
+
+                <tr>
+
+                    <td style="font-weight: 700;">Payment recieved towards against your Application</td>
+                    <td style="color: green;font-weight: 500;">Success</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <br>
+
+    <div class="text-right">
+        <!-- <button class="btn btn-primary" (click)="downloadHtmlViewNew()">download</button> -->
+        <button class="btn btn-primary" (click)="downloadPdfNewThird()">Download as PDF</button>
+    </div>
+</div>
+
+
+<div *ngIf="demandDataFirstBoolean==false && demandDataSecondBoolean==false && demandDataThirdBoolean==false" align="center" style="font-size: 1.5em; font-weight: 900;color: red;">
+Payment Data Not Available....
+</div>
+
+
+
+
+</mat-card>

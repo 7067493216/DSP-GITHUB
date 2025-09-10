@@ -1,0 +1,645 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+<mat-card class="custom-scroll-enable">
+
+    <div #componentView id="elementIdToCapture" style="padding: 2em;">
+        <div align="center">
+            <header class="dsp-headerblock">
+                <div id="alterna-header" class="">
+                    <div class="container">
+                        <div class="logobox">
+                            <img class="img-fluid" style=" width: 100%;" alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                        </div>
+                        <div class="header-custom-container"></div>
+                    </div>
+                </div>
+                <br>
+                <div align="center" style="font-size: 2em; font-weight: 900;">
+                    Consumer Application
+                    Details
+                </div>
+
+                <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU  src="assets/images/banner_mpmkvvcl_logo.jpg"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk24ZEEYK8F6E7n4zkfrkSIi-6qznVR1XiHw&usqp=CAU" -->
+
+            </header>
+
+        </div>
+
+        <br><br>
+
+        <table class="table table-bordered">
+
+
+            <!-- *********************************************************** consumer details start *************************************** -->
+            <tr class="table-secondary">
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Consumer Details</div>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2" scope="row">Applicant Name (आवेदक का नाम) </th>
+                <td colspan="2">{{consumerApplicationDetail?.consumerName}}</td>
+
+            </tr>
+
+            <tr>
+                <th colspan="2" scope="row">पिता/पति का नाम </th>
+                <td colspan="2">{{consumerApplicationDetail?.guardianName}}</td>
+
+            </tr>
+
+            <tr>
+                <th colspan="2" scope="row">Address (पता) </th>
+                <td colspan="2">{{consumerApplicationDetail?.address}}</td>
+
+            </tr>
+            <tr>
+                <th colspan="2" scope="row">Contact</th>
+                <td colspan="2">{{consumerApplicationDetail?.consumerphonNumber}}</td>
+
+            </tr>
+
+
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3)">
+                <th colspan="2" scope="row">भवन का प्रकार</th>
+                <td colspan="2">{{consumerApplicationDetail?.colonyLegalSelectionType=="1"?"Multi":"colony individual
+                    House"}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4)">
+                <th colspan="2" scope="row">अवैध कॉलोनी प्रकार</th>
+                <td colspan="2">{{consumerApplicationDetail?.colonyIllegalSelectionType=="1"?"Declared":"Un-Declared"}}
+                </td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==1
+              || consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==5 || 
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==6 || 
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7 ||
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 || 
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==10)">
+                <th colspan="2" scope="row">आवेदक का प्रकार</th>
+                <td colspan="2">{{consumerApplicationDetail?.avedakKaPrakar}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==1 
+             || consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==5 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==6 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==10)">
+                <th colspan="2" scope="row">आवेदक करने वाले विभाग/संस्था का नाम</th>
+                <td colspan="2">{{consumerApplicationDetail?.avedakRemark}}</td>
+
+            </tr>
+            <!-- ********************************************* consumer Details end ************************************************* -->
+
+            <!-- **************************************** Application Details start *************************************************** -->
+            <tr class="table-secondary">
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Application Details</div>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2" scope="row">Application Number</th>
+                <td colspan="2">{{consumerApplicationDetail?.consumerApplicationNo}}</td>
+
+            </tr>
+            <tr>
+                <th colspan="2" scope="row">Nature of Work (कार्य प्रकार)(Application type)</th>
+                <td colspan="2">{{consumerApplicationDetail?.natureOfWorkType.natureOfWorkName}}</td>
+
+            </tr>
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==1 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7)">
+                <th colspan="2" scope="row">IVRSNO (उपभोक्ता संख्या)</th>
+                <td colspan="2">{{consumerApplicationDetail?.ivrsNo}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==1 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==10 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==5 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==6)">
+                <th colspan="2" scope="row">Scheme Type (योजना का प्रकार)</th>
+                <td colspan="2">{{consumerApplicationDetail?.schemeType.schemeTypeName}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.nscApplicationNo!=null)">
+                <th colspan="2" scope="row">SSP Application Number</th>
+                <td colspan="2">{{consumerApplicationDetail?.nscApplicationNo}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.samagraId!=null)">
+                <th colspan="2" scope="row">Samagra Number (समग्र नंबर)</th>
+                <td colspan="2">{{consumerApplicationDetail?.samagraId}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==1 ||
+              consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==6)">
+                <th colspan="2" scope="row">Supply Voltage (सप्लाई वोल्टेज)</th>
+                <td colspan="2">{{supplyVoltageString}}</td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 ||
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7
+             )">
+                <th colspan="2" scope="row">Connection Type</th>
+                <td colspan="2">{{consumerApplicationDetail?.connectionType}}</td>
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 ||
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7
+             )">
+                <th colspan="2" scope="row">Voltage Level </th>
+                <td colspan="2">{{consumerApplicationDetail?.voltageLevel}}</td>
+
+            </tr>
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 ||
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==10 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==5)">
+                <th colspan="2" scope="row">Load Requested by Consumer (आवेदक द्वारा दर्ज किया गया भार)</th>
+                <td colspan="2">
+                    {{consumerApplicationDetail?.loadRequested}}<span>{{consumerApplicationDetail?.loadRequestedId?.loadRequestedName}}
+                    </span></td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==7 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+             consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==5)">
+                <th colspan="2" scope="row">Load Requested by DGM(O&M/HTM) (DGM द्वारा दर्ज किया गया भार)</th>
+                <td colspan="2">
+                    {{consumerApplicationDetail?.jeLoad}}<span>{{consumerApplicationDetail?.jeLoadUnitKwYaKva}}
+                    </span></td>
+
+            </tr>
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==10 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==9 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==5)">
+                <th colspan="2" scope="row">Land Area & Land area unit (भूमि क्षेत्रफल)</th>
+                <td colspan="2"> {{consumerApplicationDetail?.area}}<span>
+                        {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span></td>
+
+            </tr>
+
+            <tr *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==3 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 || 
+            consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==10)">
+                <th colspan="2" scope="row">No. of Plot/flats </th>
+                <td colspan="2">{{consumerApplicationDetail?.noOfPlot}}</td>
+
+            </tr>
+            <tr>
+                <th colspan="2" scope="row">GST Number</th>
+                <td colspan="2">{{consumerApplicationDetail?.gstNumber}}</td>
+
+            </tr>
+
+            <tr>
+                <th colspan="2" scope="row">PAN Number</th>
+                <td colspan="2">{{consumerApplicationDetail?.panNo}}</td>
+
+            </tr>
+
+            <br>
+            <tr
+                *ngIf="(consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==2 || 
+            (consumerApplicationDetail?.natureOfWorkType.natureOfWorkTypeId==4 && consumerApplicationDetail?.colonyIllegalSelectionType=='2')  )">
+                <th colspan="2" scope="row">कॉलोनी आवेदक का प्रकार</th>
+                <td colspan="2">{{consumerApplicationDetail?.individualOrGroupIdName}}</td>
+
+            </tr>
+            <tr>
+                <th colspan="2" scope="row">Work Short Description (कार्य का संक्षिप्त विवरण)</th>
+                <td colspan="2">{{consumerApplicationDetail?.shortDescriptionOfWork}}</td>
+
+            </tr>
+
+            <!-- *********************************************************** End Application Details ************************************************** -->
+
+            <!-- connection-pradaai-for-ngb-details -->
+
+            <tr class="table-secondary"
+                *ngIf="consumerApplicationDetail?.natureOfWorkTypeId ==8 && consumerApplicationDetail?.applicationStatusId==33">
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Connection Granted Detail
+                    </div>
+                </th>
+            </tr>
+
+
+
+            <!-- <tr>
+                <th colspan="2" scope="row">Consumer Number (IVRS no)</th>
+                <td colspan="2">{{ngbPunchingDetails?.ngbConsumerNo}}</td>
+
+            </tr> -->
+
+            <!-- <tr>
+                <th colspan="2" scope="row">DTR Name</th>
+                <td colspan="2">{{ngbPunchingDetails?.dtrName}}</td>
+
+            </tr>
+
+            <tr>
+                <th colspan="2" scope="row">FEEDER Name</th>
+                <td colspan="2">{{ngbPunchingDetails?.feederName}}</td>
+
+            </tr> -->
+
+            <!-- ///////////////////////////////////////////////                         -->
+
+
+
+            <!-- ////////////////////////////////// complain Details  start////////////////////////////////////////// -->
+
+            <tr class="table-secondary" *ngIf="complainList!=null || complainList!=undefined">
+                <!-- <th scope="col">S.No.</th> -->
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Complain by Consumer
+                    </div>
+                </th>
+            </tr>
+
+
+            <tr *ngFor="let obj of complainList; let i=index;">
+                <!-- <th scope="row" colspan="2">{{obj?.workIssueId}}</th> -->
+                <th scope="row" colspan="2">{{i+1}}</th>
+
+                <!-- <th colspan="1"  scope="row">Issue</th> -->
+                <td colspan="2">{{obj?.feedback}}</td>
+            </tr>
+
+
+
+            <!-- ////////////////////////////////// complain Details  end////////////////////////////////////////// -->
+
+            <!-- //////////////////////////////////////////// consumer Feedback start ////////////////////////////// -->
+            <tr class="table-secondary" *ngIf="feedbackList!=null || feedbackList!=undefined">
+                <!-- <th scope="col">S.No.</th> -->
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Feedback by Consumer
+                    </div>
+                </th>
+            </tr>
+
+
+            <tr *ngFor="let obj of feedbackList; let i=index;">
+                <!-- <th scope="row" colspan="2">{{obj?.workIssueId}}</th> -->
+                <th scope="row" colspan="2">{{i+1}}</th>
+
+                <!-- <th colspan="1"  scope="row">Issue</th> -->
+                <td colspan="2">{{obj?.feedback}}</td>
+            </tr>
+
+            <!-- //////////////////////////////////////////// consumer Feedback end ////////////////////////////// -->
+
+            <tr class="table-secondary">
+                <th scope="col" colspan="2">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Contractor Details</div>
+                </th>
+                <th scope="col" colspan="2">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Work Order Details & Work Completion
+                        Details</div>
+                </th>
+            </tr>
+            <tr>
+                <th scope="row">Contractor Name (कॉन्ट्रैक्टर का नाम)</th>
+                <td><b *ngIf="paymentView?.NAME_OF_CONTRACTOR!=null">{{paymentView?.NAME_OF_CONTRACTOR}},
+                    </b><b *ngIf="paymentView?.NAME_OF_CONTRACTOR==null">Contractor Not Selected </b>
+                    <b *ngIf="paymentView?.CONTRACTOR_ID!=null">[{{paymentView?.CONTRACTOR_ID}}]</b>
+                </td>
+
+                <th scope="row">DGM STC APPROVAL DATE</th>
+                <td>
+                    <div *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null">
+                        {{consumerApplicationDetail?.dateOfDgmOandM}}
+                    </div>
+                    <div *ngIf="consumerApplicationDetail?.dateOfDgmOandM==null">
+                        Not Approved By DGM(STC)
+                    </div>
+                </td>
+
+            </tr>
+
+            <tr>
+                <th scope="row">Vendor Name (कॉन्ट्रैक्टर का नाम)</th>
+                <td>Madhya Pradesh
+                    Madhya
+                    Kshetra Vidyut
+                    Vitaran Company Limited<strong>(MPMKVVCL)</strong> </td>
+
+                <th scope="row">DGM (O&M) APPROVAL DATE</th>
+                <td>
+                    <div *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null">
+                        {{consumerApplicationDetail?.dateOfDgmOandM}}
+                    </div>
+                    <div *ngIf="consumerApplicationDetail?.dateOfDgmOandM==null">
+                        Not Approved By DGM(O&M)
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <th rowspan="2" scope="row">Contractor State</th>
+                <td rowspan="2">{{paymentView?.CONTRACTOR_STATE}}</td>
+                <th scope="row">Work Order Date</th>
+                <!-- <td>{{paymentView?.WORK_ORDER_DATE?paymentView?.WORK_ORDER_DATE | date:"dd-MM-yyyy":"NA"}}</td> -->
+                <td>{{ (paymentView?.WORK_ORDER_DATE ? (paymentView?.WORK_ORDER_DATE | date:"dd-MM-yyyy") : "NA") }}
+                </td>
+
+
+            </tr>
+
+            <tr>
+                <th scope="row">Work Order No.</th>
+                <td>{{paymentView?.WORK_ORDER_NO?paymentView?.WORK_ORDER_NO:"NA"}}</td>
+
+            </tr>
+
+
+            <tr class="table-secondary">
+                <th scope="col" colspan="2">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Location Details</div>
+                </th>
+                <th scope="col" colspan="2">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">Payment Details</div>
+                </th>
+
+            </tr>
+            <tr>
+                <th scope="row">Circle (वृत)</th>
+                <td> {{paymentView?.NAME_OF_CIRCLE}}</td>
+                <th scope="row">Registration Payment Fees</th>
+                <td>{{paymentView?.PAYMENT_AMOUNT}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">Division (संभाग )</th>
+                <td> {{paymentView?.NAME_OF_DIVISION}}</td>
+                <th scope="row">Registration Payment Date</th>
+                <td>{{paymentView?.DATE_OF_REGISTRATION }}</td>
+
+            </tr>
+
+            <tr>
+                <th scope="row">Distribution Center (वितरण केन्द्र)</th>
+                <td>{{paymentView?.NAME_OF_DC}}</td>
+                <th scope="row">Demand Payment Fees</th>
+                <td>{{paymentView?.SUPERVISION_PAYMENT_AMOUNT}}</td>
+
+            </tr>
+            <tr>
+                <th rowspan="3" scope="row">Work Location Address (कार्य स्थल पता)</th>
+                <td rowspan="3">
+                    {{consumerApplicationDetail?.workAllocationAddress!=null?consumerApplicationDetail?.workAllocationAddress:consumerApplicationDetail?.address}}
+                </td>
+                <th scope="row">Demand Payment Date</th>
+                <td>{{paymentView?.DATE_OF_SUPERVISION_PAYMENT }}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Revise Payment Fees</th>
+                <td></td>
+
+            </tr>
+
+            <tr>
+                <th scope="row">Revise Payment Date</th>
+                <td></td>
+
+            </tr>
+
+
+            <tr class="table-secondary">
+                <th scope="col" colspan="2">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;"> SURVEY Details</div>
+                </th>
+
+                <th scope="col" colspan="2">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;"> Geo Location Data</div>
+                </th>
+            </tr>
+
+
+
+            <tr>
+                <th scope="row">Surveyor Name</th>
+                <td>{{consumerSurveyData?.surveyorName}}</td>
+                <th scope="row">Start Latitude (प्रारंभिक अक्षांश)</th>
+                <td>{{geoLocationData?.startingLatitude}}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Surveyor Mobile No.</th>
+                <td>{{consumerSurveyData?.surveyorMobile}}</td>
+                <th scope="row">End Latitude (अंतिम अक्षांश)</th>
+                <td>{{geoLocationData?.startingLatitude}}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Schedule Survey Date</th>
+                <td>{{consumerSurveyData?.scheduleSurveyDate | date: 'dd/MM/yyyy'}}</td>
+                <th scope="row">Start Longitude (प्रारंभिक देशांतर)</th>
+                <td> {{geoLocationData?.startingLongitude}}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Schedule Survey Time</th>
+                <td>{{consumerSurveyData?.scheduleSurveyTime}}</td>
+                <th scope="row">End Longitude (अंतिम देशांतर)</th>
+                <td>{{geoLocationData?.startingLongitude}}</td>
+            </tr>
+
+
+            <tr>
+                <th scope="row">Survey File</th>
+                <td>
+                    <!-- <a href="javascript:void(0)" (click)="getFile(consumerSurveyData?.docSurvey?.uploadId)">
+                        <div *ngIf="consumerSurveyData?.docSurvey!=null">Download
+                            File</div>
+                    </a> -->
+                    <a *ngIf="applicationDocumentData?.docEstimate!=null">
+                        <button type="button" class="btn btn-success"
+                            (click)="getDownloaddocEstimateFile()">Download</button>
+
+                    </a>
+                </td>
+
+                <th scope="row">Start Geolocation Image</th>
+                <td> <a *ngIf="geoLocationData?.startDoc?.uploadId != null " href="javascript:void(0)"
+                        (click)="getFile(geoLocationData?.startDoc?.uploadId)">
+                        Download
+                        Image</a></td>
+            </tr>
+
+            <tr>
+                <th scope="row">Survey status</th>
+                <td>
+                    <div
+                        *ngIf="consumerApplicationDetail?.applicationStatusId<8 || consumerSurveyData==null || consumerSurveyData==undefined ">
+                        Survey not done.
+                    </div>
+                    <div
+                        *ngIf=" (consumerApplicationDetail?.applicationStatusId>7 && consumerSurveyData!=null) || (consumerApplicationDetail?.applicationStatusId>7 && consumerSurveyData!=undefined )">
+                        Survey done.
+                        <br>
+                        <div *ngIf="consumerSurveyData?.surveyStatus == 'REJECTED'">
+                            <b>REJECTED REASON: </b> <span>{{consumerSurveyData?.rejectedReason}}</span>
+                        </div>
+                    </div>
+                </td>
+
+                <th scope="row">End GeoLocation Image</th>
+                <td> <a *ngIf="geoLocationData?.endDoc?.uploadId != null " href="javascript:void(0)"
+                        (click)="getFile(geoLocationData?.endDoc?.uploadId)"> Download
+                        Image</a></td>
+            </tr>
+
+
+        </table>
+
+        <hr>
+        <br>
+        <div *ngIf="applicationDocumentData && headingBoolean==false ">
+            <!-- && headingBoolean==false -->
+            <div align="center">
+                <h1
+                    style="color: black; background-color:  rgb(215, 214, 214); font-weight: 900; width: 95%; margin-right: 2%;">
+                    Application Documents</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docEstimate!=null">
+                    <b>Doc-Estimate File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocEstimateFile()">Download</button>
+                    </span>
+                </div>
+
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docAdministrative!=null">
+                    <b>Doc-Administrative File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocAdministrativeFile()">Download</button>
+                    </span>
+                </div>
+
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docNoc!=null">
+                    <b>Doc-Noc File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocNocFile()">Download</button>
+                    </span>
+                </div>
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docRegistry!=null">
+                    <b>Doc-Registry File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocRegistryFile()">Download</button>
+                    </span>
+                </div>
+
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docReraPermission!=null">
+                    <b>Doc ReraPermission File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocReraPermissionFile()">Download</button>
+                    </span>
+                </div>
+
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docT$cpPermission!=null">
+                    <b>Doc-T&CP File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocT$cpPermissionFile()">Download</button>
+                    </span>
+                </div>
+
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docEnergyBillFile!=null">
+                    <b>Doc-EnergyBill File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocEnergyBillFile()">Download</button>
+                    </span>
+                </div>
+
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docKhasraKhatoni!=null">
+                    <b>Doc-Registry File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocKhasraKhatoniFile()">Download</button>
+                    </span>
+                </div>
+
+                <!-- docGst -->
+                <div class="col-md-6" *ngIf="applicationDocumentData?.docGst!=null">
+                    <b>Doc-Gst File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocGstFile()">Download</button>
+                    </span>
+                </div>
+
+                <div *ngIf="applicationDocumentData?.docGroup!=null">
+                    <b>Doc-Group File : </b><span class="padding"><button type="button" class="btn btn-success"
+                            (click)="getDownloaddocGroupFile()">Download</button>
+                    </span>
+                </div>
+
+                <br>
+
+            </div>
+            <div class="text-danger" align="center" *ngIf="
+        applicationDocumentData?.docEstimate == null &&
+        applicationDocumentData?.docAdministrative == null &&
+        applicationDocumentData?.docNoc == null &&
+        applicationDocumentData?.docRegistry == null &&
+        applicationDocumentData?.docReraPermission == null &&
+        applicationDocumentData?.docT$cpPermission == null &&
+        applicationDocumentData?.docKhasraKhatoni == null  &&
+        applicationDocumentData?.docGst==null &&
+        applicationDocumentData?.docGroup==null
+      ">
+                <!--  -->
+                -------- File Not Available---------
+            </div>
+            <br>
+
+
+        </div>
+
+        <div>
+            <hr />
+            <div style="border-bottom: dashed 1px solid black;"></div>
+
+
+        </div>
+
+    </div>
+
+    <br>
+    <div class="text-right">
+        <button type="button" class="btn btn-primary" (click)="downloadPDF()">Download</button>
+    </div>
+
+</mat-card>

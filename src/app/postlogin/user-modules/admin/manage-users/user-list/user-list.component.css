@@ -1,0 +1,58 @@
+.my-card {
+  width: 100%;
+  margin: 10px auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-form-field {
+  width: 30%;
+}
+
+.left-position {
+  position: absolute;
+  right: 18px;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  width: 100%;
+  max-height: 500px;
+  text-align: left;
+}
+
+::ng-deep .mat-header-cell .mat-sort-header-container {
+  /* display:flex; */
+  /* justify-content:center; */
+  text-align: left;
+}
+
+.mat-column-action {
+  text-align: left;
+}
+
+.mat-column-edit {
+  text-align: left;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+}
+
+.custom-placeholder {
+  font-size: 13px !important;
+  width: 22% !important;
+}
+
+.custom-btn-export {
+  margin-left: 9px !important;
+}

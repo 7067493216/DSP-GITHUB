@@ -1,0 +1,49 @@
+
+
+
+<mat-card class="custom-scroll-enable">
+    <div  align="right">
+        <button class="close-btn" style="border-radius: 5em; color: black;"  (click)="onClose()" tabIndex="-2">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+    <!-- <form [formGroup]="remarkForm">
+        <div class="row">
+            <div class="col-md-8">
+
+                <mat-form-field class="full-width">
+                    <mat-label>remark</mat-label>
+                    <textarea matInput formControlName="remark"></textarea>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-1" align="center">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">
+                    Submit
+                </button>
+            </div>
+        </div>
+       
+    </form>
+    -->
+
+    <form [formGroup]="remarkForm">
+        <div class="row">
+          <div class="col-md-10">
+            <mat-form-field class="full-width" style="width: 100%;">
+              <mat-label>Remark</mat-label>
+              <textarea matInput formControlName="remark" placeholder="remark for rejection" rows="4"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-1 d-flex align-items-center">
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+      
+
+
+</mat-card>

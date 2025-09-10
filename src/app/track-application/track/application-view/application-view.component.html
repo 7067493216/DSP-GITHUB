@@ -1,0 +1,381 @@
+<mat-card class="custom-scroll-enable">
+
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: rgb(47, 47, 130); font-size: 2em; font-weight: 900; background-color: rgb(111, 111, 204); text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Application Details</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div align="center">
+        <h1
+            style="color: rgb(47, 47, 130); background-color: rgb(169, 169, 236); font-weight: 900; width: 95%; margin-right: 2%;">
+            Application Details</h1>
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <b>Consumer Application Number : </b><span
+                class="padding">{{consumerApplicationDetail?.consumerApplicationNo}}
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Applicant Name (आवेदक का नाम) : </b><span class="padding">{{consumerApplicationDetail?.consumerName}}
+            </span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>Father/Husband Name (पिता/पति का नाम) : </b><span class="padding">
+                {{consumerApplicationDetail?.guardianName}}</span>
+        </div>
+
+
+        <div class="col-md-6">
+            <b>Address (पता) : </b><span class="padding">
+                {{consumerApplicationDetail?.address}}</span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>Supply Voltage (सप्लाई वोल्टेज) : </b><span class="padding"><b>{{supplyVoltageString}} </b>
+
+            </span>
+        </div>
+
+
+        <div class="col-md-6">
+            <b>Contact : </b><span class="padding">
+                {{consumerApplicationDetail?.consumerphonNumber}}</span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>IVRSNO (उपभोक्ता संख्या) : </b><span class="padding"><b>{{consumerApplicationDetail?.ivrsNo}} </b>
+
+            </span>
+        </div>
+
+
+        <div class="col-md-6">
+            <b>Nature of Work (कार्य प्रकार)(Application type) : </b><span class="padding">
+                {{consumerApplicationDetail?.natureOfWorkName}}
+            </span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>Scheme Type (योजना का प्रकार) : </b><span class="padding">
+                {{consumerApplicationDetail?.schemeTypeName}}
+            </span>
+        </div>
+
+
+        <div class="col-md-6">
+            <b>load Request (आवेदक द्वारा दर्ज किया गया भार) : </b><span
+                class="padding"><b>{{consumerApplicationDetail?.loadRequested}} </b>
+
+            </span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>load unit (लोड यूनिट ) : </b><span
+                class="padding"><b>{{consumerApplicationDetail?.loadRequestedId?.loadRequestedName}} </b>
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Contractor Name (कॉन्ट्रैक्टर का नाम) : </b><span
+                class="padding"><b>{{consumerApplicationDetail?.contractorId?.contractorCompanyName}}, </b>
+                [{{consumerApplicationDetail?.contractorId?.contractorAuthenticationId}}] </span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>Vendor Name (कॉन्ट्रैक्टर का नाम): </b><span class="padding">Madhya Pradesh
+                Madhya
+                Kshetra Vidyut
+                Vitaran Company Limited <strong>(MPMKVVCL)</strong></span>
+        </div>
+
+
+        <div class="col-md-6">
+            <b>Contractor Class Type: </b><span
+                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="col-md-6">
+            <b>Contractor's Status: </b><span class="padding text-danger"><strong>The
+
+                </strong>
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Circle (वृत) : </b><span class="padding">
+                {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.divisionCircle?.circle}}
+            </span>
+        </div>
+        <br>
+        <br>
+
+
+
+        <div class="col-md-6">
+            <b>Division (संभाग ) : </b><span class="padding">
+                {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.division}}
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Distribution Center (वितरण केन्द्र) : </b><span class="padding">
+                {{consumerApplicationDetail?.distributionCenter?.dcName}}
+            </span>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-md-6">
+            <b>Work Location Address (कार्य स्थल पता): </b><span class="padding">
+                {{consumerApplicationDetail?.workAllocationAddress}}</span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Area (): </b><span class="padding">
+                {{consumerApplicationDetail?.area}}</span>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-md-6">
+            <b>land area unit (): </b><span class="padding">
+                {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span>
+        </div>
+
+        <div class="col-md-6">
+            <b>No. of Plots (): </b><span class="padding">
+                {{consumerApplicationDetail?.noOfPlot}}</span>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-md-6">
+            <b>GST Number(): </b><span class="padding">
+                {{consumerApplicationDetail?.gstNumber}}</span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Apply Individual Or Group (): </b><span class="padding">
+                {{consumerApplicationDetail?.individualOrGroupIdName}}</span>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-md-6">
+            <b>Work Short Description (कार्य का संक्षिप्त विवरण) : </b><span
+                class="padding">{{consumerApplicationDetail?.shortDescriptionOfWork}}
+            </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null">
+            <b>DGM STC APPROVAL DATE: </b><span class="padding">
+                {{consumerApplicationDetail?.dateOfDgmOandM}}
+            </span>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-md-6" *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null">
+            <b>DGM (O&M) APPROVAL DATE: </b><span class="padding">
+                {{consumerApplicationDetail?.dateOfDgmOandM}}
+            </span>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <hr>
+
+    <br>
+
+
+    <div align="center">
+        <h1
+            style="color: rgb(47, 47, 130); background-color: rgb(169, 169, 236); font-weight: 900; width: 95%; margin-right: 2%;">
+            Payment Details</h1>
+    </div>
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div *ngIf="consumerApplicationDetail?.natureOfWorkTypeId==8">
+                <b>Registration Fees: </b><span class="padding">
+                    2500
+                </span>
+            </div>
+
+            <div *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=8">
+                <b>Registration Fees: </b><span class="padding">
+                    {{paymentDetails?.Registration_Fees}}
+                </span>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <b> Registration Fees Transaction Date: </b><span class="padding">
+                {{paymentDetails?.Registration_Fees_Transaction_Date}}
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b> Registration Fees Transaction Id: </b><span class="padding">
+                {{paymentDetails?.Registration_Fees_Transaction_Id}}
+            </span>
+        </div>
+
+
+        <div class="col-md-6">
+            <b>Demand Fees: </b><span class="padding">
+                {{paymentDetails?.Demand_fees}}
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Demand fees Transaction Date: </b><span class="padding">
+                {{paymentDetails?.Demand_fees_Transaction_Date}}
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <b>Demand fees Transaction Id: </b><span class="padding">
+                {{paymentDetails?.Demand_fees_Transaction_Id}}
+            </span>
+        </div>
+
+
+        <div class="col-md-6" *ngIf="consumerApplicationDetail.revisedErpNumber!=null">
+            <!-- revisedErpNumber -->
+            <b>Revise Payment Fees: </b><span class="padding">
+                {{paymentDetails?.Revised_Demand_fees}}
+            </span>
+
+        </div>
+
+        <div class="col-md-6" *ngIf="consumerApplicationDetail.revisedErpNumber!=null">
+            <!-- revisedErpNumber -->
+            <b>Revised Demand fees Transaction Date: </b><span class="padding">
+                {{paymentDetails?.Revised_Demand_fees_Transaction_Date}}
+            </span>
+
+        </div>
+
+        <div class="col-md-6" *ngIf="consumerApplicationDetail.revisedErpNumber!=null">
+            <!-- revisedErpNumber -->
+            <b>Revised Demand fees Transaction Id: </b><span class="padding">
+                {{paymentDetails?.Revised_Demand_fees_Transaction_Id}}
+            </span>
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr>
+    <br>
+
+
+    <div align="center">
+        <h1
+            style="color: rgb(47, 47, 130); background-color: rgb(169, 169, 236); font-weight: 900; width: 95%; margin-right: 2%;">
+            Document </h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docEstimate!=null">
+            <b>Doc-Estimate File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocEstimateFile()">Download</button>
+            </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docAdministrative!=null">
+            <b>Doc-Administrative File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocAdministrativeFile()">Download</button>
+            </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docNoc!=null">
+            <b>Doc-Noc File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocNocFile()">Download</button>
+            </span>
+        </div>
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docRegistry!=null">
+            <b>Doc-Registry File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocRegistryFile()">Download</button>
+            </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docReraPermission!=null">
+            <b>Doc ReraPermission File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocReraPermissionFile()">Download</button>
+            </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docT$cpPermission!=null">
+            <b>Doc-Registry File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocT$cpPermissionFile()">Download</button>
+            </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="applicationDocumentData?.docKhasraKhatoni!=null">
+            <b>Doc-Registry File : </b><span class="padding"><button type="button" class="btn btn-actionifo"
+                    (click)="getDownloaddocKhasraKhatoniFile()">Download</button>
+            </span>
+        </div>
+
+    </div>
+
+    <br>
+
+
+</mat-card>

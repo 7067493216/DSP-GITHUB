@@ -1,0 +1,214 @@
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 1em 0 0em 0px;
+  color: #160202;
+  font-size: 24px;
+}
+
+.vendor-form-wrapper {
+  position: relative;
+  padding: 16px;
+}
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.vendor-form-card {
+  margin: auto;
+  border-radius: 12px;
+  padding: 16px;
+}
+.vendor-array-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+.vendor-row-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.vendor-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  position: relative;
+  display: block;
+}
+
+.vendor-form-grid  gap {
+  gap :16px 65px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.vendor-row-title {
+  font-size: 16px;
+}
+.add-row-btn-container {
+  margin: 24px 0 8px;
+  display: flex;
+  justify-content: flex-start;
+}
+.submit-btn-container {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+.submit-btn {
+  min-width: 160px;
+  font-weight: 600;
+}
+
+.vendor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3f51b5;
+  color: white;
+  padding: 2%;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 8px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #000;
+  border-color: #000;
+}
+
+/* search input styling used in both selects */
+.vendor-search-option {
+  opacity: 1 !important; /* ensure visible even when disabled */
+  pointer-events: none; /* the mat-option wrapper is disabled; we re-enable input below */
+}
+.vendor-search-option input.vendor-search {
+  pointer-events: auto; /* re-enable interaction on the input */
+}
+
+.vendor-search {
+  width: 100%;
+  padding: 4px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+}
+
+.vendor-select-panel,
+.material-select-panel {
+  max-height: 300px !important;
+}
+
+
+.form-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+label input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+.label-text {
+  font-size: 14px;
+}
+
+.custom-input {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.custom-input:focus {
+  border-color: #3f51b5;
+  outline: none;
+  box-shadow: 0 0 4px rgba(63, 81, 181, 0.5);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: #3f51b5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:disabled {
+  background: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #303f9f;
+}
+
+
+.full-width-table {
+  width: 100%;
+  overflow-x: auto;
+  th, td {
+    text-align: center;
+    padding: 12px;
+    word-break: break-word;
+  }
+}
+
+.header-row {
+  background-color: #e1e8ff;
+  font-weight: 600;
+}
+
+.data-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Add border to each header cell */
+::ng-deep .mat-header-cell {
+  border: 1px solid #ccc;
+  font-weight: 600;
+}
+
+/* Add border to each data cell */
+::ng-deep .mat-cell {
+  border: 1px solid #ccc;
+}
+
+

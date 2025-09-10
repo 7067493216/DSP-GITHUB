@@ -1,0 +1,301 @@
+<!-- <div class="login-wrapper" fxLayout="row" align="center" *ngIf="showForm"> -->
+    <div class="login-wrapper" fxLayout="row" align="center">
+        <mat-card class="box mat-elevation-z8">
+            <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div> -->
+            <mat-card-header>
+                <mat-card-title>Sign Up</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="consumeSignUpFg" (ngSubmit)="onSubmit()" autocomplete="off" class="consumeSignUpFg">
+                <mat-card-content>
+                    <!--FORM FIELDS HERE-->
+                    <input type="hidden" formControlName="consumerId">
+    
+                    <div class="row">
+                        <div class="col-md-6">
+    
+                            <!-- Applicant Name -->
+                            <mat-form-field class="half-width padding custom-form-field">
+                                <mat-label>Applicant Name (आवेदक का नाम ) <span class="required">*</span></mat-label>
+                                <input matInput placeholder="Applicant Name (आवेदक का नाम )" formControlName="consumerName">
+                                <!-- <mat-error
+                                    *ngIf="(consumeSignUpFormControls['consumerName'].touched || isFormSubmit) && consumeSignUpFormControls['consumerName'].errors">
+                                    <div *ngIf="consumeSignUpFormControls['consumerName'].errors['required']">
+                                        Applicant Name is required</div>
+                                </mat-error> -->
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerName.hasError('required')">
+                                    Applicant Name is required
+                                </mat-error>
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerName.hasError('onlycharPattern')">
+                                    Please enter anly Character value
+                                </mat-error>
+                            </mat-form-field>
+    
+                        </div>
+    
+    
+                        <!-- IVRS -->
+                        <!-- charitra comment code start -->
+                        <!-- <div class="col-md-6">         
+                            <mat-form-field class="half-width padding custom-form-field">
+                                <mat-label>IVRS</mat-label>
+                                <input matInput placeholder="IVRS" formControlName="ivrsNo" minlength="11" maxlength="11"> -->
+                        <!-- charitra comment code end -->
+                        <!-- <mat-error
+                *ngIf="(consumeSignUpFormControls['ivrsNo'].touched || isFormSubmit) && consumeSignUpFormControls['ivrsNo'].errors">
+                <div *ngIf="consumeSignUpFormControls['ivrsNo'].errors['required']">
+                    IVRS is required</div>
+            </mat-error> -->
+                        <!-- charitra comment code start -->
+                        <!-- </mat-form-field>
+                        </div> -->
+                        <!-- charitra comment code start -->
+                    </div>
+    
+    
+                    <div class="row">
+                        <div class="col-md-6">
+    
+                            <!-- Mobile No -->
+                            <mat-form-field class="half-width padding custom-form-field">
+                                <mat-label>Mobile No (मोबाइल नंबर )<span class="required">*</span></mat-label>
+                                <input matInput placeholder="Mobile No (मोबाइल नंबर )" formControlName="consumerMobileNo"
+                                    maxlength="10" type="tel">
+    
+                                <!-- <mat-error
+                                    *ngIf="(consumeSignUpFormControls['consumerMobileNo'].touched || isFormSubmit) && consumeSignUpFormControls['consumerMobileNo'].errors">
+                                    <div *ngIf="consumeSignUpFormControls['consumerMobileNo'].errors['required']">
+                                        Address is required</div>
+                                </mat-error> -->
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerMobileNo.hasError('required')">
+                                    Mobile Number is required
+                                </mat-error>
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerMobileNo.hasError('mobPattern')">
+                                    Please enter a valid Mobile Number
+                                </mat-error>
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerMobileNo.hasError('uniqueValue')"
+                                    [routerLink]="[ '/consumer/login']">
+                                    User Number already exists. <span style="display: inline-block;
+                                    border-bottom: 1px solid blue;
+                                    color: blue;cursor: pointer;">Please login</span>
+                                </mat-error>
+    
+                            </mat-form-field>
+    
+                        </div>
+    
+                        <div class="col-md-6">
+    
+                            <!-- Email -->
+                            <mat-form-field class="half-width padding custom-form-field">
+                                <mat-label>Email (इमेल)<span class="required">*</span></mat-label>
+                                <input matInput placeholder="Email (इमेल)" formControlName="consumerEmailId" type="email">
+                                <!-- <mat-error
+                                    *ngIf="(consumeSignUpFormControls['consumerEmailId'].touched || isFormSubmit) && consumeSignUpFormControls['consumerEmailId'].errors">
+                                    <div *ngIf="consumeSignUpFormControls['consumerEmailId'].errors['required']">
+                                        Address is required</div>
+                                </mat-error> -->
+    
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerEmailId.hasError('required')">
+                                    Email Address is required
+                                </mat-error>
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerEmailId.hasError('emailValidator')">
+                                    Please enter a valid Email Address
+                                </mat-error>
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.consumerEmailId.hasError('uniqueValue')">
+                                    Email already exists
+                                </mat-error>
+    
+                            </mat-form-field>
+    
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+    
+                            <!-- password -->
+                            <mat-form-field  class="half-width padding custom-form-field">
+                                <input matInput placeholder="Enter new password" [type]="hide1 ? 'password' : 'text'"
+                                    name="password" formControlName="password" minlength="8" maxlength="20">
+                                <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' :
+                                    'visibility'}}</mat-icon>
+                                <mat-error *ngIf="consumeSignUpFg.controls.password.hasError('required')">
+                                    New password field is required
+                                </mat-error>
+                                <mat-error *ngIf="consumeSignUpFg.controls.password.hasError('pwdPattern')">
+                                    Password should contain atleast one capital letter, one small letter, one number, one
+                                    special character (., *, @, #, $, _) and 8 character long.
+                                </mat-error>
+                            </mat-form-field>
+    
+    
+                        </div>
+                        <div class="col-md-6">
+    
+                            <!-- confirm password -->
+                            <mat-form-field  class="half-width padding custom-form-field">
+                                <mat-label>Confirm Password</mat-label>
+                                <input matInput placeholder="Confirm Password" [type]="hide2 ? 'password' : 'text'"
+                                    name="confirmPassword" formControlName="confirmPassword" minlength="8" maxlength="20">
+                                <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' :
+                                    'visibility'}}</mat-icon>
+                                <mat-error *ngIf="consumeSignUpFg.controls.confirmPassword.hasError('required')">
+                                    Confirm Password is required
+                                </mat-error>
+                                <mat-error *ngIf="consumeSignUpFg.controls.confirmPassword.hasError('mismatchedPasswords')">
+                                    Passwords do not match.
+                                </mat-error>
+                            </mat-form-field>
+    
+                        </div>
+    
+                    </div>
+    
+    
+                    <div class="row">
+                        <div class="col-md-12">
+    
+                            <!-- Address -->
+                            <mat-form-field class="half-width padding address">
+                                <mat-label>Full Address (आवेदक का पता)<span class="required">*</span></mat-label>
+                                <input matInput placeholder="Full Address (आवेदक का पता)" formControlName="address">
+                                <!-- <mat-error
+                                    *ngIf="(consumeSignUpFormControls['address'].touched || isFormSubmit) && consumeSignUpFormControls['address'].errors">
+                                    <div *ngIf="consumeSignUpFormControls['address'].errors['required']">
+                                        Address is required</div>
+                                </mat-error> -->
+    
+                                <mat-error *ngIf="consumeSignUpFg.controls.address.hasError('required')">
+                                    Full Address is required
+                                </mat-error>
+    
+                            </mat-form-field>
+    
+                        </div>
+                    </div>
+    
+    
+                    <!-- <div class="row"> -->
+                    <!-- <div class="col-md-6">
+                            <mat-form-field class="half-width padding custom-form-field">
+                                <mat-label>Aadhar Number <span class="required">*</span></mat-label>
+                                <input matInput formControlName="aadharNo" placeholder="Aadhar number" minlength="12"
+                                    maxlength="12" type="email">
+                                <mat-error *ngIf="consumeSignUpFg.controls.aadharNo.hasError('aadharPattern')">
+                                    Please enter a valid Aadhar No
+                                </mat-error>
+                                <mat-error *ngIf="consumeSignUpFg.controls.aadharNo.hasError('uniqueValue')">
+                                    Aadhar No already exists
+                                </mat-error>
+                                <mat-error *ngIf="consumeSignUpFg.controls.aadharNo.hasError('required')">
+                                    Aadhar No is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="(consumeSignUpFormControls['aadharNo'].touched || isFormSubmit) && consumeSignUpFormControls['aadharNo'].errors"> -->
+    
+    
+    
+    
+                    <!-- <div *ngIf="consumeSignUpFormControls['aadharNo'].errors['required']">
+                                        Aadhar Number is required</div> -->
+    
+    
+    
+    
+    
+                    <!-- <div *ngIf="consumeSignUpFormControls['aadharNo'].errors['pattern']">
+                                        Only numbers allowed</div>
+                                    <div *ngIf="consumeSignUpFormControls['aadharNo'].errors['maxlength']">
+                                        only 12 digits allowed </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div> -->
+    
+                    <!-- <div class="col-md-6 custom-col-md-6">
+                            <span class="half-width padding">
+                                <div class="custom-file upload-lable" id="customFile" lang="es">
+                                    <input #aadharDoc type="file" (change)="aadharUpload()" class="custom-file-input"
+                                        id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                                    <label class="custom-file-label file-lable" for="exampleInputFile">
+                                        {{ (aadharFileName.length>52)? (aadharFileName | slice:0:52)+'...':(aadharFileName )
+                                        }}
+                                        <span class="required">*</span></label>
+                                    <mat-error *ngIf=" isFormSubmit  &&  aadharRequired ">
+                                        <div *ngIf="!aadharUploaded" class="custom-required-error">
+                                            Aadhar Document is required
+                                        </div>
+                                    </mat-error>
+                                </div>
+                            </span>
+                        </div> -->
+    
+    
+                    <!-- <div class="col-md-6">
+                            <mat-form-field class="half-width padding custom-form-field">
+                                <mat-label>Pan Number <span class="required">*</span></mat-label>
+                                <input matInput formControlName="panNo" placeholder="Pan Number" minlength="10"
+                                    maxlength="10">
+                                <mat-error *ngIf="consumeSignUpFg.controls.panNo.hasError('panNoPattern')">
+                                    Please enter a valid PAN No
+                                </mat-error>
+                                <mat-error *ngIf="consumeSignUpFg.controls.panNo.hasError('uniqueValue')">
+                                    PAN No already exists
+                                </mat-error>
+                                <mat-error *ngIf="consumeSignUpFg.controls.panNo.hasError('required')">
+                                    PAN No is required
+                                </mat-error> -->
+    
+    
+    
+    
+    
+    
+                    <!-- <mat-error
+                                    *ngIf="(consumeSignUpFormControls['panNo'].touched || isFormSubmit) && consumeSignUpFormControls['panNo'].errors">
+                                    <div *ngIf="consumeSignUpFormControls['panNo'].errors['required']">
+                                        Pan Number is required</div>
+                                </mat-error> -->
+    
+    
+    
+    
+    
+    
+                    <!-- </mat-form-field>
+                        </div> -->
+    
+    
+                    <!-- <div class="col-md-6 custom-col-md-6">
+                            <span class="half-width padding">
+                                <div class="custom-file upload-lable" id="customFile" lang="es">
+                                    <input #panDoc type="file" (change)="panUpload()" class="custom-file-input"
+                                        id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                                    <label class="custom-file-label file-lable" for="exampleInputFile">
+                                        {{ (panFileName.length>52)? (panFileName | slice:0:52)+'...':(panFileName ) }}
+                                        <span class="required">*</span></label>
+                                    <mat-error *ngIf=" isFormSubmit  &&  panRequired ">
+                                        <div *ngIf="!panUploaded" class="custom-required-error">
+                                            PAN Document is required
+                                        </div>
+                                    </mat-error>
+    
+                                </div>
+                            </span>
+                        </div> -->
+                    <!-- </div> -->
+    
+                </mat-card-content>
+                <div align="center">
+                    <button type="submit" mat-raised-button color="primary">Submit</button>
+                </div>
+            </form>
+            <!-- {{consumeSignUpFg.value | json}} -->
+        </mat-card>
+    </div>

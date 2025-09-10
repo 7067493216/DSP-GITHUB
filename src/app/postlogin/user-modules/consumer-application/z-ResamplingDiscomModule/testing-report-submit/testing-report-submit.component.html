@@ -1,0 +1,88 @@
+<div class="close-container" align="right">
+    <button class="close-btn" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<mat-card class="report-card">
+
+    <!-- Toolbar/Header -->
+    <div class="vendor-toolbar">
+        <mat-icon>description</mat-icon>
+        <span>Upload Testing Report</span>
+    </div>
+
+    <form [formGroup]="testingReportForm" class="report-form">
+
+
+
+        <div class="row">
+
+            <!-- Final Result Dropdown -->
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Select Final Result</mat-label>
+                    <mat-select formControlName="finalResult" disableRipple (selectionChange)="onPassOrFail($event)"
+                        required>
+                        <mat-option [disabled]="true" value="0">Please Select</mat-option>
+                        <mat-option value="yes">Pass</mat-option>
+                        <mat-option value="reject">Failed</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- Remark -->
+            <!-- <mat-form-field appearance="outline" class="col-md-6 full-width">
+                <mat-label>Select Remark</mat-label>
+                <mat-select formControlName="remark" required>
+                    <mat-option *ngFor="let d of remarks" [value]="d.value">
+                        {{ d.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+
+            <!-- File Upload -->
+            <div class="form-group col-lg-6">
+                <label class="form-label">Report File</label>
+                <input type="file" class="form-control upload-input" formControlName="reportFile"
+                    (change)="onFileSelect($event)">
+            </div>
+
+
+            <div class="col-lg-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Remark</mat-label>
+                    <textarea matInput formControlName="remark" placeholder="Enter your remark here" rows="3"></textarea>
+                </mat-form-field>
+            </div>
+
+
+        </div>
+
+        <br>
+
+        <!-- Checkbox Row -->
+        <div class="checkbox-row">
+            <mat-checkbox class="checkbox" (change)="onCheckboxSelectionForTestingReport($event)">
+            </mat-checkbox>
+
+            <span class="checkbox-label">
+                मैं/हम एतद्द्वारा यह घोषित करते हैं कि इस रिपोर्ट में उल्लिखित प्रणाली/उपकरण का परीक्षण निर्धारित मानकों
+                एवं प्रक्रियाओं के अनुसार किया गया है। इस रिपोर्ट में दर्ज परिणाम मेरी/हमारी सर्वोत्तम जानकारी एवं
+                विश्वास के अनुसार सत्य एवं सही हैं।
+            </span>
+        </div>
+
+
+
+        <!-- Submit Button -->
+        <div align="center">
+            <button type="button" mat-raised-button color="primary" class="submit-btn" (click)="onSubmit()">
+                <mat-icon>send</mat-icon>
+                Submit
+            </button>
+        </div>
+
+    </form>
+
+</mat-card>

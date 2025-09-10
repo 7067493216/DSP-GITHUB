@@ -1,0 +1,358 @@
+<div class="dsp_home_block">
+
+    <!-- <div class="dsp_sliderblock" style="background: url(https://saralsanyojan.mpcz.in:8888/resources/images/1.JPG);">    assets/images/download.jpg  -->
+    <div class="dsp_sliderblock" [ngStyle]="{'background-image': 'url(https://images.bhaskarassets.com/thumb/1200x900/web2images/521/2023/09/02/bijli1693667242_1693678719.jpeg)'}">
+
+
+
+
+
+        <div class="contst_div">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card dsp_cards">
+                            <div class="card-header">
+                                <h2>
+                                   अति आवश्यक सूचना
+                                </h2>
+                            </div>
+                            <div class="card-body" style="background-color: aliceblue;">
+                                <marquee scrollamount="2" onmouseover="this.stop();" onmouseleave="this.start();"
+                                    style="padding: 1em;" direction="up">
+                                    <ul>
+                                        <li>
+                                            <span class="">
+                                                उपयोगकर्ता अनुभव को बेहतर बनाने के लिए
+                                                <a href="https://saralsanyojan.mpcz.in:8888/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://dsp.mpcz.in:8888'">सरल
+                                                    संयोजन पोर्टल</a>
+                                                <a href="https://survey.mpcz.in:8080/ssp-web/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://rooftop-uat.mpcz.in:8888'">सरल
+                                                    संयोजन
+                                                    पोर्टल</a>
+                                                और डिपॉजिट सुपरविजन पोर्टल को एकीकृत कर दिया गया है।
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="">
+                                                अब उपयोगकर्ताओं को नए सेवा कनेक्शन (विस्तार) और OYT आवेदन के लिए केवल
+                                                <a href="https://saralsanyojan.mpcz.in:8888/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://dsp.mpcz.in:8888'">सरल
+                                                    संयोजन पोर्टल</a>
+                                                <a href="https://survey.mpcz.in:8080/ssp-web/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://rooftop-uat.mpcz.in:8888'">सरल
+                                                    संयोजन
+                                                    पोर्टल</a>
+                                                का उपयोग करना होगा। इसके लिए
+                                                <a href="assets/images/SSP_Integration_with_DSP.pdf" target="_blank"
+                                                    download="SSP_Integration_with_DSP.pdf">मानक संचालन प्रक्रिया
+                                                    (SOP)</a>
+                                                उपलब्ध है।
+                                            </span>
+                                        </li>
+
+
+                                        <li>
+                                            <span class="">
+                                                अब उपयोगकर्ताओं को सूचित किया जाता है कि
+                                                NSC (नई सेवा कनेक्शन), OYT तथा LE (लोड वृद्धि)
+                                                से संबंधित आवेदन अब केवल
+                                                <a href="https://saralsanyojan.mpcz.in:8888/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://dsp.mpcz.in:8888'">सरल
+                                                    संयोजन पोर्टल</a>
+                                                <a href="https://survey.mpcz.in:8080/ssp-web/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://rooftop-uat.mpcz.in:8888'">सरल
+                                                    संयोजन
+                                                    पोर्टल</a>
+                                                के माध्यम से ही किए जाएंगे।
+                                            </span>
+                                        </li>
+
+                                    </ul>
+                                </marquee>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="dsp-loginblock">
+                            <mat-card class="dsp-loign-item">
+                                <mat-card-header>
+                                    <mat-card-title>Applicant Login</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content class="dsp-forminfo">
+                                    <form [formGroup]="consumerLoginForm" (ngSubmit)="trialLogin()" autocomplete="off"
+                                        class="consumerLoginForm" *ngIf="!showOtpFieldNew">
+                                        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+                                        <mat-form-field appearance="outline" class="form-group">
+                                            <input matInput name="consumerLoginId" minlength="10" maxlength="10"
+                                                placeholder="Applicant Mobile Number (आवेदक मोबाइल नंबर )"
+                                                formControlName="consumerLoginId" class="ds-textbox">
+                                            <mat-label class="form-label">Applicant Mobile Number (आवेदक मोबाइल नंबर
+                                                )</mat-label>
+                                            <mat-error
+                                                *ngIf="consumerLoginForm?.controls?.consumerLoginId?.hasError('required')">
+                                                Enter Applicant Mobile Number
+                                            </mat-error>
+                                            <mat-error
+                                                *ngIf="consumerLoginForm?.controls?.consumerLoginId?.hasError('pattern')">
+                                                Enter 10 digit Mobile Number
+                                            </mat-error>
+                                            <!-- <mat-error *ngIf="consumerLoginForm.controls.consumerLoginId.hasError('maxLength')">
+                        Enter 10 digit Mobile Number
+                    </mat-error> -->
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" class="form-group">
+                                            <input matInput placeholder="Password (पासवर्ड )"
+                                                [type]="hide ? 'password' : 'text'" name="consumerLoginPwd"
+                                                formControlName="consumerLoginPwd" class="ds-textbox" required>
+                                            <mat-icon class="iconHover" matSuffix (click)="hide = !hide">{{hide ?
+                                                'visibility_off' :
+                                                'visibility'}}</mat-icon>
+                                            <mat-label class="form-label">Password (पासवर्ड )</mat-label>
+                                            <mat-error
+                                                *ngIf="consumerLoginForm?.controls?.consumerLoginPwd?.hasError('required')">
+                                                Enter Password
+                                            </mat-error>
+                                        </mat-form-field>
+
+
+                                        <div class="form-group form-buttons">
+                                            <button mat-stroked-button color="primary" type="submit"
+                                                [disabled]="!consumerLoginForm?.valid"
+                                                class="formButton formButton-full ">
+                                                Get OTP
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                    <div *ngIf="showOtpFieldNew">
+                                        <form [formGroup]="otpVerificationFg" (ngSubmit)="otpVerification()"
+                                            autocomplete="off" class="loginForm">
+                                            <!-- *ngIf="showOtpFieldNew" -->
+                                            <div class="form-group">
+                                                <!-- <input name="consumerLoginId" type="hidden" formControlName="consumerLoginId">
+                        <input name="tokenId" type="hidden" formControlName="tokenId"> -->
+                                                <mat-form-field appearance="outline" class="form-group">
+                                                    <input matInput placeholder="Enter Your OTP" type="tel" name="otp"
+                                                        formControlName="otp" required>
+                                                    <mat-label class="form-label">OTP</mat-label>
+                                                    <mat-error
+                                                        *ngIf="otpVerificationFg?.controls?.otp?.hasError('required')">
+                                                        Enter OTP
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <span class="resendOtp otp-label" (click)="resendOtp()">Resend
+                                                    OTP</span>
+                                            </div>
+                                            <button mat-stroked-button color="primary" type="submit"
+                                                [disabled]="!otpVerificationFg?.valid"
+                                                class="formButton formButton-full ">
+                                                Log in
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </mat-card-content>
+                                <!-- <mat-divider></mat-divider> -->
+                                <mat-card-footer>
+                                    <div class="dsp-creation">
+                                        <a class="dsp-links" id="signUp" [routerLink]="[ '/consumer/sign-up']"
+                                            routerLinkActive="link-active"
+                                            [routerLinkActiveOptions]="{ exact: true }">Sign
+                                            up?</a>
+                                        <a class="dsp-links" id="forgot" routerLink="/consumer/forget-password"
+                                            routerLinkActive="link-active"
+                                            [routerLinkActiveOptions]="{ exact: true }">Forgot
+                                            Password?</a>
+                                    </div>
+                                </mat-card-footer>
+                            </mat-card>
+                        </div>
+
+                        <div class="dsp_homeinfoms">
+                            <div style="font-size: 1.8em;color: rgb(95, 60, 60);font-weight: bold;">
+                                Introduction OF MPMKVVCL
+                            </div>
+                            <br>
+                            <div style="font-size: 1em; color: black;font-weight: 800;">
+                                Madhya Pradesh Madhya Kshetra Vidyut Vitaran Company Limited (MPMKVVCL) was incorporated
+                                as
+                                a
+                                wholly owned Government Company on 31st May 2002, under the Companies Act 1956, the same
+                                has
+                                been notified vide order No.5555/RS/4/13/2001 dated 1st July, 2002 of the Government of
+                                Madhya
+                                Pradesh. The Company undertakes the activities of distribution and retail supply in the
+                                areas
+                                covered by the Commissionaries of Bhopal, Hoshangabad, Gwalior and Chambal.
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="dsp_homeinfoms">
+                    <h4>
+                        Introduction OF MPMKVVCL
+                    </h4>
+                    <p>
+                        Madhya Pradesh Madhya Kshetra Vidyut Vitaran Company Limited (MPMKVVCL) was incorporated as a
+                        wholly owned Government Company on 31st May 2002, under the Companies Act 1956, the same has
+                        been notified vide order No.5555/RS/4/13/2001 dated 1st July, 2002 of the Government of Madhya
+                        Pradesh. The Company undertakes the activities of distribution and retail supply in the areas
+                        covered by the Commissionaries of Bhopal, Hoshangabad, Gwalior and Chambal. The Company obtained
+                        certificate of commencement of business on 16th July 2002 from Registrar of Companies, Madhya
+                        Pradesh and Chattisgarh, Gwalior.Subsequently vide Government of Madhya Pradesh notification No.
+                        3679/FRS/18/13/2002 dated 31.05.2005, the Company has been provided functional autonomy with
+                        effect from 01.06.2005. The CIN Number of Company is U40109MP2002SGC015119. The Government of
+                        Madhya Pradesh vide its order no. 2671/12/13 dated 29th March, 2012 had transferred all the
+                        shares of the Company to M. P. Power Management Company Limited and subsequently our Company is
+                        now a subsidiary of M.P. Power Management Company Limited, Jabalpur.
+                    </p>
+
+                    <div class="form-group">
+                        <h4>
+                            Objective
+                        </h4>
+                        <p>
+                            The main objective of the company is better execution of work for achieving efficiency gain
+                            and to make company commercially viable, progressively self sustainable and less government
+                            dependent. Along with this, a balance between the quality service and rational tariff is to
+                            be maintained to safeguard the interest of consumers.
+                            RE Initiatives of MPMKVVCL
+                        </p>
+                        <p>
+                            As per approval accorded by GoMP, Energy Department, Madhya Kshetra Vidyut Vitaran Co. Ltd
+                            took initiative to implement 5MW Grid connected Solar Rooftop Photovoltaic Project on roofs
+                            of Government buildings in three cities of Bhopal, Indore and Jabalpur on Gross Metering
+                            Model. The project was successfully closed at final commissioned capacity of 4.685 MW (93.7%
+                            of total capacity) on 31.03.2017. The energy generated from the project is considered in the
+                            SEA for fulfilment of solar Renewable Purchase Obligations (RPOs) as fixed by MPERC through
+                            regulation. This effort of MPCZ has been recognised at national level under following
+                            categories:-
+                        </p>
+                        <ul>
+                            <li>
+                                <p>
+                                    National Award from MNRE GoI in June 2016 under the category “DISCOM- Own
+                                    Installation”.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    The concept of the project got nominated under Prime Minister’s Award in Innovation
+                                    Category
+                                    and is selected as one of 62 innovations out of 830 Innovations nominated for
+                                    publication in
+                                    the Coffee Table Book published by the Department of Reforms & Public Grievances,
+                                    GoI and
+                                    circulated on civil services. day in Delhi.
+                                </p>
+                            </li>
+                        </ul>
+
+                        <p>
+                            As a progressive Discom, MPMKVVCL is committed for adequate promotion and utilization of
+                            energy for renewable sources.
+                        </p>
+
+                    </div>
+                </div> -->
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="card dsp_cards">
+                            <div class="card-header" >
+                                <h2>
+                                    महत्वपूर्ण सूचना
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <marquee scrollamount="2" onmouseover="this.stop();" onmouseleave="this.start();"
+                                    style="padding: 1em;" direction="up">
+                                    <ul>
+                                        <li>
+                                            <span class="">
+                                                उपयोगकर्ता अनुभव को बेहतर बनाने के लिए
+                                                <a href="https://saralsanyojan.mpcz.in:8888/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://dsp.mpcz.in:8888'">सरल
+                                                    संयोजन पोर्टल</a>
+                                                <a href="https://survey.mpcz.in:8080/ssp-web/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://rooftop-uat.mpcz.in:8888'">सरल
+                                                    संयोजन
+                                                    पोर्टल</a>
+                                                और डिपॉजिट सुपरविजन पोर्टल को एकीकृत कर दिया गया है।
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="">
+                                                अब उपयोगकर्ताओं को नए सेवा कनेक्शन (विस्तार) और OYT आवेदन के लिए केवल
+                                                <a href="https://saralsanyojan.mpcz.in:8888/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://dsp.mpcz.in:8888'">सरल
+                                                    संयोजन पोर्टल</a>
+                                                <a href="https://survey.mpcz.in:8080/ssp-web/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://rooftop-uat.mpcz.in:8888'">सरल
+                                                    संयोजन
+                                                    पोर्टल</a>
+                                                का उपयोग करना होगा। इसके लिए
+                                                <a href="assets/images/SSP_Integration_with_DSP.pdf" target="_blank"
+                                                    download="SSP_Integration_with_DSP.pdf">मानक संचालन प्रक्रिया
+                                                    (SOP)</a>
+                                                उपलब्ध है।
+                                            </span>
+                                        </li>
+
+
+                                        <li>
+                                            <span class="">
+                                                अब उपयोगकर्ताओं को सूचित किया जाता है कि
+                                                NSC (नई सेवा कनेक्शन), OYT तथा LE (लोड वृद्धि)
+                                                से संबंधित आवेदन अब केवल
+                                                <a href="https://saralsanyojan.mpcz.in:8888/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://dsp.mpcz.in:8888'">सरल
+                                                    संयोजन पोर्टल</a>
+                                                <a href="https://survey.mpcz.in:8080/ssp-web/fetch_samagra_detail"
+                                                    target="_blank"
+                                                    *ngIf="url.initialBasUrl == 'https://rooftop-uat.mpcz.in:8888'">सरल
+                                                    संयोजन
+                                                    पोर्टल</a>
+                                                के माध्यम से ही किए जाएंगे।
+                                            </span>
+                                        </li>
+
+                                    </ul>
+                                </marquee>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div align="center">
+    <button type="submit" mat-raised-button color="primary" (click)="unlockId()">Unlock Id</button>
+</div> -->

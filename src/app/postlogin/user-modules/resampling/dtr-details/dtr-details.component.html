@@ -1,0 +1,182 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<div class="vendor-form-wrapper">
+    <mat-card class="vendor-form-card">
+        <div class="vendor-toolbar">
+            <mat-icon>description</mat-icon>
+            <span>Installed Material Details</span>
+        </div>
+
+        <div *ngFor="let item of dtrArray; let i = index" class="material-section">
+            <h2 class="section-heading">Material Details - {{ i + 1 }}</h2>
+
+            <!-- {
+            "id": 225,
+            "conAppNo": "SV202307557",
+            "totalNoOfDtr": 2,
+            "vendorName": "AWADH TRANSFORMERS",
+            "serialNo": "232323232",
+            "invoiceNO": "623565236236",
+            "yearOfManufacture": "01-2006",
+            "capacityOfDtr": null,
+            "auticationId": "CZC20160512195",
+            "shuffling": null,
+            "circleName": null,
+            "childApplicationNo": null,
+            "shufflingFlag": 0,
+            "itemNo": "M-0106034",
+            "materialName": "Distribution Transformer",
+            "meterialSpecification": null,
+            "capacityOfPtr": null,
+            "totalNoOfPtr": 0,
+            "divisionName": null,
+            "consumerName": null,
+            "address": null,
+            "contractorAuthenticationNo": null,
+            "workOrderNumber": null,
+            "materialRecivedInLab": null,
+            "circleId": null,
+            "dtrPassOrFail": null,
+            "applicationId": null,
+            "instalationDate": "2009-07-07T18:30:00.000Z",
+            "regionId": null,
+            "regionName": null,
+            "dtrAcceptOrNot": null,
+            "remark": null,
+            "date": null,
+            "parantApplicationNo": null,
+            "dc_NAME": null,
+            "taAcceptDtrOrNotDate": null
+        } -->
+
+            <table class="details-table">
+
+
+                <tr>
+                    <th>ID</th>
+                    <td>{{ item.id }}</td>
+               
+                    <th>Application No</th>
+                    <td>{{ item.conAppNo }}</td>
+                </tr>
+                <tr>
+                    <th>Total No Of {{item.totalNoOfDtr!=null?'DTR':'PTR'}} </th>
+                    <td>{{ item.totalNoOfDtr!=null?item.totalNoOfDtr:item.totalNoOfPtr }}</td>
+                     <!-- <th>Total No Of PTR</th>
+                    <td>{{ item.totalNoOfPtr }}</td> -->
+                
+                    <th>Vendor Name</th>
+                    <td>{{ item.vendorName }}</td>
+                </tr>
+                <tr>
+                    <th>Serial No</th>
+                    <td>{{ item.serialNo }}</td>
+               
+                    <th>Invoice No</th>
+                    <td>{{ item.invoiceNO }}</td>
+                </tr>
+                <tr>
+                    <th>Year Of Manufacture</th>
+                    <td>{{ item.yearOfManufacture }}</td>
+               
+                    <th>Installation Date</th>
+                    <td>{{ item.instalationDate | date:'dd-MMM-yyyy' }}</td>
+                </tr>
+                <tr>
+                    <th>Authentication ID</th>
+                    <td>{{ item.auticationId }}</td>
+               
+                    <th>Shuffling</th>
+                    <td>{{ item.shuffling }}</td>
+                </tr>
+                <tr>
+                    <th>Circle Name</th>
+                    <td>{{ item.circleName }}</td>
+               
+                    <th>Item No</th>
+                    <td>{{ item.itemNo }}</td>
+                </tr>
+                
+                <tr>
+                    <th>Material Name</th>
+                    <td>{{ item.materialName }}</td>
+                
+                    <th>Material Specification</th>
+                    <td>{{ item.meterialSpecification }}</td>
+                </tr>
+               
+                <tr>
+                    <th>Division Name</th>
+                    <td>{{ item.divisionName }}</td>
+               
+                    <th>Consumer Name</th>
+                    <td>{{ item.consumerName }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ item.address }}</td>
+               
+                    <th>Contractor Authentication No</th>
+                    <td>{{ item.contractorAuthenticationNo }}</td>
+                </tr>
+                <!-- <tr>
+                    <th>Work Order Number</th>
+                    <td>{{ item.workOrderNumber }}</td>
+               
+                    <th>Material Received In Lab</th>
+                    <td>{{ item.materialRecivedInLab }}</td>
+                </tr>
+                <tr>
+                    <th>Circle ID</th>
+                    <td>{{ item.circleId }}</td>
+               
+                    <th>DTR Pass Or Fail</th>
+                    <td>{{ item.dtrPassOrFail }}</td>
+                </tr>
+                <tr>
+                    <th>Application ID</th>
+                    <td>{{ item.applicationId }}</td>
+               
+                    <th>Installation Date</th>
+                    <td>{{ item.instalationDate | date:'dd-MMM-yyyy' }}</td>
+                </tr>
+                <tr>
+                    <th>Region ID</th>
+                    <td>{{ item.regionId }}</td>
+               
+                    <th>Region Name</th>
+                    <td>{{ item.regionName }}</td>
+                </tr>
+                <tr>
+                    <th>DTR Accept Or Not</th>
+                    <td>{{ item.dtrAcceptOrNot }}</td>
+                
+                    <th>Remark</th>
+                    <td>{{ item.remark }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ item.date }}</td>
+                
+                    <th>Parent Application No</th>
+                    <td>{{ item.parantApplicationNo }}</td>
+                </tr>
+                <tr>
+                    <th>DC Name</th>
+                    <td>{{ item.dc_NAME }}</td>
+               
+                    <th>TA Accept DTR Or Not Date</th>
+                    <td>{{ item.taAcceptDtrOrNotDate }}</td>
+                </tr> -->
+
+
+            </table>
+        </div>
+
+
+    </mat-card>
+</div>

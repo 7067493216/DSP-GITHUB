@@ -1,0 +1,355 @@
+.my-card {
+    width: 100%;
+    margin: 3px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-scroll-enable-1 {
+    height: 600px;
+    overflow: scroll;
+    display: block;
+}
+
+.custom-scroll-disable {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.half-width {
+    width: 33%;
+}
+
+.padding {
+    padding-left: 6px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}
+
+.opticity {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+/* .hidden{
+display: none;
+} */
+
+.survey-style{
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.erp-style{
+    padding-left: 0px !important;
+}
+
+.custom-mat-toolbar{
+    background: #3f51b5 !important;
+    color: #fff !important;
+}
+ .btn-success{
+    text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.table-wrap {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  table-layout: fixed; /* avoid overlap */
+}
+
+/* Header Rows */
+.modern-table thead tr {
+  background: #f1f3f6;
+}
+.modern-table thead th {
+  padding: 10px;
+  border: 1px solid #a8b0b8;
+  text-align: center;
+  font-weight: 700;
+  color: #222;
+  white-space: nowrap;
+}
+
+/* Body Rows */
+.modern-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.modern-table tbody td {
+  padding: 8px 10px;
+  border: 1px solid #c8cfd6;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+/* Column widths */
+.modern-table thead th:nth-child(1),
+.modern-table tbody td:nth-child(1) {
+  width: 20%; /* Vendor Name */
+}
+
+.modern-table thead th:nth-child(2),
+.modern-table tbody td:nth-child(2) {
+  width: 25%; /* Specification */
+}
+
+.modern-table thead th:nth-child(3),
+.modern-table tbody td:nth-child(3) {
+  width: 15%; /* Item No */
+}
+
+.modern-table thead th:nth-child(4),
+.modern-table tbody td:nth-child(4) {
+  width: 12%; /* Installation Date */
+}
+
+.modern-table thead th:nth-child(5),
+.modern-table tbody td:nth-child(5) {
+  width: 12%; /* Manufacture Date */
+}
+
+.modern-table thead th:nth-child(6),
+.modern-table tbody td:nth-child(6) {
+  width: 8%; /* Edit */
+}
+
+.modern-table thead th:nth-child(7),
+.modern-table tbody td:nth-child(7) {
+  width: 8%; /* Action */
+}
+
+/* Textarea full width */
+.modern-table td textarea {
+  width: 100% !important;
+  min-height: 52px;
+  resize: vertical;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1.5px solid #000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Inputs and select */
+.modern-table td input[type="text"],
+.modern-table td select {
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1.5px solid #000;
+  border-radius: 4px;
+  padding: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* Angular Material outline fix */
+:host ::ng-deep .mat-mdc-form-field .mdc-notched-outline__leading,
+:host ::ng-deep .mat-mdc-form-field .mdc-notched-outline__trailing,
+:host ::ng-deep .mat-mdc-form-field .mdc-notched-outline__notch {
+  border-color: #000 !important;
+}
+
+:host ::ng-deep .mat-mdc-input-element,
+:host ::ng-deep .mat-mdc-select-value {
+  font-weight: 600;
+  font-size: 16px;
+  color: #111;
+}
+
+/* Checkbox bigger */
+.big-check .mdc-checkbox {
+  transform: scale(1.2);
+}
+
+/* ====== Only inputs/textarea width inside specific columns ====== */
+/* 1) Vendor Name column (1st col) — fill the column nicely */
+.modern-table tbody td:nth-child(1) mat-form-field,
+.modern-table tbody td:nth-child(1) textarea,
+.modern-table tbody td:nth-child(1) input[type="text"],
+.modern-table tbody td:nth-child(1) select {
+  width: 98% !important;
+  max-width: 98%;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* 2) Specification column (2nd col) — fill the column nicely */
+.modern-table tbody td:nth-child(2) mat-form-field,
+.modern-table tbody td:nth-child(2) textarea,
+.modern-table tbody td:nth-child(2) input[type="text"],
+.modern-table tbody td:nth-child(2) select {
+  width: 98% !important;
+  max-width: 98%;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* 3) Item No. column (3rd col) — textarea styling + full width */
+.modern-table tbody td:nth-child(3) mat-form-field,
+.modern-table tbody td:nth-child(3) textarea,
+.modern-table tbody td:nth-child(3) input[type="text"],
+.modern-table tbody td:nth-child(3) select {
+  width: 98% !important;
+  max-width: 98%;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* Extra polish for the 3 textareas so content आराम से दिखे */
+.modern-table tbody td:nth-child(1) textarea,
+.modern-table tbody td:nth-child(2) textarea,
+.modern-table tbody td:nth-child(3) textarea {
+  min-height: 56px;          /* थोड़ा ऊँचा */
+  resize: vertical;           /* यूज़र drag कर सके */
+  overflow: auto;
+  display: block;
+}
+
+/* (वही black borders, bold/bigger font—अगर पहले से add है तो रहेगा) */
+/* Header columns fix */
+.modern-table thead th {
+  padding: 10px;
+  border: 1px solid #a8b0b8;
+  text-align: center;
+  font-weight: 700;
+  color: #222;
+  white-space: normal;       /* text को wrap करने की अनुमति */
+  word-wrap: break-word;     /* लम्बा शब्द टूट जाए */
+  line-height: 1.2;          /* थोड़ा compact */
+}
+
+/* Header height auto adjust */
+.modern-table thead tr {
+  height: auto;
+}
+
+/* Column widths same as पहले */
+.modern-table thead th:nth-child(1) { width: 20%; }
+.modern-table thead th:nth-child(2) { width: 22%; }
+.modern-table thead th:nth-child(3) { width: 12%; }
+.modern-table thead th:nth-child(4) { width: 12%; }
+.modern-table thead th:nth-child(5) { width: 12%; }
+.modern-table thead th:nth-child(6) { width: 8%; }
+.modern-table thead th:nth-child(7) { width: 5%; }
+.modern-table thead th:nth-child(8) { width: 8%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

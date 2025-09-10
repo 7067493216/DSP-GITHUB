@@ -1,0 +1,35 @@
+.vendor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3f51b5;
+  color: white;
+  padding: 2%;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 8px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.cute-input {
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cute-input:hover {
+  border-color: #4CAF50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+}
+
+.cute-btn {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cute-btn:hover {
+  background-color: #43a047;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}

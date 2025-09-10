@@ -1,0 +1,91 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+ <mat-toolbar color="Secondary" >
+      <div style="width: 100%;" align="center">
+          <div style="color: #3f51b5; font-weight: bold;"> Material Receipt Advice (MRA) Report (ERP Generated Report)</div>
+         
+      </div>
+  </mat-toolbar>
+
+<div class="mat-elevation-z8 table-wrapper">
+    <table mat-table [dataSource]="rowList" class="mat-table-responsive">
+
+        <!-- Project Number -->
+        <ng-container matColumnDef="PROJECT_NUMBER">
+            <th mat-header-cell *matHeaderCellDef> Project No. </th>
+            <td mat-cell *matCellDef="let row"> {{ row.PROJECT_NUMBER }} </td>
+        </ng-container>
+
+        <!-- Item Code -->
+        <ng-container matColumnDef="ITEM_CODE">
+            <th mat-header-cell *matHeaderCellDef> Item Code </th>
+            <td mat-cell *matCellDef="let row"> {{ row.ITEM_CODE }} </td>
+        </ng-container>
+
+        <!-- Description -->
+        <ng-container matColumnDef="DESCRIPTION">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let row"> {{ row.DESCRIPTION }} </td>
+        </ng-container>
+
+        <!-- Unit of Measure -->
+        <ng-container matColumnDef="INV_UOM_CODE">
+            <th mat-header-cell *matHeaderCellDef> UOM </th>
+            <td mat-cell *matCellDef="let row"> {{ row.INV_UOM_CODE }} </td>
+        </ng-container>
+
+        <!-- Project Quantity -->
+        <ng-container matColumnDef="PROJECT_QTY">
+            <th mat-header-cell *matHeaderCellDef> Project Qty </th>
+            <td mat-cell *matCellDef="let row"> {{ row.PROJECT_QTY }} </td>
+        </ng-container>
+
+        <!-- Returned Quantity -->
+        <ng-container matColumnDef="RETURN_QTY">
+            <th mat-header-cell *matHeaderCellDef> Return Qty </th>
+            <td mat-cell *matCellDef="let row"> {{ row.RETURN_QTY }} </td>
+        </ng-container>
+
+        <!-- Balance Quantity -->
+        <ng-container matColumnDef="BAL_QTY">
+            <th mat-header-cell *matHeaderCellDef> Balance Qty </th>
+            <td mat-cell *matCellDef="let row"> {{ row.BAL_QTY }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <br><br>
+
+   <div *ngIf="submitButtonDisableBoolean" style="margin: 0 1.5rem;">
+  <span style="font-size: 1.5em; font-weight: bold; color: rgb(165, 9, 9);">
+    Note:
+  </span>
+  <span style="font-size: 1.2em; font-weight: 700; color: rgb(245, 60, 60);">
+    All materials under the return category of the estimate have not yet been returned to the Area Store.Therefore, your payment cannot be made contact DGM(STC) of concerning location
+  </span>
+  <span style="font-size: 1.2em; font-weight: 700; color: rgb(245, 60, 60);">
+    (Estimate के अंतर्गत रिटर्न श्रेणी में सूचीबद्ध सभी सामग्री अभी तक एरिया स्टोर में वापस नहीं की गई हैं। इसलिए आपका भुगतान नहीं किया जा सकता। संबंधित स्थान के डीजीएम (एसटीसी) से संपर्क करें।)
+  </span>
+</div>
+
+    <br>
+.
+    <div align="center"> 
+        
+       
+             <button type="button" class="btn btn-primary me-2" (click)="onSubmit()" [disabled]="submitButtonDisableBoolean" >Submit</button>
+       
+             <button type="button" class="btn btn-danger" (click)="onCloseNew()">Cancel</button>
+       
+        
+    </div>
+
+    <br><br>
+    <div></div>
+</div>

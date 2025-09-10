@@ -1,0 +1,252 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<mat-card class="custom-scroll-enable">
+
+
+    <div align="center" style="font-size: 2em; font-weight: 900;">
+        Duplicate Payment Refund
+    </div>
+
+
+
+    <br>
+
+    <table class="table table-bordered">
+
+        <tr class="table-secondary">
+            <th scope="col" colspan="4">
+                <div align="center" style="font-weight: 900; font-size: 1.5em;">
+                    Applicant Application Details
+                </div>
+            </th>
+        </tr>
+
+        <tr>
+            <th scope="row">Applicant Name :
+            </th>
+            <td>{{consumerApplicationDetail?.consumerName}}</td>
+
+            <th scope="row">Guardian Name :
+            </th>
+            <td>{{consumerApplicationDetail?.guardianName}}</td>
+
+
+
+        </tr>
+        <tr>
+            <th scope="row">District :
+            </th>
+            <td>{{consumerApplicationDetail?.DISTRICT}}</td>
+
+
+            <th scope="row">Distribution Center:
+            </th>
+            <td>{{consumerApplicationDetail?.dcName}}</td>
+        </tr>
+        <tr>
+
+            <th scope="row">Nature of work :
+            </th>
+            <td>{{consumerApplicationDetail?.natureOfWorkName}}</td>
+
+            <th scope="row">Scheme-Type :
+            </th>
+            <td>{{consumerApplicationDetail?.schemeTypeName}}</td>
+
+        </tr>
+
+        <tr>
+            <th scope="row">Address : </th>
+            <td>{{consumerApplicationDetail?.address}}</td>
+
+            <th scope="row">Consumer Application Number :
+            </th>
+            <td>{{consumerApplicationDetail?.consumerApplicationNo}}</td>
+
+
+        </tr>
+
+        <tr>
+            <th scope="row">GST Number : </th>
+            <td>{{consumerApplicationDetail?.gstNumber}}</td>
+
+
+            <th scope="row">ERP Number :
+            </th>
+            <td>{{consumerApplicationDetail?.erpWorkFlowNumber}}</td>
+
+        </tr>
+
+        <tr>
+            <th scope="row">Demand Payment Transaction-Id :</th>
+            <td> {{paymentView?.Demand_fees_Transaction_Id }} </td>
+
+            <th scope="row">Demand Payment Transaction-Date </th>
+            <td> {{paymentView?.Demand_fees_Transaction_Date }} </td>
+
+        </tr>
+
+        <tr>
+            <th scope="row">Revise Demand Payment Transaction-Id :</th>
+            <td> {{paymentView?.Revised_Demand_fees_Transaction_Id }} </td>
+
+            <th scope="row">Revise Demand Payment Transaction-Date </th>
+            <td> {{paymentView?.Revised_Demand_fees_Transaction_Date}} </td>
+
+        </tr>
+
+
+        <tr>
+            <th scope="row">Load : </th>
+            <td> {{consumerApplicationDetail?.loadRequested}}
+                {{consumerApplicationDetail?.loadRequestedName}}</td>
+
+            <th scope="row"> </th>
+            <td> </td>
+
+        </tr>
+
+    </table>
+
+    <br>
+
+
+    <table class="table table-bordered">
+        <tr class="table-secondary">
+            <th scope="col" colspan="8">
+                <div align="center" style="font-weight: 900; font-size: 1.5em;">All Payment Details
+                </div>
+            </th>
+        </tr>
+
+        <tr>
+            <th>S.NO</th>
+            <th> PAYMENT TYPE </th>
+            <th>TOTAL NO. OF PAYMENT</th>
+            <th>TOTAL REFUND COMPLEATED</th>
+            <th>Remaining No of Payment Refund</th>
+            <th>PAYMENT AMOUNT</th>
+            <th>TRANSACTION ID</th>
+            <th>REFUNDABLE AMOUNT</th>
+        </tr>
+
+        <tr>
+
+            <td>1</td>
+            <td>Registration Payment</td>
+            <td>{{paymentsDetails?.totalPaymentOfRegistration}}</td>
+            <td>{{paymentsDetails?.registationRefundCompleted}}</td>
+            <td>{{paymentsDetails?.remainingRegistrationRefund}}</td>
+            <td>{{paymentsDetails?.registrationDto[0]?.registrationAmount}}</td>
+            <td>{{paymentsDetails?.registrationDto[0]?.registrationTransactionId}}</td>
+            <td>{{paymentsDetails?.registrationDto[0]?.registrationRefundableAmount}}</td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td>2</td>
+            <td>Demand Payment</td>
+            <td> {{paymentsDetails?.totalPaymentOfDemand}}</td>
+            <td> {{paymentsDetails?.demandRefundCompleted}}</td>
+            <td> {{paymentsDetails?.remainingDemandRefund}}</td>
+            <td> {{paymentsDetails?.demandDto[0]?.demandAmount}}</td>
+            <td> {{paymentsDetails?.demandDto[0]?.demandTransactionId}}</td>
+            <td> {{paymentsDetails?.demandDto[0]?.demandRefundableAmount}}</td>
+
+        </tr>
+
+
+
+    </table>
+
+    <br>
+
+    <table class="table table-bordered table-striped shadow-lg bg-white text-center align-middle" width="100%">
+        <!-- Table Header -->
+        <tr class="table-primary">
+            <th scope="col" colspan="4" class="py-3">
+                <h2 class="fw-bold m-0">आवेदक द्वारा भरा गया बैंक विवरण</h2>
+            </th>
+        </tr>
+
+        <!-- Account Details Row -->
+        <tr class="align-middle">
+            <th class="text-end px-3">खाता धारक का नाम (Account Holder Name) :</th>
+            <td class="fw-semibold">{{ bankDetails?.accountHolderName }}</td>
+            <th class="text-end px-3">खाता संख्या (Account Number) :</th>
+            <td class="fw-semibold">{{ bankDetails?.accountNo }}</td>
+        </tr>
+
+        <!-- Bank Details Row -->
+        <tr class="align-middle">
+            <th class="text-end px-3">बैंक का नाम (Bank Name) :</th>
+            <td class="fw-semibold">{{ bankDetails?.bankName }}</td>
+            <th class="text-end px-3">आईएफएससी कोड (IFSC Code) :</th>
+            <td class="fw-semibold">{{ bankDetails?.ifscCode }}</td>
+        </tr>
+
+        <!-- PAN & Application Number -->
+        <tr class="align-middle">
+            <th class="text-end px-3">पैन संख्या (PAN Number) :</th>
+            <td class="fw-semibold">{{ bankDetails?.panNo }}</td>
+            <th class="text-end px-3">आवेदन क्रमांक (Application Number) :</th>
+            <td class="fw-semibold">{{ bankDetails?.consumerApplicationNo }}</td>
+        </tr>
+
+        <!-- Download Bank Passbook/Checkbook -->
+        <tr class="align-middle">
+            <th class="text-end px-3">Bank Passbook/Checkbook :</th>
+            <td colspan="3">
+                <div class="d-flex justify-content-center align-items-center"
+                    *ngIf="applicationDocumentData?.docCheckOrPassBookFile">
+                    <button type="button"
+                        class="btn btn-info d-flex align-items-center justify-content-center px-3 py-2"
+                        (click)="getDownloaddocCheckOrPassBookFileFile()">
+                        <mat-icon class="me-2">download</mat-icon> Download Applicant Passbook/Checkbook PDF
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <div>
+
+        <mat-checkbox class="example-margin mx-2" (change)="onCheckboxChange($event)"> </mat-checkbox>
+        <span style="font-size: 1.2em; font-weight: 700;">
+
+
+            मैं सत्यापित करता हूँ कि संबंधित आवेदन क्रमांक <span
+                style="color: crimson; font-weight: 900;">({{consumerApplicationDetail?.consumerApplicationNo}})</span>
+            के लिए त्रुटि वश एक से अधिक बार भुगतान किया था, इसलिए एक भुगतान को समायोजित कर अन्य भुगतान को वापिस करने की
+            कृपा करे।
+
+            मेरे द्वारा बैंक संबंधी विवरण (भुगतान रिफंड के लिए ) संलग्न है अतः इसमें कोई भी त्रुटि होने समस्त ज़िम्मेदारी
+            मेरी होगी।
+
+
+
+
+        </span>
+
+    </div>
+
+
+    <div align="center">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="checkedBooleanVariable==false?true:false" >
+            Submit
+        </button>
+    </div>
+
+
+
+
+
+</mat-card>

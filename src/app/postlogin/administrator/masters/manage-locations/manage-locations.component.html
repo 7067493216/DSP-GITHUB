@@ -1,0 +1,15 @@
+<mat-tab-group mat-stretch-tabs selectedIndex="0" (selectedTabChange)="changeTab($event)" class="stretched-tabs mat-elevation-z4">
+
+    <mat-tab label="State">
+        <app-state-list></app-state-list>
+    </mat-tab>
+    <mat-tab label="District">
+        <app-dist-list *ngIf="tabIndex === 1"></app-dist-list>
+    </mat-tab>
+    <mat-tab label="Tehsil">
+        <app-tehsil-list *ngIf="tabIndex === 2"></app-tehsil-list>
+    </mat-tab>
+    <mat-tab label="City">
+        <app-city-list *ngIf="tabIndex === 3"></app-city-list>
+    </mat-tab>
+</mat-tab-group>

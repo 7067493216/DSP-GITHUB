@@ -1,0 +1,535 @@
+<mat-card class="my-card mat-elevation-z8 dsp-consumerapplication" style="border-radius: 12px; overflow: hidden;">
+
+    <!-- Header Toolbar -->
+    <mat-toolbar color="primary" class="justify-center py-4">
+        <div style="font-size: 1.5rem; font-weight: 600; color: white;">
+            <mat-icon class="mr-2">cached</mat-icon> Resampling
+        </div>
+    </mat-toolbar>
+
+    <!-- Tab Group -->
+    <mat-tab-group mat-stretch-tabs dynamicHeight class="custom-tab-group" (selectedTabChange)="onTabChange($event)">
+
+
+
+        <mat-tab label="Data Pending For Sample and Testing">
+            <div class="tab-content">
+                <div align="right">
+                    <button mat-raised-button class="btn dspButton btn-danger mx-1"
+                        (click)="exporter.exportTable('xlsx', {fileName:'Data Pending For Sample and Testing', sheet: 'sheet_name'})">
+                        Download Excel
+                    </button>
+                </div>
+                <!-- Content 1 -->
+                <mat-card class="mat-elevation-z4" style="margin: 1rem;">
+                    <mat-toolbar color="primary">
+                        <mat-icon>table_chart</mat-icon>&nbsp;
+                        <span>Data Pending For Sample and Testing</span>
+                    </mat-toolbar>
+                    <div class="table-container" style="overflow-x: auto;">
+                        <table mat-table [dataSource]="dataSource1" class="table userlist_tables" matTableExporter
+                            #exporter="matTableExporter" matSort>
+
+                            <ng-container matColumnDef="sNo" class="max-width-1" >
+                                <th mat-header-cell *matHeaderCellDef> S.No </th>
+                                <td mat-cell *matCellDef="let row; let i=index" class="name-column">
+                                    {{paginator?._pageSize * paginator?._pageIndex + i + 1}}
+                                </td>
+                            </ng-container>
+
+                            <!-- CIRCLE Column -->
+                            <ng-container matColumnDef="CIRCLE">
+                                <th mat-header-cell *matHeaderCellDef> Circle </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.CIRCLE }} </td>
+                            </ng-container>
+
+                            <!-- DIVISION Column -->
+                            <ng-container matColumnDef="DIVISION">
+                                <th mat-header-cell *matHeaderCellDef> Division </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.DIVISION }} </td>
+                            </ng-container>
+
+                            <!-- DC_NAME Column -->
+                            <ng-container matColumnDef="DC_NAME">
+                                <th mat-header-cell *matHeaderCellDef> DC Name </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.DC_NAME }} </td>
+                            </ng-container>
+
+                            <!-- CONSUMER_APPLICATION_NUMBER Column -->
+                            <ng-container matColumnDef="CONSUMER_APPLICATION_NUMBER">
+                                <th mat-header-cell *matHeaderCellDef> App. No </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.CONSUMER_APPLICATION_NUMBER }} </td>
+                            </ng-container>
+
+                            <!-- CONSUMER_NAME Column -->
+                            <ng-container matColumnDef="CONSUMER_NAME">
+                                <th mat-header-cell *matHeaderCellDef> Consumer Name </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.CONSUMER_NAME }} </td>
+                            </ng-container>
+
+                            <!-- CONSUMER_NAME Column -->
+                            <ng-container matColumnDef="address">
+                                <th mat-header-cell *matHeaderCellDef> Address </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.ADDRESS }} </td>
+                            </ng-container>
+
+                            <!-- NATURE_OF_WORK_NAME Column -->
+                            <ng-container matColumnDef="NATURE_OF_WORK_NAME">
+                                <th mat-header-cell *matHeaderCellDef> Nature of Work </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.NATURE_OF_WORK_NAME }} </td>
+                            </ng-container>
+
+                            <!-- CONTRACTOR_NAME Column -->
+                            <ng-container matColumnDef="CONTRACTOR_NAME">
+                                <th mat-header-cell *matHeaderCellDef> Contractor </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.CONTRACTOR_NAME
+                                    }}({{element?.CONTRACTOR_AUTHANTICATION_ID}}) </td>
+                            </ng-container>
+
+                            <!-- WORK_ORDER_DATE Column -->
+                            <ng-container matColumnDef="WORK_ORDER_DATE">
+                                <th mat-header-cell *matHeaderCellDef> Work Order Details</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element?.WORK_ORDER_DATE | date: 'dd-MM-yyyy' }} <br>
+                                    ({{element?.WORK_ORDER_NO}})
+                                </td>
+                            </ng-container>
+
+                            <!-- VENDOR_NAME Column -->
+                            <ng-container matColumnDef="VENDOR_NAME">
+                                <th mat-header-cell *matHeaderCellDef> Vendor </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element?.VENDOR_NAME }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Item Name -->
+                            <ng-container matColumnDef="SPECIFICATION">
+                                <th mat-header-cell *matHeaderCellDef> Item Name </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element?.VENDOR_MATERIAL_SPECIFICATION }}
+                                </td>
+                            </ng-container>
+
+                            <!-- TRANSFORMER_SERIAL_NO Column -->
+                            <ng-container matColumnDef="TRANSFORMER_SERIAL_NO">
+                                <th mat-header-cell *matHeaderCellDef> Item Code</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element?.TRANSFORMER_SERIAL_NO }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Details Column -->
+                            <ng-container matColumnDef="Details">
+                                <th mat-header-cell *matHeaderCellDef>Material Details </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onDetails(element)">Material Details</button>
+                                </td>
+                            </ng-container>
+
+                            <!-- suffle Column -->
+                            <ng-container matColumnDef="suffle">
+                                <th mat-header-cell *matHeaderCellDef> Shuffle </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onSuffle(element)">Shuffle</button>
+                                </td>
+                            </ng-container>
+
+
+                            <!-- Header & Row Definitions -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20,50,100,500,1000]"
+                        showFirstLastButtons></mat-paginator>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Shuffled Data">
+            <div class="tab-content">
+                <div align="right">
+                    <button mat-raised-button class="btn dspButton btn-danger mx-1"
+                        (click)="exporter2.exportTable('xlsx', {fileName:'Shuffled Data', sheet: 'sheet_name'})">
+                        Download Excel
+                    </button>
+                </div>
+                <!-- Content 2 -->
+                <mat-card class="mat-elevation-z4" style="margin: 1rem;">
+                    <mat-toolbar color="primary">
+                        <mat-icon>table_chart</mat-icon>&nbsp;
+                        <span>Shuffled Data</span>
+                    </mat-toolbar>
+                    <div class="table-container" style="overflow-x: auto;">
+                        <table mat-table [dataSource]="dataSource2" class="table userlist_tables" matTableExporter
+                            #exporter2="matTableExporter" matSort>
+
+                            <ng-container matColumnDef="sNo">
+                                <th mat-header-cell *matHeaderCellDef> S.No </th>
+                                <td mat-cell *matCellDef="let row; let i=index" class="name-column">
+                                    {{paginator?._pageSize * paginator?._pageIndex + i + 1}}
+                                </td>
+                            </ng-container>
+
+                            <!-- CIRCLE Column -->
+                            <ng-container matColumnDef="CIRCLE">
+                                <th mat-header-cell *matHeaderCellDef> Circle </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.circleName }} </td>
+                            </ng-container>
+
+                            <!-- DIVISION Column -->
+                            <ng-container matColumnDef="DIVISION">
+                                <th mat-header-cell *matHeaderCellDef> Division </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.divisionName }} </td>
+                            </ng-container>
+
+                            <!-- DC_NAME Column -->
+                            <ng-container matColumnDef="DC_NAME">
+                                <th mat-header-cell *matHeaderCellDef> DC Name </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.dc_NAME }} </td>
+                            </ng-container>
+
+                            <!-- Consumer Application Number -->
+                            <ng-container matColumnDef="consumerApplicationNumber">
+                                <th mat-header-cell *matHeaderCellDef> App. No </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.conAppNo }} </td>
+                            </ng-container>
+
+                            <!-- Child Application Number -->
+                            <ng-container matColumnDef="childApplicationNo">
+                                <th mat-header-cell *matHeaderCellDef> Child App. No </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.childApplicationNo }} </td>
+                            </ng-container>
+
+                            <!-- Parent Application Number -->
+                            <!-- <ng-container matColumnDef="parantApplicationNo">
+                                <th mat-header-cell *matHeaderCellDef> Parent App. No </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.parantApplicationNo }} </td>
+                            </ng-container> -->
+
+                            <!-- Vendor Name -->
+                            <ng-container matColumnDef="vendorName">
+                                <th mat-header-cell *matHeaderCellDef> Vendor </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.vendorName }} </td>
+                            </ng-container>
+
+                            <!-- Specification -->
+                            <ng-container matColumnDef="vendorMaterialSpecification">
+                                <th mat-header-cell *matHeaderCellDef>  Material Specification </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.meterialSpecification }} </td>
+                            </ng-container>
+
+                            <!-- Transformer Serial No -->
+                            <ng-container matColumnDef="transformerSerialNo">
+                                <th mat-header-cell *matHeaderCellDef> Item Code </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.itemNo }} </td>
+                            </ng-container>
+
+                            <!-- month_year_of_item_manufacture -->
+                            <ng-container matColumnDef="month_year_of_item_manufacture">
+                                <th mat-header-cell *matHeaderCellDef> Month-Year of Item Manufacture</th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.yearOfManufacture }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Material Installation Date -->
+                            <ng-container matColumnDef="materialInstallationDate">
+                                <th mat-header-cell *matHeaderCellDef>Material Installation Date </th>
+                                <td mat-cell *matCellDef="let element">
+                                  {{ element?.instalationDate | date:'MM-yyyy' }}
+
+
+                                </td>
+                            </ng-container>
+
+                             <!-- CONTRACTOR_NAME Column -->
+                            <ng-container matColumnDef="CONTRACTOR_NAME">
+                                <th mat-header-cell *matHeaderCellDef> Contractor </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.CONTRACTOR_NAME
+                                    }}({{element?.auticationId}}) </td>
+                            </ng-container>
+
+                            <!-- Participate For Testing -->
+                            <!-- <ng-container matColumnDef="participateForTestingAndSampling">
+                                <th mat-header-cell *matHeaderCellDef> Testing Status </th>
+                                <td mat-cell *matCellDef="let element" [ngClass]="{
+        'text-blue': element?.dtrAcceptOrNot == null,
+        'text-green': element?.dtrAcceptOrNot === 'yes',
+        'text-red': element?.dtrAcceptOrNot === 'reject'
+      }">{{ element?.dtrAcceptOrNot == null? 'Pending': (element?.dtrAcceptOrNot === 'yes' ? 'Pass' : 'Fail') }}
+                                </td>
+                            </ng-container> -->
+
+                            <ng-container matColumnDef="participateForTestingAndSampling">
+                                <th mat-header-cell *matHeaderCellDef> Testing Status </th>
+                                <td mat-cell *matCellDef="let element" [ngClass]="{
+        'text-blue': element?.dtrPassOrFail == null,
+        'text-green': element?.dtrPassOrFail === 'yes',
+        'text-red': element?.dtrPassOrFail === 'reject'
+      }">
+
+                                    {{ element?.dtrPassOrFail == null
+                                    ? 'Pending'
+                                    : (element?.dtrPassOrFail === 'yes' ? 'Pass' : 'Fail') }}
+                                </td>
+                            </ng-container>
+
+
+                            <!-- Details Column -->
+                            <!-- <ng-container matColumnDef="Details">
+                                <th mat-header-cell *matHeaderCellDef> Details </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onDetails(element)">Details</button>
+                                </td>
+                            </ng-container> -->
+
+                            <!-- Shuffle Column -->
+                            <!-- <ng-container matColumnDef="shuffle">
+                                <th mat-header-cell *matHeaderCellDef> Shuffle </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onSuffle(element)">Shuffle</button>
+                                </td>
+                            </ng-container> -->
+
+                            <!-- Header & Row Definitions -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                        </table>
+
+                    </div>
+                    <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 20,50,100,500,1000]"
+                        showFirstLastButtons></mat-paginator>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Sample For Testing">
+            <div class="tab-content">
+                <div align="right">
+                    <button mat-raised-button class="btn dspButton btn-danger mx-1"
+                        (click)="exporter3.exportTable('xlsx', {fileName:'Sample For Testing', sheet: 'sheet_name'})">
+                        Download Excel
+                    </button>
+                </div>
+                <!-- Content 3 -->
+                <mat-card class="mat-elevation-z4" style="margin: 1rem;">
+                    <mat-toolbar color="primary">
+                        <mat-icon>table_chart</mat-icon>&nbsp;
+                        <span>Application/Material Sample For Testing</span>
+                    </mat-toolbar>
+
+                    <div class="table-container" style="overflow-x: auto;">
+                        <table mat-table [dataSource]="dataSource3" class="table userlist_tables" matTableExporter
+                            #exporter3="matTableExporter" matSort>
+
+                            <ng-container matColumnDef="sNo">
+                                <th mat-header-cell *matHeaderCellDef> S.No </th>
+                                <td mat-cell *matCellDef="let row; let i=index" class="name-column">
+                                    {{paginator?._pageSize * paginator?._pageIndex + i + 1}}
+                                </td>
+                            </ng-container>
+
+                            <!-- CIRCLE Column -->
+                            <ng-container matColumnDef="CIRCLE">
+                                <th mat-header-cell *matHeaderCellDef> Circle </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.circleName }} </td>
+                            </ng-container>
+
+                            <!-- DIVISION Column -->
+                            <ng-container matColumnDef="DIVISION">
+                                <th mat-header-cell *matHeaderCellDef> Division </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.divisionName }} </td>
+                            </ng-container>
+
+                            <!-- DC_NAME Column -->
+                            <ng-container matColumnDef="DC_NAME">
+                                <th mat-header-cell *matHeaderCellDef> DC Name </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.dc_NAME }} </td>
+                            </ng-container>
+
+                            <!-- Application Number -->
+                            <ng-container matColumnDef="consumerApplicationNumber">
+                                <th mat-header-cell *matHeaderCellDef> App. No </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.conAppNo }} </td>
+                            </ng-container>
+
+                            <!-- Parent Application Number -->
+                            <ng-container matColumnDef="parantApplicationNo">
+                                <th mat-header-cell *matHeaderCellDef> Parent App. No </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.parantApplicationNo }} </td>
+                            </ng-container>
+
+                            <!-- Vendor Name -->
+                            <ng-container matColumnDef="vendorName">
+                                <th mat-header-cell *matHeaderCellDef> Vendor </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.vendorName }} </td>
+                            </ng-container>
+
+                            <!-- Item Name / Specification -->
+                            <!-- <ng-container matColumnDef="vendorMaterialSpecification">
+                                <th mat-header-cell *matHeaderCellDef> Item Name </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.materialName }} </td>
+                            </ng-container> -->
+
+                            <!-- Item Name / Specification -->
+                            <ng-container matColumnDef="materialSpecification">
+                                <th mat-header-cell *matHeaderCellDef> Material Specification </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.meterialSpecification }} </td>
+                            </ng-container>
+
+                            <!-- Transformer Serial No -->
+                            <ng-container matColumnDef="transformerSerialNo">
+                                <th mat-header-cell *matHeaderCellDef> Item Code </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.itemNo }} </td>
+                            </ng-container>
+
+                            <!-- month_year_of_item_manufacture -->
+                            <ng-container matColumnDef="month_year_of_item_manufacture">
+                                <th mat-header-cell *matHeaderCellDef> Month-Year of Item Manufacture </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.yearOfManufacture }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Material Installation Date -->
+                            <ng-container matColumnDef="materialInstallationDate">
+                                <th mat-header-cell *matHeaderCellDef> Installation Date </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.materialInstallationDate}} </td>
+                            </ng-container>
+
+                             <!-- CONTRACTOR_NAME Column -->
+                            <ng-container matColumnDef="CONTRACTOR_NAME">
+                                <th mat-header-cell *matHeaderCellDef> Contractor </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.CONTRACTOR_NAME
+                                    }}({{element?.auticationId}}) </td>
+                            </ng-container>
+
+                            <!-- Participate For Testing -->
+                            <ng-container matColumnDef="participateForTestingAndSampling">
+                                <th mat-header-cell *matHeaderCellDef> Testing Status </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.participateForTestingAndSampling }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Testing Sample Selected -->
+                            <ng-container matColumnDef="testingsampleSelected">
+                                <th mat-header-cell *matHeaderCellDef> Sample Selected </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.testingsampleSelected }} </td>
+                            </ng-container>
+
+                            <!-- Shuffle Flag -->
+                            <!-- <ng-container matColumnDef="shufflingFlag">
+                                <th mat-header-cell *matHeaderCellDef> Shuffle Flag </th>
+                                <td mat-cell *matCellDef="let element"> {{ element?.shufflingFlag }} </td>
+                            </ng-container> -->
+
+                            <!-- Details Button -->
+                            <!-- <ng-container matColumnDef="Details">
+                                <th mat-header-cell *matHeaderCellDef> Details </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onDetails(element)">Details</button>
+                                </td>
+                            </ng-container> -->
+
+                            <!-- Shuffle Button -->
+                            <!-- <ng-container matColumnDef="shuffle">
+                                <th mat-header-cell *matHeaderCellDef> Shuffle </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onSuffle(element)">Shuffle</button>
+                                </td>
+                            </ng-container> -->
+
+                            <ng-container matColumnDef="gatePass">
+                                <th mat-header-cell *matHeaderCellDef> Gate Pass </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onGenerateGatePass(element)">Generate</button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="trfFile">
+                                <th mat-header-cell *matHeaderCellDef> TRF PDF </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <!-- <button type="button" class="btn btn-primary" (click)="onTrfDownload(element)">
+                                        Download TRF PDF -->
+                                    <a href="assets/images/TRF - NTL_Conductor_Cable_DTR_nishtha.pdf" target="_blank"
+                                        download="TRF.pdf" *ngIf="element?.regionId==1"
+                                        style="display: flex; align-items: center; gap: 4px; text-decoration: none;">
+                                        <mat-icon>download</mat-icon>
+                                        <span>Download TRF PDF bhopal</span>
+                                    </a>
+                                    <a href="assets/images/TRF gwalior.pdf" target="_blank" download="TRF.pdf"
+                                        *ngIf="element?.regionId==2"
+                                        style="display: flex; align-items: center; gap: 4px; text-decoration: none;">
+                                        <mat-icon>download</mat-icon>
+                                        <span>Download TRF PDF Gwalior</span>
+                                    </a>
+
+                                    <!-- </button> -->
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="trfUpload">
+                                <th mat-header-cell *matHeaderCellDef>Upload TRF PDF </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary" (click)="onTRFUpload(element)">Upload
+                                        TRF PDF</button>
+                                </td>
+                            </ng-container>
+
+                            <!-- Testing Sample Selected -->
+                            <ng-container matColumnDef="files">
+                                <th mat-header-cell *matHeaderCellDef> Download Files </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="onFilesDownload(element)">Download Files</button>
+                                </td>
+                            </ng-container>
+
+                            <!-- Testing Result-->
+                            <!-- <ng-container matColumnDef="testingResult">
+                                <th mat-header-cell *matHeaderCellDef> Testing Result</th>
+
+                                <td mat-cell *matCellDef="let element" [ngClass]="{
+        'text-blue': element?.dtrAcceptOrNot == null,
+        'text-green': element?.dtrAcceptOrNot === 'yes',
+        'text-red': element?.dtrAcceptOrNot === 'reject'
+      }">{{ element?.dtrAcceptOrNot == null? 'Pending': (element?.dtrAcceptOrNot === 'yes' ? 'Pass' : 'Fail') }}
+                                </td>
+                            </ng-container> -->
+
+                            <ng-container matColumnDef="testingResult">
+                                <th mat-header-cell *matHeaderCellDef> Testing Status </th>
+                                <td mat-cell *matCellDef="let element" [ngClass]="{
+        'text-blue': element?.dtrPassOrFail == null,
+        'text-green': element?.dtrPassOrFail === 'yes',
+        'text-red': element?.dtrPassOrFail === 'reject'
+      }">
+
+                                    {{ element?.dtrPassOrFail == null
+                                    ? 'Pending'
+                                    : (element?.dtrPassOrFail === 'yes' ? 'Pass' : 'Fail') }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Header & Row Definitions -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+                        </table>
+
+                    </div>
+                    <mat-paginator #paginator3 [pageSizeOptions]="[5, 10, 20,50,100,500,1000]"
+                        showFirstLastButtons></mat-paginator>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+</mat-card>

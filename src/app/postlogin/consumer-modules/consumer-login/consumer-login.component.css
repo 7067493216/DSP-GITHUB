@@ -1,0 +1,190 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.box {
+  position: sticky;
+  opacity: 1;
+  float: center;
+  margin: 0px 0px 0px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  max-width: 400px;
+}
+
+.login-wrapper .loginForm {
+  min-width: 100%;
+  max-width: 250px;
+  width: 100%;
+}
+
+.login-wrapper .width,
+.login-wrapper .btn-block {
+  width: 100%;
+}
+
+.login-wrapper mat-card-header {
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-weight: 400;
+}
+
+.captcha {
+  display: block;
+  max-width: 500px;
+  max-height: 35px;
+  width: auto;
+  height: auto;
+}
+
+.spacer {
+  flex: 1 1;
+}
+
+.autoRenewButton {
+  margin-right: 10px;
+  margin-top: -0.4rem;
+}
+
+.login-wrapper mat-card-header mat-card-footer mat-card-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.login-wrapper .mat-card {
+  padding: 30px 40px 40px;
+}
+
+.login-wrapper .mat-stroked-button {
+  border: 1px solid currentColor;
+  line-height: 54px;
+  background: #fff7fa;
+}
+
+.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.8375em 0;
+}
+
+.iconHover {
+  cursor: pointer;
+}
+
+.resendOtp {
+  cursor: pointer;
+  color: royalblue;
+}
+
+#signUp {
+  margin: 7%;
+}
+
+
+
+
+
+
+.dsp_home_block {
+    position: relative;
+    padding: 30px 0;
+}
+
+.dsp_home_block .dsp_cards {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    border-bottom: 1px solid #007bff;
+    box-shadow: 1px 0px 19px 1px hsl(0deg 0% 0% / 23%);
+}
+
+.dsp_home_block .dsp_cards .card-header {
+    background: #007bff;
+    padding: 10px;
+}
+
+.dsp_home_block .dsp_cards .card-header h2 {
+    font-size: 18px;
+    color: #fff;
+    text-transform: capitalize;
+    font-family: monospace;
+    font-weight: bold;
+    margin: 0;
+}
+
+.dsp_home_block .dsp_cards .card-body {
+    padding: 10px;
+}
+
+.dsp_home_block .dsp_cards .card-body marquee {
+    width: 100%;
+    font-size: 14px;
+}
+
+.dsp_home_block .dsp_cards .card-body ul {
+    margin: 0;
+    padding: 0;
+    list-style: decimal;
+    font-weight: 500;
+    font-size: 16px;
+    padding-left: 2px;
+}
+
+.dsp_home_block .dsp_cards .card-body ul li {
+    margin: 0 0 10px;
+}
+
+.dsp_home_block .dsp_cards .card-body ul li span {
+    font-size: 12px;
+    line-height: 24px;
+    white-space: normal;
+}
+
+.dsp-loginblock .dsp-loign-item .dsp-forminfo  .formButton {
+    width: 100%;
+}
+
+.dsp_homeinfoms {
+    position: relative;
+}
+
+.dsp_homeinfoms h4 {
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0 0 3px;
+}
+
+.dsp_homeinfoms p {
+    font-size: 12px;
+    line-height: 22px;
+}
+.dsp-loginblock .dsp-loign-item {
+    margin-top: 0;
+}
+
+
+.dsp_home_block .dsp_sliderblock {
+    position: relative;
+    padding: 30px 0;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+.dsp_home_block .dsp_sliderblock .imgbox {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.dsp_home_block .dsp_sliderblock .imgbox img {
+    width: 100%;
+    height: 100%;
+}
+

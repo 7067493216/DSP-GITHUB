@@ -1,0 +1,277 @@
+<form [formGroup]="meterDetailsFg">
+    <mat-card class="my-card">
+        <mat-card-header>
+            <mat-card-title>New Meter Details</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select meter Type" name="meterType" formControlName="meterType" required>
+                        <mat-option *ngFor="let meter of meterType" [value]="meter.meterTypeId">{{meter.meterDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="meterDetailsFg.controls.meterType.hasError('required')">
+                        Select Meter Type
+                    </mat-error>
+                </mat-form-field>  
+            </div>
+            <div class="col-md-4" [style.display]="meterDetailsFg.get('meterType').value == 1?'inherit':'none'">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Plant capacity in Kw" [maxNumber]="sanctionLoad"
+                        [disableControl]="meterDetailsFg.get('meterType').value !==1" name="PlantCapacity"
+                        formControlName="PlantCapacity" required>
+                    <mat-error *ngIf="meterDetailsFg.controls.PlantCapacity.hasError('required')">
+                        Enter Plant capacity
+                    </mat-error>
+                    <mat-error *ngIf="meterDetailsFg.controls.PlantCapacity.hasError('maxNumber')">
+                       Plant capacity should be less then sanctionLoad
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Configuration" name="configuration" formControlName="configuration"
+                required>
+                <mat-option *ngFor="let config of configuration" [value]="config.configurationId">
+                    {{config.configurationDesc}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.configuration.hasError('required')">
+                Select Configuration
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Meter Rent Type" name="meterRentType" formControlName="meterRentType"
+                required>
+                <mat-option *ngFor="let meterRent of meterRentType" [value]="meterRent.meterRentTypeId">
+                    {{meterRent.meterCapacity}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterRentType.hasError('required')">
+                Meter Rent Type
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Manufacture" name="manufacture" formControlName="manufacture"
+                (selectionChange)="onChangeMeter($event.value)" required>
+                <mat-option *ngFor="let manufacture of manufactureType" [value]="manufacture.meterMakeDetailId">
+                    {{manufacture.meterManufacturerName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.manufacture.hasError('required')">
+                Select Manufacture
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Meter Model" name="meterModel" formControlName="meterModel" required>
+                <mat-option *ngFor="let  meterMode of meterModelData" [value]=" meterMode.meterModelId">
+                    {{ meterMode.meterModelName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterModel.hasError('required')">
+                Select Model
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Meter Serial"  name="meterSerial" maxlength="15" formControlName="meterSerial" required>
+            <mat-error *ngIf="meterDetailsFg.controls.meterSerial.hasError('required')">
+                Enter Meter Serial
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.meterSerial.hasError('pattern')">
+                Invalid pattern
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.meterSerial.hasError('uniqueValue')">
+                Serial Number already in Used
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Meter Owner" name="meterOwner" formControlName="meterOwner" required>
+                <mat-option value="1">Discom</mat-option>
+                <mat-option value="2">Customer</mat-option>
+
+
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterOwner.hasError('required')">
+                Select Meter Owner
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Meter Capacity" name="meterCapacity" formControlName="meterCapacity"
+                required>
+                <mat-option *ngFor="let capacities of meterCapacities | keyvalue" [value]="capacities.key">
+                    {{capacities.value}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterCapacity.hasError('required')">
+                Select Meter Capacity
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Meter Accuracy" name="meterAccuracy" formControlName="meterAccuracy"
+                required>
+                <mat-option value="1">0.2</mat-option>
+                <mat-option value="2">0.2s</mat-option>
+                <mat-option value="3">0.5</mat-option>
+                <mat-option value="4">0.5s</mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterAccuracy.hasError('required')">
+                Select Meter Accuracy
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Meter CT Ratio" name="meterCTRatio" formControlName="meterCTRatio" required>
+                <mat-option *ngFor="let ctRatio of ctRatios" [value]="ctRatio.id">{{ctRatio.charVal}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterCTRatio.hasError('required')">
+                Select Meter CT Ratio
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Meter PT Ratio" name="meterPTRatio" formControlName="meterPTRatio"
+                (selectionChange)="onChangePtRatio($event.value)" required>
+                <mat-option *ngFor="let ptRatio of ptRatios" [value]="ptRatio.id">{{ptRatio.charVal}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterPTRatio.hasError('required')">
+                Select Meter PT Ratio
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Bill Cycle" name="billCycle" formControlName="billCycle" required>
+                <mat-option value="A">A (Meter read start date 24)</mat-option>
+                <mat-option value="R">R (Meter Read start date 01)</mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.billCycle.hasError('required')">
+                Select Bill Cycle
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select (selectionChange)="onChangeMeterSecurityDeposit($event.value)"
+                placeholder="Select Meter Security Deposit" name="meterSecurityDeposit"
+                formControlName="meterSecurityDeposit" required>
+                <mat-option value="1">Yes</mat-option>
+                <mat-option value="2">No</mat-option>
+            </mat-select>
+            <mat-error *ngIf="meterDetailsFg.controls.meterSecurityDeposit.hasError('required')">
+                Select Option
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <input matInput placeholder=" Meter Security Deposite Amount" pattern="^\d{0,9}(\.\d{1,4})?$" type="tel" maxlength="15" name="meterSecurityDepositeAmount" formControlName="meterSecurityDepositeAmount" required>
+            <mat-error *ngIf="meterDetailsFg.controls.meterSecurityDepositeAmount.hasError('required')">
+                Enter Security Deposite Amount
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Initial KWH import Read"  name="initialKWHRead"
+                formControlName="initialKWHRead" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22">
+            <mat-error *ngIf="meterDetailsFg.controls.initialKWHRead.hasError('required')">
+                Enter Initial KWH Read
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.initialKWHRead.hasError('pattern')">
+                Invalid Input
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Initial KVAH import Read" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22"
+                name="initialKVAHRead" formControlName="initialKVAHRead" required>
+            <mat-error *ngIf="meterDetailsFg.controls.initialKVAHRead.hasError('required')">
+                Enter Initial KVAH Read
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.initialKVAHRead.hasError('pattern')">
+                invalid Input
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <input matInput placeholder="Initial off Peak import Read (TOD1)" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22"
+                name="initialoffPeakRead" formControlName="initialoffPeakRead" required>
+            <mat-error *ngIf="meterDetailsFg.controls.initialoffPeakRead.hasError('required')">
+                Enter Initial off PeakRead
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.initialoffPeakRead.hasError('pattern')">
+                Invalid Input
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Initial Normal import Read (TOD2)" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22"
+                name="initialNormalRead" formControlName="initialNormalRead" required>
+            <mat-error *ngIf="meterDetailsFg.controls.initialNormalRead.hasError('required')">
+                Enter Initial Normal Read
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.initialNormalRead.hasError('pattern')">
+                Invalid Input
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="initial Onpeak import Read (TOD3)" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22"
+                name="initialOnpeakRead" formControlName="initialOnpeakRead" required>
+            <mat-error *ngIf="meterDetailsFg.controls.initialOnpeakRead.hasError('required')">
+                Enter initial Onpeak Read
+            </mat-error>
+            <mat-error *ngIf="meterDetailsFg.controls.initialOnpeakRead.hasError('pattern')">
+                Invalid Input
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Net MeterHT show hide fields -->
+        <div [style.display]="meterDetailsFg.get('meterType').value === 1?'inherit':'none'">
+            <mat-form-field class="half-width">
+                <input matInput placeholder="Initial KWH Export Read" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22"
+                    name="kwhExportRead" formControlName="kwhExportRead" required
+                    [disableControl]="meterDetailsFg.get('meterType').value !==1">
+                <mat-error *ngIf="meterDetailsFg.controls.kwhExportRead.hasError('required')">
+                    Enter Initial KWH Export Read
+                </mat-error>
+                <mat-error *ngIf="meterDetailsFg.controls.kwhExportRead.hasError('pattern')">
+                    Invalid Input
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <input matInput placeholder="Initial KVAH Export Read" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22"
+                    name="kvahExportRead" formControlName="kvahExportRead" required
+                    [disableControl]="meterDetailsFg.get('meterType').value !==1">
+                <mat-error *ngIf="meterDetailsFg.controls.kvahExportRead.hasError('required')">
+                    Enter Initial KVAH Export Read
+                </mat-error>
+                <mat-error *ngIf="meterDetailsFg.controls.kvahExportRead.hasError('pattern')">
+                    Invalid Input
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <input matInput placeholder="Initial Off Peak Export Read (TOD1)" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22" name="initialTOD1ExportRead" formControlName="initialTOD1ExportRead"
+                    required [disableControl]="meterDetailsFg.get('meterType').value !==1">
+                <mat-error *ngIf="meterDetailsFg.controls.initialTOD1ExportRead.hasError('required')">
+                    Enter Initial Offpeak Export Read (TOD1)
+                </mat-error>
+                <mat-error *ngIf="meterDetailsFg.controls.initialTOD1ExportRead.hasError('pattern')">
+                    Invalid Input
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width">
+                <input matInput placeholder="Initial Normal Export Read (TOD2)" pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22" name="initialTOD2ExportRead" formControlName="initialTOD2ExportRead" required
+                    [disableControl]="meterDetailsFg.get('meterType').value !==1">
+                <mat-error *ngIf="meterDetailsFg.controls.initialTOD2ExportRead.hasError('required')">
+                    Enter Normal Export Read (TOD2)
+                </mat-error>
+                <mat-error *ngIf="meterDetailsFg.controls.initialTOD2ExportRead.hasError('pattern')">
+                    Invalid Input
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <input matInput placeholder="Initial On Peak Export Read (TOD3)"
+                pattern="^\d{0,15}(\.\d{1,7})?$" type="tel" maxlength="22" name="initialTOD3ExportRead" formControlName="initialTOD3ExportRead"
+                    required [disableControl]="meterDetailsFg.get('meterType').value !==1">
+                <mat-error *ngIf="meterDetailsFg.controls.initialTOD3ExportRead.hasError('required')">
+                    Enter Initial On Peak Export Read (TOD3)
+                </mat-error>
+                <mat-error *ngIf="meterDetailsFg.controls.initialTOD3ExportRead.hasError('pattern')">
+                    Invalid Input
+                </mat-error>
+            </mat-form-field>
+        </div><br>
+    </mat-card>
+</form>
+<!-- {{meterDetailsFg?.value | json}} -->

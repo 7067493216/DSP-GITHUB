@@ -1,0 +1,20 @@
+.my-card {
+    width:80%;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+}
+.table {
+    overflow-x: auto;
+    /* font-size:13px; */
+    /* white-space: nowrap; */
+    /* width: auto; */
+    text-align: center;
+}
+th{
+    white-space: nowrap; 
+    font-size:12px; 
+}
+td{
+    font-size:11px; 
+}

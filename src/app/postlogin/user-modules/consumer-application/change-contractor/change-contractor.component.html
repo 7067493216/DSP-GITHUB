@@ -1,0 +1,135 @@
+<mat-card class="custom-scroll-enable">
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style=" background-image: linear-gradient(rgb(156, 154, 154), rgb(252, 252, 252)); font-size: 2em;font-weight: bold; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Contractor Change</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <br>
+    <hr>
+    <br>
+
+
+
+
+    <!-- ------------------------------------------------------------- -->
+
+    <table class="table table-bordered">
+
+        <tr class="table-secondary" rowspan="2">
+            <th scope="col" colspan="4">
+                <div align="center" style="font-weight: 900; font-size: 1.5em;">Old Contracter Details</div>
+            </th>
+        </tr>
+
+
+
+        <tr>
+            <th scope="row">Application Number </th>
+            <td>{{consumerApplicationDetail?.consumerApplicationNo}}</td>
+            <th scope="row">Application Status</th>
+            <td>{{consumerApplicationDetail?.applicationStatus?.applicationStatusName}}</td>
+        </tr>
+
+        <tr>
+            <th scope="row">CONTRACTOR_NAME </th>
+            <td>{{contractorDetails?.CONTRACTOR_NAME}}</td>
+            <th scope="row">CONTRACTOR_CATEGORY </th>
+            <td>{{contractorDetails?.CONTRACTOR_CATEGORY}}</td>
+        </tr>
+
+        <tr>
+            <th scope="row">CONTRACTOR_ID </th>
+            <td>{{contractorDetails?.CONTRACTOR_ID}}</td>
+            <th scope="row">CONTACT_NO </th>
+            <td>{{contractorDetails?.CONTACT_NO}}</td>
+
+        </tr>
+
+
+    </table>
+
+    <!-- ----------------------------------------------------------------- -->
+
+
+
+
+    <br>
+    <br>
+    <hr>
+    <br>
+
+
+
+    <!-- <div >
+        <input type="checkbox" (change)="onCheckBoxChange($event)" style="height: 2em; width: 2em;" class="mx-4 mt-2"><span style="padding: 0.5em; background-image: linear-gradient(rgb(231, 228, 228),rgb(233, 230, 230),rgb(235, 232, 232)); font-size: 1.5em;">क्या आप कंट्रैक्टर change करना
+            चाहते हैं |</span>
+    </div>
+
+    <br>
+    <br>
+    <br> -->
+
+
+
+    <form [formGroup]="remarkForm">
+
+        <div class="row">
+            <div class="form-group col-lg-8">
+                <label class="form-label"><span class="text-danger">Document For Contractor Change
+                        Request</span></label>
+                <input class="form-control" type="file" formControlName="docContractorReselctionFile"
+                    (change)="ondocContractorReselctionFile($event)">
+                <div class="text-danger"
+                    *ngIf="submitted && remarkForm.controls?.docContractorReselctionFile.errors?.required">
+                    Document is required
+                </div>
+            </div><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-8 form-group">
+                <label class="form-label">Reason For Contractor Change Request<span class="text-danger">*</span></label>
+                <textarea class="form-control" rows="3" formControlName="remark" placeholder="remark "></textarea>
+                <div class="text-danger"
+                *ngIf="submitted && remarkForm.controls?.remark.errors?.required">
+                remark is required
+            </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-danger" style="font-size:1.5em; font-weight: bold;">आवेदन Approve होने के पश्चात <span *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId==1">आवेदक</span><span *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId==2">DGM(STC)</span> स्तर पर
+            पुन कांट्रेक्टर सिलेक्शन के लिए दिखने लगेगा |</div>
+        <br>
+
+        <div>
+            <button type="submit" class="btn btn-success" (click)="onSubmit()">Approve </button>
+        </div>
+
+        <!-- <div>
+            <button type="button" class="btn btn-success" (click)="clickMethod()">Submit</button>
+        </div> -->
+    </form>
+
+
+
+
+
+
+</mat-card>

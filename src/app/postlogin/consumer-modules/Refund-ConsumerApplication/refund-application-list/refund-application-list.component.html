@@ -1,0 +1,207 @@
+<mat-card class="my-card mat-elevation-z8 dsp-cunsumerapplication">
+  <mat-toolbar color="primary" >
+      <div style="width: 100%;" align="center">
+          <div> Refund Application List (<span>{{typeList}}</span>)</div>
+         
+      </div>
+  </mat-toolbar>
+
+
+    <div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSources" matTableExporter #exporter="matTableExporter" matSort class="table table-bordered userlist_tables">
+
+       <ng-container matColumnDef="position" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header  > S.No </th>
+          <td mat-cell *matCellDef="let row; let i=index" class="name-column"> 
+              <!-- {{(paginator?._pageIndex )}} -->
+              {{paginator?._pageSize * paginator?._pageIndex + i + 1}} 
+              <!-- {{paginator.pageSize * paginator.pageIndex + i + 1}} -->
+              </td>
+        </ng-container>
+
+     
+
+
+      <ng-container matColumnDef="consumerApplicationNo" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Application No </th>
+          <td mat-cell *matCellDef="let row" class="name-column"> {{row?.consumerApplicationNo}} </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="schemeType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Scheme Type </th>
+          <td mat-cell *matCellDef="let row"> {{row?.schemeType?.schemeTypeName}} </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="natureOfWork">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Nature of
+              Work-<br>(कार्य प्रकार) </th>
+          <td mat-cell *matCellDef="let row"> {{row?.natureOfWorkType?.natureOfWorkName}} </td>
+        </ng-container>
+
+     
+
+      <ng-container matColumnDef="consumerName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >Applicant Name <br>(
+              आवेदक का नाम)</th>
+          <td mat-cell *matCellDef="let row"> {{row?.consumerName}} </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="stage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >Application Pending On
+              <br> (आवेदन
+              लंबित स्तर पर)</th>
+          <td mat-cell *matCellDef="let row"> {{row?.applicationStatus?.applicationStatusName}} </td>
+        </ng-container>
+
+     
+
+      <ng-container matColumnDef="dcName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >Distribution Center<br>
+              (वितरण
+              केंद्र)</th>
+          <td mat-cell *matCellDef="let row"> {{row?.distributionCenter?.dcName}} </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="loadRequest">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >Load<br>
+              (भार)</th>
+          <td mat-cell *matCellDef="let row"> <span *ngIf="row?.loadRequested==null">0</span>{{row.loadRequested}}
+              {{row?.loadRequestedId?.loadRequestedName}} </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="erpWorkFlowNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >ERP
+              NUMBER<br>
+              (प्राकलन संख्या)</th>
+          <td mat-cell *matCellDef="let row"> {{row?.erpWorkFlowNumber}} </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="MobileNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >Mobile
+              Number<br>(मोबाइल नंबर)</th>
+          <td mat-cell *matCellDef="let row"> {{row?.consumers?.consumerLoginId}} </td>
+        </ng-container>
+
+     
+      <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header >Address<br>(पता)</th>
+          <td mat-cell *matCellDef="let row"> {{row?.address}} </td>
+        </ng-container>
+
+     
+      <ng-container matColumnDef="registrationPaymentDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Registration Payment Date<br>(पंजीकरण भुगतान तिथि)
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <div *ngIf="row.listOfTransactionDate != null">
+              <!-- {{ row.listOfTransactionDate[0]?.REGISTRATION_DATE | date: 'dd-MM-yyyy' }} -->
+            </div>
+          </td>
+        </ng-container>
+        
+
+      <ng-container matColumnDef="demandPaymentDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Demand Payment
+              Date<br>(मांग भुगतान
+              तिथि)</th>
+          <td mat-cell *matCellDef="let row"> 
+              <div *ngIf="row?.listOfTransactionDate != null">
+
+              </div>
+              <!-- {{row.listOfTransactionDate[0]?.DEMAND_DATE | date: 'dd-MM-yyyy'}} -->
+        </td>
+        </ng-container>
+
+      <ng-container matColumnDef="feedback">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Consumer Feedback</th>
+          <td mat-cell *matCellDef="let row">  </td>
+        </ng-container>
+
+
+      <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status <br> (वर्तमान
+              स्थिति)</th>
+          <td mat-cell *matCellDef="let row">   <b>
+
+
+
+              <span *ngIf="row?.applicationStatus?.applicationStatusId == 29"
+                  style="color:black; background-color: crimson; padding: 8%;font:bold;">
+                  Rejected
+              </span>
+              <span
+                  *ngIf="row?.applicationStatus?.applicationStatusId != 33 && row?.applicationStatusId != 29"
+                  style="color:black; background-color: orange; padding: 8%; font:bold;">
+                  Pending
+              </span>
+              <span *ngIf="row?.applicationStatus?.applicationStatusId == 33"
+                  style="color:white; background-color: green; padding: 8%;font:bold;">
+                  Completed
+              </span>
+
+
+          </b></td>
+        </ng-container>
+
+     
+
+      <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit/View <br> परिवर्तन/देखे</th>
+          <td mat-cell *matCellDef="let row"> 
+              <div class="btn-actionifo">
+
+                 
+
+                  <button matTooltip="View Consumer Application"
+                      mat-icon-button
+                      color="primary" class="m-1 btnaction_custome">
+
+                      <mat-icon> all_out </mat-icon>
+                  </button>
+
+
+                  <!-- <span>
+                      <button class="m-1 btnaction_custome"
+                          
+                          matTooltip="Edit Consumer Application" mat-icon-button color="primary"
+                          >
+                          <mat-icon>launch</mat-icon>
+                      </button>
+                  </span> -->
+
+                 
+
+                  <span *ngIf="row?.applicationStatus?.applicationStatusId != 42">
+                      <button
+                      (click)="onRefundPaymentRequestGenerate(row,RequestPaymentTypeId,row.erpWorkFlowNumber)"
+                          class="btn btn-sm btn-success m-1 btnaction_custome">
+                          Refund Payment 
+                      </button>
+                  </span>
+
+                  
+              </div>
+          </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[ 10, 25,50, 100,500,1000,5000]" aria-label="Select page of listData"></mat-paginator>
+</div>
+  
+
+</mat-card>

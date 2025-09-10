@@ -1,0 +1,1046 @@
+<div>
+    <div *ngIf="!submitted">
+        <div>
+            <button style="position: absolute;
+            top: 0px !important;
+            right: 0;
+            background: black;
+            z-index: 999;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            padding: 0 !important;
+            width: 32px !important;
+            height: 32px;
+            min-width: unset !important;" mat-button mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <mat-card class="p-0">
+            <form [formGroup]="pmmkyFormSb">
+                <div class="header text-center mb-2">
+                    <div style="display: flex;justify-content: space-between;">
+                        <img src="assets/images/kisanyojanaimages/logo_Kisan1.jpg" alt="" height="92em" width="92em">
+
+                        <div>
+                            <h1 style="font-weight: 900;" class="text-center">मुख्यमंत्री कृषक मित्र योजना</h1>
+                            <h3>मध्य प्रदेश मध्य क्षेत्र विद्यत वितरण कंपनी लिमिटेड
+                                <br>
+                                ट्रांसफार्मर सहित नवीन कृषि पंप/ट्यूबवेल कनेक्शन हेतु आवेदन पत्र
+
+                            </h3>
+                        </div>
+
+                        <img src="assets/images/kisanyojanaimages/logo_Kisan2.jpg" alt="" height="92em" width="92em">
+                    </div>
+                </div>
+
+                <div style="display: block; justify-content: space-between;">
+                    <div>
+
+                    </div>
+                </div>
+
+                <br>
+                <!-- <div style="margin-right: 5em">
+                <mat-toolbar style="background: transparent; ">
+                <span ><b>आवेदन क्रमांक :</b> </span> {{data[0].consumerApplicationNo}}
+                <span class="fill-remaining-space"></span>
+                </mat-toolbar>
+                </div> -->
+
+                <div class="dsp-formsinfo">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>कार्य का प्रकार<span class="required">*</span></mat-label>
+                                <input  placeholder="Scheme Type" formControlName="natureOfWorkTypeId"
+                                    class="change-bg-color form-control" [readonly]="true">
+                                    
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>आवेदक का प्रकार<span class="required">*</span></mat-label>
+                                <input  placeholder="--आवेदक का प्रकार--" formControlName="avedakKaPrakar"
+                                    class="change-bg-color form-control" [readonly]="true">
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>Consumer Remark<span class="required">*</span></mat-label>
+                                <input  placeholder="Consumer Remark" type="text" class="form-control"
+                                    formControlName="avedakRemark">
+                            
+                        </div>
+
+                        <!-- <mat-form-field class="half-width padding" *ngIf=" newApplicationCreationFg.get('natureOfWorkTypeId').value ==5 ||  newApplicationCreationFg.get('natureOfWorkTypeId').value ==6 " >
+                            <mat-label>आवेदक का प्रकार<span class="required">*</span></mat-label>
+                            <input  placeholder="Scheme Type" [readonly]="true" [value]="newApplicationCreationFg.get('natureOfWorkTypeId').value ==5?'Private Entity':' Govt Entity'" class="change-bg-color form-control">
+                         -->
+
+                        <!-- <div class="col-md-4 form-group">
+                            
+                                <mat-label>लोड(भार) अनुमति<span class="required">*</span></mat-label>
+                                <input  placeholder="लोड(भार) अनुमति" formControlName="loadRequested"
+                                    class="change-bg-color form-control">
+                            
+                        </div> -->
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>लोड(भार) अनुमति<span class="required">*</span></mat-label>
+                                <input  placeholder="load Requested" type="number" class="form-control"
+                                    formControlName="loadRequested">
+
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>मोबाइल नंबर<span class="required">*</span></mat-label>
+                                <input  placeholder="मोबाइल नंबर" type="number" formControlName="contact" class="form-control"
+                                    minlength="10" maxlength="10" [readonly]="true">
+                                <!-- this.fixedMobileNumberofConsumer -->
+                            
+                        </div>
+
+                        <!-- समग्र नंबर :   {{data?.MemberID}} -->
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>समग्र नंबर<span class="required">*</span></mat-label>
+                                <input  placeholder="समग्र नंबर" [readonly]="true"
+                                    formControlName="samagraNumber" class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>लोड यूनिट<span class="required">*</span></mat-label>
+                                <input  placeholder="लोड यूनिट" [readonly]="true"
+                                    formControlName="loadRequestedId" class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <!-- <div class="col-md-4 form-group">
+                            
+                                <mat-label>लोड यूनिट<span class="required"></span></mat-label>
+                                <mat-select formControlName="loadRequestedId"
+                                    (selectionChange)="onChangeSelectedLoad($event)">
+                                    <mat-option value="">--लोड यूनिट चुने--</mat-option>
+                                    <mat-option *ngFor="let loadRequest of loadRequestList" [value]="loadRequest">
+                                        {{loadRequest.loadRequestedName}}</mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="(mmkyFormControls['loadRequestedId'].touched || submitted) && mmkyFormControls['loadRequestedId'].errors">
+                                    <div *ngIf="mmkyFormControls['loadRequestedId'].errors['required']">
+                                        लोड यूनिट चुने</div>
+                                </mat-error>
+                            
+                        </div> -->
+
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>योजना का प्रकार<span class="required">*</span></mat-label>
+                                <input  placeholder="योजना का प्रकार" formControlName="schemeTypeId"
+                                    [readonly]="true" class="change-bg-color form-control">
+
+                            
+                        </div>
+                        <!-- <div class="col-md-4 form-group">
+                            
+                                <mat-label>Scheme Type (योजना का प्रकार)<span class="required">*</span></mat-label>
+                                <mat-select formControlName="schemeTypeId"
+                                    (selectionChange)="onChangeSelectedSchemeType($event)">
+                                    <mat-option value="">--Select Scheme Type--</mat-option>
+                                    <mat-option *ngFor="let schemeType of schemeTypeList"
+                                        [value]="schemeType.schemeTypeId">
+
+                                        {{schemeType.schemeTypeName}}
+
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="(mmkyFormControls['schemeTypeId'].touched || submitted) && mmkyFormControls['schemeTypeId'].errors">
+                                    <div *ngIf="mmkyFormControls['schemeTypeId'].errors['required']">
+                                        Select Scheme Type</div>
+                                </mat-error>
+                            
+                        </div> -->
+
+
+
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>आवेदक का नाम<span class="required">*</span></mat-label>
+                                <input  placeholder="आवेदक का नाम" type="text" formControlName="consumerName"
+                                    [readonly]="true" class="change-bg-color form-control">
+                            
+                        </div>
+
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>पिता/पति का नाम<span class="required">*</span></mat-label>
+                                <input  placeholder="पिता/पति का नाम" type="text" formControlName="guardianName"
+                                    class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>पता<span class="required">*</span></mat-label>
+                                <input  type="text" placeholder="पता" formControlName="address"
+                                    class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>आधार संख्‍या<span class="required">*</span></mat-label>
+                                <input  placeholder="आधार संख्‍या" formControlName="aadharNo" maxlength="12"
+                                    class="change-bg-color form-control">
+
+                            
+                        </div>
+
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>खसरा<span class="required">*</span></mat-label>
+                                <input  placeholder="खसरा" type="text" formControlName="khasra"
+                                    class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <!-- <div class="col-md-4 form-group">
+                            
+                                <mat-label>खतौनी <span class="required">*</span></mat-label>
+                                <input  placeholder="खतौनी "  formControlName="khatoni"
+                                    class="change-bg-color form-control">
+
+                            
+                        </div> -->
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>भूमि क्षेत्रफल<span class="required">*</span></mat-label>
+                                <input  placeholder="भूमि क्षेत्रफल" type="number" formControlName="area"
+                                    class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>भूमि क्षेत्रफल इकाई<span class="required">*</span></mat-label>
+                                <input  placeholder="भूमि क्षेत्रफल इकाई" [readonly]="true"
+                                    formControlName="landAreaUnitId" class="change-bg-color form-control">
+
+                            
+                        </div>
+
+                        <!-- <div class="col-md-4 form-group">
+                            
+
+                                <mat-label>भूमि क्षेत्रफल इकाई<span class="required">*</span></mat-label>
+                                <mat-select formControlName="landAreaUnitId"
+                                    (selectionChange)="onChangelandAreaUnitId($event)">
+                                    <mat-option value="">--Select Land Area Unit--</mat-option>
+                                    <mat-option *ngFor="let land of landAreaUnitList" [value]="land">
+                                        {{land.landAreaUnitName}}</mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="(mmkyFormControls['landAreaUnitId'].touched || submitted) && mmkyFormControls['landAreaUnitId'].errors">
+                                    <div *ngIf="mmkyFormControls['landAreaUnitId'].errors['required']">
+                                        Select Land Area Unit</div>
+                                </mat-error>
+                            
+                        </div> -->
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>पिनकोड <span class="required">*</span></mat-label>
+                                <input  placeholder="पिनकोड" type="number" formControlName="pinCode"
+                                    maxlength="6" class="change-bg-color form-control">
+
+                            
+                        </div>
+
+
+                        <div class="col-md-4 form-group">
+                            <div class="form-group">
+                                <label>खसरा अपलोड <span class="required">*</span></label>
+                                <input class="form-control change-bg-color" type="file"
+                                    (change)="selectOnDocKhasraKhatoni($event)">
+                                <!-- formControlName="docKhasraKhatoni" -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <div class="form-group">
+                                <label>समग्र कार्ड अपलोड़ <span class="required">*</span></label>
+                                <input class="form-control change-bg-color" type="file"
+                                    (change)="selectOndocSamagraFile($event)">
+                                <!-- formControlName="docSamagraFile" -->
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-4">
+                            
+                                <mat-label>khasra doc <span class="required">*</span></mat-label>
+                                <input class="form-group"  placeholder="khasra-file-choose" type="file" formControlName="docKhasraKhatoni"  
+                                    class="change-bg-color form-control">
+                            
+                        </div>
+
+                        <div class="col-md-4">
+                            
+                                <mat-label>docSamagraFile <span class="required">*</span></mat-label>
+                                <input class="form-group"  placeholder="docSamagraFile-choose" type="file" formControlName="docSamagraFile"  
+                                    class="change-bg-color">
+                            
+                        </div> -->
+
+
+                        <!-- <div class="col-md-4">
+                            
+                                <mat-label>जिला चुने <span class="required">*</span></mat-label>
+                                <input  placeholder="जिला चुने  "  formControlName="districtId" [readonly]="true"
+                                    class="change-bg-color">
+                            
+                        </div> -->
+
+
+
+
+
+                        <!-- <div class="col-md-4">
+                            
+                                <mat-label>उपभोक्ता श्रेणी चुने <span class="required">*</span></mat-label>
+                                <input matInput placeholder="उपभोक्ता श्रेणी चुने  " formControlName="castCategory"
+                                    class="change-bg-color">
+                            
+                        </div> -->
+
+                        <div class="col-md-4 form-group">
+                           
+                                <mat-label>उपभोक्ता श्रेणी चुने<span class="required">*</span></mat-label>
+                                <select formControlName="castCategory" class="form-control form-select">
+                                    <option value="" disabled>उपभोक्ता श्रेणी चुने</option>
+                                    <option *ngFor="let cast of casttList" [value]="cast.name">
+                                        {{cast.name}}</option>
+                                </select>
+                                <mat-error
+                                    *ngIf="(mmkyFormControls['castCategory'].touched || submitted) && mmkyFormControls['castCategory'].errors">
+                                    <div *ngIf="mmkyFormControls['castCategory'].errors['required']">
+                                        Select Nature of Work</div>
+                                </mat-error>
+                            
+                        </div>
+
+                        <!-- <div class="col-md-4">
+                            
+                                <mat-label>वितरण केन्द्र चुने <span class="required">*</span></mat-label>
+                                <input matInput placeholder="वितरण केन्द्र चुने  " 
+                                    formControlName="dcId" class="change-bg-color">
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>जिला<span class="required">*</span></mat-label>
+                                <select formControlName="districtId" class="form-control form-select"
+                                    (change)="onChangeSelectedDistrictType($event.target.value)">
+                                    <option value="" disabled>--जिला चुने--</option>
+                                    <option *ngFor="let district of districtList" [value]="district?.districtId">
+                                        {{district.districtName}}</option>
+                                </select>
+                                <mat-error
+                                    *ngIf="(mmkyFormControls['districtId'].touched || submitted) && mmkyFormControls['districtId'].errors">
+                                    <div *ngIf="mmkyFormControls['districtId'].errors['required']">
+                                        Select Nature of Work</div>
+                                </mat-error>
+                            
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            
+                                <mat-label>वितरण केन्द्र <span class="required">*</span></mat-label>
+                                <select formControlName="dcId" (change)="onChangeDc($event)" class="form-control form-select">
+                                    <option value="">--वितरण केन्द्र चुने--</option>
+                                    <option *ngFor="let dList of distributionCenterList" [value]="dList.dcId">
+                                        {{dList.dcName}}</option>
+                                </select>
+                                <mat-error
+                                    *ngIf="(mmkyFormControls['dcId'].touched || submitted) && mmkyFormControls['dcId'].errors">
+                                    <div *ngIf="mmkyFormControls['dcId'].errors['required']">
+                                        Select Distribution Center (DC)</div>
+                                </mat-error>
+                            
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <form [formGroup]="selectForm" (ngSubmit)="generateBlocks()">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                       
+        
+                                            <mat-label>आवेदन का प्रकार का चयन करें <span class="required">*</span></mat-label>
+                                            <select formControlName="individualOrGroupId" class="form-control form-select"
+                                                (change)="displayInputField($event)">
+                                                <option value="" disabled>--आवेदन का प्रकार--</option>
+                                                <option *ngFor="let data of displayInputFieldArray"
+                                                    [value]="data.id">{{data.name}}</option>
+        
+                                            </select>
+                                        
+                                    </div>
+        
+                                    <div class="col-sm-4 me-3" *ngIf="displayinputfield ">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>मुख्य आवेदक के अतरिक्त आवेदकों की संख्या (अधिकतम १०)</mat-label>
+                                            <input matInput placeholder="Enter number" formControlName="numberofgroup">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4" *ngIf="displayinputfield">
+                                        <button type="submit" class="btn btn-info">Generate</button>
+                                        <!-- <button type="button" (click)="resetAllBlocks()" class="btn btn-danger">Reset</button> -->
+                                    </div>
+                                </div>
+                            </form>
+        
+                            <div *ngIf="displayInput">
+                                <!-- <div class="form-group">
+                                    <button type="button" class="btn btn-primary " title="Add" (click)="add()">
+                                        <mat-icon>add_circle</mat-icon> &nbsp;&nbsp;नया जोड़ो
+                                    </button>
+                                </div> -->
+        
+                                <div class="form-group">
+                                    <form [formGroup]="empForm" >
+                                        <div formArrayName="employees">
+                                            <div *ngFor="let employee of employees().controls; let samIndex=index">
+                                                <table class="table w-100 pens_additem" [formGroupName]="samIndex">
+                                                    <tr>
+                                                        <td class="w-5">
+                                                            {{samIndex+1}}.
+                                                        </td>
+                                                        <td class="w-30">
+                                                            <div class="form-group">
+                                                                <label class="lable-text">
+                                                                    समग्र :
+                                                                </label>
+                                                                <div class="input-group customes-ingroups">
+                                                                    <input type="text" formControlName="samagraId"
+                                                                       
+                                                                        class="form-control" />
+                                                                    <!-- <div *ngIf="employees[samIndex].get('samagraId').errors?.required && FormArrayBooleanVariable">
+                                                                              please enter samagra id here
+                                                                        </div> -->
+                                                                    <!-- <span *ngIf="this.empForm[samIndex].controls['samagra'].errors['required']"
+                                                                        style="color: red;font-size: medium;">this is required</span> -->
+                                                                    <span class="input-group-addon">
+                                                                        <button type="submit" class="btn btn-success"
+                                                                        (click)="getSamagraDetails($event,samIndex)"    >Go</button>
+                                                                        <!-- (click)="getSamagraDetails(empForm)" -->
+                                                                    </span>
+                                                                </div>
+                                                                <div *ngIf="employee['controls'].samagra?.errors?.required"
+                                                                    style="color: red;font-size: medium;">
+                                                                    Samagra is Required
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="w-30">
+                                                            <div class="form-group">
+                                                                <label class="lable-text">
+                                                                    आवेदक का नाम :
+                                                                </label>
+                                                                <input type="text" formControlName="consumerName"
+                                                                    class="form-control" [readonly]="true"/>
+                                                            </div>
+                                                            <div *ngIf="employee['controls'].consumerName?.errors?.required"
+                                                                style="color: red;font-size: medium;">
+                                                                Name is Required
+                                                            </div>
+                                                        </td>
+        
+                                                        <td class="w-30">
+                                                            <div class="form-group">
+                                                                <label class="lable-text">
+                                                                    पिता का नाम :
+                                                                </label>
+                                                                <input type="text" formControlName="guardianName"
+                                                                    class="form-control" />
+                                                            </div>
+                                                            <div *ngIf="employee['controls'].guardianName?.errors?.required"
+                                                                style="color: red;font-size: medium;">
+                                                                FatherName is Required
+                                                            </div>
+                                                        </td>
+                                                        <td class="w-30">
+                                                            <div class="form-group">
+                                                                <label class="lable-text">
+                                                                    खसरा :
+                                                                </label>
+                                                                <input type="text" formControlName="khasraNo"
+                                                                    class="form-control" />
+                                                            </div>
+                                                            <div *ngIf="employee['controls'].khasraNo?.errors?.required"
+                                                                style="color: red;font-size: medium;">
+                                                                khasra is Required
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="w-30">
+                                                            <div class="form-group">
+                                                                <label class="lable-text">
+                                                                    लोड(भार):
+                                                                </label>
+                                                                <input type="text" formControlName="loadRequested"
+                                                                    class="form-control" />
+                                                            </div>
+                                                            <div *ngIf="employee['controls'].loadRequested?.errors?.required"
+                                                                style="color: red;font-size: medium;">
+                                                                load is Required
+                                                            </div>
+                                                        </td>
+                                                        <!-- <td class="w-10">
+                                                            <button type="button" class="btn btn-danger" (click)="remove(samIndex)"
+                                                                title="remove">
+                                                                Remove <mat-icon>delete</mat-icon>
+                                                            </button>
+                                                        </td> -->
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group" *ngIf="displayInput">
+                                            <button type="button" class="btn btn-primary" (click)="submitgroup()" [disabled]="groupSubmitBoolean==true?true:false">submit
+                                                Group</button>
+                                        </div>
+                                    </form>
+                                </div>
+        
+                            </div>
+        
+        
+        
+                            <!-- {{this.empForm.value | json}} -->
+        
+                        </div>
+        
+
+
+
+                        <div class="col-md-12">
+                            <mat-form-field class="half-width padding shortDescriptionOfWork">
+                                <mat-label>कार्य का विवरण (अधिकतम २५५ शब्द)<span class="required">*</span>
+                                </mat-label>
+                                <textarea matInput placeholder="कार्य का विवरण (अधिकतम २५५ शब्द)" type="text"
+                                    formControlName="shortDescriptionOfWork" maxlength="255"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                
+                <div class="form-group">
+                    <label class="custome_checkbox">
+                        <span class="d-block">
+                            मैं घोषणा करता/करती हूं कि मेरे द्वारा इस आवदेन में दी गई उपरोक्त समस्त जानकारियां पूर्ण एवं
+                            सत्य
+                            हैं तथा मैं ये आवेदन जमा करना चाहता/चाहती हूं।
+                        </span>
+                        <input type="checkbox" checked="true" [readonly]="true">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+
+
+
+                <div *ngIf="!submitted">
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                </div>
+
+            </form>
+
+
+
+            <hr width="100%" />
+
+
+
+        </mat-card>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- *****-->
+    <!-- mat-dialog-container .mat-button-base {
+    position: absolute;
+    top: 0px !important;
+    right: 0;
+    background: black;
+    z-index: 999;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    padding: 0 !important;
+    width: 32px !important;
+    height: 32px;
+    min-width: unset !important;
+  } -->
+
+    <!-- *** -->
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <div *ngIf="submitted">
+        <button style="position: absolute;
+        top: 0px !important;
+        right: 0;
+        background: black;
+        z-index: 999;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        padding: 0 !important;
+        width: 32px !important;
+        height: 32px;
+        min-width: unset !important;" mat-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <!-- here added -->
+    <div #componentView>
+        <div *ngIf="submitted">
+            <mat-card class="custom-scroll-enable" style="box-shadow: none; max-width:90% ;">
+                <div class="header text-center mb-2">
+                    <div style="display: flex; text-align: center; justify-content: space-between;width: 100%;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkuBij_T6xTXcqMRDi40wVUYklhpNlOgKdyHcfyH96b5xNeARY"
+                            alt="" height="92em" width="92em" style="margin-right: 5em;">
+
+                        <div>
+                            <h3 style="font-weight: 900;" class="text-center">मुख्यमंत्री कृषक मित्र योजना</h3>
+                            <h4>मध्य प्रदेश मध्य क्षेत्र विद्यत वितरण कंपनी लिमिटेड
+                                <br>
+                                ट्रांसफार्मर सहित नवीन कृषि पंप/ट्यूबवेल कनेक्शन हेतु आवेदन पत्र
+
+                            </h4>
+                        </div>
+
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJNoScp5O-83AQvCZKAs8isqXiUuv4dNU76FTowGUX1h38g4XO"
+                            alt="" height="92em" width="92em" style="margin-left: 5em;">
+                    </div>
+                </div>
+
+                <!-- <div style="display: block; justify-content: space-between;">
+                    <div>
+
+                    </div>
+                    <div>
+                        <button style="position: absolute;
+            top: 0;
+            right: 0;" mat-button mat-dialog-close>
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </div> -->
+
+                <br>
+
+                <h1 style="color: rgb(22, 22, 97); font-weight: 900; margin-top: 2px;" *ngIf="submitted">
+                    समग्र नंबर : {{data?.MemberID}}
+                </h1>
+
+                <br>
+                <h4 style="color: green; font-weight: 800; margin-top: 2px;" *ngIf="submitted">
+                    <!-- बहुत बहुत बधाई ! आपका
+                    आवेदन क्रमांक:
+                    {{submitResult}} मुख्यमंत्री कृषक मित्र योजना के लिए स्वीकृत कर दिया है
+                    और कार्यस्थल के सर्वे के लिए सम्बंधित वितरण केंद्र पर अग्रेषित कर दिया गया है | -->
+
+                    <!-- ********* -->
+                    बहुत बहुत बधाई ! आपका आवेदन क्रमांक: {{submitResult}} मुख्यमंत्री कृषक मित्र योजना के लिए स्वीकृत कर
+                    दिया है और कार्यस्थल के सर्वे के लिए उपाय (UPAY) पर अग्रेषित कर दिया गया है | आपसे अनुरोध है कि दर्ज
+                    किए हुए मोबाइल नंबर से उपाय(UPAY) पर लॉगिन करके कार्यस्थल की फोटो अपलोड करे।
+
+
+                </h4>
+                <br>
+
+                <table class="w-100">
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            आवेदक का नाम :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{data?.Name}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            पिता/पति का नाम :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.guardianName}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            पता :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.address}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            कार्य प्रकार :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        मुख्यमंत्री कृषक मित्र
+                                        योजना
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            योजना का प्रकार :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        Deposit
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            लोड(भार) अनुमति :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+
+                                        <span *ngIf="submitted">{{finalRespnse?.loadRequested}}</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            लोड यूनिट :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        HP
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            जिला :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse.district.districtName}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            वितरण केन्द्र :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse.distributionCenter.dcName}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            खसरा :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.khasra}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            आधार संख्‍या :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.aadharNo}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            पिनकोड :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.pincode}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                   
+                    <ng-template #thenBlockArea>
+                        <tr>
+                            <td>
+                                <div class="form-group mb-2">
+                                    <label class="d-block">
+                                        <span>
+                                            <b>
+                                                क्षेत्र :
+                                            </b>
+                                        </span>
+                                        <span class="pl-2">
+                                            {{finalFormValue?.area}}
+                                        </span>
+                                    </label>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group mb-2">
+                                    <label class="d-block">
+                                        <span>
+                                            <b>
+                                                क्भूमि क्षेत्र इकाई :
+                                            </b>
+                                        </span>
+                                        <span class="pl-2">
+                                            Hectare
+                                        </span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            उपभोक्ता श्रेणी :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.castCategory}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            आवेदन का प्रकार :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2" *ngIf="finalRespnse?.individualOrGroup?.name== 'Individual'">
+                                        एकल
+                                    </span>
+                                    <span class="pl-2" *ngIf="finalRespnse?.individualOrGroup?.name== 'Group'">
+                                        बाहुल्य
+                                    </span>
+                                </label>
+                                <br>
+                                <div *ngIf="finalRespnse?.individualOrGroup?.name== 'Group'">
+                                    <label class="d-block">
+                                        <span>
+                                            <b>
+                                                मुख्य आवेदक के अतरिक्त आवेदकों की संख्या :
+                                            </b>
+                                        </span>
+                                        <span class="pl-2">
+                                            {{samagraListData?.length}}
+                                        </span>
+
+                                        <div *ngFor="let list of samagraListData; let i=index; ">
+                                            <span>
+                                                <b>
+                                                    {{i+1}}.
+                                                </b>
+                                            </span>
+                                            <span  class="pl-2">
+                                                आवेदक का नाम : {{list?.consumerName}} ,  पिता/पति का नाम: {{list?.guardianName}}, समग्र नंबर:{{list?.samagraId}},खसरा :{{list?.khasraNo}}
+                                            </span>
+
+                                        </div>
+
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            <div class="form-group mb-2">
+                                <label class="d-block">
+                                    <span>
+                                        <b>
+                                            कार्य का संक्षिप्त विवरण :
+                                        </b>
+                                    </span>
+                                    <span class="pl-2">
+                                        {{finalRespnse?.shortDescriptionOfWork}}
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf="submitted" style="display: flex; justify-content: space-between;">
+        <div class="form-group text-center">
+            <button type="button" class="btn btn-primary" (click)="downloadHtmlView()">पावती डाउनलोड करे</button>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,84 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <form [formGroup]="dcCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+
+        <mat-form-field class="half-width">
+            <mat-label>Select region</mat-label>
+            <mat-select name="region" formControlName="regionId" (selectionChange)="onChangeCicle($event.value)">
+                <mat-option value="">Select region</mat-option>
+                <mat-option *ngFor="let regiondata of regionData" [value]="regiondata.regionId">{{regiondata.region}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dcCreationFg.controls.regionId.hasError('required')">
+                Please Select region
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Select circle</mat-label>
+            <mat-select name="circle" formControlName="circleId" (selectionChange)="onChangeDivision($event.value)">
+                <mat-option *ngFor="let circledata of circleData" [value]="circledata.circleId">{{circledata.circle}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dcCreationFg.controls.circleId.hasError('required')">
+                Please Select circle
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-label>Select Division</mat-label>
+            <mat-select name="divisionId" formControlName="divisionId" (selectionChange)="onChangeSubDivision($event.value)">
+                <mat-option value="">Select Division</mat-option>
+                <mat-option *ngFor="let divisiondata of divisionData" [value]="divisiondata.divisionId">
+                    {{divisiondata.division}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dcCreationFg.controls.divisionId.hasError('required')">
+                Please Select Division
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>Select Sub Division</mat-label>
+            <mat-select name="subDivisionId" formControlName="subDivisionId">
+                <mat-option *ngFor="let subDivisiondata of subDivisionData" [value]="subDivisiondata.subDivisionId">
+                    {{subDivisiondata.subDivision}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dcCreationFg.controls.subDivisionId.hasError('required')">
+                Please Select Sub Division
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-label>DC Name</mat-label>
+            <input matInput placeholder="DC Name" name="dcName" formControlName="dcName">
+            <mat-error *ngIf="dcCreationFg.controls.dcName.hasError('required')">
+                DC name is required
+            </mat-error>
+            <mat-error *ngIf="dcCreationFg.controls.dcName.hasError('uniqueValue')">
+                DC name already exists
+            </mat-error>
+
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-label>DC Code</mat-label>
+            <input matInput placeholder="DC Code" name="dcCode" formControlName="dcCode">
+            <mat-error *ngIf="dcCreationFg.controls.dcCode.hasError('required')">
+                DC Code name is required
+            </mat-error>
+            <mat-error *ngIf="dcCreationFg.controls.dcCode.hasError('pattern')">
+                Please enter DC code in valid format
+            </mat-error>
+            <mat-error *ngIf="dcCreationFg.controls.dcCode.hasError('uniqueValue')">
+                DC Code already exists
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!dcCreationFg.valid">Save</button>
+        </div>
+    </form>
+</mat-card>

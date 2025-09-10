@@ -1,0 +1,24 @@
+mat-toolbar {
+    height: 45px;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+.input-group {
+    position: absolute;
+    right: 0;
+    width: 20%;
+}
+
+mat-toolbar a {
+    display: inline-block;
+    /* margin: 0 3px; */
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
+}
+
+.padding {
+    padding-left: 3px
+}

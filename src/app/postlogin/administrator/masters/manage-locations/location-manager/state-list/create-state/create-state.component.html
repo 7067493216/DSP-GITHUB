@@ -1,0 +1,41 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{stateCreationFg.controls['$key'].value?"Modify State":"Create New State"}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+    </mat-toolbar>
+    <form [formGroup]="stateCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        <input type="hidden" formControlName="$key">
+        <mat-form-field class="half-width">
+            <mat-label>Select Country</mat-label>
+            <mat-select name="country" formControlName="country">
+                <mat-option value="1">India</mat-option>
+            </mat-select>
+            <mat-error *ngIf="stateCreationFg.controls.country.hasError('required')">
+                Please Select country
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="padding half-width">
+            <mat-label>State Name</mat-label>
+            <input matInput placeholder="State Name" name="state" formControlName="state">
+            <mat-error *ngIf="stateCreationFg.controls.state.hasError('required')">
+                State Name is required
+            </mat-error>
+            <mat-error *ngIf="stateCreationFg.controls.state.hasError('pattern')">
+                Please Enter State Name In Valid Format
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width ">
+            <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+            <mat-error *ngIf="stateCreationFg.controls.description.hasError('required')">
+                Description is required
+            </mat-error>
+        </mat-form-field>
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!stateCreationFg.valid">Save</button>
+        </div>
+    </form>
+</mat-card>

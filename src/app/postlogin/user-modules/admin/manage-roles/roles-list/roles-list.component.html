@@ -1,0 +1,89 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>Role List</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field class="padding search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button matTooltip="Refresh Table" mat-icon-button color="primary" (click)="refreshRoleList()">
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <button *appHasRole="role.rolesListComponent_add" class="padding left-position" mat-raised-button (click)="onCreate()">
+            <mat-icon>add</mat-icon>Create Role</button>
+    </mat-toolbar>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="listData" matSort>
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                 <td mat-cell *matCellDef="let element; let i = index;">{{paginator.pageSize * paginator.pageIndex + i + 1}}</td>
+            </ng-container>
+
+            <!-- roleType Column -->
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Role Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+            </ng-container>
+            <ng-container matColumnDef="roleCode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Role Code</th>
+                <td mat-cell *matCellDef="let element"> {{element.roleCode}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="viewAction">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>View</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.viewAction? 'YES':'NO'}}
+                </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="addAction">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Create</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.addAction? 'YES':'NO'}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="updateAction">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Update</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.updateAction? 'YES':'NO'}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="removeAction">
+                <th mat-header-cell *matHeaderCellDef>Remove</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.removeAction? 'YES':'NO'}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell [hidden]="!role.roleMatch(role.rolesListComponent_edit)" *matHeaderCellDef>Action edit/delete</th>
+                <td mat-cell *matCellDef="let row">
+                    <button *appHasRole= "role.rolesListComponent_edit" mat-icon-button color="primary" (click)="onEdit(row.roleId)">
+                    <mat-icon>launch</mat-icon>
+                </button>
+                    <button *appHasRole="role.rolesListComponent_delete" mat-icon-button color="warn" (click)="onDelete(row.roleId)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    Loading data...
+                </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="noData">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    No data.
+                </mat-footer-cell>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+        </table>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+</mat-card>

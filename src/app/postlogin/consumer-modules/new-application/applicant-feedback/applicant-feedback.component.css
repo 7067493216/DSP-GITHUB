@@ -1,0 +1,14 @@
+/* src/app/rating/rating.component.css */
+mat-form-field {
+    width: 100%;
+  }
+  
+  button {
+    margin-top: 16px;
+  }
+  
+
+  /* ngb-rating {
+    color: red;
+    font-size: 40px;
+  } */

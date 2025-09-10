@@ -1,0 +1,220 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <!-- <mat-toolbar class="label label-warning"> -->
+
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <!-- <h2>{{data.modalTitle}}</h2> -->
+        </div>
+        <div> <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button></div>
+    </div>
+
+
+
+    <!-- </mat-toolbar> -->
+
+    <div class="card">
+        <div class="card-body">
+
+            <div #componentView id="elementIdToCaptureNew" style="padding: 2em;">
+
+
+                <div class="header text-center mb-2">
+                    <div style="display: flex; text-align: center; justify-content: space-between;width: 100%;">
+                        <img src="assets/images/kisanyojanaimages/logo_Kisan1.jpg"
+                            alt="" height="92em" width="92em" style="margin-right: 5em;">
+                            <!-- src="assets/images/kisanyojanaimages/logo_Kisan1.jpg" -->
+                            <!-- src="assets/images/kisanyojanaimages/logo_Kisan2.jpg" -->
+
+                        <div>
+                            <h3 style="font-weight: 900;" class="text-center">मुख्यमंत्री कृषक मित्र योजना</h3>
+                            <h4>मध्य प्रदेश मध्य क्षेत्र विद्यत वितरण कंपनी लिमिटेड
+                                <br>
+                                ट्रांसफार्मर सहित नवीन कृषि पंप/ट्यूबवेल कनेक्शन हेतु आवेदन पत्र
+
+                            </h4>
+                        </div>
+
+                        <img src="assets/images/kisanyojanaimages/logo_Kisan2.jpg"
+                            alt="" height="92em" width="92em" style="margin-left: 5em;">
+                    </div>
+                </div>
+
+                <br>
+
+                <br>
+
+                <hr>
+
+                <h2 style="color: crimson;font-weight: 900;"> कृपया ध्यान दे : </h2>
+                <h3 style="color: crimson;font-weight: 900;">
+                    * अगर आपने पोर्टल पर भुगतान किया है और किसी तकनीकी समस्या के कारण पोर्टल पर समायोजित नही हुआ है तो
+                    पुनः भुगतान
+                    से पहले आवेदन क्रमांक dsp.mpcz000@gmail.com पर ईमेल करे।</h3>
+
+                <h3 style="color: crimson; font-weight: 900;">
+                    * भुगतान करने के लिए दिए गए भुगतान विकल्प का उपयोग करे,किसी भी अन्य माध्यम / ऑफलाइन के माध्यम से
+                    किया गया भुगतान स्वीकार नहीं किया जायेगा।
+                </h3>
+
+                <h3 style="color: crimson; font-weight: 900;">
+                   * शासकीय विभाग यह सुनिश्चित करें कि भुगतान की राशि मांग पत्र में उल्लिखित राशि के बराबर हो।
+                </h3>
+
+                <br>
+
+                <div style="display: flex; justify-content: center; align-items: center;">
+
+                    <h1 style="color: rgb(32, 32, 89);">{{data.modalTitle}}<span> ({{consumerApplicationNo}})</span>
+                    </h1>
+                </div>
+
+
+                <table class="demandApproveTable table table-bordered">
+                    <thead>
+
+                        <tr>
+
+
+                            <th>आवेदन क्रमांक</th>
+                            <th>कुल प्राकलन राशि</th>
+                            <th>म.प्र द्वारा दी गई अनुदान राशि(40%)</th>
+                            <th>म.प्र विद्युत कंपनी द्वारा दी गई अनुदान राशि(10%)</th>
+                            <th>सिक्योरिटी डिपाजिट </th>
+                            <th>आवेदन शुल्क </th>
+                            <th>उपभोक्ता द्वारा वहन की गई राशि (50%)</th>
+                            <th>इ. आर. पी. नंबर </th>
+                            <th>स्कीम कोड </th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of erpEstimateDataForMkmyArray">
+
+
+                            <td>{{item?.consumerApplicationNumber}}</td>
+                            <td>{{item?.totalAmount}}</td>
+                            <td>{{item?.govMafBill}}</td>
+                            <td>{{item?.mpmkMafBill}}</td>
+                            <td>{{item?.securityDeposit}}</td>
+                            <td>{{item?.avedanShulk}}</td>
+                            <td>{{item?.carryAmountByApplicant}}</td>
+                            <td>{{item?.erpNumber}}</td>
+                            <td>{{item?.schemeCode}}</td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <br>
+                <br>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="custom-particulatr" align="center">डिमांड नोट</th>
+                        </tr>
+                        <tr>
+                            <th class="custom-particulatr">मद</th>
+                            <th class="custom-amount">एकाउंट कोड</th>
+                            <th class="custom-amount">राशि</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <tr>
+                            <td class="custom-particular-td">&nbsp;1. उपभोक्ता द्वारा वहन की गई राशि।(प्राकलन राशि की
+                                50% )
+                            </td>
+                            <td class="custom-td">&nbsp;47.345
+                            </td>
+                            <td>
+                                {{mkmyAmountData?.carryAmountByApplicant}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="2" class="custom-particular-td">&nbsp;2. आवेदन शुल्क</td>
+                            <td class="custom-td">&nbsp;62.936
+                            </td>
+                            <td>
+                                5
+                                <!-- {{mkmyAmountData?.avedanShulk}} -->
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="custom-td">&nbsp;47.310
+                            </td>
+                            <td>
+                                2495
+                                <!-- {{mkmyAmountData?.avedanShulk}} -->
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="custom-particular-td">&nbsp;3. सुरक्षा निधि राशि प्रति HP 600 ( कुल भार )</td>
+                            <!-- सारे उपभोक्ता द्वारा भरा -->
+                            <td class="custom-td">&nbsp;48.150
+                            </td>
+                            <td>
+                                {{mkmyAmountData?.securityDeposit}}
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>&nbsp; <strong> कुल राशि</strong></td>
+                            <td class="custom-td">&nbsp;
+                                <strong>
+
+                                </strong>
+                            </td>
+                            <td>
+                                {{ mkmyAmountData?.payableAmount | currency:"INR":"symbol"}}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <br>
+
+                <ul>
+
+                    <li>मध्य प्रदेश शासन द्वारा दी गई अनुदान राशि (प्राकलन राशि की 40%)</li>
+                    <li>मध्य प्रदेश विद्युत वितरण कम्पनी द्वारा दी गई अनुदान राशि (प्राकलन राशि की 10%)</li>
+
+                </ul>
+
+                <br>
+
+                <br>
+
+                        <ul>
+                            <li style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Total payment is <span style="font-weight: 900; color: green;">{{paymentView?.Demand_fees}}</span></li>
+                            <li  style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Transaction Id is <span style="font-weight: 900; color: green;">{{paymentView?.Demand_fees_Transaction_Id }}</span> </li>
+                            <li  style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Transaction Date is <span style="font-weight: 900; color: green;"> {{paymentView?.Demand_fees_Transaction_Date | date: 'dd-MM-yyyy' }}</span></li>
+                        </ul>
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</mat-card>
+
+
+
+<div class="text-right">
+    <button class="btn btn-primary" (click)="downloadPdfNew()">download</button>
+</div>

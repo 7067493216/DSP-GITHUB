@@ -1,0 +1,96 @@
+<mat-card class="my-card mat-elevation-z8">
+    <mat-toolbar color="primary" class="spaceBetween">
+        <span>Nsc Application Management Dashboard</span>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z8 table-container" style="max-height:610px !important;">
+       
+        <mat-table [dataSource]="nscApplicationListData" matTableExporter #exporter="matTableExporter"
+        [hiddenColumns]="[20,21,22,23,24]" matSort style="max-height:610px !important;">
+
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> No. <br> क्रमांक</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;">
+                        {{(i+1)}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ApplicantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Applicant Name <br> आवेदक का नाम</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;">
+                        {{element.consumerName}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="NSCApplicationNo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> NSC ApplicationNo <br> आवेदन क्रमांक</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;">
+                        {{element.applicationNumber}} 
+                        
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dateOfPostDeposit">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> NSC Deposit Date <br> दिनाँक</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;">
+                        {{element.dateOfPostDeposit |date:'M/d/yy'}} 
+                        
+                    </mat-cell>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="edit">
+                    <!-- <mat-header-cell *matHeaderCellDef [hidden]="!role.roleMatch(role.todo_module_edit)"> Edit/View -->
+                    <mat-header-cell *matHeaderCellDef> Click here<br> परिवर्तन/देखे
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <!-- <ng-container *ngIf="row.status === 'Pending'"> -->
+                        <!-- *appHasRole="role.todo_module_edit" -->
+    
+                        <!-- <span *appHasRole="role.je_it_edit"> -->
+                            <!-- (click)="onEdit(row.consumerApplicationId)" -->
+
+
+                            <!-- *ngIf=" ( row.applicationStatus?.applicationStatusId == 23 && row.isRejected != 1  )" -->
+                       
+
+                    <span >
+                        <button   matTooltip="Deposit And Supervision" class="btn btn-sm btn-warning"
+                        (click)="DepositAndSupervision(row.id)" >
+                            Deposit And Supervision
+                        </button>
+                    </span>
+                    </mat-cell>
+                    </ng-container>   
+
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        Loading data...
+                    </mat-footer-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        No data.
+                    </mat-footer-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':nscApplicationListData!=null}"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':( nscApplicationListData !=null)}" 
+                   > 
+                   <!-- [ngClass]="{'hide':!( nscApplicationListData.length==0)}" -->
+                </mat-footer-row>
+            </mat-table>
+
+
+             
+        
+        <!-- <mat-paginator #paginator [length]="tableMeta?.totalItems" [pageSize]="10" [pageIndex]=0
+            [pageSizeOptions]="[5,10,20,30,50,100]" (page)="onPaginateChange($event)" showFirstLastButtons>
+        </mat-paginator> -->
+
+
+    </div>
+</mat-card>

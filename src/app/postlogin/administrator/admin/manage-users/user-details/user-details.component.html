@@ -1,0 +1,61 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <table class="table table-striped" style="line-height:5px;font-size: 15px;">
+        <tbody *ngFor="let basics of basicdetails">
+            <tr>
+                <td><b>Name:</b><span class="padding">{{basics.userName}}</span></td>
+                <td><b>Employee ID:</b><span class="padding">{{basics.userId}}</span></td>
+            </tr>
+            <tr>
+                <td><b>Aadhar Number:</b><span class="padding">{{basics.aadharNo}}</span></td>
+                <td><b>Access Level:</b><span class="padding">{{basics.accessLevel}}</span></td>
+            </tr>
+            <tr>
+                <td><b>Mobile Number:</b><span class="padding">{{basics.mobileNo}}</span></td>
+                <td><b>Designation Name:</b><span class="padding">{{basics.designationName}}</span></td>
+            </tr>
+            <tr>
+                <!--                 <td><b>Last Logged:</b><span class="padding">{{basics.lastLoggedInDate}}</span></td>
+                <td><b>Access Level:</b><span class="padding">{{basics.accessLevel}}</span></td>
+            </tr> -->
+            <tr>
+                <td><b>Region Name:</b><span class="padding">{{basics.regionName}}</span></td>
+                <td><b>Circle Name:</b><span class="padding">{{basics.circleName}}</span></td>
+            </tr>
+            <!--             <tr>
+                <td><b>Division Name:</b><span class="padding">{{basics.divisionName}}</span></td>
+                <td><b>roles Name:</b><span class="padding">{{roles.role}}</span></td>
+            </tr> -->
+        </tbody>
+    </table>
+    <div class="table-responsive-md">
+        <table class="table table-sm table-hover">
+            <thead style="background-color: darkgrey;">
+                <tr align="center">
+                    <th>Roles</th>
+                    <th>Role Codes</th>
+                    <th>Add Action</th>
+                    <th>View Action</th>
+                    <th>Update Action</th>
+                    <th>Remove Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let roles of userRoles" align="center">
+                    <td>{{roles.role}}</td>
+                    <td>{{roles.roleCode}}</td>
+                    <td>{{roles.addAction}}</td>
+                    <td>{{roles.viewAction}}</td>
+                    <td>{{roles.updateAction}}</td>
+                    <td>{{roles.removeAction}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-card>

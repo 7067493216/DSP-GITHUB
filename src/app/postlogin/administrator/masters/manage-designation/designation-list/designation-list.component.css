@@ -1,0 +1,33 @@
+.my-card {
+    width: 80%;
+    margin: 10px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form-field {
+    width: 30%;
+}
+.left-position {
+    position: absolute;
+    right: 18px;
+}
+.mat-table {
+    overflow: auto;
+    width: 100%;
+    text-align: left;
+}
+
+ ::ng-deep .mat-header-cell .mat-sort-header-container {
+    display:flex;
+    /* justify-content:center; */
+    text-align: left;
+}
+.mat-column-action{
+    text-align: center;
+  }
+.mat-header-cell {
+    font-weight:bold;
+    font-size:14px;
+    color: black;
+  }

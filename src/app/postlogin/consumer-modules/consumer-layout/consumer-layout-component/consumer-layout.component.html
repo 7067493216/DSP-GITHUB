@@ -1,0 +1,16 @@
+<!-- --------consumerLoginService.currentConsumerName---{{consumerLoginService.currentConsumerName}} -->
+<div *ngIf="consumerLoginService.currentConsumerName === null">
+    <app-consumer-header></app-consumer-header>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+    <app-consumer-footer></app-consumer-footer>
+</div>
+
+<app-consumer-sidebar *ngIf="consumerLoginService.currentConsumerName !== null">
+    <!-- <app-navbar></app-navbar> -->
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+</app-consumer-sidebar>
+
+
+<ng-template #template>
+    <router-outlet> </router-outlet>
+</ng-template>

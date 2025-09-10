@@ -1,0 +1,640 @@
+<mat-card class="custom-scroll-enable">
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: black; font-size: 2em; font-weight: 900; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">खातों और संपत्ति रजिस्टर की पुस्तकों से संपत्ति की निकासी के लिए आवश्यक विवरण।</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <br>
+
+    <form [formGroup]="returnMaterialForm">
+        <table class="demandApproveTable table table-bordered">
+            <tr>
+                <th colspan="2">
+                    A/c code
+                </th>
+
+
+                <th>
+                    Particulars
+                </th>
+
+
+                <th>
+                    Date/Year of Installation
+                </th>
+
+
+                <th>
+                    Asset No./ Original Estimate No.
+                </th>
+
+
+                <th>
+                    Location
+                </th>
+
+
+                <th>
+                    Quantity
+                </th>
+
+
+                <th>
+                    Value at the time of installation(in Rs.)
+                </th>
+
+
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean1==true?true:false" (change)="checkboxSelectionChange1($event)">
+                    </div>
+                </td>
+
+                <td>10.544</td>
+                <td>SUBSTATION TRANSFORMER & KIOSKS 100 KV & ABOVE</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation1">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation1'].touched || submitted) && returnMaterialFormControls['yearOfInstallation1'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation1'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo1">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo1'].touched || submitted) && returnMaterialFormControls['assetNo1'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo1'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location1">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location1'].touched || submitted) && returnMaterialFormControls['location1'].errors">
+                            <div *ngIf="returnMaterialFormControls['location1'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity1">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity1'].touched || submitted) && returnMaterialFormControls['quantity1'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity1'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation1">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation1'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation1'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation1'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean2==true?true:false" (change)="checkboxSelectionChange2($event)">
+                    </div>
+                </td>
+
+                <td>10.545</td>
+                <td>SUBSTATION TRANSFORMER & KIOSKS BELOW 100 KV</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation2">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation2'].touched || submitted) && returnMaterialFormControls['yearOfInstallation2'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation2'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo2">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo2'].touched || submitted) && returnMaterialFormControls['assetNo2'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo2'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location2">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location2'].touched || submitted) && returnMaterialFormControls['location2'].errors">
+                            <div *ngIf="returnMaterialFormControls['location2'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity2">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity2'].touched || submitted) && returnMaterialFormControls['quantity2'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity2'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation2">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation2'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation2'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation2'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean3==true?true:false" (change)="checkboxSelectionChange3($event)">
+                    </div>
+                </td>
+
+                <td>10.546</td>
+                <td>LINE TRANSFORMER BELOW 100 KVA</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation3">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation3'].touched || submitted) && returnMaterialFormControls['yearOfInstallation3'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation3'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo3">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo3'].touched || submitted) && returnMaterialFormControls['assetNo3'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo3'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location3">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location3'].touched || submitted) && returnMaterialFormControls['location3'].errors">
+                            <div *ngIf="returnMaterialFormControls['location3'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity3">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity3'].touched || submitted) && returnMaterialFormControls['quantity3'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity3'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation3">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation3'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation3'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation3'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean4==true?true:false" (change)="checkboxSelectionChange4($event)">
+                    </div>
+                </td>
+
+                <td>10.601</td>
+                <td>OVERHEAD LINES ON STEEL SUPPORT AT VOLTAGE > 66 KV</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation4">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation4'].touched || submitted) && returnMaterialFormControls['yearOfInstallation4'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation4'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo4">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo4'].touched || submitted) && returnMaterialFormControls['assetNo4'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo4'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location4">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location4'].touched || submitted) && returnMaterialFormControls['location4'].errors">
+                            <div *ngIf="returnMaterialFormControls['location4'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity4">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity4'].touched || submitted) && returnMaterialFormControls['quantity4'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity4'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation4">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation4'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation4'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation4'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean5==true?true:false" (change)="checkboxSelectionChange5($event)">
+                    </div>
+                </td>
+
+                
+                <td>10.602</td>
+                <td>OVERHEAD LINES ON STEEL SUPPORT AT VOL.BL. 132 &66</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation5">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation5'].touched || submitted) && returnMaterialFormControls['yearOfInstallation5'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation5'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+
+
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo5">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo5'].touched || submitted) && returnMaterialFormControls['assetNo5'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo5'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location5">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location5'].touched || submitted) && returnMaterialFormControls['location5'].errors">
+                            <div *ngIf="returnMaterialFormControls['location5'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity5">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity5'].touched || submitted) && returnMaterialFormControls['quantity5'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity5'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation5">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation5'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation5'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation5'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean6==true?true:false" (change)="checkboxSelectionChange6($event)">
+                    </div>
+                </td>
+
+                <td>10.603</td>
+                <td>OVERHEAD LINES ON R.C. SUPPORT</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation6">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation6'].touched || submitted) && returnMaterialFormControls['yearOfInstallation6'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation6'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo6">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo6'].touched || submitted) && returnMaterialFormControls['assetNo6'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo6'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location6">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location6'].touched || submitted) && returnMaterialFormControls['location6'].errors">
+                            <div *ngIf="returnMaterialFormControls['location6'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity6">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity6'].touched || submitted) && returnMaterialFormControls['quantity6'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity6'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation6">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation6'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation6'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation6'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean7==true?true:false" (change)="checkboxSelectionChange7($event)">
+                    </div>
+                </td>
+
+                <td>10.622</td>
+                <td>LINE CABLE NETWORK UNDER KMPS</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation7">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation7'].touched || submitted) && returnMaterialFormControls['yearOfInstallation7'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation7'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo7">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo7'].touched || submitted) && returnMaterialFormControls['assetNo7'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo7'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location7">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location7'].touched || submitted) && returnMaterialFormControls['location7'].errors">
+                            <div *ngIf="returnMaterialFormControls['location7'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity7">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity7'].touched || submitted) && returnMaterialFormControls['quantity7'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity7'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation7">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation7'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation7'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation7'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean8==true?true:false" (change)="checkboxSelectionChange8($event)">
+                    </div>
+                </td>
+
+                <td>10.623</td>
+                <td>LINE CABLE NETWORK UNDER KAY</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation8">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation8'].touched || submitted) && returnMaterialFormControls['yearOfInstallation8'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation8'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo8">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo8'].touched || submitted) && returnMaterialFormControls['assetNo8'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo8'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location8">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location8'].touched || submitted) && returnMaterialFormControls['location8'].errors">
+                            <div *ngIf="returnMaterialFormControls['location8'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity8">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity8'].touched || submitted) && returnMaterialFormControls['quantity8'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity8'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation8">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation8'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation8'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation8'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div>
+                        <input type="checkbox" [checked]="checkBoxBoolean9==true?true:false" (change)="checkboxSelectionChange9($event)">
+                    </div>
+                </td>
+
+                <td>10.631</td>
+                <td>METERING EQUIPMENTS</td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="yearOfInstallation9">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['yearOfInstallation9'].touched || submitted) && returnMaterialFormControls['yearOfInstallation9'].errors">
+                            <div *ngIf="returnMaterialFormControls['yearOfInstallation9'].errors['required']">
+                                Select Date of installation</div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="assetNo9">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['assetNo9'].touched || submitted) && returnMaterialFormControls['assetNo9'].errors">
+                            <div *ngIf="returnMaterialFormControls['assetNo9'].errors['required']">
+                                Please Enter Asset No. </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="location9">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['location9'].touched || submitted) && returnMaterialFormControls['location9'].errors">
+                            <div *ngIf="returnMaterialFormControls['location9'].errors['required']">
+                                Please Enter Location </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="quantity9">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['quantity9'].touched || submitted) && returnMaterialFormControls['quantity9'].errors">
+                            <div *ngIf="returnMaterialFormControls['quantity9'].errors['required']">
+                                Please Enter Quantity </div>
+                        </mat-error>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" formControlName="valueOfTimeOfInstallation9">
+                        <mat-error
+                            *ngIf="(returnMaterialFormControls['valueOfTimeOfInstallation9'].touched || submitted) && returnMaterialFormControls['valueOfTimeOfInstallation9'].errors">
+                            <div *ngIf="returnMaterialFormControls['valueOfTimeOfInstallation9'].errors['required']">
+                                Please Enter Value of Time of Installation </div>
+                        </mat-error>
+                    </div>
+                </td>
+
+            </tr>
+
+
+        </table>
+
+        <br>
+
+        <div align="center">
+            <button type="button" class="btn btn-success" [disabled]="buttonDisableBoolean==true?true:false" (click)="onSubmit()">Submit</button>
+        </div>
+
+    </form>
+
+
+
+</mat-card>

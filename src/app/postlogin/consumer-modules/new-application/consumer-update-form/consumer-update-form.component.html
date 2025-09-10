@@ -1,0 +1,1583 @@
+<!-- <mat-card class="my-card custom-scroll-enable-1">
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: white; font-size: 2em; font-weight: 900; background-color: rgb(92, 92, 227); text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Update-Consumer-Form</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+  
+</mat-card> -->
+
+
+
+
+<!-- ******************************************************************************************************************************************************************************** -->
+
+
+
+
+
+
+<mat-card class="custom-scroll-enable">
+    <mat-toolbar>
+        <span style="text-align: center;">Update Form</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <br>
+    <hr>
+
+    <div *ngIf="remarkList?.length>0">
+        <br>
+        <div *ngFor="let item of remarkList; let i=index" style="color: #000; font-size: 1em; font-weight: 800;">
+            (<span class="me-2">{{i+1}}</span>)<span style="margin-left: 1em;">{{item?.jeRemark}}</span>
+        </div>
+
+        <br>
+        <hr>
+    </div>
+    <br>
+
+    <form [formGroup]="newApplicationCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        <input type="hidden" formControlName="consumerApplicationId">
+
+
+        <div class="row">
+            <!--nature of work Type -->
+            <!-- <div class="col-md-4 form-group">
+                <mat-label>कार्य का प्रकार<span class="required">*</span></mat-label>
+                <select formControlName="natureOfWorkTypeId"  class="form-control form-select"
+                    (change)="onChangeSelectedNatureOfWorkType($event.target.value)" [disabled]="newApplicationCreationFg.get('natureOfWorkTypeId').value ==7?true:false" >
+                    <option value="">--कार्य का प्रकार चुने--</option>
+                    <option *ngFor="let workType of NatureOfworkTypeList" [value]="workType?.natureOfWorkTypeId">
+                        {{workType?.natureOfWorkName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['natureOfWorkTypeId'].touched || isFormSubmit) && newApplicationFormControls['natureOfWorkTypeId'].errors">
+                    <div *ngIf="newApplicationFormControls['natureOfWorkTypeId'].errors['required']">
+                        कार्य का प्रकार चुने</div>
+                        <div *ngIf="newApplicationFormControls['natureOfWorkTypeId']?.status=='INVALID'">
+                            Invalid  कार्य का प्रकार
+                        </div>
+                </mat-error>
+            </div> -->
+
+            <!-- Nature of Work Type -->
+            <div class="col-md-4 form-group">
+                <mat-label>कार्य का प्रकार<span class="required">*</span></mat-label>
+
+                <select formControlName="natureOfWorkTypeId" class="form-control form-select"
+                    (change)="onChangeSelectedNatureOfWorkType($event.target.value)"
+                    [readonly]="isNatureOfWorkDisabled">
+                    <option value="">--कार्य का प्रकार चुने--</option>
+                    <option *ngFor="let workType of NatureOfworkTypeList" [value]="workType?.natureOfWorkTypeId">
+                        {{ workType?.natureOfWorkName }}
+                    </option>
+                </select>
+
+                <mat-error *ngIf="(newApplicationFormControls['natureOfWorkTypeId'].touched || isFormSubmit) 
+          && newApplicationFormControls['natureOfWorkTypeId'].errors">
+                    <div *ngIf="newApplicationFormControls['natureOfWorkTypeId'].errors['required']">
+                        कार्य का प्रकार चुने
+                    </div>
+                    <div *ngIf="newApplicationFormControls['natureOfWorkTypeId']?.status === 'INVALID'">
+                        Invalid कार्य का प्रकार
+                    </div>
+                </mat-error>
+            </div>
+
+
+
+
+            <div class="col-md-4 form-group"
+                *ngIf="newApplicationCreationFg.get('natureOfWorkTypeId').value ==1 || newApplicationCreationFg.get('natureOfWorkTypeId').value ==2 || newApplicationCreationFg.get('natureOfWorkTypeId').value ==9 || newApplicationCreationFg.get('natureOfWorkTypeId').value ==3 || newApplicationCreationFg.get('natureOfWorkTypeId').value ==4 || newApplicationCreationFg.get('natureOfWorkTypeId').value ==7 || consumerApplicationDetail?.natureOfWorkTypeId==1 || consumerApplicationDetail?.natureOfWorkTypeId==2 || consumerApplicationDetail?.natureOfWorkTypeId==3 || consumerApplicationDetail?.natureOfWorkTypeId==4 || consumerApplicationDetail?.natureOfWorkTypeId==7">
+                <mat-label>आवेदक का प्रकार<span class="required">*</span></mat-label>
+                <select formControlName="avedakKaPrakar" class="form-control form-select"
+                    [readonly]="(newApplicationCreationFg.get('natureOfWorkTypeId').value ==5 || newApplicationCreationFg.get('natureOfWorkTypeId').value ==6 || consumerApplicationDetail?.natureOfWorkTypeId==5 || consumerApplicationDetail?.natureOfWorkTypeId==6)?true:false"
+                    (change)="onChangeSelectedConsumerType($event.target.value)">
+                    <option value="" disabled>--आवेदक का प्रकार चुने--</option>
+                    <option *ngFor="let consumerType of consumerTypeList" [value]="consumerType.value">
+                        {{consumerType.name}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['avedakKaPrakar'].touched || isFormSubmit) && newApplicationFormControls['avedakKaPrakar'].errors">
+                    <div *ngIf="newApplicationFormControls['avedakKaPrakar'].errors['required']">
+                        आवेदक का प्रकार चुने</div>
+                    <div *ngIf="newApplicationFormControls['avedakKaPrakar']?.status=='INVALID'">
+                        Invalid आवेदक का प्रकार
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <div class="col-md-4 form-group" *ngIf="newApplicationCreationFg.get('natureOfWorkTypeId').value ==6 ">
+                <mat-label>आवेदक का प्रकार<span class="required">*</span></mat-label>
+                <input placeholder="Scheme Type" [readonly]="true"
+                    [value]="newApplicationCreationFg.get('natureOfWorkTypeId').value ==6?'Govt Entity':'Private Entity'"
+                    class="change-bg-color form-control">
+            </div>
+
+            <div class="col-md-4 form-group" *ngIf="newApplicationCreationFg.get('natureOfWorkTypeId').value!=null">
+                <mat-label style="font-weight: bold; color: black;; ">Purpuse<span class="required">*</span></mat-label>
+                <select formControlName="billNo" class="form-control form-select" placeholder="Select Purpuse">
+                    <option value="" disabled>-- Purpose चुने --</option>
+                    <option *ngFor="let obj of purposeList" [value]="obj.purposeTypeName">
+                        {{obj.purposeTypeName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['billNo'].touched || isFormSubmit) && newApplicationFormControls['billNo'].errors">
+                    <div *ngIf="newApplicationFormControls['billNo'].errors['required']">
+                        Purpuse चुने</div>
+                    <div *ngIf="newApplicationFormControls['billNo']?.status=='INVALID'">
+                        Invalid Purpuse
+                    </div>
+                </mat-error>
+            </div>
+
+            <div class="col-md-4 form-group" *ngIf=" newApplicationCreationFg.get('natureOfWorkTypeId').value ==5">
+                <mat-label>आवेदक का प्रकार<span class="required">*</span></mat-label>
+                <input placeholder="Scheme Type" [readonly]="true"
+                    [value]="(newApplicationCreationFg.get('natureOfWorkTypeId').value==5 && consumerApplicationDetail?.avedakKaPrakar=='Government')?'Govt Entity':'Private Entity'"
+                    class="change-bg-color form-control">
+            </div>
+
+
+            <div class="col-md-4 form-group" *ngIf="((newApplicationCreationFg.get('natureOfWorkTypeId').value ==5) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==6) || 
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==1 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==2 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==9 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==3 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==4 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==7 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==9 && selectConsumerTypeBoolean==true) ||
+         (newApplicationCreationFg.get('natureOfWorkTypeId').value ==10 && selectConsumerTypeBoolean==true)
+          )">
+                <mat-label>आवेदक करने वाले विभाग/संस्था का नाम<span class="required">*</span><span class="text-danger">
+                        ( PHE,Indus Tower ) </span></mat-label><br>
+                <input class="form-control" placeholder="Aavedak Remarks" formControlName="avedakRemark">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['avedakRemark'].touched || isFormSubmit) && newApplicationFormControls['avedakRemark'].errors">
+                    <div *ngIf="newApplicationFormControls['avedakRemark'].errors['required']">
+                        आवेदक का सम्बन्धित विभाग/संस्था का नाम is Required</div>
+                    <div *ngIf="newApplicationFormControls['avedakRemark']?.status=='INVALID'">
+                        Invalid आवेदक का सम्बन्धित विभाग/संस्था का नाम
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8">
+                <mat-label>लोड(भार) अनुमति<span class="required">*</span></mat-label>
+                <input type="number" class="form-control" placeholder="load Requested" formControlName="loadRequested">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['loadRequested'].touched || isFormSubmit) && newApplicationFormControls['loadRequested'].errors">
+                    <div *ngIf="newApplicationFormControls['loadRequested'].errors['required']">
+                        लोड(भार) अनुमति(digit only)</div>
+                    <div *ngIf="newApplicationFormControls['loadRequested']?.status=='INVALID'">
+                        Invalid लोड(भार)
+                    </div>
+                </mat-error>
+            </div>
+
+
+
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8">
+                <mat-label>लोड यूनिट<span class="required"></span></mat-label>
+                <select formControlName="loadRequestedId" (change)="onChangeSelectedLoad()"
+                    class="form-control form-select"
+                    [readonly]="newApplicationCreationFg.get('natureOfWorkTypeId').value ==4?true:false">
+                    <option value="">--लोड यूनिट चुने--</option>
+                    <option *ngFor="let loadRequest of loadRequestList" [value]="loadRequest.loadRequestedId">
+                        {{loadRequest.loadRequestedName}}</option>
+
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['loadRequestedId'].touched || isFormSubmit) && newApplicationFormControls['loadRequestedId'].errors">
+                    <div *ngIf="newApplicationFormControls['loadRequestedId'].errors['required']">
+                        लोड यूनिट चुने</div>
+                    <div *ngIf="newApplicationFormControls['loadRequestedId']?.status=='INVALID'">
+                        Invalid लोड यूनिट
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <!--apply apply individual area unit -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('colonyIllegalSelectionType').value !=2 ">
+                <mat-label>कॉलोनी आवेदक का प्रकार<span class="required">*</span></mat-label>
+                <select formControlName="individualOrGroupId" class="form-control form-select"
+                    (change)="onChangeSelectedIndivdual($event.target.value)">
+                    <option value="">--Select कॉलोनी आवेदक का प्रकार-</option>
+                    <option *ngFor="let individual of individualOrGroupListStatic"
+                        [value]="individual.individualOrGroupId">
+                        {{individual.name}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['individualOrGroupId'].touched || isFormSubmit) && newApplicationFormControls['individualOrGroupId'].errors">
+                    <div *ngIf="newApplicationFormControls['individualOrGroupId'].errors['required']">
+                        Select कॉलोनी आवेदक का प्रकार</div>
+                    <div *ngIf="newApplicationFormControls['individualOrGroupId']?.status=='INVALID'">
+                        Invalid कॉलोनी आवेदक का प्रकार
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <!-- Colony-legal-selectType (formControlName="colonyLegalSelectType")-->
+            <div class="col-md-4 form-group" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 ">
+                <mat-label>भवन का प्रकार<span class="form-control form-select required"></span></mat-label>
+                <select class="form-control" (change)="onColonyLegalSelectType()"
+                    formControlName="colonyLegalSelectionType">
+
+                    <option *ngFor="let loadRequest of colonyLegalSelectTypeArray"
+                        [value]="loadRequest.colonyLegalSelectTypeId">
+                        {{loadRequest.colonyLegalSelectTypeName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['colonyLegalSelectionType'].touched || isFormSubmit) && newApplicationFormControls['colonyLegalSelectionType'].errors">
+                    <div *ngIf="newApplicationFormControls['colonyLegalSelectionType'].errors['required']">
+                        Select भवन का प्रकार</div>
+                    <div *ngIf="newApplicationFormControls['colonyLegalSelectionType']?.status=='INVALID'">
+                        Invalid भवन का प्रकार
+                    </div>
+                </mat-error>
+            </div>
+
+
+
+            <!-- Colony-ellegal-selectType (formControlName="colonyLegalSelectType")-->
+            <div class="col-md-4 form-group" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 ">
+                <mat-label>अवैध कॉलोनी प्रकार<span class="required"></span></mat-label>
+                <select (change)="onColonyEllegalSelectType($event)" class="form-control form-select"
+                    formControlName="colonyIllegalSelectionType">
+
+                    <option *ngFor="let loadRequest of colonyEllegalSelectTypeArray"
+                        [value]="loadRequest.colonyEllegalSelectTypeId">
+                        {{loadRequest.colonyEllegalSelectTypeName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['colonyIllegalSelectionType'].touched || isFormSubmit) && newApplicationFormControls['colonyIllegalSelectionType'].errors">
+                    <div *ngIf="newApplicationFormControls['colonyIllegalSelectionType'].errors['required']">
+                        Select अवैध कॉलोनी प्रकार</div>
+                    <div *ngIf="newApplicationFormControls['colonyIllegalSelectionType']?.status=='INVALID'">
+                        Invalid अवैध कॉलोनी प्रकार
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <!-- IVRS -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7">
+                <mat-label>IVRS<span class="required">*</span></mat-label>
+                <input class="form-control" placeholder="IVRS" formControlName="ivrsNo" minLength="11" maxLength="11">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['ivrsNo'].touched || isFormSubmit) && newApplicationFormControls['ivrsNo'].errors">
+                    <div *ngIf="newApplicationFormControls['ivrsNo'].errors['required']">
+                        ivrsNo is required</div>
+                    <div *ngIf="newApplicationFormControls['ivrsNo'].errors['pattern']">
+                        first letter should be N or H and 10 numbers allowed</div>
+                    <div *ngIf="newApplicationFormControls['ivrsNo']?.status=='INVALID'">
+                        Invalid IVRS Number
+                    </div>
+                </mat-error>
+            </div>
+
+            <!--start---->
+
+            <mat-form-field class="half-width padding col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 ">
+                <mat-label>Supply Voltage (सप्लाई वोल्टेज)<span class="required">*</span></mat-label>
+                <mat-select formControlName="supplyVoltageId" multiple required class="form-control">
+                    <mat-option value="" [disabled]="true">--Select Supply Voltage--</mat-option>
+                    <mat-option *ngFor="let supplyVoltage of supplyVoltageList"
+                        [value]="supplyVoltage.supplyVoltageId">{{supplyVoltage.supplyVoltageName}}</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['supplyVoltageId'].touched || isFormSubmit) && newApplicationFormControls['supplyVoltageId'].errors">
+                    <div *ngIf="newApplicationFormControls['supplyVoltageId'].errors['required']">
+                        Select Supply Voltage</div>
+                    <div *ngIf="newApplicationFormControls['supplyVoltageId']?.status=='INVALID'">
+                        Invalid Supply Voltage
+                    </div>
+                </mat-error>
+            </mat-form-field>
+
+            <!--end --->
+
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7">
+                <mat-label style="font-weight: bold; color: black;">Voltage Level<span
+                        class="required"></span></mat-label>
+                <select formControlName="voltageLevel" required class="form-control form-select"
+                    placeholder="Voltage Level चुने">
+                    <option value="" disabled>--Select Voltage Level --</option>
+                    <option *ngFor="let data of voltageLevelList" [value]="data.value">{{data.name}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['voltageLevel'].touched || isFormSubmit) && newApplicationFormControls['voltageLevel'].errors">
+                    <div *ngIf="newApplicationFormControls['voltageLevel'].errors['required']">
+                        Select Voltage Level</div>
+                    <div *ngIf="newApplicationFormControls['voltageLevel']?.status=='INVALID'">
+                        Invalid Voltage Level
+                    </div>
+                </mat-error>
+            </div>
+
+            <!-- Scheme Type -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9  && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 ">
+                <mat-label>Scheme Type (योजना का प्रकार)<span class="required">*</span></mat-label>
+                <select formControlName="schemeTypeId" (change)="onChangeSelectedSchemeType($event)"
+                    class="form-control form-select">
+                    <option value="">--Select Scheme Type--</option>
+                    <option *ngFor="let schemeType of schemeTypeList" [value]="schemeType.schemeTypeId">
+
+                        {{schemeType.schemeTypeName}}
+
+                    </option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['schemeTypeId'].touched || isFormSubmit) && newApplicationFormControls['schemeTypeId'].errors">
+                    <div *ngIf="newApplicationFormControls['schemeTypeId'].errors['required']">
+                        Select Scheme Type</div>
+                    <div *ngIf="newApplicationFormControls['schemeTypeId']?.status=='INVALID'">
+                        Invalid Scheme Type
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <div class=" col-md-4 form-group" *ngIf="newApplicationCreationFg.get('natureOfWorkTypeId').value==8 ">
+                <mat-label>योजना का प्रकार<span class="required">*</span></mat-label>
+                <input placeholder="Scheme Type" [readonly]="true" value="Deposit" class="change-bg-color form-control">
+
+            </div>
+            <!-- </div> -->
+
+            <!-- <div > -->
+            <div class="col-md-4 form-group" *ngIf=" newApplicationCreationFg.get('natureOfWorkTypeId').value==5 ">
+                <mat-label>योजना का प्रकार<span class="required">*</span></mat-label>
+                <input placeholder="Scheme Type" [readonly]="true" value="Supervision"
+                    class="change-bg-color form-control">
+
+            </div>
+            <!-- </div> -->
+
+
+            <!-- Consumer Name -->
+            <div class="col-md-4 form-group">
+                <mat-label>आवेदक का नाम</mat-label>
+                <input placeholder="Applicant Name" formControlName="consumerName" [readonly]="true"
+                    class="change-bg-color form-control">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['consumerName'].touched || isFormSubmit) && newApplicationFormControls['consumerName'].errors">
+                    <div *ngIf="newApplicationFormControls['consumerName'].errors['required']">
+                        Applicant Name is required</div>
+                    <div *ngIf="newApplicationFormControls['consumerName']?.status=='INVALID'">
+                        Invalid Applicant Name
+                    </div>
+                </mat-error>
+                <mat-error *ngIf="newApplicationCreationFg.controls.consumerName.hasError('onlycharPattern')">
+                    Please enter anly Character value
+                </mat-error>
+            </div>
+
+
+            <div class="col-md-4 form-group">
+                <mat-label>Connection Type</mat-label>
+                <input placeholder="Connection Type" formControlName="connectionType" [readonly]="true"
+                    class="change-bg-color form-control">
+
+            </div>
+
+
+
+            <!-- Guardian Name -->
+            <div class="col-md-4 form-group">
+                <mat-label>पिता/पति का नाम</mat-label>
+                <input class="form-control" placeholder="Father/Husband Name" formControlName="guardianName">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['guardianName'].touched || isFormSubmit) && newApplicationFormControls['guardianName'].errors">
+                    <div *ngIf="newApplicationFormControls['guardianName'].errors['required']">
+                        Father/Husband Name is required</div>
+                    <div *ngIf="newApplicationFormControls['guardianName']?.status=='INVALID'">
+                        Invalid Fathers Name
+                    </div>
+                </mat-error>
+                <mat-error *ngIf="newApplicationCreationFg.controls.guardianName.hasError('onlycharPattern')">
+                    Please enter anly Character value
+                </mat-error>
+            </div>
+
+
+
+            <div class="col-md-4 form-group" *ngIf="consumerApplicationDetail?.nscApplicationNo!=null">
+                <mat-label>SSP Application Number</mat-label>
+                <input class="form-control" placeholder="Father/Husband Name"
+                    [value]="consumerApplicationDetail?.nscApplicationNo" [readonly]="true">
+
+            </div>
+
+        </div>
+        <br>
+
+        <!-- Address -->
+        <div class="row">
+            <div class="col-md-12 form-group">
+
+                <mat-label>पता</mat-label>
+                <input placeholder="Address" formControlName="address" [readonly]="true"
+                    class="change-bg-color form-control">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['address'].touched || isFormSubmit) && newApplicationFormControls['address'].errors">
+                    <div *ngIf="newApplicationFormControls['address'].errors['required']">
+                        Address is required</div>
+                    <div *ngIf="newApplicationFormControls['address']?.status=='INVALID'">
+                        Invalid Address
+                    </div>
+                </mat-error>
+
+            </div>
+        </div>
+        <br>
+
+        <!-- start -->
+        <div class="row">
+            <div class="col-md-6">
+                <label><input type="checkbox" formControlName="workLocationAddresscb"
+                        [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7"
+                        (change)="checkBoxReturnTureAndFalse($event)">
+                    <mat-label class="text-danger"
+                        [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7">
+                        कार्यस्थल का पता परिवर्तित करने के लिए चिन्हित करे।
+                    </mat-label>
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label><input type="checkbox" formControlName="samagraCheckBox"
+                        [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 "
+                        (change)="samagracheckBoxCredit($event)">
+                    <mat-label class="text-danger"
+                        [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5">
+                        अगर आप समग्र आईडी दर्ज करना चाहते है तो चिन्हित करे।
+                    </mat-label>
+                </label>
+            </div>
+
+        </div>
+        <br>
+
+        <!-- work allcation address -->
+        <div class="row">
+            <div class="col-md-12 form-group" [hidden]="!newApplicationCreationFg.get('workLocationAddresscb').value">
+                <mat-label>कार्यस्थल का पता</mat-label>
+                <input class="form-control" placeholder="workAllocationAddress" formControlName="workAllocationAddress">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['workAllocationAddress'].touched || isFormSubmit) && newApplicationFormControls['workAllocationAddress'].errors">
+                    <div *ngIf="newApplicationFormControls['workAllocationAddress'].errors['required']">
+                        Address is required</div>
+                    <div *ngIf="newApplicationFormControls['workAllocationAddress']?.status=='INVALID'">
+                        Invalid Address
+                    </div>
+                </mat-error>
+
+            </div>
+        </div>
+        <br>
+
+        <!-- end -->
+        <div class="row">
+
+            <!-- khasra -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8">
+                <mat-label>खसरा <span class="required">*</span></mat-label>
+                <input class="form-control" placeholder="khasra" formControlName="khasra">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['khasra'].touched || isFormSubmit) && newApplicationFormControls['khasra'].errors">
+                    <div *ngIf="newApplicationFormControls['khasra'].errors['required']">
+                        khasra is required</div>
+                    <div *ngIf="newApplicationFormControls['khasra']?.status=='INVALID'">
+                        Invalid khasra
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <!-- khatoni  -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8">
+                <mat-label>खतौनी<span class="required">*</span></mat-label>
+                <input class="form-control" placeholder="khatoni" formControlName="khatoni">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['khatoni'].touched || isFormSubmit) && newApplicationFormControls['khatoni'].errors">
+                    <div *ngIf="newApplicationFormControls['khatoni'].errors['required']">
+                        khatoni is required</div>
+                    <div *ngIf="newApplicationFormControls['khatoni']?.status=='INVALID'">
+                        Invalid khatoni
+                    </div>
+                </mat-error>
+            </div>
+
+            <!-- land Area -->
+
+            <!-- class="required" -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4">
+                <mat-label>भूमि क्षेत्रफल<span class="required">*</span></mat-label>
+                <input class="form-control" placeholder="Area" formControlName="area">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['area'].touched || isFormSubmit) && newApplicationFormControls['area'].errors">
+                    <div *ngIf="newApplicationFormControls['area'].errors['pattern']">
+                        Only Numbers allowed</div>
+                    <div *ngIf="newApplicationFormControls['area']?.status=='INVALID'">
+                        Invalid area
+                    </div>
+                </mat-error>
+            </div>
+
+
+            <!--land area unit -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5">
+                <mat-label>भूमि क्षेत्रफल इकाई<span class="required">*</span></mat-label>
+                <select formControlName="landAreaUnitId" class="form-control form-select">
+                    <option value="">--Select Land Area Unit--</option>
+                    <option *ngFor="let land of landAreaUnitList" [value]="land.landAreaUnitId">
+
+                        {{land.landAreaUnitName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['landAreaUnitId'].touched || isFormSubmit) && newApplicationFormControls['landAreaUnitId'].errors">
+                    <div *ngIf="newApplicationFormControls['landAreaUnitId'].errors['required']">
+                        Select Land Area Unit</div>
+                    <div *ngIf="newApplicationFormControls['landAreaUnitId']?.status=='INVALID'">
+                        Invalid landAreaUnitId
+                    </div>
+                </mat-error>
+            </div>
+
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8">
+                <mat-label>भूमि क्षेत्रफल<span>*</span></mat-label>
+                <input class="form-control" placeholder="Area" formControlName="area">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['area'].touched || isFormSubmit) && newApplicationFormControls['area'].errors">
+                    <div *ngIf="newApplicationFormControls['area'].errors['pattern']">
+                        Only Numbers allowed</div>
+                    <div *ngIf="newApplicationFormControls['area']?.status=='INVALID'">
+                        Invalid area
+                    </div>
+                </mat-error>
+            </div>
+
+
+
+            <!----  Number of plot -->
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4">
+                <mat-label>Number of Plots/Flats <span class="required">*</span></mat-label>
+                <input class="form-control" placeholder="Number of plotS" formControlName="noOfPlot">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['noOfPlot'].touched || isFormSubmit) && newApplicationFormControls['noOfPlot'].errors">
+                    <div *ngIf="newApplicationFormControls['noOfPlot'].errors['required']">
+                        Number of plotS is required</div>
+                    <div *ngIf="newApplicationFormControls['noOfPlot'].errors['pattern']">
+                        only number allow</div>
+                    <div *ngIf="newApplicationFormControls['noOfPlot']?.status=='INVALID'">
+                        Invalid noOfPlot
+                    </div>
+                </mat-error>
+
+            </div>
+
+
+            <!-- Pin Code -->
+            <!-- <div class="col-md-4 form-group">
+                <mat-label>पिनकोड</mat-label>
+                <input class="form-control" placeholder="Pin Code" formControlName="pinCode" [readonly]="false"
+                    minlength="6" maxlength="6">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['pinCode'].touched || isFormSubmit) && newApplicationFormControls['pinCode'].errors">
+                    <div *ngIf="newApplicationFormControls['pinCode'].errors['required']">
+                        Pin Code is required 6 digit </div>
+
+                    <div *ngIf="newApplicationFormControls['pinCode'].errors['minLength']">
+                        6 digit required </div>
+
+                </mat-error>
+            </div> -->
+
+            <div class="col-md-4 form-group"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 || (newApplicationCreationFg.get('natureOfWorkTypeId').value==5 && samagraCheckboxchoose==false)">
+                <mat-label>समग्र नंबर दर्ज करे</mat-label>
+                <input class="form-control" placeholder="समग्र नंबर दर्ज करे" formControlName="samagraId" type="number">
+
+
+            </div>
+
+
+        </div>
+
+        <br>
+
+        <!-- ////////////////////////***************************//////////////////////////// -->
+
+        <!-- new document upload code start -->
+        <div class="row">
+            <!-- ROW Document -->
+
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 ">
+                <span class="half-width">
+                    <!-- upload-lable -->
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #rowDoc type="file" (change)="rowUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <!-- file-lable -->
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (rowFileName.length>50)? (rowFileName |
+                            slice:0:50)+'...':(rowFileName) }}
+                            <span class="required">*</span></label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  rowRequired ">
+                            <div *ngIf="!rowUploaded">
+                                ROW Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+
+            <!-- Nagar Nigam Permission Document -->
+            <div class="col-md-9"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9  && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #nagarNigamPermissionDoc type="file" (change)="nagarNigamPermissionUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (nagarNigamPermissionFileName.length>50)? (nagarNigamPermissionFileName |
+                            slice:0:50)+'...':(nagarNigamPermissionFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  nagarNigamPermissionRequired ">
+                            <div *ngIf="!nagarNigamPermissionUploaded">
+                                Nagar Nigam Permission Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Energy Bill upload -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=7">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #energyBillDoc type="file" (change)="energyBillUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (energyBillFileName.length>50)? (energyBillFileName |
+                            slice:0:50)+'...':(energyBillFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  energyBillFileRequired ">
+                            <div *ngIf="!energyBillUploaded">
+                                Energy Bill Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+
+
+            <!-- Shapath Patra -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #shapathPatraDoc type="file" (change)="shapathPatraUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (shapathPatraFileName.length>50)? (shapathPatraFileName |
+                            slice:0:50)+'...':(shapathPatraFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  shapathPatraRequired ">
+                            <div *ngIf="!shapathPatraUploaded">
+                                Shapath Patra Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Drawing Notarized -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #drawingNotarizedDoc type="file" (change)="drawingNotarizedUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (drawingNotarizedFileName.length>50)? (drawingNotarizedFileName |
+                            slice:0:50)+'...':(drawingNotarizedFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  drawingNotarizedRequired ">
+                            <div *ngIf="!drawingNotarizedUploaded">
+                                Drawing Notarized Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Colony Prakoshth -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #colonyPrakoshthDoc type="file" (change)="colonyPrakoshthUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (colonyPrakoshthFileName.length>50)? (colonyPrakoshthFileName |
+                            slice:0:50)+'...':(colonyPrakoshthFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  colonyPrakoshthRequired ">
+                            <div *ngIf="!colonyPrakoshthUploaded">
+                                Colony Prakoshth Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Colony Licence -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #colonyLicenceDoc type="file" (change)="colonyLicenceUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (colonyLicenceFileName.length>50)? (colonyLicenceFileName |
+                            slice:0:50)+'...':(colonyLicenceFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  colonyLicenceRequired ">
+                            <div *ngIf="!colonyLicenceUploaded">
+                                Colony Licence Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Load Sheet -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 ">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #loadSheetDoc type="file" (change)="loadSheetUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (loadSheetFileName.length>50)? (loadSheetFileName |
+                            slice:0:50)+'...':(loadSheetFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  loadSheetRequired ">
+                            <div *ngIf="!loadSheetUploaded">
+                                Load Sheet Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+
+            <!-- All Paper Notarized (03 Set) -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #allPaperNotarized03SetDoc type="file" (change)="allPaperNotarized03SetUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (allPaperNotarized03SetFileName.length>50)? (allPaperNotarized03SetFileName |
+                            slice:0:50)+'...':(allPaperNotarized03SetFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  allPaperNotarized03SetRequired ">
+                            <div *ngIf="!allPaperNotarized03SetUploaded">
+                                All Paper Notarized (03 Set) Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Committee -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #committeeDoc type="file" (change)="committeeUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (committeeFileName.length>50)? (committeeFileName |
+                            slice:0:50)+'...':(committeeFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  committeeRequired ">
+                            <div *ngIf="!committeeUploaded">
+                                Committee Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Diversion -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #diversionDoc type="file" (change)="diversionUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (diversionFileName.length>50)? (diversionFileName |
+                            slice:0:50)+'...':(diversionFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  diversionRequired ">
+                            <div *ngIf="!diversionUploaded">
+                                Diversion Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Nazul -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #nazulDoc type="file" (change)="nazulUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (nazulFileName.length>50)? (nazulFileName |
+                            slice:0:50)+'...':(nazulFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  nazulRequired ">
+                            <div *ngIf="!nazulUploaded">
+                                Nazul Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Map -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #mapDoc type="file" (change)="mapUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (mapFileName.length>50)? (mapFileName |
+                            slice:0:50)+'...':(mapFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  mapRequired ">
+                            <div *ngIf="!mapUploaded">
+                                Map Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Khasra-Khatoni -->
+            <div class="col-md-9"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #khasraKhatoniDoc type="file" (change)="khasraKhatoniUpload($event)"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (khasraKhatoniFileName.length>50)? (khasraKhatoniFileName |
+                            slice:0:50)+'...':(khasraKhatoniFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  khasraKhatoniRequired || khasraKhotaniexample ">
+                            <div *ngIf="!khasraKhatoniUploaded">
+                                Khasra-Khatoni Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- samagra file   && samagraCheckboxchoose==true -->
+            <div class="col-md-9"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 || (newApplicationCreationFg.get('natureOfWorkTypeId').value==5 && samagraCheckboxchoose==false)">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #samagraDoc type="file" (change)="samagraDocUpload($event)" formControlName="samagraFile"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (samagraFileName.length>50)? (samagraFileName |
+                            slice:0:50)+'...':(samagraFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  samagraRequired || samagraExample ">
+                            <div *ngIf="!samagraUploaded">
+                                Samagra File is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Map Civil Engineer -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #mapCivilEngineerDoc type="file" (change)="mapCivilEngineerUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (mapCivilEngineerFileName.length>50)? (mapCivilEngineerFileName |
+                            slice:0:50)+'...':(mapCivilEngineerFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  mapCivilEngineerRequired ">
+                            <div *ngIf="!mapCivilEngineerUploaded">
+                                Map Civil Engineer Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Application Consent -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #applicationConsentDoc type="file" (change)="applicationConsentUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (applicationConsentFileName.length>50)? (applicationConsentFileName |
+                            slice:0:50)+'...':(applicationConsentFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  applicationConsentRequired ">
+                            <div *ngIf="!applicationConsentUploaded">
+                                Application Consent Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Performa-5 A -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #performa5ADoc type="file" (change)="performa5AUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (performa5AFileName.length>50)? (performa5AFileName |
+                            slice:0:50)+'...':(performa5AFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  performa5ARequired ">
+                            <div *ngIf="!performa5AUploaded">
+                                Performa-5 A Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+
+
+
+
+
+            <!-- Performa-5 B -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #performa5BDoc type="file" (change)="performa5BUpload()" class="custom-file-input"
+                            id="exampleInputFile" aria-describedby="fileHelp" accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (performa5BFileName.length>50)? (performa5BFileName |
+                            slice:0:50)+'...':(performa5BFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  performa5BRequired ">
+                            <div *ngIf="!performa5BUploaded">
+                                Performa-5 B Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Plot Area Details With Owner -->
+            <div class="col-md-9" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+                <span class="half-width">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #plotAreaDetailsWithOwnerDoc type="file" (change)="plotAreaDetailsWithOwnerUpload()"
+                            class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                            accept="application/pdf">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (plotAreaDetailsWithOwnerFileName.length>50)? (plotAreaDetailsWithOwnerFileName |
+                            slice:0:50)+'...':(plotAreaDetailsWithOwnerFileName ) }} <span class="required">*</span>
+                        </label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less
+                            then 2 MB)</span>
+                        <mat-error *ngIf=" isFormSubmit  &&  plotAreaDetailsWithOwnerRequired ">
+                            <div *ngIf="!plotAreaDetailsWithOwnerUploaded">
+                                Plot Area Details With Owner Document is required
+                            </div>
+                        </mat-error>
+                    </div>
+                </span>
+            </div>
+            <!-- </div> -->
+
+
+        </div>
+
+        <br>
+        <div class="row">
+            <!-- District  -->
+            <div class="col-md-4 form-group">
+                <mat-label>जिला<span class="required">*</span></mat-label>
+                <select formControlName="districtId" (change)="onChangeSelectedDistrictType($event.target.value)"
+                    class="form-control form-select">
+                    <option value="">--जिला चुने--</option>
+                    <option *ngFor="let district of districtList" [value]="district.districtId">
+                        {{district.districtName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['districtId'].touched || isFormSubmit) && newApplicationFormControls['districtId'].errors">
+                    <div *ngIf="newApplicationFormControls['districtId'].errors['required']">
+                        Select District</div>
+                </mat-error>
+            </div>
+
+
+            <!-- Distribution Center List -->
+            <div class="col-md-4 form-group">
+                <mat-label>वितरण केन्द्र <span class="required">*</span></mat-label>
+                <select formControlName="dcId" (change)="onChangeDc($event.target.value)"
+                    class="form-control form-select">
+                    <option value="">--वितरण केन्द्र चुने--</option>
+                    <option *ngFor="let dList of distributionCenterList" [value]="dList.dcId">
+                        {{dList.dcName}}</option>
+                </select>
+                <mat-error
+                    *ngIf="(newApplicationFormControls['dcId'].touched || isFormSubmit) && newApplicationFormControls['dcId'].errors">
+                    <div *ngIf="newApplicationFormControls['dcId'].errors['required']">
+                        Select Distribution Center (DC)</div>
+                </mat-error>
+            </div>
+        </div>
+
+
+        <!-- charitra code -->
+        <!-- Administrative section along with order Document -->
+        <div class="col-md-12">
+            <div class="col-md-6 custom-col custom-col-md-6"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=6">
+                <span class="half-width">
+                    <!-- upload-lable -->
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input #administrativeDoc type="file" formControlName="pdfFileAdministrative"
+                            (change)="administrativeUpload($event)" class="custom-file-input" id="exampleInputFile"
+                            aria-describedby="fileHelp" accept="application/pdf"
+                            [ngClass]="{'is-invalid': isFormSubmit && administrativeRequired}">
+                        <!-- file-lable -->
+                        <label class="custom-file-label" for="exampleInputFile">
+                            {{ (administrativeFileName.length>50)? (administrativeFileName |
+                            slice:0:50)+'...':(administrativeFileName) }}
+                            <span class="required">*</span></label>
+                        <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less then 2
+                            MB)</span>
+                        <mat-error
+                            *ngIf="(newApplicationFormControls['pdfFileAdministrative'].touched || isFormSubmit) && newApplicationFormControls['pdfFileAdministrative'].errors">
+                            <div *ngIf="newApplicationFormControls['pdfFileAdministrative'].errors['required']">
+                                Administrative Document is required
+                            </div>
+                            <div *ngIf="!administrativeUploaded">
+                                Administrative Document is required
+                            </div>
+                            <div *ngIf="administrativeexample">
+                                Administrative Document must should be less than 2MB
+                            </div>
+                        </mat-error>
+
+                    </div>
+                </span>
+            </div>
+        </div>
+
+
+        <!-- T&CP Permission -->
+        <div class="col-md-6 custom-col custom-col-md-6"
+            [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=3">
+            <span class="half-width">
+                <div class="custom-file" id="customFile" lang="es">
+                    <input #t$cpPermissionDoc type="file" formControlName="pdfFileTAndCP"
+                        (change)="t$cpPermissionUpload($event)" class="custom-file-input" id="exampleInputFile"
+                        aria-describedby="fileHelp" accept="application/pdf"
+                        [ngClass]="{'is-invalid': isFormSubmit && t$cpPermissionRequired}">
+                    <label class="custom-file-label" for="exampleInputFile">
+                        {{ (t$cpPermissionFileName.length>50)? (t$cpPermissionFileName |
+                        slice:0:50)+'...':(t$cpPermissionFileName ) }} <span class="required">*</span>
+                    </label>
+                    <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less then 2
+                        MB)</span>
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['pdfFileTAndCP'].touched || isFormSubmit) && newApplicationFormControls['pdfFileTAndCP'].errors">
+                        <div *ngIf="newApplicationFormControls['pdfFileTAndCP'].errors['required']">
+                            T&CP Permission Document is required
+                        </div>
+                        <div *ngIf="!t$cpPermissionUploaded">
+                            Administrative Document is required
+                        </div>
+                        <div *ngIf="TAndCPexmple">
+                            T&CP Permission must should be less than 2MB
+                        </div>
+                    </mat-error>
+                </div>
+
+            </span>
+        </div>
+
+
+        <!-- if apply group -->
+        <div class="col-md-6 custom-col custom-col-md-6"
+            [hidden]="newApplicationCreationFg.get('individualOrGroupId').value !=2">
+            <span class="half-width">
+                <div class="custom-file" id="customFile" lang="es">
+                    <input #individualOrGroupDoc type="file" formControlName="pdfGroup"
+                        (change)="individualOrGroupApply($event)" class="custom-file-input" id="exampleInputFile"
+                        aria-describedby="fileHelp" accept="application/pdf"
+                        [ngClass]="{'is-invalid': isFormSubmit && individualOrGroupRequired}">
+                    <label class="custom-file-label" for="exampleInputFile">
+                        {{ (individualOrGroupFileName.length>50)? (individualOrGroupFileName |
+                        slice:0:50)+'...':(individualOrGroupFileName) }} <span class="required">*</span>
+                    </label>
+                    <span style="color: #080def;
+                          font-size: 10px;">(Only PDF are allowed size should be less then 2 MB)</span>
+                    <!-- <mat-error *ngIf=" isFormSubmit  &&  individualOrGroupRequired ">
+                              <div *ngIf="individualOrGroupUploaded">
+                                  individual Or GroupUploaded Document is required 
+                              </div>
+                          </mat-error> -->
+
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['pdfGroup'].touched || isFormSubmit) && newApplicationFormControls['pdfGroup'].errors">
+                        <div *ngIf="newApplicationFormControls['pdfGroup'].errors['required']">
+                            Group permission file is required
+                        </div>
+                    </mat-error>
+                </div>
+            </span>
+        </div>
+
+        <!-- Rera Permission -->
+        <div class="col-md-6 custom-col custom-col-md-6"
+            [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=3">
+            <span class="half-width">
+                <div class="custom-file" id="customFile" lang="es">
+                    <input #reraPermissionDoc type="file" formControlName="pdfFileRera"
+                        (change)="reraPermissionUpload($event)" class="custom-file-input" id="exampleInputFile"
+                        aria-describedby="fileHelp" accept="application/pdf">
+                    <label class="custom-file-label" for="exampleInputFile">
+                        {{ (reraPermissionFileName.length>50)? (reraPermissionFileName |
+                        slice:0:50)+'...':(reraPermissionFileName ) }} <span class="required">*</span>
+                    </label>
+                    <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less then 2
+                        MB)</span>
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['pdfFileRera'].touched || isFormSubmit) && newApplicationFormControls['pdfFileRera'].errors">
+                        <div *ngIf="newApplicationFormControls['pdfFileRera'].errors['required']">
+                            RERA Permission Document is required
+                        </div>
+                        <div *ngIf="!reraPermissionUploaded">
+                            RERA Permission Document is required
+                        </div>
+                        <div *ngIf="Reraexmple">
+                            RERA Permission Document must should be less than 2MB
+                        </div>
+                    </mat-error>
+                </div>
+
+            </span>
+        </div>
+
+        <!-- Registory Document -->
+        <!-- style="margin-bottom: 20px;" -->
+        <div class="col-md-6 custom-col custom-col-md-6"
+            [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9  ">
+            <span class="half-width">
+                <div class="custom-file" id="customFile" lang="es">
+                    <input #registryDoc type="file" formControlName="pdfFileRegistory" (change)="registryUpload($event)"
+                        class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                        accept="application/pdf">
+                    <label class="custom-file-label" for="exampleInputFile">
+                        {{ (registryFileName.length>50)? (registryFileName |
+                        slice:0:50)+'...':(registryFileName ) }} <span class="required">*</span>
+                    </label>
+                    <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less then 2
+                        MB)</span>
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['pdfFileRegistory'].touched || isFormSubmit) && newApplicationFormControls['pdfFileRegistory'].errors">
+                        <div
+                            *ngIf="newApplicationFormControls['pdfFileRegistory'].errors['required'] ||Registoryexample">
+                            Registry Document is required
+                        </div>
+
+                        <div *ngIf="!registryUploaded">
+                            Registry Document is required
+                        </div>
+                        <div *ngIf="Registoryexample">
+                            Registry Document must should be less than 2MB
+                        </div>
+
+                    </mat-error>
+
+                </div>
+            </span>
+        </div>
+
+        <!-- NOC -->
+        <div class="col-md-6 custom-col custom-col-md-6"
+            [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=4  && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9">
+            <span class="half-width">
+                <div class="custom-file" id="customFile" lang="es">
+                    <input #nocDoc type="file" formControlName="pdfFileNoc" (change)="nocUpload($event)"
+                        class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                        accept="application/pdf">
+                    <label class="custom-file-label" for="exampleInputFile">
+                        {{ (nocFileName.length>50)? (nocFileName |
+                        slice:0:50)+'...':(nocFileName ) }} <span class="required">*</span>
+                    </label>
+                    <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less then 2
+                        MB)</span>
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['pdfFileNoc'].touched || isFormSubmit) && newApplicationFormControls['pdfFileNoc'].errors">
+                        <div *ngIf="newApplicationFormControls['pdfFileNoc'].errors['required'] || Nocexample">
+                            NOC Document is required
+                        </div>
+
+                        <div *ngIf="!nocUploaded">
+                            NOC Document is required
+                        </div>
+                        <div *ngIf="Nocexample">
+                            NOC Document must should be less than 2MB
+                        </div>
+
+                    </mat-error>
+
+                </div>
+            </span>
+        </div>
+
+
+
+
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="half-width padding shortDescriptionOfWork">
+                    <mat-label>कार्य का विवरण (अधिकतम २५५ शब्द)<span class="required">*</span>
+                    </mat-label>
+                    <textarea matInput placeholder="Short Description Of Work" formControlName="shortDescriptionOfWork"
+                        maxlength="255"></textarea>
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['shortDescriptionOfWork'].touched || isFormSubmit) && newApplicationFormControls['shortDescriptionOfWork'].errors">
+                        <div *ngIf="newApplicationFormControls['shortDescriptionOfWork'].errors['required']">
+                            Short Description Of Work is required</div>
+                        <div class="required" *ngIf="shortDescriptionOfWork?.length > 255">
+                            Max 255 Char allow only</div>
+
+                        <div *ngIf="newApplicationFormControls['shortDescriptionOfWork']?.status=='INVALID'">
+                            Invalid shortDescriptionOfWork
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <br>
+
+
+        <!-- SGT credit lena chahate hai to -->
+
+        <label>
+
+            <mat-label class="text-danger" style="font-size: 1.5em; font-weight: 800;"
+                [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=8 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7">
+                अगर आप GST Credit लेना चाहते है तो GST Number दर्ज करे |
+            </mat-label>
+
+            <mat-radio-group aria-label="Select an option" formControlName="gstCreditCheckBox"
+                (change)="checkBoxCredit($event.value)" [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5  
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6 
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=10
+            && newApplicationCreationFg.get('natureOfWorkTypeId').value !=7">
+                <mat-radio-button value="YES" class="mx-2" style="font-weight: 900;">Yes</mat-radio-button>
+                <mat-radio-button value="NO" style="font-weight: bold;">No</mat-radio-button>
+            </mat-radio-group>
+        </label>
+
+
+        <!-- GST number  -->
+        <div *ngIf="gstchekbox" class="row">
+
+            <div class="col-md-4 form-group">
+                <mat-label>GST Number</mat-label>
+                <input class="form-control" placeholder="GST Number" formControlName="gstNumber" minlength="15"
+                    maxlength="15">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['gstNumber'].touched || isFormSubmit) && newApplicationFormControls['gstNumber'].errors">
+                    <div *ngIf="newApplicationFormControls['gstNumber'].errors['required']">
+                        GST Code is required 15 digit </div>
+
+                    <div *ngIf="newApplicationFormControls['gstNumber'].errors['minLength']">
+                        15 digit required </div>
+
+                    <div *ngIf="newApplicationFormControls['gstNumber']?.status=='INVALID'">
+                        Invalid gstNumber
+                    </div>
+
+                </mat-error>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <mat-label style="font-weight: bold; color: black;">PAN Number</mat-label>
+                <input placeholder="PAN Number" formControlName="panNo" minlength="10" maxlength="10"
+                    class="form-control">
+                <mat-error
+                    *ngIf="(newApplicationFormControls['panNo'].touched || isFormSubmit) && newApplicationFormControls['panNo'].errors">
+                    <div *ngIf="newApplicationFormControls['panNo'].errors['required']">
+                        PAN Number is required 10 digit </div>
+
+                    <div *ngIf="newApplicationFormControls['panNo'].errors['minLength']">
+                        10 digit required </div>
+
+                    <div *ngIf="newApplicationFormControls['panNo']?.status=='INVALID'">
+                        Invalid panNo
+                    </div>
+
+                </mat-error>
+            </div>
+
+        </div>
+
+
+        <!-- gst file -->
+        <div class="col-md-6 custom-col custom-col-md-6" *ngIf="gstchekbox">
+            <span class="half-width">
+                <div class="custom-file" id="customFile" lang="es">
+                    <input #gstDoc type="file" formControlName="pdfFileGst" (change)="gstUpload($event)"
+                        class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp"
+                        accept="application/pdf" [ngClass]="{'is-invalid': isFormSubmit && gstRequired}">
+                    <label class="custom-file-label" for="exampleInputFile">
+                        {{ (gstFileName.length>50)? (gstFileName |
+                        slice:0:50)+'...':(gstFileName ) }} <span class="required">*</span>
+                    </label>
+                    <span style="color: #080def; font-size: 10px;">(Only PDF are allowed size should be less then 2
+                        MB)</span>
+                    <mat-error
+                        *ngIf="(newApplicationFormControls['pdfFileGst'].touched || isFormSubmit) && newApplicationFormControls['pdfFileGst'].errors">
+                        <div *ngIf="newApplicationFormControls['pdfFileGst'].errors['required'] || !gstUploaded">
+                            GST Document is required
+                        </div>
+
+                        <div *ngIf="gstFileExample">
+                            GST Document must should be less than 2MB
+                        </div>
+                    </mat-error>
+                </div>
+            </span>
+        </div>
+        <br>
+
+
+        <!-- <mat-form-field class="half-width padding"
+        [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=1 &&  newApplicationCreationFg.get('natureOfWorkTypeId').value !=2 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=9 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=5 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=6">
+            <mat-label>land area<span class="required">*</span></mat-label>
+            <input matInput placeholder="gstNumber" formControlName="gstNumber" [hidden]="!newApplicationCreationFg.get('gstCreditCheckBox').value ==true">
+            <mat-error
+                *ngIf="(newApplicationFormControls['gstNumber'].touched || isFormSubmit) && newApplicationFormControls['gstNumber'].errors">
+                <div *ngIf="newApplicationFormControls['area'].errors['pattern']">
+                    Only Numbers allowed</div>
+            </mat-error>
+        </mat-form-field> -->
+
+        <!-- </div> -->
+
+        <!-- start -->
+        <!-- <label>
+            <input type="checkbox" formControlName="cb">
+            1. मैं घोषणा करता/करती हूं कि मेरे द्वारा इस आवदेन में दी गई उपरोक्त समस्त जानकारियां पूर्ण एवं सत्य हैं तथा किसी भी स्तर पर असत्य पाये <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;जाने पर नियमानुसार कार्यवाही करने का मध्य प्रदेश मध्य क्षेत्र विद्युत वितरण कम्पनी लिमिटेड, भोपाल  को पूर्ण अधिकार होगा। <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;2. इसके अतिरिक़्त कार्य में आने वाली सभी प्रकार की ROW का निराकरण मेरे द्वारा किया जावेगा | कार्य से समबन्धित नगर निगम ,रेलवे ,NHAI   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;विभाग में कार्य से समबन्धित NOC,कार्यवाही और अनुमति शुल्क मै स्वयं सुनिश्चित करूँगा |
+            <span class="required">*</span></label> -->
+
+        <div class="form-group">
+            <label class="custome_checkbox">
+                <span class="d-block">
+                    1. मैं घोषणा करता/करती हूं कि मेरे द्वारा इस आवदेन में दी गई उपरोक्त समस्त जानकारियां पूर्ण एवं सत्य
+                    हैं तथा किसी भी स्तर पर असत्य पाये जाने पर नियमानुसार कार्यवाही करने का मध्य प्रदेश मध्य क्षेत्र
+                    विद्युत वितरण कम्पनी लिमिटेड, भोपाल को पूर्ण अधिकार होगा।
+                </span>
+                <span class="d-block">
+                    2. इसके अतिरिक़्त कार्य में आने वाली सभी प्रकार की ROW का निराकरण मेरे द्वारा किया जावेगा | कार्य से
+                    समबन्धित नगर निगम ,रेलवे ,NHAI विभाग में कार्य से समबन्धित NOC,कार्यवाही और अनुमति शुल्क मै स्वयं
+                    सुनिश्चित करूँगा |
+                </span>
+                <input type="checkbox" formControlName="cb" (change)="onCheckboxTick($event)">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+
+
+        <div class="form-group"
+            [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4">
+            <label class="custome_checkbox">
+                <span class="d-block">
+                    3. मेरे द्वारा प्लॉटों की संख्या के आधार पर लोड की मांग की गयी है अगर मेरे द्वारा प्लॉटों की संख्या
+                    बढ़ाता हूँ तो मेरे द्वारा लोड को भी उसी अनुपात में बढ़ाने के लिए मैं उत्तरदायी होगा |
+                </span>
+                <input type="checkbox" formControlName="cbLigalAndIlegal">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+
+        <style>
+            .custome_checkbox {
+                display: block;
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                user-select: none;
+                line-height: 26px;
+            }
+
+
+            .custome_checkbox input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+
+            .custome_checkbox .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 22px;
+                width: 22px;
+                background-color: transparent;
+                border: 2px solid #000;
+                border-radius: 2px;
+            }
+
+
+            .custome_checkbox input:checked~.checkmark {
+                background-color: transparent;
+            }
+
+            .custome_checkbox .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+
+            .custome_checkbox input:checked~.checkmark:after {
+                display: block;
+            }
+
+            .custome_checkbox .checkmark:after {
+                left: 6px;
+                top: 2px;
+                width: 6px;
+                height: 12px;
+                border: solid #000;
+                border-width: 0 2px 2px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        </style>
+
+        <!-- end -->
+
+        <!-- <label  [hidden]="newApplicationCreationFg.get('natureOfWorkTypeId').value !=3 && newApplicationCreationFg.get('natureOfWorkTypeId').value !=4"><input type="checkbox" formControlName="cbLigalAndIlegal" >&nbsp;3. मेरे द्वारा प्लॉटों की संख्या के आधार पर लोड की मांग की गयी है अगर मेरे द्वारा प्लॉटों की संख्या बढ़ाता  हूँ तो मेरे द्वारा लोड को भी उसी  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अनुपात में बढ़ाने के लिए मैं उत्तरदायी होगा | <br><span class="required">*</span></label> -->
+
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <!-- {{newApplicationCreationFg.value | json}} -->
+</mat-card>

@@ -1,0 +1,187 @@
+<div  align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;"  (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<mat-card class="custom-scroll-enable">
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style=" font-size: 2em; font-weight: 900; text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">
+                <!-- IVRS Confirmation by JE -->
+                Consumer Application Number : <span
+                style="color: green;">{{consumerApplicationDetail.consumerApplicationNo}}</span>
+            </div>
+        </div>
+        <div></div>
+    </div>
+
+
+
+    <br>
+<br>
+
+
+    <form [formGroup]="ivrsForm">
+
+        <div style="font-size: 1em; font-weight: 900;">
+            <mat-checkbox class="example-margin" 
+                (change)="onNewCheckboxSelect($event)"></mat-checkbox>
+            <span style="font-size: 1.2em; font-weight: 700;">
+                मैं सत्यापित करता हूँ कि उक्त कार्य पूर्ण हो चुका है और
+                विद्युत कनेक्शन चालू है। अतः मैं नवीन कनेक्शन जारी करने के लिए अपनी सहमति देता हूँ।
+            </span>
+        </div>
+        <br>
+
+        <div class="row ">
+            <div class="col-md-6 form-group">
+                <mat-label style="font-weight: bold; color: black;">IVRS Number<span
+                        class="required text-danger">*</span></mat-label>
+                <input type="text" class="form-control" placeholder="IVRS NUMBER" formControlName="ivrsNo"
+                    minLength="11" maxLength="11">
+                <mat-error
+                    *ngIf="(ivrsFormControls['ivrsNo'].touched || isFormSubmit) && ivrsFormControls['ivrsNo'].errors">
+                    <div *ngIf="ivrsFormControls['ivrsNo'].errors['required']" style="font-weight: bold;">
+                        ivrsNo is required</div>
+                    <div *ngIf="ivrsFormControls['ivrsNo'].errors['pattern']" style="font-weight: bold;">
+                        first letter should be N or H and 10 numbers allowed</div>
+
+                </mat-error>
+            </div>
+
+
+            <div class="col-md-3 form-group mt-3" align="center" style="justify-content: center; align-items: center;">
+                <button type="button" class="btn btn-success" (click)="onGetDetails()" [disabled]="ivrsForm.invalid?true:false">
+                    Get Details
+                </button>
+            </div>
+
+
+        </div>
+
+    </form>
+
+    <br>
+<table class="table table-bordered">
+    <tr class="table-secondary">
+        <th scope="col" colspan="4">
+            <div align="center" style="font-weight: 900; font-size: 1.5em;">IVRS Details</div>
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">IVRS Number</th>
+        <td colspan="2">{{ivrsDetails?.ivrs}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Application Number</th>
+        <td colspan="2">{{consumerApplicationDetail?.consumerApplicationNo}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Address</th>
+        <td colspan="2">{{ivrsDetails?.address}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Consumer Name</th>
+        <td colspan="2">{{ivrsDetails?.consumer_name}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Phase</th>
+        <td colspan="2">{{ivrsDetails?.phase}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Connection Date</th>
+        <td colspan="2">{{ivrsDetails?.connection_date}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Primary Mobile Number</th>
+        <td colspan="2">{{ivrsDetails?.primary_mobile_no}}</td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Sanction Load</th>
+        <td colspan="2">{{ivrsDetails?.sanctioned_load}}{{ivrsDetails?.sanctioned_load_unit}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Feeder Name</th>
+        <td colspan="2">{{ivrsDetails?.feeder_name}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">DTR Name</th>
+        <td colspan="2">{{ivrsDetails?.dtr_name}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Connection Type</th>
+        <td colspan="2">{{ivrsDetails?.connection_type}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Contract demand</th>
+        <td colspan="2">{{ivrsDetails?.contract_demand}}{{ivrsDetails?.contract_demand_unit}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Location Code</th>
+        <td colspan="2">{{ivrsDetails?.location_code}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Tariff code</th>
+        <td colspan="2">{{ivrsDetails?.tariff_code}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Tariff Category</th>
+        <td colspan="2">{{ivrsDetails?.tariff_category}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Group Number</th>
+        <td colspan="2">{{ivrsDetails?.group_no}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Metering Status</th>
+        <td colspan="2">{{ivrsDetails?.metering_status}} </td>
+
+    </tr>
+    <tr>
+        <th colspan="2" scope="row">Created Date</th>
+        <td colspan="2">{{ivrsDetails?.created_on}} </td>
+
+    </tr>
+
+
+</table>
+    <br>
+
+
+    <div >
+        <div style="font-size: 1em; font-weight: 900;">
+            <mat-checkbox class="example-margin" formControlName="selection194j"
+                (change)="onCheckboxSelect($event)"></mat-checkbox>
+            <span style="font-size: 1.2em; font-weight: 700;">
+                मैं सत्यापित करता हूँ कि ऊपर दर्ज किया गया IVRS नंबर, इसी आवेदन से सम्बंधित है।
+            </span>
+        </div>
+
+        <br>
+        <div align="center" >
+            <button type="button" class="btn btn-primary"  [disabled]="(checkBoxSelectBoolean==true && GetDetailsBoolean==true)?false:true"
+                (click)="onSubmit()">Submit</button>
+        </div>
+    </div>
+
+
+</mat-card>

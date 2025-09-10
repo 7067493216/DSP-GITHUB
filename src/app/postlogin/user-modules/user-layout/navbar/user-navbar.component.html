@@ -1,0 +1,217 @@
+<mat-toolbar color="primary" class="mat-elevation-z3">
+    <mat-nav-list *ngIf="isSearchkey == 'connectedConsumer' || isSearchkey == 'pdcConsumer'">
+        <mat-list-item>
+            <a mat-icon-button (click)="cleanSearchKey()" matTooltip="Home">
+                <mat-icon>home</mat-icon>
+            </a>
+            <a *appHasRole="role.viewBasicDetailsNavBar" mat-button [matMenuTriggerFor]="ConsumerControl"
+                routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>widgets</mat-icon><span class="padding">Basic Details</span>
+            </a>
+            <mat-menu #ConsumerControl>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.AccountInfoComponent_update"
+                    mat-menu-item routerLink="/consumer-control/account-info" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>assignment_ind</mat-icon><span>Account-info</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.UpdateBasicInfoComponent_update"
+                    mat-menu-item routerLink="/consumer-control/data-correction" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>perm_identity</mat-icon><span>Data Correction</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.viewDisputedArrearssNavLink"
+                    mat-menu-item routerLink="/consumer-control/disputed-arrears" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>card_travel</mat-icon><span>Disputed Arrears</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.ConsumerFlagsComponent_view"
+                    mat-menu-item routerLink="/consumer-control/consumer-flags" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>tab_unselected</mat-icon><span>Consumer Flags</span>
+                </a>
+                <!-- /* ********************
+                *  Sandeep, Date: - 27 - 07 - 2022 - Starts *****
+                * *********************/ -->
+                <!-- <a *appHasRole="role.ConsumerFlagsComponent_view" mat-menu-item
+                    routerLink="/consumer-control/current-status" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>poll</mat-icon><span>Current Status</span>
+                </a> -->
+
+                <a *appHasRole="role.ConsumerCurrentStatusComponent_view" mat-menu-item
+                    routerLink="/consumer-control/current-status" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>poll</mat-icon><span>Current Status</span>
+                </a>
+
+                <!-- /* ********************
+                * Sandeep, Date: - 27 - 07 - 2022 - Ends ******
+                * ********************/ -->
+
+                <a *appHasRole="role.SdManagerComponent_view" mat-menu-item routerLink="/consumer-control/sd-manager"
+                    routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>verified_user</mat-icon><span>Manage SD</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.PremiseAddressComponent_update"
+                    mat-menu-item routerLink="/consumer-control/premise-address" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>navigation</mat-icon><span>premise-address</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.PersonalInfoComponent_update"
+                    mat-menu-item routerLink="/consumer-control/personal-info" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>contacts</mat-icon><span>Personal-info</span>
+                </a>
+                <ng-container *ngIf="isBhopalDiscom">
+                    <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.consumerTdsTcsRates_update"
+                        mat-menu-item routerLink="/consumer-control/tds-tcs-rates" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>contacts</mat-icon><span>Tcs-Tds-Rates</span>
+                    </a>
+                </ng-container>
+
+
+
+
+                <!-- <a mat-menu-item routerLink="/consumer-dashboard/additional-info" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>import_contacts</mat-icon><span class="padding">Additional-info</span>
+            </a> -->
+            </mat-menu>
+            <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.viewMeterMeControllerNavLink" mat-button
+                [matMenuTriggerFor]="meterMeController" routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>settings_brightness</mat-icon><span class="padding">Meter & ME Controller</span>
+            </a>
+            <mat-menu #meterMeController>
+                <a *appHasRole="role.viewMeterMEReplacementNavLink" mat-menu-item (click)="openMeterMeUrl()">
+                    <mat-icon>network_check</mat-icon><span>Meter & ME replacement</span>
+                </a>
+                <a *appHasRole="role.viewMeterMEUpdationNavLink" mat-menu-item routerLink="/meter/meter-me-updation"
+                    routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>system_update_alt</mat-icon><span>Meter ME Updation</span>
+                </a>
+            </mat-menu>
+            <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.viewLoadChangeNavLink" mat-button
+                routerLink="/ht-nsc/load-change-ht" routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>replay_circle_filled</mat-icon><span class="padding">Change Load</span>
+            </a>
+            <a [hidden]="isSearchkey !== 'connectedConsumer'" *appHasRole="role.viewTariffChangeNavLink" mat-button
+                routerLink="/ht-nsc/tariff-change-ht" routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>chrome_reader_mode</mat-icon><span class="padding">Tariff Change</span>
+            </a>
+            <a *appHasRole="role.viewHTAdjustmentNavLink" mat-button [matMenuTriggerFor]="adjustments">
+                <mat-icon>account_balance</mat-icon><span class="padding">Adjustments/Reading Punch</span>
+            </a>
+            <mat-menu #adjustments="matMenu" yPosition="below">
+                <a mat-menu-item *appHasRole="role.viewAmountAdjustmentNavLink" routerLink="/payment/amount-adjustment"
+                    routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>receipt</mat-icon><span>Amount Adjustment(CCB)</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" mat-menu-item
+                    *appHasRole="role.viewUnitAdjustmentNavLink" routerLink="/meter-read/ht-adjustment"
+                    routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>tune</mat-icon><span>Unit Adjustment</span>
+                </a>
+                <a [hidden]="isSearchkey !== 'connectedConsumer'" mat-menu-item
+                    *appHasRole="role.viewReadingEntryNavLink" [matMenuTriggerFor]="punchUnit">
+                    <mat-icon>pie_chart</mat-icon><span>Reading Entry</span>
+                </a>
+            </mat-menu>
+            <mat-menu #punchUnit="matMenu">
+                <a *appHasRole="role.viewCaptiveUnitRebateNavLink" mat-menu-item
+                    routerLink="/meter-read/captive-unit-punch" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>blur_on</mat-icon><span>Captive Unit rebate</span>
+                </a>
+                <a *appHasRole="role.viewOpenAccessUnitrebateNavLink" mat-menu-item
+                    routerLink="/meter-read/open-access-unit" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>device_hub</mat-icon><span>Open Access Unit rebate</span>
+                </a>
+                <a *appHasRole="role.viewManualReadingNavLink" mat-menu-item
+                    routerLink="/meter-read/manual-reading-unit" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>low_priority</mat-icon><span>Manual Reading</span>
+                </a>
+                <a *appHasRole="role.viewAverageUnitAssessmentNavLink" mat-menu-item
+                    routerLink="/meter-read/average-assessment" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>bug_report</mat-icon><span>Average Assessment Reading</span>
+                </a>
+                <a *appHasRole="role.viewTmmUnitPunchNavLink" mat-menu-item routerLink="/meter-read/tmm-unit-punch"
+                    routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>developer_board</mat-icon><span>TMM Reading</span>
+                </a>
+            </mat-menu>
+            <a *appHasRole="role.viewHistoryNavBar" mat-button [matMenuTriggerFor]="historyMenu"
+                routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>history_edu</mat-icon><span class="padding">History</span>
+            </a>
+            <mat-menu #historyMenu>
+                <a mat-menu-item routerLink="/history/bill" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>receipt_long</mat-icon><span>Bill</span>
+                </a>
+                <a mat-menu-item routerLink="/history/ccnb-bill" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>table_chart</mat-icon><span>CCNB-Bill</span>
+                </a>
+                <a mat-menu-item routerLink="/history/financial-adjustement" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>card_travel</mat-icon><span>Financial Adjustements</span>
+                </a>
+                <a mat-menu-item routerLink="/history/load" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>system_update_alt</mat-icon><span>Load Change</span>
+                </a>
+                <a mat-menu-item routerLink="/history/meter-read" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>network_check</mat-icon><span>Meter Read & Consumption</span>
+                </a>
+                <a mat-menu-item routerLink="/history/me" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>settings_brightness</mat-icon><span>Metering Equipment</span>
+                </a>
+                <a mat-menu-item routerLink="/history/meter" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>settings_input_component</mat-icon><span>Meter</span>
+                </a>
+                <a mat-menu-item routerLink="/history/payment" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>payments</mat-icon><span>Payment</span>
+                </a>
+                <a mat-menu-item routerLink="/history/sd" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>verified_user</mat-icon><span>Security Deposit</span>
+                </a>
+                <a mat-menu-item routerLink="/history/tariff" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>power</mat-icon><span>Tariff</span>
+                </a>
+                <!--                 <a mat-menu-item routerLink="/history/tc-advance" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>videogame_asset</mat-icon><span>TC Advance</span>
+                </a> -->
+                <a mat-menu-item routerLink="/history/unit-adjustement" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>ac_unit</mat-icon><span>Unit Adjustements</span>
+                </a>
+                <a mat-menu-item routerLink="/history/certificates" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon>list_alt</mat-icon><span>TDS u/s 194Q Certificates</span>
+                </a>
+            </mat-menu>
+        </mat-list-item>
+    </mat-nav-list>
+    <div id="1" class="input-group md-form form-sm form-1 pl-0">
+        <input [(ngModel)]="searchKey" #search="ngModel" maxlength="15" (keyup.enter)="setSearchkey()" autofocus
+            class="form-control my-0 py-1 lime-border" type="text" style="font-size: 10pt;"
+            placeholder="Search Account Id/Meter Sn." aria-label="Search">
+        <button *appHasRole="role.viewSearchBarButton" type="submit" mat-button matSuffix mat-icon-button
+            aria-label="Clear" (click)="setSearchkey()">
+            <mat-icon style="color: white;">search</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>

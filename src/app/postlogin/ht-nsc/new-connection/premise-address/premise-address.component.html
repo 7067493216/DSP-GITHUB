@@ -1,0 +1,273 @@
+<!-- ...........................Premise Address Information........Start............. ............-->
+<mat-card class="my-card">
+    <mat-card-header>
+        <mat-card-title>Premise Address Information</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="premiseFg">
+        <ng-template matStepLabel>Premise Address Information</ng-template>
+        <mat-divider></mat-divider><br>
+        <mat-form-field class="half-width">
+            <input matInput placeholder="Agreement purpose" name="premiseType" upperCase maxlength="40" formControlName="premiseType">
+            <mat-error *ngIf="premiseFg.controls.premiseType.hasError('required')">
+                Enter Agreement purpose
+            </mat-error>
+            <mat-error *ngIf="premiseFg.controls.premiseType.hasError('maxlength')">
+            Max length 40 characters
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Area Type" name="areaType" formControlName="areaType" required>
+                <mat-option *ngFor="let areatypes of areaType| keyvalue" [value]="areatypes.key">
+                    {{areatypes.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.areaType.hasError('required')">
+                Select Connection Scheme
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Connection Scheme" name="areaTowns" formControlName="areaTowns" required>
+                <mat-option *ngFor="let area of areaTown | keyvalue" [value]="area.key">{{area.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.areaTowns.hasError('required')">
+                Select Area/Town(Location Of Connection)
+            </mat-error>
+        </mat-form-field>
+        <!--                 <mat-form-field class="half-width">
+                    <mat-select placeholder="Discom" formControlName="discom"
+                        (selectionChange)="onChangeDiscom($event.value)" required>
+                        <mat-option *ngFor="let discom of discomData" [value]="discom.discomId">
+                            {{discom.discom}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="premiseFg.controls.discom.hasError('required')">
+                        Discom is required
+                    </mat-error>
+                </mat-form-field> -->
+
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Region" name="region" formControlName="region"
+                (selectionChange)="onChangeRegion($event.value)" required>
+                <mat-option *ngFor="let regiondata of regionData" [value]="regiondata.regionId">
+                    {{regiondata.region}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.region.hasError('required')">
+                Select Region
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Circle" name="circle" formControlName="circle"
+                (selectionChange)="onChangeCircle($event.value)" required>
+                <mat-option *ngFor="let circle of circleData" [value]="circle.circleId">
+                    {{circle.circle}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.circle.hasError('required')">
+                Select Circle
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Division" name="locationCode" formControlName="division"
+                (selectionChange)="onChangeDivision($event.value)" required>
+                <mat-option *ngFor="let division of divisionData" [value]="division.divisionId">
+                    {{division.division}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.division.hasError('required')">
+                Select Location Code
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Sub Division" name="subDivision" formControlName="subDivision"
+                (selectionChange)="onChangeSubDivision($event.value)" required>
+                <mat-option *ngFor="let subDivision of subDivisionData" [value]="subDivision.subDivisionId">
+                    {{subDivision.subDivision}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.subDivision.hasError('required')">
+                Select Location Code
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select DC" name="dc" formControlName="dc"
+                (selectionChange)="onChangeDc($event.value)" required>
+                <mat-option *ngFor="let dc of dcData" [value]="dc.dcId">
+                    {{dc.dcName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.dc.hasError('required')">
+                Select Location Code
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Sub Station" name="subStation" formControlName="subStation"
+                (selectionChange)="onChangeSubStation($event.value)" required>
+                <mat-option *ngFor="let subStation of subStationData" [value]="subStation.subStationId">
+                    {{subStation.subStationName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.subStation.hasError('required')">
+                Select Location Code
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select feeder" name="feeder" formControlName="feeder" required>
+                <mat-option *ngFor="let feeder of feederData" [value]="feeder.feederId">
+                    {{feeder.feederName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.feeder.hasError('required')">
+                Select Location Code
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="House/Street No.(Location Of Connection)" name="houseNo" upperCase formControlName="houseNo" required>
+            <mat-error *ngIf="premiseFg.controls.houseNo.hasError('required')">
+                House/Street No. is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Area Colony" name="areaColony" upperCase formControlName="areaColony" required>
+            <mat-error *ngIf="premiseFg.controls.areaColony.hasError('required')">
+                Area Colony is required
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select District" name="district" formControlName="district"
+                (selectionChange)="onChangeDistrict($event.value)" required>
+                <mat-option *ngFor="let district of districtData" [value]="district.districtId">
+                    {{district.district}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.district.hasError('required')">
+                District is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select Tehsil" name="tehsil" formControlName="tehsil"
+                (selectionChange)="onChangeTehsil($event.value)" required>
+                <mat-option *ngFor="let tehsil of tehsilData" [value]="tehsil.tehsilId">
+                    {{tehsil.tehsil}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.tehsil.hasError('required')">
+                Tehsil is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Select City" name="city" formControlName="city" required>
+                <mat-option *ngFor="let city of cityData" [value]="city.cityId">
+                    {{city.city}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premiseFg.controls.city.hasError('required')">
+                City/Village is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <input matInput placeholder="Pin Code" name="pinCode" upperCase formControlName="pinCode"
+                onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="6" maxlength="6" required>
+            <mat-error *ngIf="premiseFg.controls.pinCode.hasError('required')">
+                Pin Code is required
+            </mat-error>
+            <mat-error *ngIf="premiseFg.controls.pinCode.hasError('minlength')">
+                Pin Code is invalid
+            </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider><br><br>
+
+        <!-- !!!!!!!!!!!!!!!add Mailing Address Start!!!!!!!!!!!!!!!!!!! -->
+
+        <div class="row">
+            <div class="col-md-5">
+                <h6>Is mailing address is same as premise address</h6>
+            </div>
+            <div class="col-md-7">
+                <mat-radio-group formControlName="mailingAddress" color="primary">
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2" class="padding">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            </div>
+        <!-- <ng-container  *ngIf="premiseFg.get('mailingAddress').value=='2'"> -->
+        <div [style.display]="premiseFg.get('mailingAddress').value=='2'?'inherit':'none'">
+            <mat-form-field class="half-width">
+                <input matInput placeholder="House/Street No" name="houseStreetNo1" upperCase
+                    formControlName="houseStreetNo1" [disableControl]="premiseFg.get('mailingAddress').value !== '2'">
+                <mat-error *ngIf="premiseFg.controls.houseStreetNo1.hasError('required')">
+                    House/Street No required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <input matInput placeholder="Area Colony" name="areaColony" upperCase formControlName="areaColony1"
+                    [disableControl]="premiseFg.get('mailingAddress').value !=='2'">
+                <mat-error *ngIf="premiseFg.controls.areaColony1.hasError('required')">
+                    Area Colony name required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <mat-select placeholder="Select State" name="state" formControlName="state"
+                    (selectionChange)="onChangeState($event.value)"
+                    [disableControl]="premiseFg.get('mailingAddress').value !=='2'">
+                    <mat-option *ngFor="let state of stateData" [value]="state.stateId">
+                        {{state.state}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="premiseFg.controls.state.hasError('required')">
+                    District name required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width">
+                <mat-select placeholder="Select district" name="district1" formControlName="district1"
+                    (selectionChange)="onChangeDistrict1($event.value)"
+                    [disableControl]="premiseFg.get('mailingAddress').value !=='2'">
+                    <mat-option *ngFor="let districts of districtData1" [value]="districts.districtId">
+                        {{districts.district}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="premiseFg.controls.district1.hasError('required')">
+                    District name required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <mat-select placeholder="Select Tehsil" name="tehsil1" formControlName="tehsil1"
+                    (selectionChange)="onChangeTehsil1($event.value)"
+                    [disableControl]="premiseFg.get('mailingAddress').value !=='2'">
+                    <mat-option *ngFor="let tehsils of tehsilData1" [value]="tehsils.tehsilId">
+                        {{tehsils.tehsil}}
+                    </mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="premiseFg.controls.tehsil1.hasError('required')">
+                    Block name required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="half-width padding">
+                <mat-select placeholder="Select City" name="city1" formControlName="city1"
+                    [disableControl]="premiseFg.get('mailingAddress').value !=='2'">
+                    <mat-option *ngFor="let citys of cityData1" [value]="citys.cityId">{{citys.city}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="premiseFg.controls.city1.hasError('required')">
+                    City Name required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width">
+                <input matInput placeholder="Pin Code" name="pinCode" formControlName="pinCode1" [disableControl]="premiseFg.get('mailingAddress').value !=='2'" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="6" maxlength="6" required>
+                <mat-error *ngIf="premiseFg.controls.pinCode1.hasError('required')">
+                    Pin Code is required
+                </mat-error>
+                <mat-error *ngIf="premiseFg.controls.pinCode1.hasError('minlength')">
+                    Pin Code is invalid
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+    <!-- {{premiseFg?.value | json}} -->
+    <!-- {{premiseFg?.status | json}} -->
+</mat-card>

@@ -1,0 +1,29 @@
+.my-card {
+    width: 60%;
+    margin: 10px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.half-width {
+    width: 100%;
+}
+
+.padding {
+    padding-left: 23px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.ckeck-margin {
+    margin: 0 10px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}

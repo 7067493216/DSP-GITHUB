@@ -1,0 +1,25 @@
+<mat-card>
+
+    <div align="center" style="font-size: 2em; font-weight: 900;">Registration-Reciept</div>
+
+    <hr>
+    <br>
+
+    <form [formGroup]="registrationForm">
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+                <label class="form-label">Consumer Application Number</label>
+                <input type="text" class="form-control" formControlName="applicationNumber">
+            </div>
+            <div class="col-md-3 mt-4">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()" >Submit</button>
+
+            </div>
+        </div>
+
+    </form>
+
+
+</mat-card>

@@ -1,0 +1,52 @@
+<div class="dsp-loginblock" >
+    <mat-card class="dsp-loign-item" style="align-items: center; justify-content: center;">
+        <mat-card-header>
+            <mat-card-title>SSP Applicant Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dsp-forminfo">
+            <!-- <form [formGroup]="consumerLoginForm"  autocomplete="off" class="consumerLoginForm"
+                *ngIf="!showOtpFieldNew">
+                <mat-form-field appearance="outline" class="form-group">
+                    <input matInput name="consumerLoginId" minlength="10" maxlength="10"
+                        placeholder="Applicant Mobile Number (आवेदक मोबाइल नंबर )" formControlName="consumerLoginId"
+                        class="ds-textbox">
+                    <mat-label class="form-label">Applicant Mobile Number (आवेदक मोबाइल नंबर )</mat-label>
+                    <mat-error *ngIf="consumerLoginForm?.controls?.consumerLoginId?.hasError('required')">
+                        Enter Applicant Mobile Number
+                    </mat-error>
+                    <mat-error *ngIf="consumerLoginForm?.controls?.consumerLoginId?.hasError('pattern')">
+                        Enter 10 digit Mobile Number
+                    </mat-error>
+                </mat-form-field>
+                <div class="form-group form-buttons">
+                    <button mat-stroked-button color="primary" type="submit" (click)="trialLogin()" class="formButton formButton-full ">
+                        Get OTP
+                    </button>
+                </div>
+            </form> -->
+
+            <div >
+                <form [formGroup]="otpVerificationFg" (ngSubmit)="otpVerification()" autocomplete="off"
+                    class="loginForm">
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="form-group">
+                            <input matInput placeholder="Enter Your OTP" type="tel" name="otp" formControlName="otp"
+                                required>
+                            <mat-label class="form-label">OTP</mat-label>
+                            <mat-error *ngIf="otpVerificationFg?.controls?.otp?.hasError('required')">
+                                Enter OTP
+                            </mat-error>
+                        </mat-form-field>
+                        <span class="resendOtp otp-label" (click)="resendOtp()">Resend OTP</span>
+                    </div>
+                    <button mat-stroked-button color="primary" type="submit" class="formButton formButton-full ">
+                        Log in
+                    </button>
+                </form>
+            </div>
+
+        </mat-card-content>
+        <mat-card-footer>
+        </mat-card-footer>
+    </mat-card>
+</div>

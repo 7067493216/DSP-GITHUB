@@ -1,0 +1,1520 @@
+<br>
+<br>
+<br>
+<br>
+<div>
+    <form [formGroup]="filterForm">
+        <div class="dsp-forminfo">
+            <div class="row">
+                <div class="col-sm-3">
+                    <mat-form-field appearance="outline" class="form-group">
+                        <mat-select #myfilter [(value)]="filtertypeSelected" formControlName="filterType"
+                            (selectionChange)="getSearchType(myfilter.value)" disableRipple>
+                            <mat-option value="nothingSelected"> Select Filter Type</mat-option>
+                            <mat-option value="NatureOfWork">Nature Of Work</mat-option>
+                            <mat-option value="ApplicantName"> Applicant Name</mat-option>
+                            <mat-option value="ApplicationNumber"> ApplicationNumber</mat-option>
+                            <!-- <mat-option value="ApplicationStatus">ApplicationStatus</mat-option> -->
+                            <mat-option value="allType">All Type Of Application</mat-option>
+                        </mat-select>
+                        <mat-hint align="end">Please Select Filter Type here ^</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-4" *ngIf="searchKey=='ApplicantName'">
+                    <mat-form-field appearance="outline" class="form-group">
+                        <mat-label>Applicant Name ( आवेदक का नाम)</mat-label>
+                        <input matInput placeholder="" formControlName="filtervalueFirst"
+                            (input)="filterByConsumerName($event.target.value)">
+
+
+                    </mat-form-field>
+                    <mat-error *ngIf="filterForm.controls['filtervalueFirst']?.errors?.required">
+                        Please Enter Applicant Name
+                    </mat-error>
+                </div>
+
+                <div class="col-sm-4" *ngIf="searchKey=='ApplicationNumber'">
+                    <mat-form-field appearance="outline" class="form-group">
+                        <mat-label>Application Number (आवेदन क्रमांक)</mat-label>
+                        <input matInput placeholder="Enter Application Number" id=""
+                            formControlName="filterValueSecond">
+                        <mat-hint>Ex:DS110022022000/SV110022022000</mat-hint>
+
+                    </mat-form-field>
+                    <br>
+                    <mat-error *ngIf="filterForm.controls['filterValueSecond']?.errors?.required">
+                        Please EnterApplication Number
+                    </mat-error>
+                </div>
+
+                <div class="col-sm-4" *ngIf="searchKey=='ApplicationStatus'">
+                    <mat-form-field appearance="outline" class="form-group">
+                        <mat-label>Choose a ApplicationStatus</mat-label>
+                        <mat-select disableRipple formControlName="filtervaluelast">
+                            <!-- <mat-option selected>Choose a ApplicationStatus</mat-option> -->
+                            <mat-option *ngFor="let e of ApplicationStatusList" value="{{e.applicationStatusId}}">
+                                {{e.applicationStatusName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error *ngIf="filterForm.controls['filtervaluelast']?.errors?.required">
+                        Please Select ApplicationStatus
+                    </mat-error>
+                </div>
+
+                <div class="col-sm-4" *ngIf="searchKey=='NatureOfWork'">
+                    <mat-form-field appearance="outline" class="form-group">
+                        <mat-label>Choose Nature Of Work</mat-label>
+                        <!-- {{ApplicationStatusList|json}} -->
+                        <mat-select disableRipple formControlName="filterValueFourth">
+                            <mat-option *ngFor="let e of NatureOfworkTypeList" value="{{e.natureOfWorkTypeId}}">
+                                {{e.natureOfWorkName}}</mat-option>
+
+                        </mat-select>
+
+                    </mat-form-field>
+                    <mat-error *ngIf="filterForm.controls['filterValueFourth']?.errors?.required">
+                        Please Select Nature Of Work
+                    </mat-error>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" *ngIf="!allTypeBoolean" class="btn formButton btn-secondary"
+                            (click)="filterApplication()">Search</button>
+                        <button mat-raised-button class="btn dspButton btn-danger mx-1"
+                            (click)="exporter.exportTable('xlsx', {fileName:'Consumer-ApplicationList', sheet: 'sheet_name'})"
+                            *ngIf="finalArrayt!== null">
+                            Download Excel
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group text-right">
+                <span class="text-danger" style="font-weight: bold;"> *आवेदन की वास्तविक स्थिति के लिए यहा क्लिक करे।
+                </span> <button type="submit" class="btn formButton btn-secondary me-2" (click)="onLatestData()"><span>
+                        <mat-icon>touch_app</mat-icon></span>Latest Update</button>
+                <span><button type="button" class="btn btn-primary" (click)="goBack()">Go-Back</button></span>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="mat-elevation-z8">
+    <div class="table-responsive">
+        <table mat-table [dataSource]="listData" matTableExporter #exporter="matTableExporter" matSort
+            class="table table-bordered userlist_tables">
+
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                    style="max-width: 50px;padding: 2px; width: 50px;"> S.No<br>(क्रमांक) </th>
+                <td mat-cell *matCellDef="let row; let i=index" class="name-column"
+                    style="max-width: 50px;padding: 2px; width: 50px;">
+                    <!-- {{(paginator?._pageIndex )}} -->
+                    {{paginator?._pageSize * paginator?._pageIndex + i + 1}}
+                    <!-- {{paginator.pageSize * paginator.pageIndex + i + 1}} -->
+                </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="mw-5"> No. <br>(
+                क्रमांक)</mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index;">
+                {{paginator.pageSize * paginator.pageIndex + i + 1}}
+            </mat-cell>
+        </ng-container> -->
+
+
+            <ng-container matColumnDef="consumerApplicationNo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Application No<br>(आवेदन संख्या) </th>
+                <td mat-cell *matCellDef="let row" class="name-column"> {{row?.consumerApplicationNo}} </td>
+            </ng-container>
+
+
+
+            <!-- <ng-container matColumnDef="consumerApplicationNo" class="mw-15">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Application No <br>(आवेदन क्रमांक)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.consumerApplicationNo}} </mat-cell>
+        </ng-container> -->
+
+            <!-- Scheme Type Column -->
+            <ng-container matColumnDef="schemeType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Type <br>(योजना का प्रकार)</th>
+                <td mat-cell *matCellDef="let row"> {{row?.schemeTypeName}} </td>
+            </ng-container>
+
+
+            <!-- <ng-container matColumnDef="schemeType">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="mw-10">Scheme Type <br> (योजना
+                का प्रकार)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.schemeType.schemeTypeName}} </mat-cell>
+        </ng-container> -->
+
+            <!-- Nature of work -->
+
+            <ng-container matColumnDef="natureOfWork">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nature of
+                    Work-<br>(कार्य प्रकार) </th>
+                <td mat-cell *matCellDef="let row"> {{row?.natureOfWorkName}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="natureOfWork">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="mw-10">Nature of
+                Work-<br>(कार्य प्रकार)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.natureOfWorkType.natureOfWorkName}}
+            </mat-cell>
+        </ng-container> -->
+
+            <!-- Consumer Name Column -->
+
+            <ng-container matColumnDef="consumerName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Applicant Name <br>(
+                    आवेदक का नाम)</th>
+                <td mat-cell *matCellDef="let row"> {{row?.consumerName}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="consumerName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="mw-15">Applicant Name <br>(
+                आवेदक का नाम)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.consumerName}} </mat-cell>
+        </ng-container> -->
+
+
+
+
+            <ng-container matColumnDef="stage">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Application Pending On
+                    <br> (आवेदन
+                    लंबित स्तर पर)
+                </th>
+                <td mat-cell *matCellDef="let row" style="min-width: 150px;"> {{row?.applicationStatusName}}
+                    <br>
+
+                    <span
+                        style="font-size: 1.5em; font-weight: 900; text-decoration: underline; text-decoration-color: rgb(15, 15, 229);">
+                        <a href="javascript:void(0)" *ngIf="(row?.natureOfWorkTypeId == 5) &&
+            row?.nscApplicationNo != null &&
+            row?.sspApplicationCompleted != null &&
+            row?.applicationStatusId != 29 &&
+            row?.applicationStatusId != 30 &&
+            row?.applicationStatusId != 33 &&
+            row?.applicationStatusId != 35 &&
+            row?.applicationStatusId != 36 &&
+            row?.applicationStatusId != 37 &&
+            row?.applicationStatusId != 38 &&
+            row?.applicationStatusId != 39 &&
+            row?.applicationStatusId != 40 &&
+            row?.applicationStatusId != 41 &&
+            row?.applicationStatusId != 42 &&
+            row?.applicationStatusId != 43 &&
+            row?.applicationStatusId > 23" (click)="onRevertAtSspPortal(row?.nscApplicationNo)">
+                            MOVE TO SSP PORTAL
+                        </a>
+                    </span>
+
+                    <span
+                        style="font-size: 1.5em; font-weight: 900; text-decoration: underline; text-decoration-color: rgb(15, 15, 229);">
+                        <a href="javascript:void(0)" *ngIf="(row?.natureOfWorkTypeId == 2 || row?.natureOfWorkTypeId == 7) &&
+            row?.nscApplicationNo != null &&
+            row?.sspApplicationCompleted != null &&
+            row?.applicationStatusId != 35 &&
+            row?.applicationStatusId != 36 &&
+            row?.applicationStatusId != 37 &&
+            row?.applicationStatusId != 38 &&
+            row?.applicationStatusId != 39 &&
+            row?.applicationStatusId != 40 &&
+            row?.applicationStatusId != 41 &&
+            row?.applicationStatusId != 42 &&
+            row?.applicationStatusId != 43 &&
+            row?.applicationStatusId > 32" (click)="onRevertAtSspPortal(row?.nscApplicationNo)">
+                            MOVE TO SSP PORTAL
+                        </a>
+                    </span>
+
+
+
+
+
+                </td>
+
+
+            </ng-container>
+
+
+
+
+
+
+            <!-- <ng-container matColumnDef="stage">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="mw-25">Application Pending On
+                <br> (आवेदन
+                लंबित स्तर पर)</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+                <b>
+                  
+                    {{ element.applicationStatus?.applicationStatusName }}
+
+                  
+                </b>
+            </mat-cell>
+        </ng-container> -->
+
+
+            <!-- <ng-container matColumnDef="district">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>District<br>
+                (जिला)</th>
+            <td mat-cell *matCellDef="let row"> {{row?.DISTRICT}} </td>
+        </ng-container> -->
+
+
+
+            <ng-container matColumnDef="circle">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Circle<br>(वृत्त)</th>
+                <td mat-cell *matCellDef="let row"> {{row?.NAME_OF_CIRCLE}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="division">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Division<br>(संभाग)</th>
+                <td mat-cell *matCellDef="let row"> {{row?.NAME_OF_DIVISION}}</td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="dcName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Distribution Center<br>
+                    (वितरण
+                    केंद्र)</th>
+                <td mat-cell *matCellDef="let row"> {{row?.dcName}} </td>
+            </ng-container>
+
+
+
+            <!-- <ng-container matColumnDef="dcName">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Distribution Center<br>
+                (वितरण
+                केंद्र)</mat-header-cell>
+            <mat-cell class="mw-15" *matCellDef="let element">{{element.distributionCenter.dcName}}
+            </mat-cell>
+        </ng-container> -->
+
+
+            <ng-container matColumnDef="loadRequest">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                    style="max-width: 50px;padding: 2px; width: 50px;">Load<br>
+                    (भार)</th>
+                <td mat-cell *matCellDef="let row" style="max-width: 50px;padding: 2px; width: 50px;"> <span
+                        *ngIf="row?.loadRequested==null">NA</span> <span
+                        *ngIf="row?.loadRequested!=null"></span>{{row.loadRequested}}
+                    {{row.loadRequestedName}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="loadRequest">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Load<br>
+                (भार)</mat-header-cell>
+            <mat-cell class="mw-15" *matCellDef="let element">{{element.loadRequested}}
+                {{element.loadRequestedId?.loadRequestedName}} </mat-cell>
+        </ng-container> -->
+
+            <ng-container matColumnDef="erpWorkFlowNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                    style="max-width: 60px;padding: 2px; width: 60px;">ERP
+                    No.<br>
+                    (प्राकलन संख्या)</th>
+                <td mat-cell *matCellDef="let row" style="max-width: 60px;padding: 2px; width: 60px;">
+                    {{row?.erpWorkFlowNumber}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="erpWorkFlowNumber">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>ERP
+                NUMBER<br>
+                (प्राकलन संख्या)</mat-header-cell>
+            <mat-cell class="mw-15"
+                *matCellDef="let element">{{element.erpWorkFlowNumber}}</mat-cell>
+        </ng-container> -->
+
+
+
+            <ng-container matColumnDef="MobileNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Applicant Contact Detail<br>(मोबाइल नंबर)</th>
+                <td mat-cell *matCellDef="let row"> {{row?.consumerphonNumber}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="MobileNumber">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Mobile
+                Number<br>(मोबाइल नंबर)
+            </mat-header-cell>
+            <mat-cell class="mw-15" *matCellDef="let element">{{element.consumers?.consumerLoginId}}
+            </mat-cell>
+        </ng-container> -->
+
+
+            <ng-container matColumnDef="Address">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                    style="min-width: 250px;padding: 2px; max-width: 300px;">Address<br>(पता)</th>
+                <td mat-cell *matCellDef="let row" style="min-width: 250px;max-width: 250px;"> {{row?.address}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="Address">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Address<br>(पता)
+            </mat-header-cell>
+            <mat-cell class="mw-15" *matCellDef="let element">{{element.address}} </mat-cell>
+        </ng-container> -->
+
+            <!-- registrationPaymentDate -->
+            <!-- <ng-container matColumnDef="registrationPaymentDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Registration Payment Date<br>(पंजीकरण भुगतान तिथि)
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <div *ngIf="row.REG_PAY_DATE">
+                    {{ row.REG_PAY_DATE | date: 'dd-MM-yyyy' }}
+                </div>
+            </td>
+        </ng-container> -->
+
+
+            <ng-container matColumnDef="contractorName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Contractor Name<br>(ठेकेदार का नाम)
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.NAME_OF_CONTRACTOR}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="contractorRegistrationNo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Contractor Registration No.<br>(ठेकेदार पंजीकरण संख्या)
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.contractorRegistrationNo}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ivrs">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    IVRS <br>(आई वी आर एस)
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.ivrsNo}}
+                </td>
+            </ng-container>
+
+
+            <!-- <ng-container matColumnDef="registrationPaymentDate">
+                <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Registration Payment
+                    Date<br>(पंजीकरण भुगतान तिथि)
+                </mat-header-cell>
+                <mat-cell class="mw-15" *matCellDef="let element">
+
+                    {{element?.REG_PAY_DATE | date}}
+
+                </mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="registrationPaymentDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Registration Payment
+                    Date<br>(पंजीकरण भुगतान तिथि)</th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.REG_PAY_DATE | date: 'dd-MM-yyyy'}}
+                </td>
+            </ng-container>
+
+
+
+            <!-- demandPaymentDate -->
+
+            <ng-container matColumnDef="demandPaymentDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Demand Payment
+                    Date<br>(मांग भुगतान
+                    तिथि)</th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.DEMAND_PAY_DATE | date: 'dd-MM-yyyy'}}
+                </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="demandPaymentDate">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Demand Payment
+                Date<br>(मांग भुगतान
+                तिथि)
+            </mat-header-cell>
+            <mat-cell class="mw-15" *matCellDef="let element">
+                <div *ngIf="element.listOfTransactionDate != null">
+                    {{element.listOfTransactionDate[0]?.DEMAND_DATE | date}}
+                </div>
+
+            </mat-cell>
+        </ng-container> -->
+
+            <!-- feedback -->
+            <!-- <ng-container matColumnDef="feedback">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Consumer Feedback</th>
+            <td mat-cell *matCellDef="let row"> </td>
+        </ng-container> -->
+
+            <!-- <ng-container matColumnDef="feedback">
+            <mat-header-cell class="mw-15" *matHeaderCellDef mat-sort-header>Consumer Feedback
+            </mat-header-cell>
+            <mat-cell class="mw-15" *matCellDef="let element">
+
+
+            </mat-cell>
+        </ng-container> -->
+
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status <br> (वर्तमान
+                    स्थिति)</th>
+                <td mat-cell *matCellDef="let row"> <b>
+
+
+
+                        <span *ngIf="row?.applicationStatusId == 29"
+                            style="color:black; background-color: crimson; padding: 8%;font:bold;">
+                            Rejected
+                        </span>
+                        <span *ngIf="row?.applicationStatusId != 33 && row?.applicationStatusId != 29"
+                            style="color:black; background-color: orange; padding: 8%; font:bold;">
+                            Pending
+                        </span>
+                        <span *ngIf="row?.applicationStatusId == 33"
+                            style="color:white; background-color: green; padding: 8%;font:bold;">
+                            Completed
+                        </span>
+
+
+                    </b></td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="mw-10">Status <br> (वर्तमान
+                स्थिति)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+                <b>
+
+
+
+                    <span *ngIf="element?.applicationStatus?.applicationStatusId == 29"
+                        style="color:black; background-color: crimson; padding: 8%;font:bold;">
+                        Rejected
+                    </span>
+                    <span
+                        *ngIf="element?.applicationStatus?.applicationStatusId != 33 && element?.applicationStatus?.applicationStatusId != 29"
+                        style="color:black; background-color: orange; padding: 8%; font:bold;">
+                        Pending
+                    </span>
+                    <span *ngIf="element?.applicationStatus?.applicationStatusId == 33"
+                        style="color:white; background-color: green; padding: 8%;font:bold;">
+                        Completed
+                    </span>
+
+
+                </b>
+            </mat-cell>
+        </ng-container> -->
+
+            <!-- Edit/View Column -->
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit/View <br> परिवर्तन/देखे</th>
+                <td mat-cell *matCellDef="let row">
+
+                    <div class="dsp_tootltips_info">
+                        <span class="btn_tootltips">
+                            <button type="button" class="btn btn-primary">विवरण/कार्यवाही</button>
+                        </span>
+                        <div class="dsp_tooltipdropdown">
+
+                            <div class="btn-actionifo">
+
+                                <!-- <button matTooltip="View Consumer Application" (click)="onView(row,row.consumerApplicationId)"
+                                    mat-icon-button color="primary" class="m-1 btnaction_custome">
+                                
+                                    <mat-icon> all_out </mat-icon>
+                                </button> -->
+
+                                <button matTooltip="View Consumer Application"
+                                    (click)="onNewView(row,row.consumerApplicationId)" mat-icon-button color="primary"
+                                    class="m-1 btnaction_custome">
+
+                                    <mat-icon> all_out </mat-icon>
+                                </button>
+
+
+
+                                <!-- &&  canViewBackStageButtton(row.applicationStatus.applicationStatusId) -->
+                                <!-- <div *ngIf="row.previousStage == false  && row.isRejected != 1   && (
+                                    row?.applicationStatusId == 9
+                                    ||  row?.applicationStatusId == 10 
+                                    ||  row?.applicationStatusId == 11
+                                    ) ">
+                                    
+                                <button matTooltip="send application to previous Stage" mat-icon-button
+                                    color="warn" (click)="backToPreviousStage(row.consumerApplicationId)"
+                                    class="m-1 btnaction_custome">
+                                    <mat-icon>reply</mat-icon>
+                                </button>
+                            </div> -->
+
+                                <span *ngIf="userRolesData== 'JE_IT'">
+                                    <button class="m-1 btnaction_custome"
+                                        *ngIf="row?.applicationStatusId <= 4 && row.isRejected != 1"
+                                        matTooltip="Edit Consumer Application" mat-icon-button color="primary"
+                                        (click)="onEdit(row.consumerApplicationId)">
+                                        <mat-icon>launch</mat-icon>
+                                    </button>
+                                </span>
+
+                                <!-- ******************************************************************** complaint ********************************* -->
+                                <br>
+
+                                <!-- <span *ngIf="userRolesData=='DGM'">
+                                <button class=" btn-sm m-1"  (click)="onRefundRequestNew(row)" type="button" 
+                                    class="btn btn-primary m-1 btnaction_custome">
+                                    Refund Request
+                                </button>
+                            </span> -->
+
+                                <!-- <span>
+                                <button class=" btn-sm m-1" (click)="onComplain(row.consumerApplicationNo)"
+                                    type="button" class="btn btn-secondary m-1 btnaction_custome">
+                                    Complain
+                                </button>
+                            </span><br> -->
+
+                                <!-- ******************************************************************** complaint ***************************** -->
+
+
+                                <span *ngIf="userRolesData=='DGM_STC'">
+                                    <button class=" btn-sm m-1" *ngIf="row?.applicationStatusId>24"
+                                        (click)="onTagRequestForMultipleDtr(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        Tag Item
+                                    </button>
+                                </span>
+
+
+                                <!-- *************************************************************************  REFUND PAYMENT ************************************************************ -->
+
+                                <span *ngIf="userRolesData=='DGM_STC'">
+                                    <button class=" btn-sm m-1" *ngIf="row?.applicationStatusId==43 "
+                                        (click)="onRefundRequestNewForStc(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        Refund Request
+                                    </button>
+                                </span>
+
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button class=" btn-sm m-1" *ngIf="row?.applicationStatusId==39 "
+                                        (click)="onRefundRequestNew(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        Refund Request
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button class=" btn-sm m-1" *ngIf="row?.applicationStatusId==39 "
+                                        (click)="onRefundRequestNew(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        Refund Request
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='GM'">
+                                    <button class=" btn-sm m-1" *ngIf="row?.applicationStatusId==40 "
+                                        (click)="onRefundRequestNewByGm(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        Refund Request
+                                    </button>
+                                </span>
+
+                                <!-- <span *ngIf="userRolesData=='DGM' && row?.dgm_approal_dup_ref==null &&
+                                 (row?.gm_approal_dup_ref==null || row?.gm_approal_dup_ref==false) &&
+                                  (row?.finance_approal_dup_ref==null || row?.finance_approal_dup_ref==false)">
+                                    <button class=" btn-sm m-1" 
+                                        (click)="onDuplicateRefundRequestNewByDgm(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                       Duplicate Refund Request
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='GM' && row?.dgm_approal_dup_ref==true &&
+                                row?.gm_approal_dup_ref==null  &&
+                                 (row?.finance_approal_dup_ref==null || row?.finance_approal_dup_ref==false)">
+                                    <button class=" btn-sm m-1" 
+                                        (click)="onDuplicateRefundRequestNewByGm(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                       Duplicate Refund Request
+                                    </button>
+                                </span> -->
+
+                                <!-- <span *ngIf="userRolesData=='Admin'">
+                                    <button class=" btn-sm m-1" 
+                                        (click)="onDuplicateRefundRequestNewByDgm(row)" type="button"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                       Duplicate Refund Request
+                                    </button>
+                                </span> -->
+
+                                <!-- ################################################################################## -->
+                                <!-- <span *ngIf="userRolesData=='DGM'">
+                                <button class=" btn-sm m-1"  (click)="onRefundRequestNew(row)" type="button" 
+                                    class="btn btn-primary m-1 btnaction_custome">
+                                    Refund Confirmation By DGM
+                                </button>
+                            </span>
+
+                            <span *ngIf="userRolesData=='GM'">
+                                <button class=" btn-sm m-1"  (click)="onRefundRequestNewByGm(row)" type="button" 
+                                    class="btn btn-primary m-1 btnaction_custome">
+                                    Refund Confirmation By GM
+                                </button>
+                            </span> -->
+                                <!-- ################################################################################ -->
+
+
+
+
+                                <!-- *************************************************************************  REFUND PAYMENT ************************************************************ -->
+
+
+                                <!-- *************************************************************************  REFUND PAYMENT Confirmation By Gm ************************************************************ -->
+
+
+                                <!-- *************************************************************************  REFUND PAYMENT Confirmation By Gm ************************************************************ -->
+
+
+                                <!-- ******************************************* Dc Acceptance For Je && Ae and Manager(Htm) start ************************************************** -->
+                                <span *ngIf="userRolesData=='JE_IT'">
+                                    <button *ngIf="row?.applicationStatusId == 6 && row.isRejected != 1"
+                                        class="btn btn-sm btn-success m-1 btnaction_custome"
+                                        (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                        Application DC Acceptance
+                                    </button>
+                                </span>
+
+                                <!-- <span *ngIf="userRolesData=='JE_IT'">
+                                <button
+                                    
+                                    class="btn btn-sm btn-success m-1 btnaction_custome"
+                                    (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                    Application DC Acceptance
+                                </button>
+                            </span> -->
+
+
+                                <span *ngIf="userRolesData=='AE_IT_(VIEW)'">
+                                    <button *ngIf="row?.applicationStatusId == 6 && row.isRejected != 1 "
+                                        class="btn btn-sm btn-success m-1 btnaction_custome"
+                                        (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                        Application DC Acceptance
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='Manager (HTM)'">
+                                    <button *ngIf="row?.applicationStatusId == 6 && row.isRejected != 1"
+                                        class="btn btn-sm btn-success m-1 btnaction_custome"
+                                        (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                        Application DC Acceptance
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='Manager (O&M)'">
+                                    <button *ngIf="row?.applicationStatusId == 6 && row.isRejected != 1"
+                                        class="btn btn-sm btn-success m-1 btnaction_custome"
+                                        (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                        Application DC Acceptance
+                                    </button>
+                                </span>
+                                <!-- //'Manager (HTM)' -->
+                                <!-- <span *appHasRole="role.Manager_HTM">
+                                <button
+                                    *ngIf="row?.applicationStatusId == 6 && row.isRejected != 1"
+                                    class="btn btn-sm btn-success m-1 btnaction_custome"
+                                    (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                    Application DC Acceptance
+                                </button>
+                            </span> -->
+
+                                <!-- <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                <button
+                                    *ngIf="row?.applicationStatusId == 6 && row.isRejected != 1"
+                                    class="btn btn-sm btn-success m-1 btnaction_custome"
+                                    (click)="applicationDcAcceptance(row.consumerApplicationId,row.previousStage,row)">
+                                    Application DC Acceptance
+                                </button>
+                            </span> -->
+
+                                <!-- ******************************************* Dc Acceptance For Je && Ae and Manager(Htm) end ************************************************** -->
+
+
+                                <!-- ****************************  survey Break for je start******************** -->
+
+                                <span *ngIf="userRolesData== 'JE_IT'">
+                                    <button *ngIf="row?.applicationStatusId == 7 && row.isRejected != 1"
+                                        class="btn btn-sm btn-success m-1 btnaction_custome"
+                                        (click)="onJeSurveyBreak(row)">
+                                        Survey
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='Manager (HTM)'">
+                                    <button *ngIf="row?.applicationStatusId == 7 && row.isRejected != 1 "
+                                        class="btn btn-sm btn-success m-1 btnaction_custome"
+                                        (click)="onJeSurveyBreak(row)">
+                                        Survey
+                                    </button>
+                                </span>
+
+                                <!-- <span *appHasRole="role.Manager_HTM">
+                                <button
+                                    *ngIf="row?.applicationStatusId == 7 && row.isRejected != 1 "
+                                    class="btn btn-sm btn-success m-1 btnaction_custome"
+                                    (click)="onJeSurveyBreak(row)">
+                                    Survey
+                                </button>
+                            </span> -->
+
+                                <!-- ****************************  survey Break for je end ******************** -->
+
+
+                                <!-- *************************  Survey By Dgm(O&M) and Dgm(HTM) start ******************************* -->
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button *ngIf="row?.applicationStatusId == 9 && row.isRejected != 1 "
+                                        class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                        (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                        <!-- Application Survey -->
+                                        Estimate And Demand Note Generation
+                                    </button>
+                                </span>
+
+
+                                <!-- <span >
+                                <button
+                                    *ngIf="row?.applicationStatusId == 9 "
+                                    class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                    (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                
+                                    Estimate And Demand Note Generation
+                                </button>
+                            </span> -->
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button *ngIf="row?.applicationStatusId == 9 && row.isRejected != 1"
+                                        class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                        (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                        <!-- Application Survey -->
+                                        Estimate And Demand Note Generation
+                                    </button>
+                                </span>
+
+
+
+
+                                <!-- <span *ngIf="userRolesData=='Admin'">
+                                ######################################################################################################
+                                <button *ngIf="row?.applicationStatusId == 9 && row.isRejected != 1"
+                                    class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                    (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                   
+                                    Estimate And Demand Note Generation
+                                </button>
+                                #######################################################################################################
+                            </span> -->
+
+
+                                <!-- *************************  Survey By Dgm(O&M) and Dgm(HTM) end ******************************* -->
+
+
+
+                                <!-- ********************************************** connection paradaai by Je start ************************************************ -->
+
+                                <span *ngIf="userRolesData== 'JE_IT'">
+                                    <button
+                                        *ngIf="(row?.natureOfWorkTypeId==2  || row?.natureOfWorkTypeId==5 ) && row?.nscApplicationNo==null  && row?.applicationStatusId == 32 && row?.ivrsNo==null && row.isRejected != 1 "
+                                        class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                        (click)="connectioPradaai(row)">
+                                        connection praday
+                                    </button>
+                                </span>
+
+
+                                <!-- <span *ngIf="userRolesData== 'JE_IT' || userRolesData=='Manager (HTM)'">
+                                    <button class="btn btn-primary m-1"
+                                        *ngIf="row?.natureOfWorkTypeId==5 && row?.applicationStatusId!=29 && row?.applicationStatusId!=30 && row?.applicationStatusId!=32 && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 && row?.applicationStatusId!=42 && row?.applicationStatusId!=43 && row?.applicationStatusId>23 && row?.nscApplicationNo==null && row.SECURITY_DEPOSIT!=null && row?.ivrsNo==null "
+                                        (click)="onIvrsConfirmation(row)" type="button"
+                                        class="btn btn-secondary m-1 btnaction_custome">
+                                        IVRS Tagging
+                                        && row?.DATE_OF_CREATION<='2024-12-31'
+                                    </button>
+                                </span> -->
+
+                                <span *ngIf="userRolesData== 'JE_IT' || userRolesData=='Manager (HTM)'">
+                                    <button class="btn btn-primary m-1"
+                                        *ngIf="row?.natureOfWorkTypeId==5 && row?.applicationStatusId!=29 && row?.applicationStatusId!=30 && row?.applicationStatusId!=32 && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 && row?.applicationStatusId!=42 && row?.applicationStatusId!=43 && row?.applicationStatusId>23 && row?.nscApplicationNo==null && row.SECURITY_DEPOSIT==null && row?.ivrsNo==null "
+                                        (click)="onIvrsConfirmation(row)" type="button"
+                                        class="btn btn-secondary m-1 btnaction_custome">
+                                        IVRS Tagging
+                                        <!-- && row?.DATE_OF_CREATION > '2024-12-31' -->
+                                    </button>
+                                </span><br>
+
+                                <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+
+                                <span *ngIf="userRolesData== 'JE_IT'">
+                                    <button type="button"
+                                        *ngIf="row?.natureOfWorkTypeId==8 && row?.applicationStatusId == 32"
+                                        class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                        (click)="connectioPradaaiForNgb(row)">
+                                        connection praday NGB
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='JE_IT'">
+                                    <button class=" btn-sm m-1" (click)="connectioPradaaiForNgb(row)" type="button"
+                                        *ngIf="row?.natureOfWorkTypeId==5 && row.SECURITY_DEPOSIT!=null && row.ngb_id==null && row?.applicationStatusId!=29 && row?.applicationStatusId!=30 && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 && row?.applicationStatusId!=42 && row?.applicationStatusId!=43 && row?.applicationStatusId>23 &&  row?.sspApplicationCompleted==null && row?.ivrsNo==null "
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        connection praday NGB
+                                    </button>
+                                </span>
+
+                                <!-- <span *ngIf="userRolesData=='JE_IT'">
+                                    <button class=" btn-sm m-1" (click)="connectioPradaaiForNgb(row)" type="button"
+                                        *ngIf="row?.natureOfWorkTypeId==5 && row.SECURITY_DEPOSIT!=null && row.ngb_id==null && row?.applicationStatusId!=29 && row?.applicationStatusId!=30 && row?.applicationStatusId!=32 && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 && row?.applicationStatusId!=42 && row?.applicationStatusId!=43 && row?.applicationStatusId>23 && row?.nscApplicationNo!=null && row?.sspApplicationCompleted==null && row?.ivrsNo==null"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        connection praday NGB
+
+                                    </button>
+                                </span> -->
+
+                                <span *ngIf="userRolesData=='JE_IT'">
+                                    <button class=" btn-sm m-1" (click)="onSspTransfer(row)" type="button" *ngIf="row?.natureOfWorkTypeId==5 && row.SECURITY_DEPOSIT==null && row?.applicationStatusId!=29 && row?.applicationStatusId!=30
+                                         && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 
+                                         && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 
+                                         && row?.applicationStatusId!=42 && row?.applicationStatusId!=43 && row?.applicationStatusId>23 && row?.nscApplicationNo!=null 
+                                         && row?.sspApplicationCompleted==null && row?.ivrsNo==null"
+                                        class="btn btn-primary m-1 btnaction_custome">
+                                        Generate IVRS Tagging Request
+
+                                    </button>
+                                </span>
+
+
+
+
+
+
+
+
+                                <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+
+
+
+
+                                <!-- <span *ngIf="userRolesData== 'JE_IT'">
+                                <button
+                                    *ngIf="row?.natureOfWorkTypeId==8 "
+                                    class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                    (click)="connectioPradaaiForNgb(row)">
+                                    connection praday NGB
+                                </button>
+                            </span> -->
+
+
+
+                                <!-- ********************************************** connection paradaai by Je end ************************************************ -->
+
+
+
+                                <!-- <span *ngIf="userRolesData=='Manager (HTM)'">
+                                <button
+                                    *ngIf="row?.applicationStatusId == 9 && row.isRejected != 1  && (userRolesData=='Manager (HTM)' )"
+                                    class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                    (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                    Application Survey
+                                </button>
+                            </span>
+
+                            <span *appHasRole="role.Manager_HTM">
+                                <button
+                                    *ngIf="row?.applicationStatusId == 9 && row.isRejected != 1  && (role.Manager_HTM)"
+                                    class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                    (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                    Application Survey
+                                </button>
+                            </span> -->
+
+
+
+                                <!-- <span *appHasRole="role.ae_it_view">
+                                <button
+                                    *ngIf="row?.applicationStatusId == 9 && row.isRejected != 1  && (role.ae_it_view )"
+                                    class="btn btn-sm btn-primary m-1 btnaction_custome"
+                                    (click)="applicationSurvey(row.consumerApplicationId,row.previousStage,row)">
+                                    Application Survey
+                                </button>
+                            </span> -->
+
+
+                                <!-- ******************************************************************** Application Demaand start ***********************8 -->
+                                <span *ngIf="row?.natureOfWorkTypeId!=8">
+                                    <button
+                                        *ngIf="row?.applicationStatusId >=12  && row?.applicationStatusId!=24 && row?.applicationStatusId!=36 && row?.applicationStatusId!=38 && row.revisedErpNumber==null  && row.isRejected!= 1 "
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationDemandGenerate(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId,row)">
+                                        Application Demand
+                                    </button>
+                                </span>
+
+                                <span *ngIf="row?.natureOfWorkTypeId==8">
+                                    <button
+                                        *ngIf="row?.applicationStatusId >=12 && row?.applicationStatusId!=24 && row?.applicationStatusId!=36 && row?.applicationStatusId!=38 && row.revisedErpNumber==null  && row.isRejected!= 1 "
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationDemandGenerateForMkmy(row.consumerApplicationId,row.consumerApplicationNo,row?.schemeTypeId,row?.natureOfWorkTypeId,row)">
+                                        Application Demand
+                                    </button>
+                                </span>
+
+                                <!-- ******************************************************************** Application Demaand end ***********************8 -->
+                                <!-- <span *ngIf="row?.natureOfWorkTypeId==8">
+                                    <button *ngIf="row?.applicationStatusId >=12  && row.isRejected!= 1 "
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationDemandGenerateForMkmy(row.consumerApplicationId,row.consumerApplicationNo,row?.schemeTypeId,row?.natureOfWorkTypeId,row)">
+                                        Application Demand
+                                    </button>
+                                </span> -->
+
+
+                                <!-- ********************************************** Revise estimate  by Dgm(O&M) start ******************************************* -->
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button *ngIf=" row?.applicationStatusId==24 "
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="onRevisePaymentGenerate(row)">
+                                        Revise Estimate
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button *ngIf=" row?.applicationStatusId==24 "
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="onRevisePaymentGenerate(row)">
+                                        Revise Estimate
+                                    </button>
+                                </span>
+
+
+                                <!-- <span>
+                                <button *ngIf=" row?.applicationStatusId==24 "
+                                    class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                    (click)="onRevisePaymentGenerate(row)">
+                                    Revise Estimate
+                                </button>
+                            </span> -->
+
+                                <!-- ********************************************** Revise estimate  by Dgm(O&M) end ******************************************* -->
+
+
+                                <!-- ********************************** Revise Demaand start ********************************************************************** -->
+
+                                <!-- <span>
+                                <button *ngIf="row.revisedErpNumber!=null"
+                                    class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                    (click)="onRevisePaymentDemand(row)">
+                                    Revise Demand
+                                </button>
+                            </span> -->
+
+
+                                <span>
+                                    <button *ngIf="row.revisedErpNumber!=null"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="onRevisePaymentDemand(row)">
+                                        Revise Demand
+                                    </button>
+                                </span>
+
+                                <!-- ********************************** Revise Demaand end ********************************************************************** -->
+
+
+
+
+
+                                <!-- <span *ngIf="userRolesData=='DGM_STC'">
+                                
+                                    <button class=" btn-sm " *ngIf=" row?.applicationStatusId==27"
+                                        matTooltip="Contractor"
+                                        (click)="onStcRemark(row)"
+                                        type="button" class="btn   btn-warning btnaction_custome">
+                                        STC-REMARK
+                                    </button>
+                                </span> -->
+
+                                <!-- <span >
+                                
+                                    <button class=" btn-sm " 
+                                        matTooltip="Contractor"
+                                        (click)="onStcRemark(row)"
+                                        type="button" class="btn   btn-warning btnaction_custome">
+                                        STC-REMARK
+                                    </button>
+                                </span> -->
+
+
+                                <!-- ****************************************** Return Materials start **************************************************** -->
+
+                                <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                
+                                    <button *ngIf="(row?.natureOfWorkTypeId==1 || row?.natureOfWorkTypeId==6) && row?.applicationStatusId==23 && row.returnMaterialData==null"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="returnMaterial(row)">
+                                        Return Material
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                
+                                    <button *ngIf="(row?.natureOfWorkTypeId==1 || row?.natureOfWorkTypeId==6) && row?.applicationStatusId==23 && row.returnMaterialData==null"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="returnMaterial(row)">
+                                        Return Material
+                                    </button>
+                                </span>
+
+
+                                &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+
+                                <!-- <span >
+                                
+                                    <button 
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="returnMaterial(row)">
+                                        Return Material
+                                    </button>
+                                </span> -->
+
+                                <!-- ****************************************** Return Materials end **************************************************** -->
+
+
+                                <!-- ************************************************ Select Contractor By Dgm(O&M) start ************************************************** -->
+
+                                <span *ngIf="userRolesData=='DGM_STC'">
+                                    <button class=" btn-sm "
+                                        *ngIf="row?.schemeTypeId==2 && row?.applicationStatusId==34"
+                                        matTooltip="Contractor"
+                                        (click)="onSelectContractor(row.consumerApplicationNo,row.consumerApplicationId)"
+                                        type="button" class="btn   btn-warning btnaction_custome">
+                                        select contractor
+                                    </button>
+                                </span>
+
+                                <!-- <span *ngIf="userRolesData=='DGM'">
+                                   
+                                    <button class=" btn-sm "
+                                        *ngIf="row?.natureOfWorkTypeId==5 && row?.applicationStatusId==21"
+                                        matTooltip="Contractor"
+                                        (click)="onSelectContractor(row.consumerApplicationNo,row.consumerApplicationId)"
+                                        type="button" class="btn   btn-warning btnaction_custome">
+                                        select contractor
+                                    </button>
+                                </span> -->
+
+
+                                <span *ngIf="userRolesData=='GM'">
+                                    <button class="btn-sm"
+                                        *ngIf="row?.schemeTypeId==1 && (row?.applicationStatusId==22 || row?.applicationStatusId==23 || row?.applicationStatusId==24 )"
+                                        matTooltip="Contractor" (click)="onRequestForChangeContractor(row)"
+                                        type="button" class="btn   btn-warning btnaction_custome">
+                                        Change contractor
+                                    </button>
+                                </span>
+
+
+                                <span *ngIf="userRolesData=='GM'">
+                                    <button class="btn-sm"
+                                        *ngIf="row?.schemeTypeId==2 && (row?.applicationStatusId==22 || row?.applicationStatusId==24 )"
+                                        matTooltip="Contractor" (click)="onRequestForChangeContractor(row)"
+                                        type="button" class="btn   btn-warning btnaction_custome">
+                                        Change contractor
+                                    </button>
+                                </span>
+
+
+
+                                <!-- <span >
+                                <button class="btn-sm"
+                                    matTooltip="Contractor"
+                                    (click)="onRequestForChangeContractor(row)"
+                                    type="button" class="btn   btn-warning btnaction_custome">
+                                    Change contractor
+                                </button>
+                            </span> -->
+
+
+
+                                <!-- ************************************ -->
+
+                                <!-- <span>
+
+                                <button class=" btn-sm "
+                                    *ngIf="row?.natureOfWorkTypeId==8 && row?.applicationStatusId==21"
+                                    matTooltip="Contractor"
+                                    (click)="onSelectContractor(row.consumerApplicationNo,row.consumerApplicationId)"
+                                    type="button" class="btn   btn-warning btnaction_custome">
+                                    select contractor
+                                </button>
+                            </span>
+
+                            <span>
+
+                                <button class=" btn-sm "
+                                    *ngIf="row?.natureOfWorkTypeId!=8 &&  row?.applicationStatusId==21"
+                                    matTooltip="Contractor"
+                                    (click)="onSelectContractor(row.consumerApplicationNo,row.consumerApplicationId)"
+                                    type="button" class="btn   btn-warning btnaction_custome">
+                                    select contractor
+                                </button>
+                            </span> -->
+
+                                <!-- ************************************************ Select Contractor By Dgm(O&M) end ************************************************** -->
+
+
+
+                                <!-- ********************************** Application Rejection Proposal generate By Dgm(O&M) and Dgm(HTM) start ******************************* -->
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button *ngIf=" (row?.applicationStatusId <= 12 && row.rejectionProposal == null)"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalGenerate(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal-Generate
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button *ngIf=" (row?.applicationStatusId <= 12 && row.rejectionProposal == null)"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalGenerate(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal-Generate
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button *ngIf=" (row?.applicationStatusId ==44 && row.rejectionProposal == null)"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalGenerate(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal-Generate
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button *ngIf=" (row?.applicationStatusId ==44 && row.rejectionProposal == null)"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalGenerate(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal-Generate
+                                    </button>
+                                </span>
+
+
+                                <span *ngIf="userRolesData=='JE_IT'">
+                                    <button *ngIf=" (row?.applicationStatusId <= 12 && row.rejectionProposal == null)"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalGenerateByJe(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal-Generate
+                                    </button>
+                                </span>
+
+                                <!-- ********************************** Application Rejection Proposal generate By Dgm(O&M) and Dgm(HTM) end ******************************* -->
+
+                                <!-- ********************************* Rejection proposal Action Proceed by GM start ************************************************ -->
+                                <span *ngIf="userRolesData=='GM'">
+                                    <button
+                                        *ngIf=" ((row?.applicationStatusId <= 12 || row?.applicationStatusId ==37)  && row.rejectionProposal =='true')"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalHandOverToGM(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal By DGM
+                                    </button>
+                                </span>
+
+                                <!-- <span >
+                                    <button
+                                    
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="applicationRejectionPerposalHandOverToGM(row.consumerApplicationId,row.previousStage,row.consumerApplicationNo,row?.schemeTypeId)">
+                                        Application-Rejection Proposal By GM
+                                    </button>
+                                </span> -->
+
+                                <!-- ********************************* Rejection proposal Action Proceed by GM end ************************************************ -->
+
+
+
+
+                                <!-- <span>
+                                    <button matTooltip="Approve Demand" class="btn m-1 btn-sm btn-warning btnaction_custome"
+                                        (click)="applicationDemandApprove(row.consumerApplicationId,row.previousStage,row)">
+                                        Approve Demand
+                                    </button>
+                                </span> -->
+
+
+                                <!-- ********************************** Demand Approve By Dgm(O&M) satrt **************************************** -->
+
+                                <!-- <span *ngIf="userRolesData=='DGM'">
+                                <button *ngIf=" (row?.applicationStatusId == 9  )
+                                && row.isRejected != 1 " matTooltip="Approve Demand"
+                                    class="btn m-1 btn-sm btn-warning btnaction_custome"
+                                    (click)="applicationDemandApprove(row.consumerApplicationId,row.previousStage,row)">
+                                    Approve Demand
+                                </button>
+                            </span>
+
+                            <span *ngIf="userRolesData=='GM'">
+                                <button *ngIf=" ( row?.applicationStatusId == 10   )
+                                && row.isRejected != 1" matTooltip="Approve Demand"
+                                    class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                    (click)="applicationDemandApprove(row.consumerApplicationId,row.previousStage,row)">
+                                    Approve Demand
+                                </button>
+
+                            </span>
+
+                            <span *ngIf="userRolesData=='CGM'">
+                                <button *ngIf=" ( row?.applicationStatusId == 11   )
+                                && row.isRejected != 1 && !role.DGMSTCAuthority" matTooltip="Approve Demand"
+                                    class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                    (click)="applicationDemandApprove(row.consumerApplicationId,row.previousStage,row)">
+                                    Approve Demand
+                                </button>
+
+                            </span> -->
+
+                                <!-- ********************************** Demand Approve By Dgm(O&M) end **************************************** -->
+
+                                <!-- *************************************** Consumer File Download start *********************************************************** -->
+                                <span>
+                                    <button matTooltip="Consumer-File-Download"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="consumerFileDownload(row.consumerApplicationId)">
+
+                                        Consumer-File-Download
+                                    </button>
+                                </span>
+                                <!-- *************************************** Consumer File Download end *********************************************************** -->
+
+                                <!-- *************************************** work order generater By Dgm (O&M) start ***************************************************8 -->
+
+
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button *ngIf=" (row?.applicationStatusId == 23  &&  row.isRejected != 1  )"
+                                        matTooltip="work order" class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="workOrder(row.consumerApplicationId,row.previousStage,row)">
+                                        <div *ngIf="row.revisedErpNumber!=null">
+                                            Revise Work Order
+                                        </div>
+                                        <div *ngIf="row.revisedErpNumber==null">
+                                            Work Order
+                                        </div>
+                                    </button>
+                                </span>
+
+
+
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button *ngIf=" (row?.applicationStatusId == 23   && row.isRejected != 1 )"
+                                        matTooltip="work order" class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="workOrder(row.consumerApplicationId,row.previousStage,row)">
+                                        <div *ngIf="row.revisedErpNumber!=null">
+                                            Revise Work Order
+                                        </div>
+                                        <div *ngIf="row.revisedErpNumber==null">
+                                            Work Order
+                                        </div>
+
+                                    </button>
+                                </span>
+
+                                <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+                                <!-- <span *ngIf="userRolesData== 'AE(O&M)'">
+                        
+                            <button
+                                *ngIf=" (row?.applicationStatusId == 23 && row.natureOfWorkTypeId==5 &&  row.isRejected != 1  )"
+                                matTooltip="work order"
+                                class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                (click)="workOrder(row.consumerApplicationId,row.previousStage,row)">
+                                <div *ngIf="row.revisedErpNumber!=null">
+                                    Revise Work Order
+                                </div>
+                                <div *ngIf="row.revisedErpNumber==null">
+                                    Work Order
+                                </div>
+
+                            </button>
+                        </span> -->
+
+
+                                <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+                                <!-- *************************************** work order generater By Dgm (O&M) end ***************************************************8 -->
+
+
+                                <!-- *************************************** Work order view start **************************************************** -->
+
+                                <span *ngIf="row?.natureOfWorkTypeId!=8 && row?.schemeTypeId!=2">
+                                    <button
+                                        *ngIf=" ( row?.applicationStatusId >= 24 && row?.applicationStatusId!=29 && row?.applicationStatusId!=30 && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 && row?.applicationStatusId!=42 && row?.applicationStatusId!=43  && row.isRejected != 1 )"
+                                        matTooltip="work order workOrdergGenreateSuccessfull"
+                                        class="btn btn-sm btn-success btn-warning m-1 btnaction_custome"
+                                        (click)="workOrdergGenreateSuccessfull(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Order View
+                                    </button>
+                                </span>
+
+                                <span
+                                    *ngIf="row?.natureOfWorkTypeId==8 || (row?.natureOfWorkTypeId!=8 && row?.schemeTypeId==2 )">
+                                    <button
+                                        *ngIf=" ( row?.applicationStatusId >= 24 && row?.applicationStatusId!=29 && row?.applicationStatusId!=30 && row?.applicationStatusId!=33 && row?.applicationStatusId!=35 && row?.applicationStatusId!=36 && row?.applicationStatusId!=37 && row?.applicationStatusId!=38 && row?.applicationStatusId!=39 && row?.applicationStatusId!=40 && row?.applicationStatusId!=41 && row?.applicationStatusId!=42 && row?.applicationStatusId!=43 && row.isRejected != 1  )"
+                                        matTooltip="work order workOrdergGenreateSuccessfull"
+                                        class="btn btn-sm btn-success btn-warning m-1 btnaction_custome"
+                                        (click)="workOrdergGenreateSuccessfull(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Order View
+                                    </button>
+                                </span>
+
+                                <!-- *************************************** Work order view end **************************************************** -->
+
+
+                                <!-- Mis-report -->
+                                <!-- <span>
+                                    <button
+                                    
+                                        matTooltip="Mis-Report"
+                                        class="btn btn-sm btn-success btn-warning m-1 btnaction_custome"
+                                        (click)="MisReport()">
+                                        Mis-Report
+                                    </button>
+                                </span> -->
+
+                                <!-- ************************************************* Work completion Request generate by Dgm (O&M) and Dgm(HTM) start *************************************8 -->
+
+
+                                <span *ngIf="userRolesData=='DGM'">
+                                    <button *ngIf=" ( row?.applicationStatusId == 25 
+                                    && row.isRejected != 1 && completeDate >=row.dateOfDgmOandM ) "
+                                        matTooltip="work order workOrdergGenreateSuccessfull"
+                                        class="btn btn-sm m-1 btn-warning btnaction_custome"
+                                        (click)="workCompletionGenreateSuccessfull(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Completion
+                                    </button>
+                                </span>
+
+                                <span *ngIf="userRolesData=='DGM_(HTM)'">
+                                    <button *ngIf="(row?.applicationStatusId == 25 
+                                    && row.isRejected != 1 && completeDate >=row.dateOfDgmOandM )"
+                                        matTooltip="work order workOrdergGenreateSuccessfull"
+                                        class="btn btn-sm m-1 btn-warning btnaction_custome"
+                                        (click)="workCompletionGenreateSuccessfull(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Completion
+                                    </button>
+                                </span>
+
+
+                                <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+                                <!-- <span *ngIf="userRolesData=='AE(O&M)'">
+                                <button *ngIf="(row?.applicationStatusId == 25 && row.natureOfWorkTypeId==5
+                                    && row.isRejected != 1 && completeDate >=row.dateOfDgmOandM )"
+                                    matTooltip="work order workOrdergGenreateSuccessfull"
+                                    class="btn btn-sm m-1 btn-warning btnaction_custome"
+                                    (click)="workCompletionGenreateSuccessfull(row.consumerApplicationId,row.previousStage,row)">
+                                    Work Completion
+                                </button>
+                            </span> -->
+
+                                <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+                                <!-- ************************************************* Work completion Request generate by Dgm (O&M) and Dgm(HTM) end *************************************8 -->
+
+
+                                <!-- ********************************************* work completion done by Dgm(STC) start ************************************** -->
+
+                                <span *ngIf="userRolesData=='DGM_STC'">
+                                    <button *ngIf=" ( row?.applicationStatusId == 27  && row.isRejected != 1  )"
+                                        matTooltip="Work Completion"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="workCompletion(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Completion generate
+                                    </button>
+                                </span>
+
+
+                                <span *ngIf="userRolesData=='AE(O&M)'">
+                                    <button *ngIf=" ( row?.applicationStatusId == 27 && row.isRejected != 1  )"
+                                        matTooltip="Work Completion"
+                                        class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="workCompletion(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Completion generate
+                                    </button>
+                                </span>
+
+                                <!-- ********************************************* work completion done by Dgm(STC) end ************************************** -->
+
+
+                                <!-- <span >
+
+                                    <button
+                                    *ngIf=" ( row?.applicationStatusId == 27 && row.isRejected != 1  )"
+                                        matTooltip="Work Completion" class="btn btn-sm btn-warning m-1 btnaction_custome"
+                                        (click)="workCompletion(row.consumerApplicationId,row.previousStage,row)">
+                                        Work Completion generate
+                                    </button>
+                                </span> -->
+
+                                <!-- <span >
+                                    <button *ngIf=" ( row?.applicationStatusId == 25 
+                                        && row.isRejected != 1 && completeDate >=row.dateOfDgmOandM ) "
+                                        matTooltip="work order workOrdergGenreateSuccessfull"
+                                        class="btn btn-sm m-1 btn-warning btnaction_custome"
+                                        (click)="workCompletionGenreateSuccessfull(row.consumerApplicationId,row.previousStage)">
+                                        Work Completion
+                                    </button>
+                                </span> -->
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[10, 25,50, 100,500,1000,5000]"
+        aria-label="Select page of dataSource"></mat-paginator>
+</div>

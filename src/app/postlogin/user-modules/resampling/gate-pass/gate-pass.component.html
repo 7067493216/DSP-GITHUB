@@ -1,0 +1,401 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<div>
+    <mat-card class="p-4">
+
+        <div class="vendor-toolbar">
+            <mat-icon>description</mat-icon>
+            <span>Gate Pass</span>
+        </div>
+
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()" *ngIf="!tableShowBoolean">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Quantity</mat-label>
+                        <input matInput formControlName="quantity" placeholder="Enter Quantity" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Circle</mat-label>
+
+                        <input matInput formControlName="circle" placeholder="Enter Circle Name" [readonly]="true" >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Division</mat-label>
+
+                        <input matInput formControlName="division" placeholder="Enter Division" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Subdivision</mat-label>
+
+                        <input matInput formControlName="subdivision" placeholder="Enter Subdivision">
+                    </mat-form-field>
+                </div> -->
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>DC</mat-label>
+
+                        <input matInput formControlName="dc" placeholder="Enter DC Name" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Application Number</mat-label>
+                        <input matInput formControlName="applicationNumber" placeholder="Enter Application Number" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Consumer Name</mat-label>
+                        <input matInput formControlName="consumerName" placeholder="Enter Consumer Name" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="address" placeholder="Enter Address" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Contractor AuthenticationId</mat-label>
+                        <input matInput formControlName="contractorAuthId"
+                            placeholder="Enter Contractor AuthenticationId" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Work-Order Number</mat-label>
+                        <input matInput formControlName="workOrderNumber" placeholder="Enter Work-Order Number" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Work-Order Date</mat-label>
+                        <input matInput formControlName="workOrderDate" placeholder="Enter Work-Order Date">
+                    </mat-form-field>
+                </div> -->
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Work-Order Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="workOrderDate" [readonly]="true"
+                            placeholder="Enter Work-Order Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Vender Name</mat-label>
+                        <input matInput formControlName="venderName" placeholder="Enter Vender Name" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Item Name</mat-label>
+                        <input matInput formControlName="itemName" placeholder="Enter Item Name" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Item Code</mat-label>
+                        <input matInput formControlName="itemCode" placeholder="Enter Item Code" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Material Type</mat-label>
+                        <input matInput formControlName="materialType" placeholder="Enter Material Type" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Serial Number</mat-label>
+                        <input matInput formControlName="serialNumber" placeholder="Enter Serial Number" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Capacity</mat-label>
+                        <input matInput formControlName="capacity" placeholder="Enter Capacity">
+                    </mat-form-field>
+                </div> -->
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Invoice Number</mat-label>
+                        <input matInput formControlName="invoiceNumber" placeholder="Enter Invoice Number" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Year Of Manufacture</mat-label>
+                        <input matInput type="date" formControlName="yom" placeholder="Enter Year Of Manufacture">
+                    </mat-form-field>
+                </div> -->
+
+                <!-- Year of Manufacture (MM-YYYY) -->
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Year Of Manufacture</mat-label>
+                        <input matInput [matDatepicker]="pickerNew" formControlName="yom" placeholder="MM-YYYY" [max]="today" [readonly]="true" >
+                        <mat-datepicker-toggle matSuffix [for]="pickerNew"></mat-datepicker-toggle>
+
+                        <mat-datepicker #pickerNew startView="multi-year"
+                            (monthSelected)="chosenMonthHandler($event, pickerNew)" panelClass="month-year-picker">
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+
+                <br>
+                <h2>
+                    Vehicle Details
+                </h2>
+                <br>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Vehicle Name</mat-label>
+                        <input matInput formControlName="vehicleName" placeholder="Enter Vehicle Name">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Vehicle No.</mat-label>
+                        <input matInput formControlName="vehicleNumber" placeholder="Enter Vehicle No.">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Driver Name</mat-label>
+                        <input matInput formControlName="driverName" placeholder="Enter Driver Name">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Issue Date</mat-label>
+                        <input matInput type="date" formControlName="issueDate" placeholder="Enter Issue Date" [max]="today">
+                    </mat-form-field>
+                </div>
+
+                <br>
+                <h2>Verified By </h2>
+                <br>
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Name of Employee</mat-label>
+                        <input matInput formControlName="nameOfEmployee" placeholder="Enter Name of Employee" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Employee No.</mat-label>
+                        <input matInput formControlName="employeeNumber" placeholder="Enter Employee No."[readonly]="true" >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Designation</mat-label>
+                        <input matInput formControlName="designation" placeholder="Enter Degignation" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+                <!-- <br>
+                <h2>
+                    Material Details
+                </h2>
+                <br> -->
+
+                <!-- <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>S.NO.</mat-label>
+                        <input matInput formControlName="sNo" placeholder="Enter S.No.">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Item serial No.</mat-label>
+                        <input matInput formControlName="materialSerialNo" placeholder="Enter Material's Number">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Serial/Batch No.</mat-label>
+                        <input matInput formControlName="batchNo" placeholder="Enter Serial/Batch Number">
+                    </mat-form-field>
+                </div> -->
+
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Nistha Lab</mat-label>
+                        <input matInput formControlName="nisthaLab" placeholder="Enter Serial/Batch Number" [readonly]="true">
+                    </mat-form-field>
+                </div>
+
+
+                <!-- Checkbox with Declaration -->
+                <div class="col-md-12 d-flex align-items-start mb-3">
+                    <!-- Checkbox -->
+                    <mat-checkbox class="example-margin mt-1" (change)="onCheckBoxSelect($event)">
+                    </mat-checkbox>
+
+                    <!-- Declaration Text -->
+                    <div class="ms-2"
+                        style="font-size: 1rem; font-weight: 500; line-height: 1.6; text-align: justify; word-break: break-word;">
+                        मैं यह घोषित करता/करती हूँ कि उपरोक्त टीआरएफ फॉर्म एवं गेट पास फॉर्म के अंतर्गत सभी आवश्यक विवरण
+                        मेरे द्वारा सही,
+                        पूर्ण तथा स्पष्ट रूप से भरे गए हैं। प्रस्तुत की गई सभी जानकारियाँ एवं दस्तावेज़ मेरी सर्वोत्तम
+                        जानकारी और विश्वास के अनुसार सत्य एवं प्रमाणिक हैं।
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <button mat-raised-button color="primary" type="submit">
+                Submit
+            </button>
+
+        </form>
+
+        <div #componentView id="elementIdToCapture" style="padding: 2em;">
+            <table class="table table-bordered w-100" *ngIf="tableShowBoolean">
+                <tr>
+                    <th colspan="4">
+                        <header class="dsp-headerblock">
+                            <div id="alterna-header" class="">
+                                <div class="container">
+                                    <div class="logobox">
+                                        <img class="img-fluid" style="height: 10em;"
+                                            alt="MP Madhya Kshetra Vidyut Vitaran Co. Ltd."
+                                            src="assets/images/banner_mpmkvvcl_logo.jpg" alt="logo">
+                                    </div>
+                                    <div class="header-custom-container"></div>
+                                </div>
+                            </div>
+                            <div align="center" style="font-size: 1.5em; font-weight: 900;">
+                                Gate Pass
+                            </div>
+                            <br>
+
+                        </header>
+                    </th>
+
+                </tr>
+                <tr>
+                    <th>CONSUMER APPLICATION NUMBER</th>
+                    <td>{{getPassPatchingData.CONSUMER_APPLICATION_NUMBER || '-'}}</td>
+                    <th>Consumer Name</th>
+                    <td>{{getPassPatchingData.CONSUMER_NAME}}</td>
+                </tr>
+                <tr>
+                    <th>WORK ORDER NO</th>
+                    <td>{{getPassPatchingData.WORK_ORDER_NO}}</td>
+                    <th>Work Order Date</th>
+                    <td>{{getPassPatchingData.WORK_ORDER_DATE | date:'yyyy-MM-dd'}}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{getPassPatchingData.ADDRESS}}</td>
+                    <th>Consumer Mobile</th>
+                    <td>{{getPassPatchingData.CONSUMER_MOBILE_NO}}</td>
+                </tr>
+
+                <tr>
+                    <th>Contractor Name</th>
+                    <td>{{getPassPatchingData.CONTRACTOR_NAME}}</td>
+                    <th>CONTRACTOR AUTHANTICATION ID</th>
+                    <td>{{getPassPatchingData.CONTRACTOR_AUTHANTICATION_ID}}</td>
+                </tr>
+
+                <tr>
+                    <th>Division</th>
+                    <td>{{getPassPatchingData.DIVISION}}</td>
+                    <th>Circle</th>
+                    <td>{{getPassPatchingData.CIRCLE}}</td>
+                </tr>
+
+                <!-- ----------------------- -->
+
+                <tr>
+                    <th>Sub-Division</th>
+                    <td>{{getPassPatchingData.SUB_DIVISION}}</td>
+                    <th> DC </th>
+                    <td>{{getPassPatchingData.DC_NAME}}</td>
+                </tr>
+
+                <tr>
+                    <th>Nistha Lab</th>
+                    <td> NISTHA LAB {{getPassPatchingData.REGION}}</td>
+                    <th>ERP Workflow</th>
+                    <td>{{getPassPatchingData.ERP_WORKFLOW_NUMBER}}</td>
+                </tr>
+
+                <tr>
+                    <th>Vendor Name</th>
+                    <td>{{getPassPatchingData.VENDOR_NAME || '-'}}</td>
+                    <th>INVOICE NO</th>
+                    <td>{{getPassPatchingData.INVOICE_NO}}</td>
+                </tr>
+
+                <tr>
+                    <th>TOTAL NO OF DTR</th>
+                    <td>{{getPassPatchingData.TOTAL_NO_OF_DTR}}</td>
+                    <th>YEAR OF MANUFACTURE</th>
+                    <td>{{getPassPatchingData.YEAR_OF_MANUFACTURE}}</td>
+                </tr>
+
+            </table>
+        </div>
+
+
+        <div align="right" *ngIf="tableShowBoolean">
+            <button type="button" class="btn btn-primary" (click)="downloadPDF()">
+                Download
+            </button>
+        </div>
+
+
+    </mat-card>
+
+</div>

@@ -1,0 +1,372 @@
+<!-- <div class="dspuser_dashborad_main">
+    <div class="container">
+        <div class="dshbaord_block"><br>
+            <div class="title_block">
+                <h4>
+                    WELCOME TO THE DEPOSIT SUPERVISION PORTAL
+                </h4>
+            </div>
+
+            <br>
+
+            <div class="dash_qubebox_list">
+                <div class="row">
+                    <div class="col-lg-6" *ngFor="let data of newCountArray; let i = index">
+                        <div class="dash_qubebox_item" (click)="onStatus(data)">
+                            <div class="dass_innerbox">
+                                <div class="iconbox">
+                                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="6" r="4" stroke="#1C274C" stroke-width="1.5" />
+                                        <path
+                                            d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+                                            stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <div class="contabt_box">
+                                    <h4>
+                                        {{data?.ApplicationRefundTypeName}}
+                                    </h4>
+                                    <p *ngIf="data?.COUNT!=null">
+                                        {{data?.COUNT}}
+                                    </p>
+                                    <p *ngIf="data?.COUNT==null">0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+           
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+<mat-toolbar color="primary" class="mat-elevation-z4"> <span class="toolbar-title">Welcome to the Deposit Supervision
+        Portal</span> </mat-toolbar>
+<div class="dashboard-container">
+    <!-- Pending Applications -->
+    <mat-card class="dashboard-section section-pending">
+        <div class="section-header"> <button mat-raised-button color="primary">Pending Application</button> </div>
+        <div class="dashboard-grid"> 
+            <mat-card class="dashboard-card" *ngFor="let data of newCountArray"
+                (click)="onStatus(data)"> <mat-icon class="card-icon">hourglass_empty</mat-icon>
+                <div class="card-content">
+                    <h4>
+                        {{data?.ApplicationRefundTypeName}}
+                    </h4>
+                    <p *ngIf="data?.COUNT!=null">
+                        {{data?.COUNT}}
+                    </p>
+                    <p *ngIf="data?.COUNT==null">0</p>
+                </div>
+           
+            </mat-card> 
+        </div>
+    </mat-card>
+    <!-- Cancellation Applications -->
+    <mat-card class="dashboard-section section-complete">
+        <div class="section-header"> <button mat-raised-button class="btn-success">Completed Application</button> </div>
+        <div class="dashboard-grid"> 
+            <mat-card class="dashboard-card" *ngFor="let data of newCountArrayForCompleatedApplication"
+                (click)="onStatusForCompleted(data)"> <mat-icon class="card-icon" style="color: rgb(4, 249, 4);">check_circle</mat-icon>
+                <!-- <mat-icon color="primary">check_circle</mat-icon> -->
+
+                <div class="card-content">
+                    <h4>
+                        {{data?.ApplicationRefundTypeName}}
+                    </h4>
+                    <p *ngIf="data?.COUNT!=null">
+                        {{data?.COUNT}}
+                    </p>
+                    <p *ngIf="data?.COUNT==null">0</p>
+                </div>
+           
+            </mat-card> 
+        </div>
+    </mat-card>
+    <!-- <mat-card class="dashboard-section section-complete">
+        <div class="section-header"> <button mat-raised-button class="btn-success">Compleated Application</button>
+        </div>
+        <div class="dashboard-grid">
+            <mat-card class="dashboard-card" *ngFor="let data of newCountArray" (click)="onStatus(data)">
+              <mat-icon class="card-icon">done</mat-icon>
+              <div class="card-content">
+                <h4>
+                    {{data?.ApplicationRefundTypeName}}
+                </h4>
+                <p *ngIf="data?.COUNT!=null">
+                    {{data?.COUNT}}
+                </p>
+                <p *ngIf="data?.COUNT==null">0</p>
+              </div>
+            </mat-card>
+          </div>
+          
+    </mat-card> -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<marquee scrollamount="17" style="background-color: #3f51b5;color: white;">
+    <h4 align="center"><b> Welcome to HT NGB Portal</b></h4>
+</marquee> -->
+
+<ng-container *ngIf="showDetail">
+    <div class="col-md-12 row py-2">
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/HT CONSUMERS.jpg"
+                    alt="HT ACTIVE CONSUMERS">
+                <mat-card-content style="display: flex;justify-content: center;align-items: center;">
+                    <button class="button" (click)="getDetail('HTACTIVECONSUMERS')" mat-raised-button color="primary">
+                        HT ACTIVE CONSUMERS</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/PDC2.jpg" alt="PDC">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('PDC')" color="primary">Permanent
+                        disconnection</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/DETERMINANT.jpg" alt="BILL DETERMINANT">
+                <mat-card-content>
+                    <button class="button" (click)="getDetail('billdeterminant')" mat-raised-button color="primary">BILL
+                        DETERMINANT</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/BILL GENERATION.png"
+                    alt="BILL GENERATION">
+                <mat-card-content>
+                    <button class="button" (click)="getDetail('billgeneration')" mat-raised-button color="primary">BILL
+                        GENERATION</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+    <div class="col-md-12 row py-2">
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+                <img mat-card-image style="height: 100px;" src="assets/images/r15.png" alt="R15">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('R15')" color="primary">R15</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+                <img mat-card-image style="height: 100px;" src="assets/images/nsc.jpg" alt="NSC">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('NSC')" color="primary">New
+                        Service Connection</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/AMR2.jpg" alt="AMR">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('AMR')" color="primary">Automatic
+                        Meter Reading</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/ELECTRICITY BILL.jpg"
+                    alt="CURRENT MONTH DEMAND">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('CurrentMonthDemand')"
+                        color="primary">CURRENT MONTH DEMAND</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+    <div class="col-md-12 row py-2">
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+                <img mat-card-image style="height: 100px;" src="assets/images/BILL MONTH WISE COLLECTION.jpg"
+                    alt="COLLECTION AGAINST CURRENT BILL">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('CollectionAgainstCurrentBill')"
+                        color="primary">COLLECTION AGAINST CURRENT BILL</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+                <img mat-card-image style="height: 100px;" src="assets/images/DAILY COLLECTION.jpg"
+                    alt="Daily Collection">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('dailyCollection')"
+                        color="primary">Daily Collection</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+
+                <img mat-card-image style="height: 100px;" src="assets/images/DETERMINANT3.png"
+                    alt="MONTHLY COLLECTION">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('monthlyCollection')"
+                        color="primary">MONTHLY COLLECTION</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card class="example-card " style="height: 180px;">
+                <img mat-card-image style="height: 100px;" src="assets/images\DETERMINANT2.jpg" alt="ARREARS">
+                <mat-card-content>
+                    <button class="button" mat-raised-button (click)="getDetail('arrears')"
+                        color="primary">ARREARS</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</ng-container>
+
+<!------------------------------- 1st row ----------------------------------->
+
+<ng-container *ngIf="redirection == 'HTACTIVECONSUMERS' && showDetail">
+    <!-- <app-htactive-consumers (redirectEvent)="redirectedToDashboard()"></app-htactive-consumers> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'PDC' && showDetail">
+    <!-- <app-permanent-disconnection (redirectEvent)="redirectedToDashboard()"></app-permanent-disconnection> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'billdeterminant' && showDetail">
+    <!-- <app-bill-determinant (redirectEvent)="redirectedToDashboard()"></app-bill-determinant> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'billgeneration' && showDetail">
+    <!-- <app-bill-generation (redirectEvent)="redirectedToDashboard()"></app-bill-generation> -->
+</ng-container>
+
+<!------------------------------- 2nd row ----------------------------------->
+<ng-container *ngIf="redirection == 'R15' && showDetail">
+    <!-- <app-r15 (redirectEvent)="redirectedToDashboard()"></app-r15> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'NSC' && showDetail">
+    <!-- <app-new-service-connection (redirectEvent)="redirectedToDashboard()"></app-new-service-connection> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'AMR' && showDetail">
+    <!-- <app-automatic-meter-reading (redirectEvent)="redirectedToDashboard()"></app-automatic-meter-reading> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'CurrentMonthDemand' && showDetail">
+    <!-- <app-current-month-demand (redirectEvent)="redirectedToDashboard()"></app-current-month-demand> -->
+</ng-container>
+
+<!------------------------------- 3nd row ----------------------------------->
+<ng-container *ngIf="redirection == 'CollectionAgainstCurrentBill' && showDetail">
+    <!-- <app-collection-against-currentbill (redirectEvent)="redirectedToDashboard()"></app-collection-against-currentbill> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'dailyCollection' && showDetail">
+    <!-- <app-daily-collection (redirectEvent)="redirectedToDashboard()"></app-daily-collection> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'monthlyCollection' && showDetail">
+    <!-- <app-monthly-collection (redirectEvent)="redirectedToDashboard()"></app-monthly-collection> -->
+</ng-container>
+
+<ng-container *ngIf="redirection == 'arrears' && showDetail">
+    <!-- <app-arrears (redirectEvent)="redirectedToDashboard()"></app-arrears> -->
+</ng-container>
+
+<!-- <div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-8 col-md-6 col-sm-7">
+            <mat-card class="widgetCard mat-elevation-z1">
+                <mat-toolbar>Dummy1 Summary </mat-toolbar>
+                <mat-card-content>
+                    <canvas height="75" baseChart class="chart" [datasets]="lineChartService.lineChartData"
+                        [labels]="lineChartService.lineChartLabels" [options]="lineChartService.lineChartOptions"
+                        [legend]="lineChartService.lineChartLegend" [chartType]="lineChartService.lineChartType"
+                        (chartHover)="lineChartService.chartHovered($event)"
+                        (chartClick)="lineChartService.chartClicked($event)"></canvas>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-5">
+            <mat-card class="widgetCard mat-elevation-z1">
+                <mat-toolbar class="spaceBetween">
+                    <span>Dummy2 Summary </span>
+                    <button type="button" matTooltip="View Full Detail" aria-label="Toggle sidenav"
+                        [disabled]="!viewTableButton" mat-icon-button>
+                        <mat-icon>view_list</mat-icon>
+                    </button>
+                </mat-toolbar>
+                <mat-card-content>
+                    <canvas baseChart [datasets]="barChartService.barChartData"
+                        [labels]="barChartService.barChartLabels" [options]="barChartService.barChartOptions"
+                        [legend]="barChartService.barChartLegend" [chartType]="barChartService.barChartType">
+                    </canvas>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+ -->

@@ -1,0 +1,56 @@
+<mat-card class="my-card">
+    <mat-toolbar>
+        <span>{{data.modalTitle}}</span>
+        <!-- <span>{{regionCreationFg.controls['regionId'].value?"Modify Region":"Create New Region"}}</span> -->
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+    </mat-toolbar>
+    <form [formGroup]="regionCreationFg" (ngSubmit)="onSubmit()" autocomplete="off">
+        <!--FORM FIELDS HERE-->
+        <input type="hidden" formControlName="regionId">
+        <mat-form-field class="half-width">
+            <mat-label>Select discom</mat-label>
+            <mat-select name="discomId" formControlName="discomId">
+                <mat-option value="">Select discom</mat-option>
+                <mat-option value="1">MPCZ</mat-option>
+                <mat-option value="2">MPEZ</mat-option>
+                <mat-option value="3">MPWZ</mat-option>
+            </mat-select>
+            <mat-error *ngIf="regionCreationFg.controls.discomId.hasError('required')">
+                Please Select discom
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="padding half-width">
+            <mat-label>region Code</mat-label>
+            <input matInput placeholder="region Code" name="regionCode" formControlName="regionCode">
+            <mat-error *ngIf="regionCreationFg.controls.regionCode.hasError('required')">
+                region Code is required
+            </mat-error>
+            <mat-error *ngIf="regionCreationFg.controls.regionCode.hasError('pattern')">
+                Please Enter region Code In Valid Format
+            </mat-error>
+            <mat-error *ngIf="regionCreationFg.controls.regionCode.hasError('uniqueValue')">
+                region Code already exists
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>region Name</mat-label>
+            <input matInput placeholder="region Name" name="region" formControlName="region">
+            <mat-error *ngIf="regionCreationFg.controls.region.hasError('required')">
+                region Name is required
+            </mat-error>
+            <mat-error *ngIf="regionCreationFg.controls.region.hasError('pattern')">
+                region Name In Valid Format
+            </mat-error>
+            <mat-error *ngIf="regionCreationFg.controls.region.hasError('uniqueValue')">
+                Region Name already exists
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="!regionCreationFg.valid">{{data.btnTitle}}</button>
+        </div>
+    </form>
+</mat-card>

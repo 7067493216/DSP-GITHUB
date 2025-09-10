@@ -1,0 +1,65 @@
+/* #talkbubble { width: 120px; height: 80px; background: green; position: relative; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; font-size: 1.5em; }
+
+#talkbubble:before { content:""; position: absolute; left: 100%; top: 26px; width: 0; height: 0; border-top: 13px solid transparent; border-left: 26px solid green; border-bottom: 13px solid transparent; }
+
+
+
+
+
+
+#talkbubble2 { width: 120px; height: 80px; background: rgb(83, 82, 82); position: relative; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;font-size: 1.5em; }
+
+#talkbubble2:before { content:""; position: absolute; left: 100%; top: 26px; width: 0; height: 0; border-top: 13px solid transparent; border-left: 26px solid rgb(84, 84, 84); border-bottom: 13px solid transparent; } */
+
+
+
+
+/* #talkbubble {
+    display:inline-block;
+    padding:5px 6px 8px 6px;
+    border-radius: 6px;
+    float: right;
+    margin-right: 40px;
+    color:black;
+    background-color:#146f79;
+    position: relative;
+  }
+  
+  #talkbubble:after {
+    content: "";
+    position:absolute;
+    margin-top:-6px;
+    margin-left:-5px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #146f79;
+    transform:rotate(-45deg);
+    right: -15px; 
+    top: 10px;
+  }
+
+
+
+  #talkbubble2 {
+    display:inline-block;
+    padding:5px 6px 8px 6px;
+    border-radius: 6px;
+    float: right;
+    margin-right: 40px;
+    color:black;
+    background-color:#146f79;
+    position: relative;
+  }
+  
+  #talkbubble2:after {
+    content: "";
+    position:absolute;
+    margin-top:-6px;
+    margin-left:-5px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #146f79;
+    transform:rotate(-45deg);
+    right: -15px; 
+    top: 10px;
+  } */

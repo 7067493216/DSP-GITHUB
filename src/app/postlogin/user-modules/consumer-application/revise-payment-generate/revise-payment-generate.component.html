@@ -1,0 +1,1257 @@
+<mat-card class="my-card custom-scroll-enable-1">
+
+
+    <!-- <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <h1>Revise Payment Generate</h1>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div> -->
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: black; font-size: 2em; font-weight: 900;  text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">Revise Demand Generate</div>
+
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div>
+
+        <div class="row custom-row">
+
+            <div class="col-md-12 custom-col-md-12">
+
+                <table id="tableID" border="1" width="100%" cellspacing="1" #scrollBottom>
+
+                    <tbody id="tablebody">
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Application Number</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumerApplicationNo}}</td>
+                        </tr>
+
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Name</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumerName
+                                }}
+                            </td>
+                        </tr>
+
+                        <!-- <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Email</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumers?.consumerEmailId}}
+                            </td>
+                        </tr> -->
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Mobile No.</td>
+                            <td class="tabledatas col-md-8">{{consumerApplicationDetail?.consumerphonNumber}}
+                            </td>
+                        </tr>
+
+                        <tr class="col-md-12">
+                            <td class="tableHeaders col-md-4">Payment particular</td>
+                            <td class="tabledatas col-md-8">
+                                Revise Demand Note
+                            </td>
+                        </tr>
+
+                        <!-- <tr *ngIf="erpReviseData!=null || erpReviseData!=undefined" class="col-md-12">
+                            <th class="tableHeaders col-md-4">CGST-9%</th>
+                            <td class="tabledatas col-md-8"> {{erpReviseData?.remCgst}}</td>
+                        </tr>
+                        <tr *ngIf="erpReviseData!=null || erpReviseData!=undefined" class="col-md-12">
+                            <th class="tableHeaders col-md-4">SGST-9%</th>
+                            <td class="tabledatas col-md-8">{{erpReviseData?.remSgst}}</td>
+                        </tr>
+
+                        <tr class="col-md-12" *ngIf="erpReviseData!=null || erpReviseData!=undefined">
+                            <td class="tableHeaders col-md-4" *ngIf="erpReviseData!=null || erpReviseData!=undefined">
+                                Total
+                                Amount (in ₹)
+                            </td>
+                            <td class="tableHeaders col-md-4"
+                                *ngIf="consumerApplicationDetail?.applicationStatus.applicationStatusId==12">Fees (in ₹)
+                            </td>
+
+                            <td class="tabledatas col-md-8">
+                                {{erpReviseData?.payAmt}}
+
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+
+        <mat-divider class="custom-mat-divider">
+
+        </mat-divider>
+
+        <br>
+
+        <form [formGroup]="loadForm" *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=1 && consumerApplicationDetail?.natureOfWorkTypeId!=6">
+            <div class="row">
+
+                <div class="col-md-4 form-group">
+                    <label class="form-label">Enter Load<span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" formControlName="load">
+
+                    <mat-error *ngIf="isFormSubmit && loadForm['controls']?.load?.errors">
+                        <div *ngIf="loadForm['controls']?.load?.errors['required']">
+                            Load is Required</div>
+                    </mat-error>
+                </div>
+
+                <div class="col-md-3">
+                    <mat-form-field class="half-width padding">
+                        <mat-label>Load Unit (लोड यूनिट)<span class="text-danger">*</span></mat-label>
+                        <input matInput placeholder="लोड यूनिट" [readonly]="(loadUnitCheckBoolean==true || (consumerApplicationDetail.natureOfWorkTypeId==4))?true:false"
+                            formControlName="loadUnit" class="change-bg-color">
+                    </mat-form-field>
+                    <div *ngIf="loadUnitCheckBoolean==false" class="text-danger"> Enter Load Unit either KW,KVA or
+                        HP<span class="text-danger">*</span></div>
+                </div>
+
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-primary mt-4" [disabled]="SubmitLoadBoolean==true?true:false"
+                        (click)="onLoadSubmit()">Submit</button>
+                </div>
+
+            </div>
+        </form>
+
+
+
+
+        <br>
+        <br>
+
+        <mat-divider class="custom-mat-divider">
+
+        </mat-divider>
+
+        <br>
+        <section class="example-section" *ngIf="consumerApplicationDetail?.natureOfWorkTypeId!=5">
+            <b style="font-size: 1.2em;">आवेदक द्वारा चुना हुआ आवेदक प्रकार " <span style="color: red; ">
+                    {{consumerApplicationDetail?.avedakKaPrakar}} </span> " है।</b>
+            <br>
+            <b style="font-size: 1.1em;"> यदि आपके अनुसार यह आवेदक "Gorvement" है, तो अपनी सहमति दीजिए।
+                <!-- क्या आप इसे परिवर्तित करना चाहते हैं ? -->
+                <!-- || आवेदक द्वारा चुना हुआ आवेदक का प्रकार "<span>{{consumerApplicationDetail?.avedakKaPrakar}}</span>" है -->
+            </b>
+            <span>
+                <mat-radio-group aria-label="Select an option" (change)="onRadioButtonCredit($event)">
+                    <mat-radio-button value="Yes" class="mx-2" style="font-weight: 900;">Yes</mat-radio-button>
+                    <mat-radio-button value="No" style="font-weight: bold;">No</mat-radio-button>
+                </mat-radio-group>
+                <div *ngIf="radioButtonBoolean==true && aavedakKaPrakarConfirmationByDGM.isAvedakGovernmentERP=='No'"
+                    style="color: rgb(255, 2, 53);">
+                    आपके अनुसार आवेदक का प्रकार "Private" है और आप इसके लिए पूर्ण रूप से सहमत हैं। अब वापसी सामग्री की
+                    राशि
+                    डिमांड नोट में समायोजित होकर आएगी।
+                </div>
+            </span>
+        </section>
+
+        <br>
+
+
+
+
+        <div>
+            <form [formGroup]="erpForm">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="form-group">
+                        <label class="form-label">Enter ERP Number</label>
+                        <input type="number" class="form-control" formControlName="erpNumber">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success mt-2" (click)="getPaymentDetails()">Get Revise
+                            Details</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="openTableBoolean">
+
+            <table class="table table-bordered"
+                *ngIf="consumerApplicationDetail?.schemeTypeId == 1  && natureOfWorkTypeId!=8">
+                <!-- && natureOfWorkTypeId!=8 -->
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th scope="col">S.NO.</th>
+                    <th scope="col"> Particular</th>
+                    <th scope="col">Account Head</th>
+                    <th scope="col">Old Demand Payment Details</th>
+                    <th scope="col">New Demand Payment Details</th>
+                    <th scope="col">Amount Difference</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td scope="row">&nbsp; Supervision Charges on Cost of Material (Excluding
+                        Service Tax Amount)</td>
+                    <td>
+                        62.925
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldSupervision!=null">
+                            {{erpReviseData?.oldSupervision}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldSupervision==null">
+                            0.00
+                        </div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newSupervisionAmt!=null">
+                            {{erpReviseData?.newSupervisionAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.newSupervisionAmt==null">
+                            0.00
+                        </div>
+
+                        <!-- <div *ngIf="erpReviseData?.supervisionAmt!=null">
+                            {{erpReviseData?.supervisionAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.supervisionAmt==null">
+                            0.00
+                        </div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remSupervisionAmt!=null">
+                            {{erpReviseData?.remSupervisionAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remSupervisionAmt==null">
+                            0.00
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td scope="row">&nbsp;CGST-9%</td>
+                    <td> 46.948</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldCgst!=null">
+                            {{erpReviseData?.oldCgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldCgst==null">
+                            0.00
+                        </div>
+                    </td>
+
+                    <td>
+                        <div *ngIf="erpReviseData?.newCgst!=null">
+                            {{erpReviseData?.newCgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.newCgst==null">
+                            0.00
+                        </div>
+
+                        <!-- <div *ngIf="erpReviseData?.cgst!=null">
+                            {{erpReviseData?.cgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.cgst==null">
+                            0.00
+                        </div> -->
+                    </td>
+
+                    <td>
+                        <div *ngIf="erpReviseData?.remCgst!=null">
+                            {{erpReviseData?.remCgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remCgst==null">
+                            0.00
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td scope="row">&nbsp;SGST-9%</td>
+                    <td>46.949</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldSgst!=null">
+                            {{erpReviseData?.oldSgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldSgst==null">
+                            0.00
+                        </div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newSgst!=null">
+                            {{erpReviseData?.newSgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.newSgst==null">
+                            0.00
+                        </div>
+
+                        <!-- <div *ngIf="erpReviseData?.sgst!=null">
+                            {{erpReviseData?.sgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.sgst==null">
+                            0.00
+                        </div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remSgst!=null">
+                            {{erpReviseData?.remSgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remSgst==null">
+                            0.00
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td scope="row">&nbsp;System Development Charges</td>
+                    <td>55.160</td>
+                    <td>
+
+                        <div *ngIf="erpReviseData?.oldkWloadAmt!=null">
+                            {{erpReviseData?.oldkWloadAmt}}</div>
+                        <div *ngIf="erpReviseData?.oldkWloadAmt==null">0.00</div>
+
+                    </td>
+                    <td>
+
+                        <div *ngIf="erpReviseData?.newKwAmt!=null">
+                            {{erpReviseData?.newKwAmt}}</div>
+                        <div *ngIf="erpReviseData?.newKwAmt==null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.kwAmt!=null">
+                            {{erpReviseData?.kwAmt}}</div>
+                        <div *ngIf="erpReviseData?.kwAmt==null">0.00</div> -->
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remKwAmt!=null">
+                            {{erpReviseData?.remKwAmt}}</div>
+                        <div *ngIf="erpReviseData?.remKwAmt==null">0.00</div>
+                        <!-- remKwAmt -->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td scope="row">&nbsp;Deposit Charges(Excluding Supervision Charges and CGST,SGST on Supervision
+                        Charges)</td>
+                    <td> 47.320</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>
+                        0.00
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td scope="row">&nbsp;Other Infrastructure related cost</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td scope="row">&nbsp;Supply Affording Charges @850 per KVA</td>
+                    <td> 55.150</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldkvaloadAmt != null">
+                            {{erpReviseData?.oldkvaloadAmt}}</div>
+                        <div *ngIf="erpReviseData?.oldkvaloadAmt == null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newKvaAmt!=null">
+                            {{erpReviseData?.newKvaAmt}}</div>
+                        <div *ngIf="erpReviseData?.newKvaAmt==null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.kvaAmt!=null">
+                            {{erpReviseData?.kvaAmt}}</div>
+                        <div *ngIf="erpReviseData?.kvaAmt==null">0.00</div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remKvaAmt!=null">
+                            {{erpReviseData?.remKvaAmt}}</div>
+                        <div *ngIf="erpReviseData?.remKvaAmt==null">0.00</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td scope="row">&nbsp;Deposit for Electrification of illegal Colony/Slum</td>
+                    <td>47.337</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldColonyOrSlum != null">
+
+                            {{erpReviseData?.oldColonyOrSlum}}
+                        </div>
+                        <div *ngIf="erpReviseData?.oldColonyOrSlum == null">0.00</div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newColonyOrSlum!=null">
+                            {{erpReviseData?.newColonyOrSlum}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.newColonyOrSlum==null">
+                            0.00
+                        </div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remColonyOrSlum!=null">
+                            {{erpReviseData?.remColonyOrSlum}}
+                        </div>
+                        <div *ngIf="erpReviseData?.remColonyOrSlum==null">
+                            0.00
+                        </div>
+
+                    </td>
+                </tr>
+
+                <!-- <tr>
+                    <td>9</td>
+                    <td> Return Material amount in estimate</td>
+                    <td>0.00</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldJeReturnAmt != null">
+
+                            {{erpReviseData?.oldJeReturnAmt}}
+                        </div>
+                        <div *ngIf="erpReviseData?.oldJeReturnAmt == null">0.00</div>
+                       
+                    </td>
+                    <td>0.00</td>
+                    <td>
+                        0.00
+                    </td>
+                </tr> -->
+
+
+                <tr>
+                    <!-- h111111111111 -->
+                    <td>9</td>
+                    <!-- h2222222 -->
+                    <td scope="row">
+                        &nbsp; Return Material amount in estimate
+
+                    </td>
+                    <td>0.00</td>
+
+                    <td>
+                        <div *ngIf="erpReviseData?.oldJeReturnAmt != null">
+                            <!-- h3333333333333333333333333333333333333333333 -->
+                            {{erpReviseData?.oldJeReturnAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldJeReturnAmt == null">0.00 </div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oAndMReturnAmt != null">
+                            <!-- h3333333333333333333333333333333333333333333 -->
+                            {{erpReviseData?.oAndMReturnAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oAndMReturnAmt == null">0.00 </div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remReturnAmt != null">
+                            <!-- h3333333333333333333333333333333333333333333 -->
+                            {{erpReviseData?.remReturnAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remReturnAmt == null">0.00 </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+
+                    <td colspan="3">
+                        Total Paid Amount
+                    </td>
+                    <td>
+                        {{erpReviseData?.oldPayableAmt | currency:"INR":"symbol"}}
+                    </td>
+                    <td>
+                        <div *ngIf="natureOfWorkTypeId!=8">
+                            {{erpReviseData?.newPayAmt | currency:"INR":"symbol"}}
+                        </div>
+                        <div *ngIf="natureOfWorkTypeId==8"> {{erpReviseData?.mkmyPayAmt}}</div>
+                    </td>
+                    <td>
+                        <div> {{erpReviseData?.payAmt |
+                            currency:"INR":"symbol"}}</div>
+                        <!-- <div *ngIf="erpReviseData?.consumerRefundableAmnt!=null">
+                            {{erpReviseData?.consumerRefundableAmnt | currency:"INR":"symbol"}}</div> -->
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" scope="row">&nbsp; <strong *ngIf="erpReviseData?.consumerRefundableAmnt==null">Total
+                            Amount to be Paid (in ₹.) </strong> <strong
+                            *ngIf="erpReviseData?.consumerRefundableAmnt!=null">Total Amount to be Refund (in ₹.)
+                        </strong></td>
+                    <td colspan="3">&nbsp; <strong>
+                            <div *ngIf="erpReviseData?.consumerRefundableAmnt==null"> {{erpReviseData?.payAmt |
+                                currency:"INR":"symbol"}}</div>
+                            <div *ngIf="erpReviseData?.consumerRefundableAmnt!=null">
+                                {{erpReviseData?.consumerRefundableAmnt | currency:"INR":"symbol"}}</div>
+                        </strong></td>
+                </tr>
+
+            </table>
+
+
+            <table class="table table-bordered"
+                *ngIf="consumerApplicationDetail?.schemeTypeId == 2  && natureOfWorkTypeId!=8">
+                <!-- && natureOfWorkTypeId!=8 -->
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th>S.NO.</th>
+                    <th> Particular</th>
+                    <th>Account Code</th>
+                    <th>Old Demand Payment Details</th>
+                    <th>New Demand Payment Details</th>
+                    <th>Amount Difference</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>&nbsp;Supervision Charges on Cost of Material (Excluding
+                        Service Tax Amount)</td>
+                    <td> 62.925</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldSupervision!=null">{{erpReviseData?.oldSupervision}}</div>
+                        <div *ngIf="erpReviseData?.oldSupervision==null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newSupervisionAmt!=null">{{erpReviseData?.newSupervisionAmt}}</div>
+                        <div *ngIf="erpReviseData?.newSupervisionAmt==null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.supervisionAmt!=null">{{erpReviseData?.supervisionAmt}}</div>
+                        <div *ngIf="erpReviseData?.supervisionAmt==null">0.00</div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remSupervisionAmt!=null">{{erpReviseData?.remSupervisionAmt}}</div>
+                        <div *ngIf="erpReviseData?.remSupervisionAmt==null">0.00</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>&nbsp;CGST-9%</td>
+                    <td>46.948</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldCgst!=null"> {{erpReviseData?.oldCgst}}</div>
+                        <div *ngIf="erpReviseData?.oldCgst==null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newCgst!=null"> {{erpReviseData?.newCgst}}</div>
+                        <div *ngIf="erpReviseData?.newCgst==null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.cgst!=null"> {{erpReviseData?.cgst}}</div>
+                        <div *ngIf="erpReviseData?.cgst==null">0.00</div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remCgst!=null">
+                            {{erpReviseData?.remCgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remCgst==null">
+                            0.00
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>&nbsp;SGST-9%</td>
+                    <td>46.949</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldSgst!=null"> {{erpReviseData?.oldSgst}}</div>
+                        <div *ngIf="erpReviseData?.oldSgst==null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newSgst!=null"> {{erpReviseData?.newSgst}}</div>
+                        <div *ngIf="erpReviseData?.newSgst==null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.sgst!=null"> {{erpReviseData?.sgst}}</div>
+                        <div *ngIf="erpReviseData?.sgst==null">0.00</div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remSgst!=null">
+                            {{erpReviseData?.remSgst}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remSgst==null">
+                            0.00
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>&nbsp;System Development Charges</td>
+                    <td> 55.160</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldkWloadAmt!=null">
+                            {{erpReviseData?.oldkWloadAmt}}</div>
+                        <div *ngIf="erpReviseData?.oldkWloadAmt==null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newKwAmt!=null">
+                            {{erpReviseData?.newKwAmt}}</div>
+                        <div *ngIf="erpReviseData?.newKwAmt==null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.kwAmt!=null">
+                            {{erpReviseData?.kwAmt}}</div> -->
+                        <div *ngIf="erpReviseData?.kwAmt==null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remKwAmt!=null">
+                            {{erpReviseData?.remKwAmt}}</div>
+                        <div *ngIf="erpReviseData?.remKwAmt==null">0.00</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>&nbsp;Deposit Charges(Excluding Supervision Charges and CGST,SGST on Supervision Charges)</td>
+                    <td>47.320</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldSupervision == null">
+                            {{erpReviseData?.oldDeposit | currency:"INR":"symbol"}}
+
+                        </div>
+                        <div *ngIf="erpReviseData?.oldDeposit == null">
+                            {{erpReviseData?.oldSupervision | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldDeposit != null && erpReviseData?.oldSupervision != null">
+                            {{erpReviseData?.oldDeposit | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldDeposit == null && erpReviseData?.oldSupervision == null">
+                            0.00
+                        </div>
+
+                    </td>
+
+                    <td>
+
+
+                        <div *ngIf="erpReviseData?.supervisionAmt == null">
+                            {{erpReviseData?.newDepositAmt | currency:"INR":"symbol"}}
+
+                        </div>
+                        <div *ngIf="erpReviseData?.newDepositAmt == null">
+                            {{erpReviseData?.supervisionAmt | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.newDepositAmt != null && erpReviseData?.supervisionAmt != null">
+                            {{erpReviseData?.newDepositAmt | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.newDepositAmt == null && erpReviseData?.supervisionAmt == null">
+                            0.00
+                        </div>
+
+                        <!-- <div *ngIf="erpReviseData?.supervisionAmt == null">
+                            {{erpReviseData?.DepositAmt | currency:"INR":"symbol"}}
+
+                        </div>
+                        <div *ngIf="erpReviseData?.DepositAmt == null">
+                            {{erpReviseData?.supervisionAmt | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.DepositAmt != null && erpReviseData?.supervisionAmt != null">
+                            {{erpReviseData?.DepositAmt | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.DepositAmt == null && erpReviseData?.supervisionAmt == null">
+                            0.00
+                        </div> -->
+                    </td>
+
+                    <td>
+                        <div *ngIf="erpReviseData?.remSupervisionAmt == null">
+                            {{erpReviseData?.remmDepositAmt | currency:"INR":"symbol"}}
+
+                        </div>
+                        <div *ngIf="erpReviseData?.remmDepositAmt == null">
+                            {{erpReviseData?.remSupervisionAmt | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remmDepositAmt != null && erpReviseData?.remSupervisionAmt != null">
+                            {{erpReviseData?.remmDepositAmt | currency:"INR":"symbol"}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remmDepositAmt == null && erpReviseData?.remSupervisionAmt == null">
+                            0.00
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>&nbsp;Other Infrastructure related cost</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td>&nbsp;Deposit for Electrification of illegal Colony/Slum</td>
+                    <td> 47.337</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldColonyOrSlum != null">
+
+                            {{erpReviseData?.oldColonyOrSlum}}
+                        </div>
+                        <div *ngIf="erpReviseData?.oldColonyOrSlum == null">0.00</div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newColonyOrSlum!=null">
+                            {{erpReviseData?.newColonyOrSlum}}
+                        </div>
+                        <div *ngIf="erpReviseData?.newColonyOrSlum==null">
+                            0.00
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remColonyOrSlum!=null">
+                            {{erpReviseData?.remColonyOrSlum}}
+                        </div>
+                        <div *ngIf="erpReviseData?.remColonyOrSlum==null">
+                            0.00
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>&nbsp;Supply Affording Charges @850 per KVA</td>
+                    <td> 55.150</td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oldkvaloadAmt != null">
+                            {{erpReviseData?.oldkvaloadAmt}}</div>
+                        <div *ngIf="erpReviseData?.oldkvaloadAmt == null">0.00</div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.newKvaAmt != null">
+                            {{erpReviseData?.newKvaAmt}}</div>
+                        <div *ngIf="erpReviseData?.newKvaAmt == null">0.00</div>
+
+                        <!-- <div *ngIf="erpReviseData?.kvaAmt != null">
+                            {{erpReviseData?.kvaAmt}}</div>
+                        <div *ngIf="erpReviseData?.kvaAmt == null">0.00</div> -->
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remKvaAmt != null">
+                            {{erpReviseData?.remKvaAmt}}</div>
+                        <div *ngIf="erpReviseData?.remKvaAmt == null">0.00</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <!-- h111111111111 -->
+                    <td>9</td>
+                    <!-- h2222222 -->
+                    <td scope="row">
+                        &nbsp; Return Material amount in estimate
+
+                    </td>
+                    <td>0.00</td>
+
+                    <td>
+                        <div *ngIf="erpReviseData?.oldJeReturnAmt != null">
+                            <!-- h3333333333333333333333333333333333333333333 -->
+                            {{erpReviseData?.oldJeReturnAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oldJeReturnAmt == null">0.00 </div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.oAndMReturnAmt != null">
+                            <!-- h3333333333333333333333333333333333333333333 -->
+                            {{erpReviseData?.oAndMReturnAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.oAndMReturnAmt == null">0.00 </div>
+                    </td>
+                    <td>
+                        <div *ngIf="erpReviseData?.remReturnAmt != null">
+                            <!-- h3333333333333333333333333333333333333333333 -->
+                            {{erpReviseData?.remReturnAmt}}
+                        </div>
+
+                        <div *ngIf="erpReviseData?.remReturnAmt == null">0.00 </div>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td colspan="3">
+                        Total Paid Amount
+                    </td>
+                    <td>
+                        {{erpReviseData?.oldPayableAmt | currency:"INR":"symbol"}}
+                    </td>
+                    <td>
+                        <div *ngIf="natureOfWorkTypeId!=8">
+                            {{erpReviseData?.newPayAmt | currency:"INR":"symbol"}}
+                        </div>
+                        <div *ngIf="natureOfWorkTypeId==8"> {{erpReviseData.mkmyPayAmt}}</div>
+                    </td>
+                    <td>
+                        <!-- {{erpReviseData?.payAmt | currency:"INR":"symbol"}} -->
+                        <div *ngIf="erpReviseData?.consumerRefundableAmnt==null"> {{erpReviseData?.payAmt |
+                            currency:"INR":"symbol"}}</div>
+                        <div *ngIf="erpReviseData?.consumerRefundableAmnt!=null">
+                            {{erpReviseData?.consumerRefundableAmnt | currency:"INR":"symbol"}}</div>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="3">&nbsp; <strong *ngIf="erpReviseData?.consumerRefundableAmnt==null">Total Amount to
+                            be Paid (in ₹) </strong><strong *ngIf="erpReviseData?.consumerRefundableAmnt!=null">Total
+                            Amount to be Paid (in ₹) </strong></td>
+                    <td colspan="3">&nbsp;
+                        <!-- {{erpReviseData?.payAmt}} -->
+                        <div *ngIf="erpReviseData?.consumerRefundableAmnt==null"> {{erpReviseData?.payAmt |
+                            currency:"INR":"symbol"}}</div>
+                        <div *ngIf="erpReviseData?.consumerRefundableAmnt!=null">
+                            {{erpReviseData?.consumerRefundableAmnt | currency:"INR":"symbol"}}</div>
+                        <strong>
+
+                        </strong>
+                    </td>
+
+                </tr>
+
+
+
+
+            </table>
+
+            <table class="table table-bordered" *ngIf=" natureOfWorkTypeId==8">
+                <tr aria-rowspan="3" style="justify-content: center; align-items: center;">
+
+                    <th colspan="5">
+                        <h2 style="display: flex; justify-content: center; align-items: center;"> Total Payment Details
+                        </h2>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th scope="col">S.NO.</th>
+                    <th scope="col"> Particular</th>
+                    <th scope="col">Account Head</th>
+                    <th scope="col">Old Demand Payment Details</th>
+                    <th scope="col">New Demand Payment Details</th>
+                    <th scope="col">Amount Difference</th>
+                </tr>
+
+                <!-- <th>आवेदन क्रमांक</th>
+                <th>कुल प्राकलन राशि</th>
+                <th>म.प्र द्वारा दी गई अनुदान राशि(40%)</th>
+                <th>म.प्र विद्युत कंपनी द्वारा दी गई अनुदान राशि(10%)</th>
+                <th>सिक्योरिटी डिपाजिट </th>
+                <th>आवेदन शुल्क </th>
+                <th>उपभोक्ता द्वारा वहन की गई राशि (50%)</th>
+                <th>इ. आर. पी. नंबर </th>
+                <th>स्कीम कोड </th> -->
+
+                <tr>
+                    <td>1</td>
+                    <td scope="row">&nbsp; कुल प्राकलन राशि</td>
+                    <td></td>
+                    <td>{{erpReviseData?.oldEstimate}}</td>
+                    <td>{{erpReviseData?.newEstimateAmt}}</td>
+                    <!-- <td>{{erpReviseData?.estimateAmt}}</td> -->
+                    <td>{{erpReviseData?.remEstimateAmt}}</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td scope="row">&nbsp;म.प्र द्वारा दी गई अनुदान राशि(40%)</td>
+                    <td></td>
+                    <td>{{erpReviseData?.oldGovMafAmt}}</td>
+                    <td>{{erpReviseData?.govMafAmt}}</td>
+                    <td>{{erpReviseData?.remGovMafAmt}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td scope="row">&nbsp;म.प्र विद्युत कंपनी द्वारा दी गई अनुदान राशि(10%)</td>
+                    <td></td>
+                    <td>{{erpReviseData?.oldMpmkMafAmt}}</td>
+                    <td>{{erpReviseData?.mpmkMafAmt}}</td>
+                    <td>{{erpReviseData?.remMpmkMafAmt}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td scope="row">&nbsp;सिक्योरिटी डिपाजिट </td>
+                    <td></td>
+                    <td>{{erpReviseData?.oldMkmySecurityDeposit}}</td>
+                    <td>NA</td>
+                    <td>NA</td>
+
+                </tr>
+
+                <tr>
+                    <td rowspan="2">5</td>
+                    <td scope="row" rowspan="2">&nbsp;आवेदन शुल्क</td>
+                    <td>62.936</td>
+                    <td>5</td>
+                    <td>NA</td>
+                    <td>NA</td>
+
+                </tr>
+
+                <tr>
+                    <td>47.310</td>
+                    <td>2495</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td scope="row">&nbsp;उपभोक्ता द्वारा वहन की गई राशि (50%)</td>
+                    <td>47.345</td>
+                    <td>{{erpReviseData?.oldCarryAmt }}</td>
+                    <td>{{erpReviseData?.mkmyPayAmt}}</td>
+                    <td>{{erpReviseData?.remMkmyPayAmt}}</td>
+
+                </tr>
+
+
+
+                <tr>
+                    <td>7</td>
+                    <td scope="row">&nbsp;स्कीम कोड</td>
+                    <td></td>
+                    <td>KMY</td>
+                    <td>KMY</td>
+                    <td>KMY</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">&nbsp; <strong>Total Amount to be Paid (in ₹) </strong></td>
+                    <td colspan="3">&nbsp;
+                        {{erpReviseData?.remMkmyPayAmt}}
+                        <strong>
+
+                        </strong>
+                    </td>
+
+                </tr>
+
+            </table>
+
+<br>
+<form [formGroup]="fileForm" >
+    <div class="row" >
+
+        <div class="col-md-3"></div>
+        <div class="form-group col-md-6">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Upload ERP Revise Estimate File</label>
+                <input class="form-control" type="file" formControlName="file" id="formFile"
+                    (change)="selectFile($event)">
+            </div>
+            <br>
+            <!-- <button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button> -->
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</form>
+
+        </div>
+
+        <br>
+
+
+
+        <!-- <div class="col-md-4">
+            <div class="form-group">
+                <label>समग्र कार्ड अपलोड़ <span class="required">*</span></label>
+                <input class="form-control change-bg-color" type="file" (change)="selectOndocSamagraFile($event)">
+            </div>
+        </div> -->
+
+        <table class="table table-bordered" *ngIf="erpReviseData?.consumerRefundableAmnt<0">
+
+
+            <tr class="table-secondary">
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">बैंक संबंधी विवरण
+                    </div>
+                </th>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <form [formGroup]="refundRequestForm">
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">खाता धारक का नाम (Account Holder Name) <span
+                                        class="text-danger">*</span> </label>
+                                <input type="text" class="form-control"
+                                    placeholder="--------- Account Holder Name --------" formControlName="creditorName">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">खाता संख्या (Account Number)<span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" placeholder="--------- Account Number ------"
+                                    maxlength="16" pattern="^[0-9]*$" formControlName="accountNumber"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+
+                                <div class="text-danger"
+                                    *ngIf="refundRequestForm.controls['accountNumber'].errors?.pattern">
+                                    Only numeric values are allowed.
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label"> बैंक का नाम(Bank Name)<span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="bankName" (change)="onSelectBankName($event)">
+                                    <option selected [disabled]="true" value="" class="text-success">
+                                        ----------------------Choose Bank Name---------------------
+                                    </option>
+                                    <option *ngFor="let bank of bankList" [ngValue]="bank">{{ bank.name }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label"> आईएफएससी कोड(IFSC Code)<span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" placeholder="---------- IFSC Code -----------"
+                                    formControlName="ifscCode" (input)="onIfscCode($event.target.value)">
+                                <small *ngIf="ifscError" class="text-danger">Invalid IFSC Code. Expected: {{
+                                    selectedBankCode }}</small>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">पैन संख्या(PAN Number)<span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" placeholder="---------- PAN Number -----------"
+                                    maxlength="10" formControlName="panNumber">
+                            </div>
+
+                             <div class="form-group col-md-6">
+                                    <label class="form-label">PAN CARD (image/pdf file)<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" class="form-control" (change)="onPanCardFileSelect($event)"
+                                        formControlName="panCardFile">
+                                </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">रद्द चेक / बैंक पासबुक का प्रथम पृष्ठ जिसमें खाता धारक का
+                                    विवरण हो (Cancellation cheque/Passbook file)<span class="text-danger">*</span>
+                                </label>
+                                <input type="file" class="form-control" (change)="onBankCheckbookFileSelect($event)"
+                                    formControlName="docCheckOrPassBook">
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    </form>
+                </td>
+            </tr>
+
+            <tr *ngIf="bankDetails">
+                <!-- <td colspan="4"> -->
+
+                <table width="100%">
+                    <tr>
+                        <th>
+                            <h3>खाता धारक का नाम (Account Holder Name) :</h3>
+                        </th>
+                        <td>{{bankDetails?.accountHolderName}}</td>
+                        <th>
+                            <h3>खाता संख्या (Account Number) :</h3>
+                        </th>
+                        <td>{{bankDetails?.accountNo}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <h3>बैंक का नाम(Bank Name) :</h3>
+                        </th>
+                        <td>{{bankDetails?.bankName}}</td>
+                        <th>
+                            <h3>आईएफएससी कोड(IFSC Code) :</h3>
+                        </th>
+                        <td>{{bankDetails?.ifscCode}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <h3>पैन संख्या(PAN Number) :</h3>
+                        </th>
+                        <td>{{bankDetails?.panNo}}</td>
+                        <th>
+                            <h3>आवेदन क्रमांक (Application Number) :</h3>
+                        </th>
+                        <td>{{bankDetails?.consumerApplicationNo}}</td>
+                    </tr>
+                </table>
+
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div align="center">
+
+                        <button type="button" class="btn btn-primary mx-2" (click)="onEdit()">
+                            सुधार करें
+                        </button>
+                        <span>
+                            <button type="button" class="btn btn-primary " (click)="onSubmitBankDetail()">
+                                बैंक विवरण सही हैं। आगे बढ़ें
+                            </button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <br>
+                    <div>
+
+                        <mat-checkbox class="example-margin mx-2" (change)="onBankDetailsCheckboxChange($event)">
+                        </mat-checkbox>
+                        <span style="font-size: 1.2em; font-weight: 700;">मैं, घोषणा करता/करती हूं कि मेरे द्वारा
+                            [उद्देश्य, जैसे कि रिफंड, भुगतान] के लिए प्रदान किया गया बैंक विवरण सत्य एवं सही एवं इसी
+                            आवेदन से सम्बन्धित है। और यदि इसमें किसी भी प्रकार की त्रुटि होती है, तो उसके लिए मैं
+                            स्वयं उत्तरदायी रहूंगा/रहूंगी। किसी भी गलत जानकारी के कारण होने वाली असुविधा या वित्तीय
+                            हानि के लिए विद्युत वितरण कंपनी जिम्मेदार नहीं होगी। </span>
+
+                    </div>
+                </td>
+            </tr>
+
+
+
+        </table>
+
+
+        <div *ngIf="openTableBoolean==true && erpReviseData?.consumerRefundableAmnt<0">
+            <mat-checkbox class="example-margin mx-2" (change)="onCheckBoxChange($event)">
+            </mat-checkbox>
+            <span style="font-size: 1.2em; font-weight: 700;">मैं सत्यापित करता हूँ कि संबंधित
+                आवेदन क्रमांक <span
+                    style="color: crimson;">({{consumerApplicationDetail?.consumerApplicationNo}})</span>
+                का कार्य रद्द किया जा रहा है और अब इस संबंध में कोई भी कार्यवाही आगे नहीं की जाएगी। इसके अतिरिक्त, आवेदक
+                को
+                किसी अन्य माध्यम से भुगतान या राशि का हस्तांतरण नहीं किया गया है, और भविष्य में ऐसा कोई भुगतान किए जाने
+                की
+                संभावना भी नहीं है। मैं भुगतान करने में अपनी सहमति प्रदान
+                करता हूँ।
+                <span style="color: green; font-weight: bold;">{{erpReviseData?.consumerRefundableAmnt}}</span></span>
+            <span> <button type="button" [disabled]="(checkedBoolean==true)?false:true" class="btn btn-success mx-5"
+                    (click)="onSubmitNext()">Submit</button></span>
+
+        </div>
+
+
+
+        <div  *ngIf="erpReviseData?.consumerRefundableAmnt>=0 && openTableBoolean==true">
+            <!-- <button type="button" class="btn btn-success mx-5" (click)="onSubmitNext()">Submit</button> -->
+
+            <!-- मैं सत्यापित करता/करती हूं कि संबंधित आवेदन संख्या (SV1724404440737) का अनुमान सही है। -->
+
+            <mat-checkbox class="example-margin mx-2" (change)="onCheckBoxChangeNew($event)">
+            </mat-checkbox>
+            <span style="font-size: 1.2em; font-weight: 700;"> मैं सत्यापित करता/करती हूं कि संबंधित आवेदन संख्या  <span
+                    style="color: crimson;">({{consumerApplicationDetail?.consumerApplicationNo}})</span>
+                    का अनुमान सही है।
+                <span style="color: green; font-weight: bold;">{{erpReviseData?.consumerRefundableAmnt}}</span></span>
+            <span> <button type="button" [disabled]="(checkedBooleanNew==true)?false:true" class="btn btn-success mx-5"
+                    (click)="onSubmitNext()">Submit</button></span>
+        </div>
+
+    </div>
+
+</mat-card>

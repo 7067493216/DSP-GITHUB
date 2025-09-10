@@ -1,0 +1,1138 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+.custome_checkbox {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+  line-height: 26px;
+  }
+  
+  
+  .custome_checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  
+  .custome_checkbox .checkmark {    
+      position: absolute;
+  top: 0;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 2px;
+  }
+   
+   
+  .custome_checkbox input:checked ~ .checkmark {
+    background-color: transparent;
+  }
+   
+  .custome_checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+   
+  .custome_checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+   
+  .custome_checkbox .checkmark:after {
+      left: 6px;
+      top: 2px;
+      width: 6px;
+      height: 12px;
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+  }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* notification */
+
+snack-bar-container.success {
+  background-color: #5cb85c;
+  color: #fff;
+}
+
+snack-bar-container.warn {
+  background-color: #f99157;
+  color: #fff;
+}
+
+snack-bar-container.error {
+  background-color: #f00;
+  color: #fff;
+}
+
+snack-bar-container.info {
+  background-color: #4bb1cf;
+  color: #fff;
+}
+
+snack-bar-container.notification simple-snack-bar {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.snack-bar-container #close-icon:hover {
+  cursor: pointer;
+}
+
+/* .snack-bar-container #span {
+    display: inline-block;
+} */
+.hide {
+  display: none;
+}
+
+/* for dialog pop-up */
+
+.btn-dialog-close {
+  width: 45px;
+  min-width: 0px !important;
+  height: 40px;
+  padding: 0px !important;
+}
+
+/* mat-confirm-dialog (customised dialog) */
+
+.confirm-dialog-container .mat-dialog-container {
+  border-radius: 0.25em 0.25em 0.8em 0.4em;
+  padding: 0px;
+}
+
+.confirm-dialog-container .content-container {
+  margin: 5px 5px 15px 5px;
+  color: #8f9cb5;
+  display: flex;
+}
+
+.confirm-dialog-container .confirm-dialog {
+  margin: 30px 15px 30px 15px;
+  /* color: #8f9cb5; */
+  display: flex;
+}
+
+.confirm-dialog-container #close-icon {
+  margin-left: auto;
+  order: 2;
+  font-weight: bolder;
+}
+
+.confirm-dialog-container #close-icon:hover {
+  cursor: pointer;
+}
+
+.confirm-dialog-container #no-button {
+  height: 50px;
+  width: 50%;
+  background-color: #fc7169;
+  color: white;
+  border-radius: 0px;
+}
+
+.confirm-dialog-container #yes-button {
+  height: 50px;
+  width: 50%;
+  background-color: #b6bece;
+  color: white;
+  border-radius: 0px;
+}
+
+.confirm-dialog-container span.content-span {
+  padding: 35px 16px;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* .mat-table {
+    border-collapse: separate!important;
+    border-spacing:0 4px!important;
+  } */
+
+.active-link {
+  background-color: #8080803d;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.demandTable .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 1.25em;
+  padding-bottom: 0px !important;
+  height: 41px !important;
+}
+
+.demandTable .mat-form-field-infix {
+  position: unset !important;
+  padding-bottom: 0px !important;
+  border-top-width: 0px !important;
+  padding-top: 0px !important;
+}
+
+.flagAdminLogin .mat-select-value {
+  color: black !important;
+}
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------  DS Design -------------------*/
+/*------------------------------------------------  DS Design -------------------*/
+/*------------------------------------------------  DS Design -------------------*/
+
+
+.dsp-card-block {
+  box-shadow: 0px 0px 10px 1px rgb(30 30 30 / 20%);
+  border-radius: 6px;
+  box-shadow: 0px 0px 6px 1px rgb(30 30 30 / 10%);
+  min-height: 90vh;
+  padding: 30px 0 30px;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 26px;
+  color: #323233;
+  background: #e6e6ff !important;
+}
+
+.dsp-card-block .ed-card-inner {
+  position: relative;
+}
+
+.dsp-card-block .card-header {
+  background: transparent;
+  padding: 15px;
+  border: 0;
+  padding-bottom: 0;
+}
+
+.dsp-card-block .card-header h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(39, 54, 69, 0.22);
+  padding: 0 0 10px;
+  margin: 0 0 15px;
+  text-transform: capitalize;
+}
+
+.dsp-card-block .card-body {
+  padding: 15px;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+.dsp-cunsumerapplication {
+  position: relative;
+  width: 100%;
+  /* padding: 30px 0 30px;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 26px;
+  color: #323233;
+  background: #e6e6ff !important; */
+}
+
+.dsp-cunsumerapplication mat-toolbar {
+  background: #3f51b5;
+  padding: 28px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dsp-cunsumerapplication mat-toolbar span {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.dsp-cunsumerapplication mat-toolbar .mat-button-base {box-shadow: none !important;padding: 6px 6px;min-height: unset;line-height: normal;min-width: unset;}
+
+.dsp-cunsumerapplication mat-toolbar .mat-button-base .mat-button-wrapper {
+  font-size: 14px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dsp-cunsumerapplication mat-toolbar .mat-button-base .mat-button-wrapper mat-icon {
+  font-size: 22px;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+/* .dsp-cunsumerapplication {
+  position: relative;
+  width: 100%;
+  margin: 30px 0 30px;
+  padding: 0;
+  border-radius: 0;
+} */
+
+.dsp-cunsumerapplication mat-toolbar {
+  background: #3f51b5;
+  padding: 28px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dsp-cunsumerapplication mat-toolbar span {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.cunsumerapplication_title {
+  width: 100%;
+}
+.cunsumerapplication_title h2 {
+  
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.dsp-cunsumerapplication mat-toolbar .mat-button-base {box-shadow: none !important;padding: 6px 6px;min-height: unset;line-height: normal;min-width: unset;}
+
+.dsp-cunsumerapplication mat-toolbar .mat-button-base .mat-button-wrapper {
+  font-size: 14px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dsp-cunsumerapplication mat-toolbar .mat-button-base .mat-button-wrapper mat-icon {
+  font-size: 22px;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
+
+.dsp-cunsumerapplication mat-table {
+  position: relative;
+}
+
+.dsp-cunsumerapplication mat-table mat-header-row {
+  position: relative;
+  min-height: unset !important;
+}
+
+.dsp-cunsumerapplication mat-table mat-header-row mat-header-cell {
+  font-size: 14px;
+  line-height: 27px;
+  font-weight: 700;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.dsp-cunsumerapplication mat-table mat-header-row mat-header-cell button {
+  line-height: normal;
+}
+
+.dsp-cunsumerapplication mat-table mat-cell {
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+.dsp-cunsumerapplication mat-table {
+  position: relative;
+}
+
+.dsp-cunsumerapplication mat-table mat-header-row {
+  position: relative;
+  min-height: unset !important;
+}
+
+.dsp-cunsumerapplication mat-table mat-header-row mat-header-cell {
+  font-size: 14px;
+  line-height: 27px;
+  font-weight: 700;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.dsp-cunsumerapplication mat-table mat-header-row mat-header-cell button {
+  line-height: normal;
+}
+
+.dsp-cunsumerapplication mat-table mat-cell {
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+.dsp-cunsumergenerate {
+  /* height: auto !important; */
+}
+
+.dsp-cunsumergenerate mat-toolbar {
+  padding: 10px 10px;
+  min-height: auto;
+  height: auto;
+  font-size: 16px;
+}
+
+
+.dsp-cunsumergenerate .info-tabel {
+  width: 100%;
+}
+
+.dsp-cunsumergenerate .info-tabel th, .dsp-cunsumergenerate .info-tabel td {
+  font-size: 14px;
+  line-height: 26px;
+  text-transform: capitalize;
+}
+
+.dsp-cunsumergenerate .form-group {
+}
+
+.dsp-cunsumergenerate .forminfo-block {
+  position: relative;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info {
+  list-style: none;
+  font-weight: 700;
+  margin: 0 0 10px;
+  padding-left: 0;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info .nav-item {
+  margin: 0 0 6px;
+  width: 100%;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info .nav-item label {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info1 {
+  list-style: nu;
+  font-weight: 700;
+  margin: 0 0 10px;
+  padding-left: 15px;
+  font-size: 14px;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info1 .nav-item {
+  margin: 0 0 6px;
+  width: 100%;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info1 .nav-item label {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info1 .nav-item .list-info2 {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info1 .nav-item.nav-iteminfo {
+  list-style: none;
+  display: block;
+}
+
+.dsp-cunsumergenerate .forminfo-block .list-info1 .nav-item.nav-iteminfo label {
+  margin: 20px 0 10px;
+}
+
+.dsp-cunsumergenerate .forminfo-block .signaturer-text {position: relative;margin: 10px 0;}
+
+.dsp-cunsumergenerate .forminfo-block .signaturer-text label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 26px;
+  margin: 0;
+}
+
+.dsp-cunsumergenerate .forminfo-block  .copyright-block {
+  position: relative;
+}
+
+.dsp-cunsumergenerate .forminfo-block .copyright-block label {
+  font-size: 14px;
+  line-height: 26px;
+  margin: 0;
+}
+
+.dsp-cunsumergenerate .forminfo-block .copyright-block .list-copyright {
+  list-style: number;
+  font-size: 14px;
+  padding-left: 14px;
+  font-weight: 600;
+}
+
+.dsp-cunsumergenerate .forminfo-block .copyright-block .list-copyright .nav-item {
+  margin: 0 0 6px;
+  width: 100%;
+}
+
+.dsp-cunsumergenerate .forminfo-block .copyright-block .list-copyright .nav-item label {
+  font-weight: 400;
+}
+
+ 
+
+
+
+/*------------------------------------------------  DS Design -------------------*/
+/*------------------------------------------------  DS Design -------------------*/ 
+
+
+.mw-5
+{
+  width: 5%;
+}
+
+.mw-10
+{
+  width: 10%;
+}
+
+.mw-15
+{
+  width: 15%;
+}
+
+.mw-20
+{
+  width: 20%;
+}
+
+.mw-25
+{
+  width: 25%;
+}
+
+.mw-30
+{
+  width: 30%;
+}
+.mw-35
+{
+  width: 35%;
+}
+.mw-40
+{
+  width: 40%;
+}
+.mw-45
+{
+  width: 45%;
+}
+
+.mw-55
+{
+  width: 55%;
+}
+.mw-60
+{
+  width: 60%;
+}
+.mw-65
+{
+  width: 65%;
+}
+.mw-70
+{
+  width: 70%;
+}
+.mw-75
+{
+  width: 75%;
+}
+.mw-80
+{
+  width: 80%;
+}
+.mw-85
+{
+  width: 85%;
+} 
+.mw-90
+{
+  width: 90%;
+}
+.mw-100
+{
+  width: 100%;
+}
+
+ 
+
+
+
+
+.table_consumerapplication {
+  position: relative;
+  display: block;
+}
+
+.table_consumerapplication mat-table {
+  display: table;
+  width: 100%;
+}
+
+.table_consumerapplication mat-table mat-header-row {
+  display: table-row;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.table_consumerapplication mat-table mat-header-row mat-header-cell {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 24px;
+  /* border: 1px solid rgb(108 117 125 / 30%); */
+  padding: 4px 6px !important;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+  border: 1px solid #ccc;
+}
+
+.table_consumerapplication mat-table mat-row {
+  display: table-row;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.table_consumerapplication mat-table mat-row mat-cell {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px !important;
+  line-height: 24px;
+  /* border: 1px solid rgb(108 117 125 / 30%); */
+  padding: 4px 6px !important;
+  text-align: center !important ;
+  border-bottom: 1px solid #ccc;
+  border: 1px solid #ccc;
+}
+
+.table_consumerapplication mat-table mat-header-row mat-header-cell .mat-sort-header-container {
+  justify-content: center !important;
+}
+
+.btn-actionifo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.btn-actionifo .btnaction_custome {
+  position: relative;
+  /* padding: 8px 12px; */
+  border-radius: 2px;
+  font-weight: 500;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------- headerblock  -------------------- */
+
+.dsp-headerblock {
+  position: relative;
+}
+
+.dsp-headerblock .logobox {
+  padding: 10px 0;
+}
+ 
+
+.dsp-headerblock .logobox img {
+  width: 100%;
+}
+/* ------------- headerblock  -------------------- */
+
+
+
+/*--------------------------------- */
+.menulisttoolbar {
+  height: auto !important;
+  background: #007bff;
+}
+.menulisttoolbar .meniulist_block {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menulisttoolbar .meniulist_block .nav-item {
+  position: relative;
+}
+
+.menulisttoolbar .meniulist_block .nav-item .nav-link {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 16px 10px;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menulisttoolbar .meniulist_block .nav-item .nav-link mat-icon {
+/* height: auto;
+width: auto;
+margin-right: 4px;
+line-height: normal;
+font-size: 16px; */
+}
+
+
+.readonly
+ { 
+    background: hsl(0deg 0% 50.2% / 40%) !important;
+    border-color: hsl(0deg 0% 50.2% / 40%) !important;
+}
+
+/* ------------- Footer  -------------------- */
+/* ------------- Footer  -------------------- */
+
+.dsp-footer-block {
+  position: relative;
+  background: #000;
+}
+
+.dsp-footer-block .footer-info {
+  position: relative;
+  padding: 10px 0;
+}
+
+.dsp-footer-block .footer-info p {
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  margin: 0 0 10px;
+}
+
+.dsp-footer-block .footer-info p a {
+  color: #fff;
+}
+.dsp-footer-block .footer-info p .whimg {
+  max-width: 36px;
+}
+
+
+/* ------------- Footer  -------------------- */
+/* ------------- Footer  -------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------------------- */
+
+
+
+
+
+
+.dsp-loginblock {
+  position: relative;
+}
+
+.dsp-loginblock .dsp-loign-item {
+  background: #fff;
+  max-width: 300px;
+  margin: 30px auto;
+  margin-top: 40px;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 2px 2px 11px 2px rgb(0 0 0 / 14%) !important;
+  border-bottom: 6px solid #007bff;
+}
+
+.dsp-loginblock .dsp-loign-item mat-card-header {
+  margin: 0 !important;
+}
+
+.dsp-loginblock .dsp-loign-item mat-card-title {
+  font-size: 22px;
+  color: #007bff;
+  font-weight: 600;
+  margin: 0 0 20px;
+  padding: 0 !important;
+}
+
+.dsp-forminfo {
+  position: relative;
+}
+
+.dsp-forminfo .form-group {
+  position: relative;
+  margin: 0 0 15px;
+  width: 100%;
+}
+
+.dsp-forminfo .form-group .mat-form-field-wrapper {
+  margin: 0;
+}
+
+.dsp-loginblock .dsp-loign-item .dsp-forminfo {
+  position: relative;
+}
+
+.dsp-loginblock .dsp-loign-item .dsp-forminfo .captchainfo {
+  /* display: flex; */
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.dsp-loginblock .dsp-loign-item .dsp-forminfo .captchainfo img {
+  max-width: unset !important;
+  margin: 0 !important;
+  max-height: unset !important;
+  width: 80px !important;
+  display: inline;
+}
+
+.dsp-loginblock .dsp-loign-item .dsp-forminfo .captchainfo .autoRenewButton {
+  margin: 0 !important;
+  width: auto;
+  height: auto !important;
+  display: inline;
+  line-height: unset;
+  border-radius: unset;
+}
+
+.formButton {
+  background: #007bff !important;
+  color: #fff !important;
+  border-radius: 2px !important;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  padding: 10px 20px;
+  line-height: normal;
+}
+
+.dspButton {
+  /* background: #007bff !important;
+  color: #fff !important; */
+  border-radius: 2px !important;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  padding: 10px 20px;
+  line-height: normal;
+}
+/* 
+.formButton {
+width: 100%;
+}
+.dsp-forminfo .form-group .formButton {
+  width: 100%;
+} */
+
+.dsp-loginblock .dsp-loign-item  .mat-card-footer {
+  padding: 18px;
+  padding-top: 0;
+}
+
+.dsp-loginblock .dsp-loign-item  .mat-card-footer .dsp-creation {
+  position: relative;
+  text-align: center;
+}
+
+.dsp-loginblock .dsp-loign-item  .mat-card-footer .dsp-creation .dsp-links{
+  font-size: 13px;
+  margin-right: 3px;
+}
+
+
+.dspform-marquee {
+  background: #007bff;
+  padding: 20px 0;
+  height: auto;
+  margin: 0;
+}
+
+.dspform-marquee marquee {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper {}
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper .mat-form-field-flex {}
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix {}
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix span {
+    top: -12px;
+}
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix span label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    overflow: unset !important;
+    width: 100% !important;
+}
+
+.dsp-formsinfo mat-form-field.mat-form-field
+{
+  width: 100%;
+}
+
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper {padding-bottom: 20px;}
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix {
+    width: 100%;
+    padding-top: 12px;
+}
+ 
+
+.dsp-formsinfo .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .dsp-formsinfo   .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
+    transform: translateY(-1.0em) scale(0.75) perspective(100px) translateZ(0.001px);
+    -ms-transform: translateY(-1.28125em) scale(0.75);
+}
+
+
+
+
+
+.bnform-field-text mat-form-field {
+  width: 100%;
+}
+
+.bnform-field-text {
+  position: relative;
+}
+ 
+
+.bnform-field-text mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix.ng-tns-c105-0 {
+  width: 100%;
+}
+ 
+
+.bnform-field-text mat-form-field .mat-form-field-wrapper .mat-form-field-outline {
+  color: #000 !important;
+}
+
+
+
+
+mat-dialog-container {
+  position: relative;
+  /* padding: 14px !important; */
+  position: relative;
+}
+
+
+
+.dsp-cunsumerapplicationinfo {
+  background: #fff;
+}
+
+.dsp-cunsumerapplicationinfo .table_consumerapplication {
+  width: 100%;
+}
+
+.mat-form-field .mat-form-field-label {
+  padding-top: 3px;
+}
+
+/* ///////////////////////////////////////////////////////////////////////// */
+
+.table thead th {
+  text-align: center;
+}
+
+.table thead th * {
+  width: auto;
+  justify-content: center;
+  /* color: black; */
+  font-weight: 800;
+  font-size: 1.1em;
+  color: #077bf7;
+  line-height: 24px;
+}
+
+
+
+
+
+/*---------------------------------------------------------------------- Btn tooltip section */
+/*---------------------------------------------------------------------- Btn tooltip section */
+.dsp_tootltips_info {
+  position: relative;
+}
+
+.dsp_tootltips_info .btn_tootltips {
+  background: #fdfdfd;
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  line-height: 8px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dsp_tootltips_info .dsp_tooltipdropdown {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  border-radius: 4px;
+  display: none;
+  position: absolute;
+  right: 100%;
+  top: -20%;
+  z-index: 999999;
+  min-width: 350px;
+  box-shadow: 1px 2px 6px 1px hsla(0, 1%, 84%, 0.2);
+}
+
+.dsp_tootltips_info .dsp_tooltipdropdown .btn-actionifo {
+  text-align: center;
+  justify-content: space-around;
+}
+
+.dsp_tootltips_info .dsp_tooltipdropdown:before {
+  content: "";
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-left: 10px solid hsl(0deg 7.49% 81.7% / 79%);
+  position: absolute;
+  left: 100%;
+  top: 10%;
+}
+
+.dsp_tootltips_info:hover .dsp_tooltipdropdown {
+  display: block;
+}
+
+/*---------------------------------------------------------------------- Btn tooltip section */
+/*---------------------------------------------------------------------- Btn tooltip section */

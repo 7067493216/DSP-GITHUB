@@ -1,0 +1,233 @@
+<mat-card class="my-card">
+    <mat-card-header>
+        <mat-card-title>Personal Information</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <form [formGroup]="personalDetailFg">
+        <mat-form-field class="half-width">
+            <input matInput placeholder="NSC application No." name="nscApplicationNo"
+                formControlName="nscApplicationNo" maxlength="16" required>
+            <mat-icon matSuffix>chrome_reader_mode</mat-icon>
+            <mat-error *ngIf="personalDetailFg.controls.nscApplicationNo.hasError('required')">
+                NSC Application Number
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput [matDatepicker]="nscDatepicker" [max]="maxToDate" (dateChange)="onChangeNscApplicationDate($event.value)" placeholder="NSC Application Date"
+                formControlName="nscApplicationDate" required>
+            <mat-datepicker-toggle matSuffix [for]="nscDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #nscDatepicker></mat-datepicker>
+            <mat-error *ngIf="personalDetailFg.controls.nscApplicationDate.hasError('required')">
+                NSC Application Date
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <mat-select placeholder="Person/Organization" name="userType" formControlName="userType"
+                (selectionChange)="onChangeuserType($event.value)" required>
+                <mat-option *ngFor="let persons of userType | keyvalue" [value]="persons.key">{{persons.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="personalDetailFg.controls['userType'].touched && personalDetailFg.controls['userType'].hasError('required')">
+                Select Person/Organization
+            </mat-error>
+        </mat-form-field>
+        <div [style.display]="personalDetailFg.get('userType').value =='3'?'inherit':'none'">
+            <mat-form-field class="half-width">
+                <mat-select placeholder="Select Goverment Type"
+                    [disableControl]="personalDetailFg.get('userType').value!=='3'" name="govtType"
+                    formControlName="govtType" (selectionChange)="onChangeGovt($event.value)">
+                    <mat-option *ngFor="let government of governmentType" [value]="government.govtId">
+                        {{government.govtName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="personalDetailFg.controls.govtType.hasError('required')">
+                    Select Goverment Type
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width padding">
+                <mat-select placeholder="Select Department Name" name="departmentName"
+                    [disableControl]="personalDetailFg.get('userType').value !=='3'" formControlName="departmentName"
+                    required>
+                    <mat-option *ngFor="let depart of department" [value]="depart.deptId">
+                        {{depart.deptName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="personalDetailFg.controls.departmentName.hasError('required')">
+                    Select Department Name
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- documents Field -->
+        <div formArrayName="documents">
+            <!-- loop throught documents-->
+            <ng-container *ngFor="let id of personalDetailFg.get('documents')['controls']; let i=index">
+                <ng-container [formGroupName]="i">
+                    <mat-form-field class="half-width">
+                        <mat-select placeholder="Document Type" name="documentTypeId"
+                            (selectionChange)="onChangeDocumentType(i,docNumber)" formControlName="documentTypeId">
+                            <mat-option [value]="">NA</mat-option>
+                            <mat-option *ngFor="let document of documents" [value]="document.documentTypeId"
+                                [disabled]="document.documentTypeId==selectedDocumentTypeId1 || document.documentTypeId==selectedDocumentTypeId2 
+                            || document.documentTypeId==selectedDocumentTypeId3 || document.documentTypeId==selectedDocumentTypeId4 ||document.documentTypeId==selectedDocumentTypeId5 || document.documentTypeId==selectedDocumentTypeId6 ||document.documentTypeId==selectedDocumentTypeId7 || document.documentTypeId==selectedDocumentTypeId8 || document.documentTypeId==selectedDocumentTypeId9">
+                                {{document.docType}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="id.controls.documentTypeId.hasError('required')">
+                            Document type is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width2 padding">
+                        <input matInput placeholder="Document Number" type="" maxlength="15" #docNumber name="documentNumber"
+                            minlength="3" formControlName="documentNumber" upperCase>
+                        <mat-error *ngIf="id.controls.documentNumber.hasError('required')">
+                            Document Number required
+                        </mat-error>
+                        <mat-error *ngIf="id.controls.documentNumber.hasError('pattern')">
+                            invalid Input
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- row delete button, hidden if there is just one row -->
+                    <button type="button" mat-mini-fab color="warn" fxFlex="nogrow"
+                        *ngIf="personalDetailFg.get('documents').value.length > 1" (click)="removeDocuments(i)">
+                        <mat-icon>delete forever</mat-icon>
+                    </button>
+                </ng-container>
+            </ng-container>&nbsp;&nbsp;
+            <!-- row add button, hidden if there is just four row  addNewLoadFormGroup.get(newLoad).controls-->
+            <button type="button" mat-mini-fab color="primary" fxFlex="nogrow"
+                *ngIf="personalDetailFg.get('documents').value.length < 4" (click)="addDocuments()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <!-- End form doscuments array -->
+        <!-- Name Field -->
+        <div formArrayName="nameTypes">
+            <!-- loop throught nameTypes-->
+            <ng-container *ngFor="let Name of personalDetailFg.get('nameTypes')['controls']; let i=index">
+                <ng-container [formGroupName]="i">
+                    <mat-form-field class="half-width" [ngClass]="{readonlyDiv: i==0}">
+                        <mat-select placeholder="Name Type" name="nameTypeId" (selectionChange)="onChangenameTypeId(i)"
+                            formControlName="nameTypeId">
+                            <mat-option *ngFor="let nametypes of nameType" [value]="nametypes.nameTypeId"
+                                [disabled]="nametypes.nameTypeId===selectednameTypeId || nametypes.nameTypeId===firstSelectednameTypeId ||nametypes.nameTypeId===secondSelectednameTypeId || nametypes.nameTypeId===thirdSelectednameTypeId ||nametypes.nameTypeId===fourthSelectednameTypeId">
+                                {{nametypes.nameType}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="Name.controls.nameTypeId.invalid">
+                            Name Type is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="half-width2 padding">
+                        <input matInput placeholder="Name" name="name" minlength="3" formControlName="name" type="text"  pattern="^[a-zA-Z0-9&()-.,/ ]*$" upperCase>
+                        <mat-error *ngIf="Name.controls.name.hasError('required')">
+                            Name is required
+                        </mat-error>
+                        <mat-error *ngIf="Name.controls.name.hasError('pattern')">
+                            invalid Name
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- row delete button, hidden if there is just one row -->
+                    <button type="button" mat-mini-fab color="warn" fxFlex="nogrow" [disabled]="i==0"
+                        *ngIf="personalDetailFg.get('nameTypes').value.length > 1" (click)="removeName(i)">
+                        <mat-icon>delete forever</mat-icon>
+                    </button>
+                </ng-container>
+            </ng-container>&nbsp;&nbsp;
+            <!-- row add button, hidden if there is just four row  addNewLoadFormGroup.get(newLoad).controls-->
+            <button type="button" mat-mini-fab color="primary" fxFlex="nogrow"
+                *ngIf="personalDetailFg.get('nameTypes').value.length < 4" (click)="addname()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <!-- End form nameTypes array -->
+        <!-- Relation Feilds -->
+        <mat-form-field class="half-width">
+            <mat-select placeholder="Select Relation" name="Relation" formControlName="relation" required>
+                <mat-option *ngFor="let relations of relationList | keyvalue" [value]="relations.key">
+                    {{relations.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="personalDetailFg.controls.relation.hasError('required')">
+                Select Relation
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Name" name="relationName" upperCase type="text" formControlName="relationName"
+                required>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error *ngIf="personalDetailFg.controls.relationName.hasError('required')">
+                Name is required
+            </mat-error>
+            <mat-error *ngIf="personalDetailFg.controls.relationName.hasError('onlycharPattern')">
+                Name is invalid
+            </mat-error>
+        </mat-form-field>
+        <!-- End Relation Feilds -->
+        <!-- phone field -->
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Mobile Number" type="number"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                name="mobile" formControlName="mobile" maxlength="10" autocomplete="off" required>
+            <mat-icon matSuffix>local_phone</mat-icon>
+            <mat-error *ngIf="personalDetailFg.controls.mobile.hasError('mobPattern')">
+                Please enter a valid Mobile Number
+            </mat-error>
+            <mat-error *ngIf="personalDetailFg.controls.mobile.hasError('required')">
+                Mobile Number required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+            <input matInput placeholder="Secondry Mobile Number optional" name="mobile" formControlName="secondryMobile"
+                maxlength="10" autocomplete="off" optional>
+            <mat-icon matSuffix>local_phone</mat-icon>
+        </mat-form-field>
+        <!-- Email Field -->
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Email Address" name="email" formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="personalDetailFg.controls.email.hasError('emailValidator')">
+                Please enter a valid Email Address
+            </mat-error>
+            <mat-error *ngIf="personalDetailFg.controls.email.hasError('required')">
+                Email Address Required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Secondry Email Address" name="secondryEmail" formControlName="secondryEmail">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="personalDetailFg.controls.secondryEmail.hasError('emailValidator')">
+                Please enter a valid Email Address
+            </mat-error>
+        </mat-form-field>
+        <!-- End Email Field -->
+        <!-- Datepicker start -->
+        <mat-form-field class="half-width">
+            <input matInput [matDatepicker]="picker" (dateChange)="onChangeconnectionDate($event.value)"
+                [max]="maxToDate" [min]="connectionMinDate" placeholder="Connection Date" tname="connectionDate" formControlName="connectionDate"
+                required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="personalDetailFg.controls.connectionDate.hasError('required')">
+                Connection Date is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput [matDatepicker]="picker1" [max]="agreementMaxDate" [min]="connectionMinDate" placeholder="Agreement Date"
+                name="agreementDate" formControlName="agreementDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-error *ngIf="personalDetailFg.controls.agreementDate.hasError('required')">
+                Agreement Date is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width padding">
+            <input matInput placeholder="Sequence No" maxlength="20" name="sequenceNo" upperCase formControlName="sequenceNo">
+            <mat-error *ngIf="personalDetailFg.controls.sequenceNo.hasError('maxlength')">
+               Not allow
+            </mat-error>
+        </mat-form-field>
+    </form>
+    <!-- {{personalDetailFg?.value | json}} -->
+</mat-card>

@@ -1,0 +1,181 @@
+<!-- 
+<div class="form-container">
+  <h2>Update Consumer Mobile Number</h2>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Old Mobile Number</mat-label>
+      <input matInput formControlName="oldMobile" maxlength="10" />
+      <mat-error *ngIf="oldMobile?.hasError('required')">Old mobile number is required</mat-error>
+      <mat-error *ngIf="oldMobile?.hasError('pattern')">Enter a valid 10-digit mobile number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>New Mobile Number</mat-label>
+      <input matInput formControlName="newMobile" maxlength="10" />
+      <mat-error *ngIf="newMobile?.hasError('required')">New mobile number is required</mat-error>
+      <mat-error *ngIf="newMobile?.hasError('pattern')">Enter a valid 10-digit mobile number</mat-error>
+      <mat-error *ngIf="updateForm.hasError('sameNumber')">Old and new numbers must be different</mat-error>
+    </mat-form-field>
+
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">
+      Update Mobile Number
+    </button>
+  </form>
+</div> -->
+
+
+<!-- <div class="update-card">
+  <mat-card>
+    <mat-card-header>
+      <mat-icon class="icon-header">phone_android</mat-icon>
+      <mat-card-title>Update Consumer Mobile Number</mat-card-title>
+      <mat-card-subtitle>Securely update contact details</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Old Mobile Number</mat-label>
+          <mat-icon matPrefix>call</mat-icon>
+          <input matInput formControlName="oldMobile" maxlength="10" placeholder="Enter old number" />
+          <mat-error *ngIf="oldMobile?.hasError('required')">Old mobile number is required</mat-error>
+          <mat-error *ngIf="oldMobile?.hasError('pattern')">Enter a valid 10-digit mobile number</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New Mobile Number</mat-label>
+          <mat-icon matPrefix>edit</mat-icon>
+          <input matInput formControlName="newMobile" maxlength="10" placeholder="Enter new number" />
+          <mat-error *ngIf="newMobile?.hasError('required')">New mobile number is required</mat-error>
+          <mat-error *ngIf="newMobile?.hasError('pattern')">Enter a valid 10-digit mobile number</mat-error>
+          <mat-error *ngIf="updateForm.hasError('sameNumber')">Old and new numbers must be different</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">
+          <mat-icon>check_circle</mat-icon>&nbsp;Update Mobile Number
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> -->
+
+
+<!-- 
+<div class="glass-card">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="icon-avatar">
+        <mat-icon>phone_android</mat-icon>
+      </div>
+      <mat-card-title>Update Mobile Number</mat-card-title>
+      <mat-card-subtitle>Verify & Change consumer contact</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Old Mobile Number</mat-label>
+          <mat-icon matPrefix>call</mat-icon>
+          <input matInput formControlName="oldMobile" maxlength="10" placeholder="Enter old number" />
+          <mat-error *ngIf="oldMobile?.hasError('required')">Old mobile number is required</mat-error>
+          <mat-error *ngIf="oldMobile?.hasError('pattern')">Enter a valid 10-digit number</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>New Mobile Number</mat-label>
+          <mat-icon matPrefix>edit</mat-icon>
+          <input matInput formControlName="newMobile" maxlength="10" placeholder="Enter new number" />
+          <mat-error *ngIf="newMobile?.hasError('required')">New mobile number is required</mat-error>
+          <mat-error *ngIf="newMobile?.hasError('pattern')">Enter a valid 10-digit number</mat-error>
+          <mat-error *ngIf="updateForm.hasError('sameNumber')">Old and new numbers must differ</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" type="submit" [disabled]="updateForm.invalid">
+          <mat-icon>sync</mat-icon>&nbsp;Update Number
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> -->
+
+
+<!-- <div class="glass-wrapper">
+  <div class="glass-form">
+    <div class="header">
+      <mat-icon class="icon">phone_android</mat-icon>
+      <h2>Update Mobile Number</h2>
+      <p>Enter your old and new mobile numbers to update</p>
+    </div>
+
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>Old Mobile Number</mat-label>
+        <mat-icon matPrefix>call</mat-icon>
+        <input matInput maxlength="10" formControlName="oldMobile" placeholder="Old number" />
+        <mat-error *ngIf="oldMobile?.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="oldMobile?.hasError('pattern')">Invalid number</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>New Mobile Number</mat-label>
+        <mat-icon matPrefix>edit</mat-icon>
+        <input matInput maxlength="10" formControlName="newMobile" placeholder="New number" />
+        <mat-error *ngIf="newMobile?.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="newMobile?.hasError('pattern')">Invalid number</mat-error>
+        <mat-error *ngIf="updateForm.hasError('sameNumber')">Numbers must differ</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="submit-btn" [disabled]="updateForm.invalid">
+        <mat-icon>sync</mat-icon> Update
+      </button>
+    </form>
+  </div>
+</div> -->
+
+
+
+
+
+
+<div class="glass-wrapper">
+    <div class="glass-form">
+        <div class="header">
+            <mat-icon class="icon">phone_android</mat-icon>
+            <h2>Update Mobile Number</h2>
+            <p>Enter your current and new mobile number below</p>
+        </div>
+
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Old Mobile Number</mat-label>
+                <mat-icon matPrefix>call</mat-icon>
+                <input matInput maxlength="10" formControlName="oldMobile" placeholder="Old number" />
+                <mat-error *ngIf="oldMobile?.hasError('required')">Old mobile number is required</mat-error>
+                <mat-error *ngIf="oldMobile?.hasError('pattern')">Invalid number</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="input-field">
+                <mat-label>New Mobile Number</mat-label>
+                <mat-icon matPrefix>edit</mat-icon>
+                <input matInput maxlength="10" formControlName="newMobile" placeholder="New number" />
+                <mat-error *ngIf="newMobile?.hasError('required')">New mobile number is required</mat-error>
+                <mat-error *ngIf="newMobile?.hasError('pattern')">Invalid number</mat-error>
+                <mat-error *ngIf="updateForm.hasError('sameNumber')==true">Numbers must be different</mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="updateForm.hasError('sameNumber')">
+                Old and new numbers must be different
+            </mat-error>
+<br>
+            <button mat-raised-button color="primary" class="submit-btn" [disabled]="diableButtonBoolean" >
+                <mat-icon>sync</mat-icon> Update
+            </button>
+        </form>
+    </div>
+</div>

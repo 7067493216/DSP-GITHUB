@@ -1,0 +1,72 @@
+<!-- <mat-horizontal-stepper linear #stepper> -->
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="personalInfo.personalDetailFg">
+        <ng-template matStepLabel>Personal information</ng-template>
+        <app-personal-information #personalInfo></app-personal-information>
+        <div align="center">
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="premiseAddress.premiseFg">
+        <ng-template matStepLabel>Premise address</ng-template>
+        <app-premise-address #premiseAddress></app-premise-address>
+        <div align="center">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="accountInfo.accountInfoFg">
+        <ng-template matStepLabel>Account information</ng-template>
+        <app-account-information #accountInfo></app-account-information>
+        <div align="center">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="additionalInfo.additionalFormGroup">
+        <ng-template matStepLabel>Additional information</ng-template>
+        <app-additional-information #additionalInfo></app-additional-information>
+        <div align="center">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="meterDetails.meterDetailsFg">
+        <ng-template matStepLabel>Meter Details</ng-template>
+        <app-meter-details #meterDetails></app-meter-details>
+        <div align="center">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="meDetails.meFg">
+        <ng-template matStepLabel>ME Details</ng-template>
+        <app-me-details #meDetails></app-me-details>
+        <div align="center">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div align="center">
+            <button mat-raised-button color="accent" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+            <button *appHasRole="role.NewConnectionComponent_save" mat-raised-button color="primary" [disabled]="!(personalInfo.personalDetailFg.valid && 
+            premiseAddress.premiseFg.valid && accountInfo.accountInfoFg.valid && additionalInfo.additionalFormGroup.valid && 
+            meterDetails.meterDetailsFg.valid && meDetails.meFg.valid)" (click)="saveNscForm(personalInfo.personalDetailFg.value,
+            premiseAddress.premiseFg.value,accountInfo.accountInfoFg.value,additionalInfo.additionalFormGroup.value,
+            meterDetails.meterDetailsFg.value,meDetails.meFg.value)"><span matTooltip="Save">Save</span></button>
+            &nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="accent"
+                (click)="stepper.selectedIndex = 0;">preview</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
+<!-- {{personalInfo.personalDetailFg.value | json}}
+{{premiseAddress.premiseFg.value | json}}
+{{accountInfo.accountInfoFg.value | json}}
+{{additionalInfo.additionalFormGroup.value | json}}
+{{meterDetails.meterDetailsFg.value | json}}
+{{meDetails.meFg.value | json}} -->

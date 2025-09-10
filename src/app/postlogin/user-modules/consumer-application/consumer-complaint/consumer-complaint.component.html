@@ -1,0 +1,85 @@
+<mat-card class="custom-scroll-enable">
+
+
+    <div>
+        <div style="font-size: 2.5em; font-weight: 900; text-align: center;">Consumer Complaint</div>
+        <div style="text-align: right;">
+            <button class="close-btn" style="text-align: right;" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- <span style="text-align: center;">Apply Complain</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" style="text-align: right;" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button> -->
+
+    <br>
+    <br>
+    <hr>
+    <br>
+
+    <form [formGroup]="complainForm">
+        <!-- <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+                <label class="form-label">Application Number</label>
+                <input class="form-control" type="text" [readonly]="true" formControlName="consumerApplicationNo">
+            </div>
+            <div class="col-md-3"></div>
+        </div> -->
+
+        <div style="border: 10px solid rgb(111, 110, 110); height: 50vh;width: 100%;overflow: scroll;">
+            <br><br>
+            <br>
+         
+            <div *ngFor="let item of complainList">
+
+                <div class="row" *ngIf="item?.typeOfUser=='user'">
+                      <div class="col-md-3"></div>
+                      <div class="col-md-8" align="right" ><button style="background-color: rgb(40, 147, 112); padding: 10px; font-size: 1.5em; font-weight: 700;border-radius: 10px; " >{{item.feedback}}</button></div>
+                      <div class="col-md-1"></div>
+                      <br>
+                      <br>
+                      <br>
+                </div>
+
+                <div class="row" *ngIf="item?.typeOfUser=='consumer'">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8" align="left" ><button style="background-color: rgb(225, 229, 233); padding: 10px; font-size:1.5em; font-weight: 700;border-radius: 10px;">{{item.feedback}}</button></div>
+                    <div class="col-md-3"></div>
+                    <br>
+                    <br>
+                    <br>
+              </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <!-- <div class="col-md-3"></div> -->
+            <div class="col-md-12 form-group">
+                <!-- <label class="form-label">Remark</label> -->
+                <textarea class="form-control" placeholder="Text here" type="text" style="font-size: 2em;" formControlName="feedback">
+                </textarea>
+            </div>
+            <!-- <div class="col-md-3"></div> -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+    </form>
+
+
+
+
+</mat-card>

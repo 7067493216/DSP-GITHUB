@@ -1,0 +1,75 @@
+.my-card {
+    width: 100%;
+    margin: 3px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-scroll-enable-1 {
+    height: 600px;
+    overflow: scroll;
+    display: block;
+}
+
+.custom-scroll-disable {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.half-width {
+    width: 33%;
+}
+
+.padding {
+    padding-left: 6px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}
+
+.opticity {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+/* .hidden{
+display: none;
+} */
+
+.survey-style{
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.erp-style{
+    padding-left: 0px !important;
+}
+
+.custom-mat-toolbar{
+    background: #3f51b5 !important;
+    color: #fff !important;
+}

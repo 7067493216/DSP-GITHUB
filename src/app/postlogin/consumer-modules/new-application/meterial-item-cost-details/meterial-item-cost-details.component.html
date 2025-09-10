@@ -1,0 +1,51 @@
+<div align="right">
+  <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<mat-card class="p-4">
+  <mat-toolbar color="primary" class="justify-center py-4">
+    <div style="font-size: 1.5rem; font-weight: 600; color: white; align-items: center;">
+      <mat-icon class="mr-2">description</mat-icon> Item Cost Details
+    </div>
+  </mat-toolbar>
+
+  <div class="mat-elevation-z4">
+
+    <table class="mat-elevation-z2 modern-table">
+      <thead>
+        <tr class="header sticky">
+          <th>Schedule No</th>
+          
+          <th>Item Code</th>
+          <th>Item Name </th>
+          <th>Quantity</th>
+          <th>Item Cost</th>
+          <th>Total Cost</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of dataSource">
+          <td>{{ item.scheduleNo }}</td>
+          
+          <td>{{ item.expType }}</td>
+          <td>{{ item.itemDesc }}</td>
+          <td>{{ item.itemQty }}</td>
+          <td>{{ item.rateWithTotalCgstAndSgst }}</td>
+          <td>{{ item.oytMaterialTotalCostWithCgstAndSgst }}</td>
+        </tr>
+
+        <!-- Overall Total Row -->
+        <tr class="overall-total-row">
+          <td colspan="5" class="total-label" style="text-align:center; vertical-align:middle;"><strong>Overall Total
+              Cost</strong></td>
+          <td class="total-value"><strong>₹{{ getOverallTotalCost() }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</mat-card>

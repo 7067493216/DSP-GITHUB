@@ -1,0 +1,184 @@
+<mat-sidenav-container class="sidenav-container" *ngIf="userLoginService.currentUserName != null" autosize>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport mode="push" opened="false">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list *ngIf="foraccessLeveOfUser.userRoles[0].roleCode!='AO Finance & DGM Fianance'">
+      <a mat-list-item routerLink="/user/dashboard" (click)="cleanSearchKey(drawer)" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>dashboard </mat-icon>
+        &nbsp;&nbsp;<span>User Dashboard</span>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list *ngIf="foraccessLeveOfUser.userRoles[0].roleCode=='AO Finance & DGM Fianance'">
+      <a mat-list-item routerLink="/user/finance-dashboard" (click)="cleanSearchKey(drawer)"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>dashboard </mat-icon>
+        &nbsp;&nbsp;<span>Finance Dashboard</span>
+      </a>
+    </mat-nav-list>
+
+
+    <mat-accordion>
+      <mat-expansion-panel *appHasRole="role.viewAdminNavLinks">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>verified_user</mat-icon>
+            &nbsp;&nbsp;&nbsp;<span>Admin</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item *appHasRole="role.viewUserDashboardNavLink" routerLink="/user/admin/manage-users"
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>view_comfy</mat-icon>
+
+            &nbsp;&nbsp;<span>User Management</span>
+          </a>
+          <a mat-list-item *appHasRole="role.viewManageRolesNavLinks" routerLink="/user/admin/manage-roles"
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>settings_input_component</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span>Manage-roles</span>
+          </a>
+          <a mat-list-item *appHasRole="role.viewManageRolesNavLinks" routerLink="/user/admin/update-consumer"
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>all_out</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span>Update-Consumer</span>
+          </a>
+
+           <div *ngIf="foraccessLeveOfUser.userId=='9999999999'">
+          <a mat-list-item *appHasRole="role.viewManageRolesNavLinks" routerLink="/user/admin/update-application-status"
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>all_out</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span>Update consumer Application status</span>
+          </a>
+          </div>
+
+          <!-- ///////////////////////////////////////////////// -->
+           <div *ngIf="foraccessLeveOfUser.userId=='9999999999'">
+          <a mat-list-item *appHasRole="role.viewManageRolesNavLinks" routerLink="/user/admin/change-contact" 
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>phone_android</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span>Change Consumer Mobile Number</span>
+          </a>
+          </div>
+
+           <div *ngIf="foraccessLeveOfUser.userId=='9999999999'">
+          <a mat-list-item *appHasRole="role.viewManageRolesNavLinks" routerLink="/user/admin/refund-mis" 
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>receipt</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span>Refund Mis</span>
+          </a>
+          </div>
+
+          <a mat-list-item *appHasRole="role.viewManageRolesNavLinks" routerLink="/user/admin/contractor-pendency"
+            (click)="cleanSearchKey(drawer)" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon color="warn">pending_actions</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span class="label">Contractor Pendency</span>
+
+          </a>
+
+          <!-- ///////////////////////////////////////////////// -->
+
+
+
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- <mat-nav-list>
+      <a mat-list-item routerLink="/user/consumer-application" (click)="cleanSearchKey(drawer)"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>fiber_new</mat-icon>
+        &nbsp;&nbsp;&nbsp;<span>Consumer Application</span>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/user/nsc-portal" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>fiber_new</mat-icon>
+        <span>NSC Portal</span>
+      </a>
+    </mat-nav-list> -->
+
+
+
+
+
+
+  </mat-sidenav>
+
+  <!-- SideNav is closed -->
+  <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z20 tbar" color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a routerLink="/user/dashboard"><span>Deposit Supervision Portal</span></a>&nbsp;&nbsp;
+      <span class="timer">{{ time | date: "hh:mm:ss a" }}</span>
+      <span class="spacer"></span>
+
+
+
+
+
+
+
+      <span>Welcome {{ userLoginService.currentUserName }} </span>&nbsp;&nbsp;
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-right"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5" />
+      </svg>
+      <button mat-icon-button [matMenuTriggerFor]="dropmenu">
+        <mat-icon style="font-size: 34px">account_circle</mat-icon>
+      </button>
+      <div align="right">
+        <form [formGroup]="roleForm">
+          <mat-form-field>
+            <mat-label>Switch Role</mat-label>
+            <mat-select formControlName="roleOfuser" (selectionChange)="onRoleChange($event)" disableRipple>
+              <mat-option *ngFor="let item of roleList" [value]="item">{{item?.role}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </div>
+
+
+
+      <div align="right" *ngIf="DistributionCenterList?.length>0 || divisionList?.length>0">
+        <form [formGroup]="dcSwitchForm">
+          <mat-form-field *ngIf="DistributionCenterList?.length>0">
+            <mat-label>Switch DC</mat-label>
+            <mat-select formControlName="dc" (selectionChange)="onDcChange($event)" disableRipple>
+              <mat-option *ngFor="let item of DistributionCenterList"
+                [value]="item.distributionCenterId">{{item?.distributionCenterName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="divisionList?.length>0">
+            <mat-label>Switch DIVISION</mat-label>
+            <mat-select formControlName="division" (selectionChange)="onDivisionChange($event)" disableRipple>
+              <mat-option *ngFor="let item of divisionList"
+                [value]="item.divisionId">{{item?.divisionName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </form>
+      </div>
+
+      <mat-menu #dropmenu>
+        <a mat-menu-item routerLink="/user/change-password" (click)="cleanSearchKey(drawer)"
+          routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>lock</mat-icon>
+          <span>change-password</span>
+        </a>
+        <a mat-menu-item (click)="logout()" (click)="cleanSearchKey(drawer)" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>logout</span>
+        </a>
+      </mat-menu>&nbsp;&nbsp;
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

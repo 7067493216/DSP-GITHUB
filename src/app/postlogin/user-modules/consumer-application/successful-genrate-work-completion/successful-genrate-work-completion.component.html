@@ -1,0 +1,370 @@
+<mat-card class="my-card custom-scroll-enable-1">
+    <mat-toolbar class="label label-warning custom-mat-toolbar">
+        <span>Material Hand-over & Charging Permission </span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+
+    <div>
+        <form [formGroup]="sucessWorkComplationForm">
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        आवेदन क्रमांक
+                    </td>
+                    <td>
+                        {{consumerApplicationDetail?.consumerApplicationNo}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        वृत का नाम
+                    </td>
+                    <td>
+                        {{consumerApplicationDetail?.NAME_OF_CIRCLE
+                        }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        संभाग का नाम
+                    </td>
+                    <td>
+                        {{consumerApplicationDetail?.NAME_OF_DIVISION }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        वितरण केंद्र का नाम
+                    </td>
+                    <td>
+                        {{ consumerApplicationDetail?.dcName}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        प्राकलन क्रमांक
+                    </td>
+                    <td>
+                        {{consumerApplicationDetail?.erpWorkFlowNumber}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        कार्य प्रकार
+                    </td>
+                    <td>
+                        {{ consumerApplicationDetail?.natureOfWorkName
+                        }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        उपभोक्ता नाम और पता
+                    </td>
+                    <td>
+                        {{consumerApplicationDetail?.consumerName
+                        }} , {{consumerApplicationDetail?.address
+                        }}
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        निरीक्षण दिनांक(DGM_STC) :
+                    </td>
+                    <td>
+                        {{consumerApplicationDetail?.dateOfDgmOandM }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        निरीक्षण दिनांक (DGM_O&M/DGM_HTM) :
+                    </td>
+                    <td>
+
+                        <mat-form-field class="half-width padding">
+                            <input matInput [matDatepicker]="applicableFromDatepicker" [min]="applicationDate" [max]="maxDate"
+                                placeholder="Application Date" name="applicationDate" [readonly]="true"  formControlName="dateOfDgmOandM">
+                            <mat-datepicker-toggle matSuffix [for]="applicableFromDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #applicableFromDatepicker></mat-datepicker>
+                            <mat-error *ngIf="fillDate==true"> Date
+                                is Required
+                            </mat-error>
+                            
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        निरीक्षण अधिकारी का नाम
+                    </td>
+                    <td>
+                        {{loginUser}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        ठेकेदार का नाम
+                    </td>
+                    <td>
+                        {{contractorDetails?.CONTRACTOR_NAME}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>GST Number</th>
+                    <td>{{consumerApplicationDetail.gstNumber}}</td>
+                </tr>
+
+                
+            </thead>
+        </table>
+        <br><br>
+
+
+        <table class="table table-0">
+            <tr>
+                <th>
+                  Expected Work Start Date:-
+                </th>
+                <td>
+                    {{workComplicationDetail?.conWorkStartedDate}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Expected Material HandOver at Site:-
+                </th>
+                <td>
+                    {{workComplicationDetail?.materialHandoverSiteDate}}
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Expected Material Installation Start:-
+                </th>
+                <td>
+                    {{workComplicationDetail?.materialInstallStartDate}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Expected Material Installation Completed:-
+                </th>
+                <td>
+                    {{workComplicationDetail?.materialInstallFinishDate}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Expected Work Completed:-
+                </th>
+                <td>
+                    {{workComplicationDetail?.conWorkCompleteDate}}
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <!-- ************************************************************************************************************************** -->
+
+        <div  style="color: black; background-color: rgb(193, 191, 191); font-weight: 900;font-size: 2em; width: 100%; margin-right: 2%;height: 2em;display: flex; justify-content: center;align-items: center;text-align: center;">
+            Submitted Document by Contractor
+         </div>
+
+         <br>
+
+
+         <div align="center" *ngIf="showFileDocs==false">
+             <h5 style="color: crimson;">--------------no file found---------</h5>
+         </div>
+
+
+         <div class="row" style="display: flex; justify-content: space-between;" *ngIf="showFileDocs==true">
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%; "
+                     (click)="onDownload(filePathObject?.challan_doc)">(1) Challan Receipt Copy With Self
+                     Declaration Report </button>
+                     <h6 *ngIf="filePathObject?.challan_doc==null" style="color: crimson;">this File is not available</h6>
+             </div>
+
+             <div class="col-md-6">
+                 <div></div>
+                 <div>
+                     <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                         (click)="onDownload(filePathObject.bill_doc)">
+                         (2) Material Bill Copy </button>
+                         <h6 *ngIf="filePathObject?.bill_doc==null" style="color: crimson;">this File is not available</h6>
+                 </div>
+
+
+             </div>
+
+             <br>
+             <br>
+             <br>
+             <br>
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                     (click)="onDownload(filePathObject.pole_doc)">
+                     (3) Pole Schedule </button>
+                     <h6 *ngIf="filePathObject?.pole_doc==null" style="color: crimson;">this File is not available</h6>
+
+             </div>
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                     (click)="onDownload(filePathObject.sld_doc)">
+                     (4) SLD(SINGLE LINE DIAGRAM) </button>
+                     <h6 *ngIf="filePathObject?.sld_doc==null" style="color: crimson;">this File is not available</h6>
+
+             </div>
+
+             <br>
+             <br>
+             <br>
+             <br>
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                     (click)="onDownload(filePathObject.workcompletion_doc)">(5) Work Completion Report </button>
+                     <h6 *ngIf="filePathObject?.workcompletion_doc==null" style="color: crimson;">this File is not available</h6>
+
+             </div>
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                     (click)="onDownload(filePathObject.nabl_doc)">
+                     (6) NABL Test Report </button>
+                     <h6 *ngIf="filePathObject?.nabl_doc==null" style="color: crimson;">this File is not available</h6>
+
+             </div>
+
+             <br>
+             <br>
+             <br>
+             <br>
+
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                     (click)="onDownload(filePathObject.agreement_doc)">(7) Agreement Notary/Affidevit </button>
+                     <h6 *ngIf="filePathObject?.agreement_doc==null" style="color: crimson;">this File is not available</h6>
+
+             </div>
+
+             <div class="col-md-6">
+                 <button type="button" class="btn btn-secondary" style="padding: 1em; width: 95%;"
+                     (click)="onDownload(filePathObject.tkc_license_doc)">(8) Contractor License & Registration
+                     Copy
+                 </button>
+                 <h6 *ngIf="filePathObject?.tkc_license_doc==null" style="color: crimson;">this File is not available</h6>
+
+             </div>
+
+             <br>
+
+
+
+
+         </div>
+
+         <br>
+         <hr>
+
+        <!-- ************************************************************************************************************************* -->
+
+        <!-- ********** -->
+        <div *ngIf="goFormGo">
+
+            <div *ngIf="enabledOTP">
+                <form [formGroup]="otpVerificationForm" style="display: flex;">
+                    <div style="width: 18%;">
+                        <mat-form-field style="margin-bottom: 10%;">
+                            <mat-label> ENTER otp</mat-label>
+                            <input type="otp" matInput class="form-control" formControlName="otp">
+                        </mat-form-field>
+
+                        <br>
+                         <div >
+                            <button type="button" class="btn btn-success" (click)="resendOtp()">Resend OTP</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" (click)="OtpVerifySubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- <div *ngIf="!enabledOTP">
+            <button type="submit" class="btn btn-primary" (click)="getOtp()">Get OTP</button>
+        </div> -->
+
+
+        </div>
+        <!-- ************ -->
+
+        <!-- ################ -->
+        <div *ngIf="!goFormGo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-radio-group aria-label="DC Accepted ? " formControlName="workComplationChangedByDgmOrendum"
+                            (change)=onDcChangedChange($event)>
+                            <label>Application Accepted Or Change ? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <mat-radio-button value="true">Rejected &nbsp;&nbsp;</mat-radio-button>
+                            <mat-radio-button value="false">Accepted</mat-radio-button>
+                        </mat-radio-group>
+                        <mat-error
+                            *ngIf="sucessWorkComplationForm.controls.workComplationChangedByDgmOrendum.hasError('required')">
+                            Please select work Completion approval ?
+                        </mat-error>
+                    </div>
+                    <div style="height:10px;"></div>
+                </div>
+
+                <div style="margin-bottom: 50px;" *ngIf="showTextFild"
+                    [ngClass]="{'hidden':sucessWorkComplationForm.get('workComplationChangedByDgmOrendum').value == 'false' }"
+                    style="margin-top: 10px;margin-bottom: 20px;">
+                    <div>
+                        <textarea
+                            [required]="sucessWorkComplationForm.get('workComplationChangedByDgmOrendum').value == 'true'"
+                            class="form-control" id="exampleFormControlTextarea4" rows="3"
+                            formControlName="workComplationChangedReason" placeholder="remarks"
+                            style="font-family: Arial, Helvetica, sans-serif; color: rgb(151, 148, 148);"
+                            [ngClass]="{ 'is-invalid':submitted &&  formControl['workComplationChangedReason'].errors || formControl['workComplationChangedReason'].invalid && (formControl['workComplationChangedReason'].dirty || formControl['workComplationChangedReason'].touched) }"></textarea>
+                    </div>
+                    <mat-error
+                        *ngIf="sucessWorkComplationForm.controls.workComplationChangedReason.hasError('required')">
+
+                    </mat-error>
+                </div>
+
+                <div align="center">
+                    <button type="submit" class="btn btn-primary " (click)="submitForm()">Submit</button>
+                </div>
+            
+        </div>
+        <!-- ################ -->
+</form>
+    </div>
+</mat-card>

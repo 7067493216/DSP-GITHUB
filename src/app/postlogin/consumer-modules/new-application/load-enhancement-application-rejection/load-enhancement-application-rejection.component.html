@@ -1,0 +1,38 @@
+<div align="right">
+    <button class="close-btn" style="border-radius: 5em; color: black;" (click)="onClose()" tabIndex="-2">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<div>
+    <mat-card class="p-4">
+
+        <div class="vendor-toolbar">
+            <mat-icon>description</mat-icon>
+            <span>Consumer Declaration for Cancellation of Load Enhancement Application</span>
+        </div>
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-12 d-flex align-items-center">
+                <mat-checkbox class="example-margin" (change)="onCheckboxSelection($event)">
+                </mat-checkbox>
+
+                <span style="font-size: 1.2em; font-weight: 700; margin-left: 8px;">
+                    मैं यह घोषणा करता/करती हूँ कि मैंने अपने विद्युत कनेक्शन हेतु लोड वृद्धि (Load Enhancement) के लिए
+                    आवेदन प्रस्तुत किया था।
+                    मैं स्वेच्छा एवं बिना किसी दबाव के अपना लोड वृद्धि आवेदन निरस्त (रद्द) कराने हेतु सहमति प्रदान
+                    करता/करती हूँ।
+                    मैं यह भी स्वीकार करता/करती हूँ कि आवेदन रद्द किए जाने के उपरांत इस संबंध में भविष्य में मेरी ओर से
+                    किसी प्रकार का दावा, आपत्ति अथवा विवाद प्रस्तुत नहीं किया जाएगा।
+                </span>
+            </div>
+        </div>
+        <br>
+        <div align="right">
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        </div>
+
+    </mat-card>
+</div>

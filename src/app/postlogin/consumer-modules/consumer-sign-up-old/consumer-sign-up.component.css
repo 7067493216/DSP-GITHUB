@@ -1,0 +1,18 @@
+.my-card {
+    width: 80%;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mat-card-title {
+    justify-content: centre;
+    text-align: center;
+  }
+  .full-width {
+    width: 100%;
+  }
+  
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

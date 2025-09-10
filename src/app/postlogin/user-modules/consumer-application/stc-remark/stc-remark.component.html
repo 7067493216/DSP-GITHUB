@@ -1,0 +1,323 @@
+<mat-card class="custom-scroll-enable">
+
+    <div style="display: flex; justify-content: space-between;" class="bottom5">
+        <div></div>
+        <div>
+            <div style="color: rgb(27, 140, 27); font-size: 2em; font-weight: 900; background-color: rgb(209, 245, 156); text-align: center;align-items: center; padding: 1em;"
+                class="bottom2">STC REMARK</div>
+        </div>
+        <div style="padding:2em">
+            <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">    
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <table class="table table-striped" style="line-height:26px;font-size: 15px;">
+       
+
+            <tr>
+                <td><b>Applicant Name (आवेदक का नाम) : </b><span
+                        class="padding">{{consumerApplicationDetail?.consumerName}} </span></td>
+                <td><b>Father/Husband Name (पिता/पति का नाम) : </b><span class="padding">
+                        {{consumerApplicationDetail?.guardianName}}</span>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td><b>Address (पता) : </b><span class="padding">
+                        {{consumerApplicationDetail?.address}}</span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="2"><b>Contact : </b><span class="padding">
+                        {{consumerApplicationDetail?.consumers.consumerLoginId}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.ivrsNo !== null; then thenBlockivrs">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockivrs>
+
+                    <td colspan="2"><b>IVRSNO (उपभोक्ता संख्या) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.ivrsNo}} </b>
+
+                        </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+
+
+            <tr>
+                <td><b>Nature of Work (कार्य प्रकार)(Application type) : </b><span class="padding">
+                        {{consumerApplicationDetail?.natureOfWorkType.natureOfWorkName}}
+                    </span>
+                </td>
+                <td><b>Scheme Type (योजना का प्रकार) : </b><span class="padding">
+                        {{consumerApplicationDetail?.schemeType.schemeTypeName}}
+                    </span>
+                </td>
+            
+
+            </tr>
+
+           
+
+
+            <tr>
+                <div *ngIf="supplyVoltageString !== ''; then thenBlockSupplyVoltage">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSupplyVoltage>
+
+                    <td colspan="2"><b>Supply Voltage (सप्लाई वोल्टेज) : </b><span
+                            class="padding"><b>{{supplyVoltageString}} </b>
+
+                        </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.loadRequested !== null; then thenBlockLoadReuest">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockLoadReuest>
+
+                    <td colspan="1"><b>load Request (आवेदक द्वारा दर्ज किया गया भार) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.loadRequested}} </b>
+
+                        </span>
+                    </td>
+
+
+                    <td colspan="1"><b>load unit (लोड यूनिट ) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.loadRequestedId?.loadRequestedName}} </b>
+                        </span>
+                    </td>
+
+                </ng-template>
+            </tr>
+
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1; then thenBlockSchemeTypeIs1">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs1>
+
+                    <td colspan="2"><b>Contractor Name (कॉन्ट्रैक्टर का नाम) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.contractorId?.contractorCompanyName}}, </b>
+                            [{{consumerApplicationDetail?.contractorId?.contractorAuthenticationId}}] </span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr>
+                <div
+                    *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1  ; then thenBlockSchemeTypeWithStatus">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeWithStatus>
+
+                    <div
+                        *ngIf="consumerApplicationDetail?.applicationStatus?.applicationStatusId > 3  ; then thenBlockContractorStatus else elseBlockContractorStatus">
+                        This content is not shown
+                    </div>
+
+                    <ng-template #thenBlockContractorStatus>
+
+                        <td><b>Contractor Class Type: </b><span
+                                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+                        </td>
+
+                        <td>
+                            <b>Contractor's Status: </b><span class="padding text-success"><strong>
+
+
+                                </strong>
+                            </span>
+                        </td>
+                    </ng-template>
+
+                    <ng-template #elseBlockContractorStatus>
+
+                        <td><b>Contractor Class Type: </b><span
+                                class="padding">{{consumerApplicationDetail?.contractorId?.contractorUserClass}} </span>
+                        </td>
+
+                        <td>
+                            <b>Contractor's Status: </b><span class="padding text-danger"><strong>The
+
+                                </strong>
+                            </span>
+                        </td>
+                    </ng-template>
+
+                </ng-template>
+            </tr>
+
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 2; then thenBlockSchemeTypeIs2">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs2>
+
+                    <td colspan="2"><b>Vendor Name (कॉन्ट्रैक्टर का नाम): </b><span class="padding">Madhya Pradesh
+                            Madhya
+                            Kshetra Vidyut
+                            Vitaran Company Limited <strong>(MPMKVVCL)</strong></span>
+                    </td>
+                </ng-template>
+            </tr>
+
+            <tr>
+
+
+                <td><b>Circle (वृत) : </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.divisionCircle?.circle}}
+                    </span>
+                </td>
+
+                <td><b>Division (संभाग ) : </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.division}}
+                    </span>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td colspan="2"><b>Distribution Center (वितरण केन्द्र) : </b><span class="padding">
+                        {{consumerApplicationDetail?.distributionCenter?.dcName}}
+                    </span>
+                </td>
+            </tr>
+
+            <!-- if work laction is difference -->
+            <tr>
+                <div
+                    *ngIf="consumerApplicationDetail?.workAllocationAddress != null; then thenBlockWorkAllocationDifference">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockWorkAllocationDifference>
+                    <td><b>Work Location Address (कार्य स्थल पता): </b><span class="padding">
+                            {{consumerApplicationDetail?.workAllocationAddress}}</span></td>
+                </ng-template>
+            </tr>
+
+            <!-- land area -->
+            <!-- alnd are Unit  -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.area != null; then thenBlockArea">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockArea>
+                    <td><b>Area (): </b><span class="padding">
+                            {{consumerApplicationDetail?.area}}</span></td>
+                    <td><b>land area unit (): </b><span class="padding">
+                            {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span></td>
+                </ng-template>
+            </tr>
+
+
+            <!-- no Of Plot -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.noOfPlot != null; then thenBlockNoOfPlot">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockNoOfPlot>
+                    <td><b>No. of Plots (): </b><span class="padding">
+                            {{consumerApplicationDetail?.noOfPlot}}</span></td>
+                </ng-template>
+            </tr>
+
+
+            <!--gst number  -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.gstNumber != null; then thenBlockGstNumber">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockGstNumber>
+                    <td colspan="2"><b>GST Number(): </b><span class="padding">
+                            {{consumerApplicationDetail?.gstNumber}}</span></td>
+                </ng-template>
+            </tr>
+
+            <!--Individual Or Group -->
+            <tr>
+                <div *ngIf="consumerApplicationDetail?.individualOrGroup != null; then thenBlockIndividualOrGroup">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockIndividualOrGroup>
+                    <td colspan="2"><b>Apply Individual Or Group (): </b><span class="padding">
+                            {{consumerApplicationDetail?.individualOrGroupIdName}}</span></td>
+                </ng-template>
+            </tr>
+
+
+
+            <tr>
+                <td *ngIf="consumerApplicationDetail?.dgmStcDate!=null"><b>DGM STC APPROVAL DATE: </b><span
+                        class="padding">
+                        {{consumerApplicationDetail?.dgmStcDate}}
+                    </span>
+                </td>
+
+                <td *ngIf="consumerApplicationDetail?.dateOfDgmOandM!=null"><b>DGM (O&M) APPROVAL DATE: </b><span
+                        class="padding">
+                        {{consumerApplicationDetail?.dateOfDgmOandM}}
+                    </span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="2"><b>Work Short Description (कार्य का संक्षिप्त विवरण) : </b><span
+                        class="padding">{{consumerApplicationDetail?.shortDescriptionOfWork}}
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <form [formGroup]="remarkForm">
+                        <div class="row">
+                            <div class="col-md-8 form-group">
+                                <label class="form-label">Remark<span class="text-danger">*</span></label>
+                                <textarea  class="form-control"
+                                 rows="3" formControlName="remark"
+                                placeholder="remark "></textarea>
+                               
+                            </div>
+                        </div>
+                                <div>
+                                    <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+                                </div>
+                    </form>
+                </td>
+            </tr>
+
+            </table>
+
+</mat-card>

@@ -1,0 +1,179 @@
+.my-card {
+    width: 100%;
+    margin: 3px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-scroll-enable-1 {
+    height: 600px;
+    overflow: scroll;
+    display: block;
+}
+
+.custom-scroll-disable {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.half-width {
+    width: 33%;
+}
+
+.padding {
+    padding-left: 6px
+}
+
+.margin {
+    margin: 10px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    right: 28px;
+    width: 45px;
+    height: 40px;
+}
+
+.opticity {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+/* .hidden{
+display: none;
+} */
+
+/* sandeep,start */
+.demandTable {
+    border: 1px solid #0f0000;
+    border-collapse: collapse;
+    padding: 1px;
+}
+
+.demandTable th {
+    border: 1px solid #0f0000;
+    padding: 1px;
+    background: #b3adad;
+    color: #313030;
+}
+
+.demandTable td {
+    border: 1px solid #0f0000;
+    text-align: center;
+    padding: 1px;
+    background: #ffffff;
+    color: #050000;
+}
+
+.custom-srno {
+    text-align: center !important;
+    width: 55px !important;
+}
+
+.custom-particulatr {
+    text-align: center !important;
+    width: 61% !important;
+    /* width: 55px !important; */
+}
+
+.custom-amount {
+    text-align: center !important;
+    width: 0px !important;
+    /* width: 55px !important; */
+}
+
+.required {
+    content: " *";
+    color: red;
+}
+
+.custom-mat-form {
+    text-align: end !important;
+    font-weight: 700 !important;
+    line-height: initial !important;
+    width: 25% !important;
+    margin-left: 77px !important;
+    /* padding-top: 5px !important; */
+}
+
+.custom-td {
+    /* padding-bottom: 10px !important; */
+    padding-bottom: 0px !important;
+    text-align: left !important;
+}
+
+.custom-particular-td {
+    text-align: left !important;
+    padding-left: 20px !important;
+}
+
+.custom-mat-divider {
+    margin-top: 10px !important;
+}
+
+.custom-doc-upload-div {
+    margin-top: 30px !important;
+}
+
+.custom-col-md-5 {
+    margin-top: 10px !important;
+}
+
+.custom-test {
+    border-top-width: 0px !important;
+    height: calc(1.5em + 0.75rem + 1px) !important;
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    margin-top: 0px !important;
+}
+
+.custom-error-span {
+    width: 160% !important;
+    text-align: left !important;
+    padding-top: 5px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    position: absolute !important;
+    color: red !important;
+    padding-left: 10px !important;
+    font-size: 13px !important;
+    display: inline-table !important;
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+}
+
+.custom-amount-div-td {
+    margin-top: -20px !important;
+    margin-bottom: -15px !important;
+}
+
+
+/* sandeep, end */
+
+.customError {
+    color: red;
+    padding-left: 10px;
+    font-size: 13px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-disabled {
+    color: white;
+    opacity: 0;
+}

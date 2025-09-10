@@ -1,0 +1,153 @@
+<mat-card class="list-card mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title class="header-title">
+      📋 Resampling
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="custom-table mat-elevation-z2" matSort>
+
+        <!-- CIRCLE Column -->
+        <ng-container matColumnDef="CIRCLE">
+          <th mat-header-cell *matHeaderCellDef> Circle </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.circleName }} </td>
+        </ng-container>
+
+        <!-- DIVISION Column -->
+        <ng-container matColumnDef="DIVISION">
+          <th mat-header-cell *matHeaderCellDef> Division </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.divisionName }} </td>
+        </ng-container>
+
+        <!-- DC_NAME Column -->
+        <ng-container matColumnDef="DC_NAME">
+          <th mat-header-cell *matHeaderCellDef> DC Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.dc_NAME }} </td>
+        </ng-container>
+
+        <!-- Application Number -->
+        <ng-container matColumnDef="consumerApplicationNumber">
+          <th mat-header-cell *matHeaderCellDef> App. No </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.conAppNo }} </td>
+        </ng-container>
+
+        <!-- Vendor Name -->
+        <ng-container matColumnDef="vendorName">
+          <th mat-header-cell *matHeaderCellDef> Vendor </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.vendorName }} </td>
+        </ng-container>
+
+        <!-- Item Name / Specification -->
+        <ng-container matColumnDef="vendorMaterialSpecification">
+          <th mat-header-cell *matHeaderCellDef> Item Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.vendorMaterialSpecification }} </td>
+        </ng-container>
+
+        <!-- Item Name / Specification -->
+        <ng-container matColumnDef="materialSpecification">
+          <th mat-header-cell *matHeaderCellDef> Material Specification </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.meterialSpecification }} </td>
+        </ng-container>
+
+        <!-- Transformer Serial No -->
+        <ng-container matColumnDef="transformerSerialNo">
+          <th mat-header-cell *matHeaderCellDef> Item Code </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.itemNo }} </td>
+        </ng-container>
+
+        <!-- Manufacture Year -->
+        <ng-container matColumnDef="month_year_of_item_manufacture">
+          <th mat-header-cell *matHeaderCellDef> Manufacture (Month-Year) </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.yearOfManufacture }} </td>
+        </ng-container>
+
+        <!-- Material Installation Date -->
+        <ng-container matColumnDef="materialInstallationDate">
+          <th mat-header-cell *matHeaderCellDef> Installation Date </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.materialInstallationDate }} </td>
+        </ng-container>
+
+        <!-- Participate For Testing -->
+        <ng-container matColumnDef="participateForTestingAndSampling">
+          <th mat-header-cell *matHeaderCellDef> Testing Status </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.participateForTestingAndSampling }} </td>
+        </ng-container>
+
+        <!-- Testing Sample Selected -->
+        <ng-container matColumnDef="testingsampleSelected">
+          <th mat-header-cell *matHeaderCellDef> Sample Selected </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.testingsampleSelected }} </td>
+        </ng-container>
+
+        <!-- Testing Sample Selected -->
+        <ng-container matColumnDef="files">
+          <th mat-header-cell *matHeaderCellDef> Download Files </th>
+          <td mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-primary" (click)="onFilesDownload(element)">Download Files</button>
+          </td>
+        </ng-container>
+
+        <!-- create Testing Report -->
+        <ng-container matColumnDef="materialAcceptance">
+          <th mat-header-cell *matHeaderCellDef> Material Acceptance </th>
+          <td mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-primary" (click)="onMaterialAcceptance(element)"
+              [disabled]="element.dtrAcceptOrNot=='yes'?true:false">Confirm Material</button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="submitTestingReport">
+          <th mat-header-cell *matHeaderCellDef> Testing Report </th>
+          <td mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-primary" (click)="onCreateTestingReport(element)"
+              [disabled]="element.dtrPassOrFail=='yes'?true:false">Create Report</button>
+          </td>
+        </ng-container>
+
+
+         <ng-container matColumnDef="reversesGatePass">
+          <th mat-header-cell *matHeaderCellDef> Reverse Gate Pass </th>
+          <td mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-primary" (click)="onGenerateReverseGatePass(element)"
+              [disabled]="element.dtrPassOrFail=='yes'?true:false">Generate Reverse Gate Pass</button>
+          </td>
+        </ng-container>
+
+        <!-- Testing Result-->
+        <!-- <ng-container matColumnDef="testingResult">
+          <th mat-header-cell *matHeaderCellDef> Testing Result </th>
+          
+          <td mat-cell *matCellDef="let element" [ngClass]="{
+        'text-blue': element?.dtrAcceptOrNot == null,
+        'text-green': element?.dtrAcceptOrNot === 'yes',
+        'text-red': element?.dtrAcceptOrNot === 'reject'
+      }"> {{ element?.dtrAcceptOrNot == null ? 'Pending' : (element?.dtrAcceptOrNot === 'yes' ? 'Pass' : 'Fail') }}
+          </td>
+        </ng-container> -->
+
+          <ng-container matColumnDef="testingResult">
+                                <th mat-header-cell *matHeaderCellDef> Testing Status </th>
+                                <td mat-cell *matCellDef="let element" [ngClass]="{
+        'text-blue': element?.dtrPassOrFail == null,
+        'text-green': element?.dtrPassOrFail === 'yes',
+        'text-red': element?.dtrPassOrFail === 'reject'
+      }">
+
+                                    {{ element?.dtrPassOrFail == null
+                                    ? 'Pending'
+                                    : (element?.dtrPassOrFail === 'yes' ? 'Pass' : 'Fail') }}
+                                </td>
+                            </ng-container>
+
+        <!-- Header & Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 50, 100]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

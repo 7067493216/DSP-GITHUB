@@ -1,0 +1,285 @@
+<mat-card class="custom-scroll-enable">
+    <mat-toolbar>                                
+        <span>NSC Application Details :{{nscDataa.applicationNumber}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <!-- {{nscDataa | json}} -->
+    <table class="table table-striped" style="line-height:5px;font-size: 15px;">
+        <tbody>
+
+            <tr class="col-md-12">
+                <td class="col-md-6"><b>Applicant Name (आवेदक का नाम) : </b><span
+                        class="padding">{{nscDataa.consumerName}} </span></td>               
+            </tr>
+
+
+            <tr class="col-md-12">
+                <td class="col-md-6"><b>Address (पता) : </b><span class="padding">
+                    {{nscDataa.consumerAddress}}</span>
+                </td>
+            </tr>
+
+            <tr class="col-md-12">
+                <td class="col-md-6"><b>Address (पता) : </b><span class="padding">
+                    {{nscDataa.consumerAddress}}</span>
+                </td>
+            </tr>
+
+            
+
+            
+
+          
+        
+        <tr class="col-md-12">
+            <td class="col-md-6"><b>Date of apply ()(Application type) : </b><span class="padding">
+                {{nscDataa.dateOfApply
+                }}
+                </span>
+            </td>
+            <td class="col-md-6"><b>Date of sending to deposit portal () : </b><span class="padding">
+                {{nscDataa.dateOfPostDeposit
+                }}
+                </span>
+            </td>
+        </tr>
+
+
+        <tr class="col-md-12">
+            <td class="col-md-6"><b>Category () : </b><span class="padding">
+                {{nscDataa.category
+                }}
+                </span>
+            </td>
+            <td class="col-md-6"><b>Purpose () : </b><span class="padding">
+                {{nscDataa.purpose
+                }}
+                </span>
+            </td>
+        </tr>
+       
+
+        <tr class="col-md-12">
+            <td class="col-md-6"><b> Colony type ( After Survey) () : </b><span class="padding">
+                {{nscDataa.colonyType
+                }}
+                </span>
+            </td>
+            <td class="col-md-6"><b>Distance from LT Pole ( After Survey) () : </b><span class="padding">
+               {{nscDataa.distanceFromLtPole}}
+                </span>
+            </td>
+        </tr>
+
+
+        <tr class="col-md-12">
+            <td class="col-md-6"><b> Feeder Name () : </b><span class="padding">
+                {{nscDataa.feederName}}
+                </span>
+            </td>
+            <td class="col-md-6"><b>DTR Name () : </b><span class="padding">
+                {{nscDataa.dtrName}}
+                </span>
+            </td>
+        </tr>
+
+       
+
+
+        <tr class="col-md-12">
+            <td class="col-md-6"><b> Is multifloor complex () : </b><span class="padding">
+                {{nscDataa.isMultiFloorComplex}}
+                </span>
+            </td>
+        </tr>
+
+
+
+        <tr class="col-md-12">
+            <td class="col-md-6"><b> SAC paid on NSC Portal () : </b><span class="padding">
+                {{nscDataa.supplyAffordingCharge }}
+                </span>
+            </td>
+            <td class="col-md-6"><b>SD Paid on NSC Portal () : </b><span class="padding">
+               {{ nscDataa.securityDepositCharge  }}
+                </span>
+            </td>
+        </tr>
+
+
+        <tr class="col-md-12">
+            <td class="col-md-6"><b> Remark of Surveyor () : </b><span class="padding">
+                daymic data
+                </span>
+            </td>
+            <td class="col-md-6"><b>Remark of DC user () : </b><span class="padding">
+                daymic data
+                </span>
+            </td>
+        </tr>
+        
+
+
+
+        
+            <!-- <tr class="col-md-12">
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 1; then thenBlockSchemeTypeIs1">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs1>
+
+                    <td class="col-md-12" colspan="2"><b>Contractor Name (कॉन्ट्रैक्टर का नाम) : </b><span
+                            class="padding"><b>{{consumerApplicationDetail?.contractorId?.contractorCompanyName}}, </b>
+                            [{{consumerApplicationDetail?.contractorId?.contractorAuthenticationId}}] </span>
+                    </td>
+                </ng-template>
+            </tr> -->
+
+          
+
+            <!-- <tr class="col-md-12">
+                <div *ngIf="consumerApplicationDetail?.schemeType?.schemeTypeId === 2; then thenBlockSchemeTypeIs2">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockSchemeTypeIs2>
+
+                    <td class="col-md-12" colspan="2"><b>Vendor Name (कॉन्ट्रैक्टर का नाम): </b><span class="padding">Madhya Pradesh Madhya
+                            Kshetra Vidyut
+                            Vitaran Company Limited <strong>(MPMKVVCL)</strong></span>
+                    </td>
+                </ng-template>
+            </tr> -->
+
+            <!-- <tr class="col-md-12">
+                 <td class="col-md-3"><b>Circle (वृत) : </b><span class="padding">
+                    {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.divisionCircle?.circle}}
+                </span>
+               </td>
+
+                <td class="col-md-3"><b>Division (संभाग ) : </b><span class="padding">
+                    {{consumerApplicationDetail?.distributionCenter?.dcSubdivision?.subdivisionDivision?.division}}
+                </span>
+                </td>
+
+            </tr> -->
+
+
+            <!-- <tr class="col-md-12">
+                <td class="col-md-6" colspan="2"><b>Distribution Center (वितरण केन्द्र) : </b><span class="padding">
+                    {{consumerApplicationDetail?.distributionCenter?.dcName}}
+                </span>
+            </td>
+            </tr> -->
+
+
+            <!-- if work laction is difference -->
+             <!-- <tr class="col-md-12">  
+                <div *ngIf="consumerApplicationDetail?.workAllocationAddress != null; then thenBlockWorkAllocationDifference">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockWorkAllocationDifference>
+                    <td class="col-md-6"><b>Work Location Address (कार्य स्थल पता): </b><span class="padding">
+                            {{consumerApplicationDetail?.workAllocationAddress}}</span></td>
+                </ng-template>
+             </tr> -->
+
+            <!-- land area -->
+            <!-- alnd are Unit  -->
+             <!-- <tr class="col-md-12" >
+                <div *ngIf="consumerApplicationDetail?.area != null; then thenBlockArea">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockArea>
+                    <td class="col-md-6"><b>Area (): </b><span class="padding">
+                            {{consumerApplicationDetail?.area}}</span></td>
+                    <td class="col-md-6"><b>land area unit (): </b><span class="padding">
+                                {{consumerApplicationDetail?.landAreaUnit?.landAreaUnitName}}</span></td>       
+                </ng-template>
+             </tr> -->
+
+
+            <!-- no Of Plot -->
+             <!-- <tr class="col-md-12" >
+                <div *ngIf="consumerApplicationDetail?.noOfPlot != null; then thenBlockNoOfPlot">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockNoOfPlot>
+                    <td class="col-md-6"><b>No. of Plots (): </b><span class="padding">
+                            {{consumerApplicationDetail?.noOfPlot}}</span></td>    
+                </ng-template>
+             </tr> -->
+             
+           
+             <!--Individual Or Group -->
+             <!-- <tr class="col-md-12" >
+                <div *ngIf="consumerApplicationDetail?.individualOrGroup != null; then thenBlockIndividualOrGroup">
+                    This content is not shown
+                </div>
+
+                <ng-template #thenBlockIndividualOrGroup>
+                    <td class="col-md-6" colspan="2"><b>Apply Individual Or Group (): </b><span class="padding">
+                            {{consumerApplicationDetail?.individualOrGroup?.name}}</span></td>    
+                </ng-template>
+             </tr> -->
+             
+             
+
+
+            <!-- <tr class="col-md-12">
+                <td colspan="2"><b>Work Short Description (कार्य का संक्षिप्त विवरण) : </b><span
+                        class="padding">{{consumerApplicationDetail?.shortDescriptionOfWork}}
+                    </span>
+                </td>
+            </tr> -->
+
+        </tbody>
+    </table>
+    <!-- <p style="font-size: 22px;font-weight: 700;color: rgb(205, 124, 124);">
+  please select One 
+    </p> -->
+<div>
+    <form [formGroup]="nscChooseDepositAndSupervision"   >
+      <p style="font-size: 22px;font-weight: 700;color: rgb(205, 124, 124);">
+         please select One  
+             <!-- Scheme Type -->
+             <mat-form-field class="half-width padding">
+                <mat-label>Scheme Type (योजना का प्रकार)<span class="required">*</span></mat-label>
+                <mat-select formControlName="schemaTypeId" (selectionChange)="onChangeSelectedSchemeType($event.value)">
+                    <mat-option >--Select Scheme Type--</mat-option>
+                    <mat-option  value="2"> Deposit
+                        </mat-option>
+                        <mat-option   value="1"> Supervision
+                        </mat-option>
+                </mat-select>
+                <!-- <mat-error
+                    *ngIf="(newApplicationFormControls['schemeTypeId'].touched || isFormSubmit) && newApplicationFormControls['schemeTypeId'].errors">
+                    <div *ngIf="newApplicationFormControls['schemeTypeId'].errors['required']">
+                        Select Scheme Type</div>
+                </mat-error> -->
+            </mat-form-field>
+      </p>
+     
+     
+
+        <div class="Center" style="text-align: center;">
+            <button type="submit" class="btn btn-primary" (click)="OnSubmit(recievedNSCID)">Submit</button>
+        </div>
+        
+    </form>
+</div>
+    
+
+
+
+
+
+</mat-card>

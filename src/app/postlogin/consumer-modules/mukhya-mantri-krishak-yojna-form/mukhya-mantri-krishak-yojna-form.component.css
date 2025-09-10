@@ -1,0 +1,23 @@
+
+/* .dsp-formsinfo{
+
+} */
+
+.dsp-formsinfo mat-form-field.mat-form-field {
+    position: relative;
+}
+
+/* mat-form-field.mat-form-field label#mat-form-field-label-3 {} */
+
+/* mat-form-field.mat-form-field .mat-form-field-label-wrapper {} */
+
+.dsp-formsinfo mat-form-field.mat-form-field .mat-form-field-label-wrapper label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+mat-toolbar {
+    /* background: #f5f5f5; */
+    color: rgba(0,0,0,.87);
+}

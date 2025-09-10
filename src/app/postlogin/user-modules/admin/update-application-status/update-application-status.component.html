@@ -1,0 +1,115 @@
+<div class="container">
+    <!-- *ngIf="showForm" -->
+    <mat-card >
+        <div class="header " align="center" style="font-size: 2em; font-weight: bold;">
+            Update Consumer Application
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form">
+            <form [formGroup]="applicationStatusUpdateForm">
+                <div class="row">
+
+                    <div class="col-lg-6 form-group">
+                        <mat-label style="font-weight: bold; color: black;" class="form-label">Enter Application
+                            Number<span class="required">*</span></mat-label>
+                        <input type="text" class="form-control"
+                            placeholder="--------------------------------------Application Number-------------------------------------------"
+                            formControlName="applicationNumber">
+                    </div>
+
+                    <div class="col-md-3" align="center">
+                        <button type="button" class="btn btn-success mt-3" (click)="onGetDetails()">Get Details</button>
+                    </div>
+
+                </div>
+                <br>
+
+                <div *ngIf="detailShowBoolean">
+                    <table class="table table-bordered">
+
+                        <tr aria-rowspan="2" class="table-secondary">
+                            <th colspan="4" scope="col">
+                                <div align="center" style="font-weight: 900; font-size: 1.5em;">Application Details
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Application Number </th>
+                            <td>{{applicationDetails?.consumerApplicationNo}}</td>
+
+                            <th scope="row">Applicant Name </th>
+                            <td>{{applicationDetails?.consumerName}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Guardian Name</th>
+                            <td>{{applicationDetails?.guardianName}}</td>
+
+                            <th scope="row">Address </th>
+                            <td>{{applicationDetails?.address}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Nature of Work </th>
+                            <td>{{applicationDetails?.natureOfWorkType?.natureOfWorkName}}</td>
+                            
+                            <th scope="row">Scheme Type </th>
+                            <td>{{applicationDetails?.schemeType?.schemeTypeName}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">District</th>
+                            <td>{{applicationDetails?.district?.districtName}}</td>
+
+                            <th scope="row">DC </th>
+                            <td>{{applicationDetails?.distributionCenter?.dcName}}</td> 
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Application Status</th>
+                            <td colspan="3">{{applicationDetails?.applicationStatus?.applicationStatusName}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <br>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <mat-label style="font-weight: bold; color: black;" class="form-label">Application Status<span
+                                class="required">*</span></mat-label>
+                        <select formControlName="applicationStatus" class="form-control form-select"
+                            placeholder="कार्य का प्रकार चुने" (change)="onStatusSelection($event.target.value)">
+                            <option value="" disabled>--Application Status चुने--</option>
+                            <option *ngFor="let data of ApplicationStatusList" [value]="data.applicationStatusId">
+                                {{data.applicationStatusName}}</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-12 form-group">
+                        <label class="form-label">Remark</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea4" rows="3"
+                            formControlName="remark" placeholder="Please Enter remark here"
+                            style="resize: none;"></textarea>
+                    </div>
+
+
+
+                </div>
+
+                <br>
+
+                <div align="center">
+                    <button type="button" class="btn btn-primary" [disabled]="applicationStatusUpdateForm.valid?false:true" (click)="changeConsumerApplicationStatus()" >Submit</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

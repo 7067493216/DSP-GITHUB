@@ -1,0 +1,257 @@
+<div class="container">
+
+    <mat-card style="min-height: 75vh;">
+        <div align="center">
+            <button type="button"
+                style="padding: 0.6em; font-size: 2em; background-color: #4e61ca; color: #ffff; border: hidden;">Application
+                Duplicate Payment Refund</button>
+        </div>
+        <br>
+        <br>
+
+        <form [formGroup]="searchForm">
+            <div class="row">
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-8">
+                    <label class="form-label"> Application Number<span class="text-danger">*</span> </label>
+                    <input type="text" class="form-control me-2"
+                        placeholder="---------------------------------------------------------------- Application Number ---------------------------------------------------------------------------"
+                        formControlName="applicationNumber">
+                </div>
+
+                <div class="form-group col-md-1" align="center">
+                    <button type="button" class="btn btn-success mt-4 " (click)="onSearch()">Search</button>
+                </div>
+            </div>
+        </form>
+
+
+        <br>
+
+
+        <table class="table table-bordered" *ngIf="bankDetailsFormShowBoolean==true">
+            <tr class="table-secondary">
+                <th scope="col" colspan="8">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">All Payment Details
+                    </div>
+                </th>
+            </tr>
+
+            <tr>
+                <th>S.NO</th>
+                <th> PAYMENT TYPE </th>
+                <th>TOTAL NO. OF PAYMENT</th>
+                <th>TOTAL REFUND COMPLEATED</th>
+                <th>Remaining No of Payment Refund</th>
+                <th>PAYMENT AMOUNT</th>
+                <th>TRANSACTION ID</th>
+                <th>REFUNDABLE AMOUNT</th>
+            </tr>
+
+            <tr>
+
+                <td>1</td>
+                <td>Registration Payment</td>
+                <td>{{paymentsDetails?.totalPaymentOfRegistration}}</td>
+                <td>{{paymentsDetails?.registationRefundCompleted}}</td>
+                <td>{{paymentsDetails?.remainingRegistrationRefund}}</td>
+                <td>{{paymentsDetails?.registrationDto[0]?.registrationAmount}}</td>
+                <td>{{paymentsDetails?.registrationDto[0]?.registrationTransactionId}}</td>
+                <td>{{paymentsDetails?.registrationDto[0]?.registrationRefundableAmount}}</td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>2</td>
+                <td>Demand Payment</td>
+                <td> {{paymentsDetails?.totalPaymentOfDemand}}</td>
+                <td> {{paymentsDetails?.demandRefundCompleted}}</td>
+                <td> {{paymentsDetails?.remainingDemandRefund}}</td>
+                <td> {{paymentsDetails?.demandDto[0]?.demandAmount}}</td>
+                <td> {{paymentsDetails?.demandDto[0]?.demandTransactionId}}</td>
+                <td> {{paymentsDetails?.demandDto[0]?.demandRefundableAmount}}</td>
+
+            </tr>
+
+
+
+        </table>
+
+        <br>
+
+
+        <table class="table table-bordered" *ngIf="bankDetailsFormShowBoolean==true">
+            <tr class="table-secondary">
+                <th scope="col" colspan="4">
+                    <div align="center" style="font-weight: 900; font-size: 1.5em;">बैंक संबंधी विवरण
+                    </div>
+                </th>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <form [formGroup]="refundRequestForm">
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">खाता धारक का नाम (Account Holder Name) <span
+                                        class="text-danger">*</span> </label>
+                                <input type="text" class="form-control"
+                                    placeholder="--------- Account Holder Name --------"
+                                    formControlName="creditorName">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">खाता संख्या (Account Number)<span
+                                        class="text-danger">*</span> </label>
+                                <input type="text" class="form-control"
+                                    placeholder="--------- Account Number ------" maxlength="16" pattern="^[0-9]*$"
+                                    formControlName="accountNumber"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+
+                                <div class="text-danger"
+                                    *ngIf="refundRequestForm.controls['accountNumber'].errors?.pattern">
+                                    Only numeric values are allowed.
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label"> बैंक का नाम(Bank Name)<span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="bankName" (change)="onSelectBankName($event)">
+                                    <option selected [disabled]="true" value="" class="text-success">
+                                        ----------------------Choose Bank Name---------------------
+                                    </option>
+                                    <option *ngFor="let bank of bankList" [ngValue]="bank">{{ bank.name }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label"> आईएफएससी कोड(IFSC Code)<span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control"
+                                    placeholder="---------- IFSC Code -----------" formControlName="ifscCode"
+                                    (input)="onIfscCode($event.target.value)">
+                                <small *ngIf="ifscError" class="text-danger">Invalid IFSC Code. Expected: {{
+                                    selectedBankCode }}</small>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">पैन संख्या(PAN Number)<span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control"
+                                    placeholder="---------- PAN Number -----------" maxlength="10"
+                                    formControlName="panNumber">
+                            </div>
+
+                             <div class="form-group col-md-6">
+                                    <label class="form-label">PAN CARD  (image/pdf file)<span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" class="form-control" (change)="onPanCardFileSelect($event)"
+                                        formControlName="panCardFile">
+                                </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label class="form-label">रद्द चेक / बैंक पासबुक का प्रथम पृष्ठ जिसमें खाता धारक का
+                                    विवरण हो (Cancellation cheque/Passbook file)<span class="text-danger">*</span>
+                                </label>
+                                <input type="file" class="form-control" (change)="onBankCheckbookFileSelect($event)"
+                                    formControlName="docCheckOrPassBook">
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    </form>
+                </td>
+            </tr>
+
+            <tr *ngIf="bankDetails">
+
+                    <table width="100%">
+                        <tr>
+                            <th><h3>खाता धारक का नाम (Account Holder Name) :</h3></th>
+                            <td>{{bankDetails?.accountHolderName}}</td>
+                            <th><h3>खाता संख्या (Account Number) :</h3></th>
+                            <td>{{bankDetails?.accountNo}}</td>
+                        </tr>
+                        <tr>
+                            <th><h3>बैंक का नाम(Bank Name) :</h3></th>
+                            <td>{{bankDetails?.bankName}}</td>
+                            <th><h3>आईएफएससी कोड(IFSC Code) :</h3></th>
+                            <td>{{bankDetails?.ifscCode}}</td>
+                        </tr>
+                        <tr>
+                            <th><h3>पैन संख्या(PAN Number) :</h3></th>
+                            <td>{{bankDetails?.panNo}}</td>
+                            <th><h3>आवेदन क्रमांक (Application Number) :</h3></th>
+                            <td>{{bankDetails?.consumerApplicationNo}}</td>
+                        </tr>
+                    </table>
+                   
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div align="center">
+
+                        <button type="button" class="btn btn-primary mx-2" (click)="onEdit()">
+                            सुधार करें
+                        </button>
+                        <span>
+                            <button type="button" class="btn btn-primary " (click)="onSubmitBankDetail()">
+                                बैंक विवरण सही हैं। आगे बढ़ें
+                            </button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+
+           
+            <div>
+
+                <mat-checkbox class="example-margin mx-2" (change)="onCheckboxChange($event)"> </mat-checkbox>
+                <span style="font-size: 1.2em; font-weight: 700;"
+                   >
+                
+                
+                    मैं सत्यापित करता हूँ कि संबंधित आवेदन क्रमांक <span
+                    style="color: crimson; font-weight: 900;">({{bankDetailsPayload?.consumerApplicationNo}})</span> के लिए त्रुटि वश एक से अधिक बार भुगतान किया था, इसलिए एक भुगतान को समायोजित कर अन्य भुगतान को वापिस करने की कृपा करे।
+
+                    मेरे द्वारा बैंक संबंधी विवरण (भुगतान रिफंड के लिए ) संलग्न है अतः इसमें कोई भी त्रुटि होने समस्त ज़िम्मेदारी मेरी होगी।
+                
+                
+                
+                
+                </span>
+
+            </div>
+
+            <div align="center">
+                <button type="button" class="btn btn-success"  (click)="onFinalSubmit()"  [disabled]="(doneBoolean==true || checkboxBoolean==false)?true:false" >
+                    Submit</button>
+            </div>
+
+
+
+        </table>
+
+
+       
+
+
+    </mat-card>
+
+
+
+</div>

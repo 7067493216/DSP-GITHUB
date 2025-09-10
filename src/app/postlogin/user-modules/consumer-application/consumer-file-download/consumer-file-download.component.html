@@ -1,0 +1,67 @@
+<mat-card>
+        <div style="display: flex;justify-content: space-between;">
+            <h1>
+                All File Download
+            </h1>
+            <div>
+                <button class="close-btn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <br>
+        <br>
+    <mat-card-content>
+        <div class="row">
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docEstimate!=null">
+                <b>Doc-Estimate File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocEstimateFile()">Download</button>
+                </span>
+            </div>
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docAdministrative!=null">
+                <b>Doc-Administrative File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocAdministrativeFile()">Download</button>
+                </span>
+            </div>
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docNoc!=null">
+                <b>Doc-Noc File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocNocFile()">Download</button>
+                </span>
+            </div>
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docRegistry!=null">
+                <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocRegistryFile()">Download</button>
+                </span>
+            </div>
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docReraPermission!=null">
+                <b>Doc ReraPermission File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocReraPermissionFile()">Download</button>
+                </span>
+            </div>
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docT$cpPermission!=null">
+                <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocT$cpPermissionFile()">Download</button>
+                </span>
+            </div>
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docKhasraKhatoni!=null">
+                <b>Doc-Registry File : </b><span class="padding"><button type="button"
+                        class="btn btn-success" (click)="getDownloaddocKhasraKhatoniFile()">Download</button>
+                </span>
+            </div>
+
+            <div class="col-md-6" *ngIf="applicationDocumentData?.docGst!=null">
+                <b>Doc-Gst File : </b><span class="padding"><button type="button" class="btn btn-success"
+                        (click)="getDownloaddocGstFile()">Download</button>
+                </span>
+            </div>
+
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,126 @@
+<mat-card class="custom-scroll-enable">
+
+
+    <div>
+        <div style="font-size: 2.5em; font-weight: 900; text-align: center;">Payment Refund Confirmation By GM</div>
+        <div style="text-align: right;">
+            <button class="close-btn" style="text-align: right;" mat-stroked-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <hr>
+    <br>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">S.NO</th>
+                <th scope="col">Details</th>
+                <th scope="col">Value</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Creditor Name</td>
+                <td>{{refundPaymentDetails?.creditorName}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Application Number</td>
+                <td>{{refundPaymentDetails?.consumerApplicationNo}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Refund Type</td>
+                <td>{{refundPaymentDetails?.refundType}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Refund Amount</td>
+                <td>{{refundPaymentDetails?.refundableAmnt}}</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Account Number</td>
+                <td>{{refundPaymentDetails?.accountNumber}}</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Bank Name</td>
+                <td>{{refundPaymentDetails?.bankName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>IFSC Code</td>
+                <td>{{refundPaymentDetails?.ifscCode}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <hr>
+    <br>
+
+
+    
+
+    <form [formGroup]="gmConfirmationForm">
+        <div class="row">
+
+            <div class="col-md-6">
+             Payment Refund Letter :   <button type="button" class="btn btn-success" (click)="onDownloadRefundLetter()" >Download</button>
+            </div>
+
+            <div class="col-md-6">
+                Bank checkbook :   <button type="button" class="btn btn-success" (click)="onDownloadCheckbook()" >Download</button>
+               </div>
+
+               <br>
+               <br>
+               <br>
+
+            <div class="col-md-6 form-group">
+               <label class="form-label">Consumer Application Number<span class="text-danger">*</span></label>
+               <input type="text" class="form-control" formControlName="consumerApplicationNumber" [readonly]="true" >
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="form-label">Refund Application Date<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" formControlName="refundApplicationDate" >
+             </div>
+
+             <div class="col-md-4 form-group">
+                <label class="form-label">Refund Acceptance confirmation<span class="text-danger">*</span></label><br>
+                <mat-radio-group aria-label="Select an option" formControlName="gmRefundAccepted"
+                    >
+                    <mat-radio-button value="true">Accepted</mat-radio-button><br>
+                    <mat-radio-button value="false">Rejected</mat-radio-button>
+                </mat-radio-group>
+             </div>
+
+             <div class="col-md-8 form-group">
+                <label class="form-label">Remark<span class="text-danger">*</span></label>
+                <textarea class="form-control" placeholder="remark" type="text"  formControlName="refundRemark">
+                </textarea>
+             </div>
+
+        </div>
+
+        <div align="center">
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        </div>
+    </form>
+
+</mat-card>

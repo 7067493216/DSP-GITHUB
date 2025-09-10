@@ -1,0 +1,98 @@
+
+
+.glass-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af); 
+  padding: 20px;
+}
+
+.glass-form {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  color: #ffffff;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .icon {
+    font-size: 40px;
+    color: #00e5ff;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  p {
+    font-size: 13px;
+    color: #e0e0e0;
+    margin: 5px 0 0;
+  }
+}
+
+.input-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  input {
+    color: #fff;
+  }
+
+  .mat-form-field-label,
+  .mat-icon {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .mat-form-field-underline {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .mat-error {
+    font-size: 12px;
+    color: #ff8a80;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to right, #2196f3, #21cbf3);
+  box-shadow: 0 4px 14px rgba(33, 203, 243, 0.5);
+  padding: 12px 0;
+
+  mat-icon {
+    margin-right: 6px;
+  }
+
+  &:hover {
+    background: linear-gradient(to right, #21cbf3, #2196f3);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
